@@ -16,6 +16,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // TODO -> Create different product flavours for free and paid version of the app
+
     buildTypes {
         debug {
             minifyEnabled true
@@ -32,6 +34,19 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src/main/res',
+                        'src/main/res/drawables/main-activity',
+                        'src/main/res/drawables/cells',
+                        'src/main/res/drawables/game-activity'
+            }
+            assets {
+                srcDirs 'src/main/assets'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -42,4 +57,15 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // For Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    // For Lottie Animations
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    // For GSon
+    implementation 'com.google.code.gson:gson:2.8.8'
 }
