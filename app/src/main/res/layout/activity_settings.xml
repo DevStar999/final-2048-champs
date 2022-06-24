@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- List of things that we need to check while creating a layout are as follows:
+     1) root_game_constraint_layout
+     a. padding="16dp" (Correct, Always keep this value)
+     2) goal_title_text_view, current_score_title_text_view, best_score_title_text_view
+     a. layout_height="24dp" (Adjust according to board size)
+     b. textSize="12sp" (Adjust according to above layout_height)
+     3) goal_value_text_view, current_score_value_text_view, best_score_value_text_view
+     a. layout_width="90dp"
+     b. layout_height="36dp"
+     c. textSize="20sp" -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_settings_constraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/game_primary_background_color"
+    tools:context=".activity.SettingsActivity">
+
+</androidx.constraintlayout.widget.ConstraintLayout>

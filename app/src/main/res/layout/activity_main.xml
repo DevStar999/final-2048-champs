@@ -2,17 +2,254 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout_main_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/game_primary_background_color"
+    android:padding="16dp"
+    tools:context=".activity.MainActivity">
 
-    <TextView
+    <!-- TODO -> Implement this feature and change visibility
+                 to VISIBLE -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/google_play_console_image_view"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="signInToGooglePlay"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1"
+        app:srcCompat="@drawable/top_google_play_console" />
+
+    <!-- TODO -> Implement this feature and change visibility
+             to VISIBLE -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/premium_icon_image_view"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="upgradeToPremium"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1"
+        app:srcCompat="@drawable/top_premium_icon" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/game_title_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        app:layout_constraintBottom_toTopOf="@id/game_preview_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/app_logo_drawable" />
+
+    <FrameLayout
+        android:id="@+id/game_preview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/game_options_linear_layout"
+        app:layout_constraintDimensionRatio="1.5:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/game_title_image_view">
+
+        <!-- Lottie Animation Link = https://lottiefiles.com/42266-roatating-light -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/game_preview_spotlight_lottie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:visibility="visible"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/rotating_light"
+            app:lottie_speed="0.75" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/game_preview_image_constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:padding="56dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/game_preview_image_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Lottie Animation Link = https://lottiefiles.com/70455-video-game-console -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/start_game_lottie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/start_game_console"
+            app:lottie_speed="1.25" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/game_options_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/gap_vertical"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_icons_linear_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/game_preview_layout">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/start_game_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="8dp"
+            android:background="@drawable/rounded_corner_button"
+            android:maxEms="12"
+            android:minEms="10"
+            android:onClick="startGameButtonPressed"
+            android:text="Start Game"
+            android:textColor="@color/game_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/game_mode_options_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/game_mode_left_arrow_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="gameModeBrowse"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/game_mode_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/rounded_corner_button"
+                android:maxEms="12"
+                android:minEms="10"
+                android:textColor="@color/game_text_color"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/game_mode_right_arrow_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="gameModeBrowse"
+                app:srcCompat="@drawable/arrow_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/game_size_options_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="8dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/game_size_left_arrow_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="gameSizeBrowse"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/game_size_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/rounded_corner_button"
+                android:maxEms="12"
+                android:minEms="10"
+                android:textColor="@color/game_text_color"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/game_size_right_arrow_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="gameSizeBrowse"
+                app:srcCompat="@drawable/arrow_right" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- TODO -> Implement this feature and change visibility
+             to VISIBLE -->
+    <LinearLayout
+        android:id="@+id/bottom_icons_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/gap_horizontal"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/game_options_linear_layout">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/settings_icon_image_view"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center_vertical"
+            android:onClick="settingsClicked"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bottom_settings" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/achievements_icon_image_view"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:layout_gravity="center_vertical"
+            android:onClick="achievementsClicked"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bottom_achievements" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/menu_icon_image_view"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center_vertical"
+            android:onClick="menuClicked"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bottom_menu" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
