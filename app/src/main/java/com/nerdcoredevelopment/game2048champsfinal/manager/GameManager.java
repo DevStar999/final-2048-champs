@@ -28,7 +28,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-// TODO -> Implement mechanism to save states so that we can provide the undo feature
 public class GameManager {
     private final Activity parentActivity;
     private final GameModes currentGameMode;
@@ -94,11 +93,6 @@ public class GameManager {
             goalTileTextView.setText("GOAL TILE");
         }
 
-        /* TODO -> Make code changes so that 2 new values are not added when game is resumed back
-                   again. This will also require a code change in the MainActivity.java and/or
-                   MainManager.java where the text 'START GAME' will have to be changed to
-                   'CONTINUE GAME'. This is a major bug causes the app to crash.
-         */
         // Adding 2 new random values to the gameMatrix
         addNewValues(2);
 

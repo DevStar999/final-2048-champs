@@ -86,7 +86,6 @@ public enum GameModes {
         add(new ArrayList<Boolean>() {{add(false); add(false); add(false); add(false); add(false);}});
     }}, "block_middle_5x5.jpg"), // Total 25 cells.
 
-    // TODO -> Use these restricted modes in the paid version of the app
     /*
     BLOCK_MIDDLE_6X6(6,6,"6 X 6","BLOCK MIDDLE",4096, new ArrayList<ArrayList<Boolean>>() {{
         add(new ArrayList<Boolean>() {{add(false); add(false); add(false); add(false); add(false); add(false);}});
@@ -122,15 +121,6 @@ public enum GameModes {
         add(new ArrayList<Boolean>() {{add(false); add(false); add(false); add(false); add(true); add(true);}});
         add(new ArrayList<Boolean>() {{add(false); add(false); add(false); add(false); add(true); add(true);}});
     }}, "block_2_corners_6x6.jpg"); // Total 36 cells.
-    */
-
-    /* TODO -> Incrementally add the commented game modes into the game and change the preview images of
-               the added modes and ensure the game preview images of the previous modes are also intact.
-    */
-    /* New Modes Ideas:
-    (1) Layout: Hexagonal 3x3 and 5x5
-    (2) Chain Merge for all layouts up till now
-    (3) Fibonacci modes, check out all variations and take more inspiration from other variants on Play Store
     */
 
     private final int rows;

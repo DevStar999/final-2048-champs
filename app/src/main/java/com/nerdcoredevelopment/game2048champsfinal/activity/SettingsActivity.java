@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.nerdcoredevelopment.game2048champsfinal.R;
 
-// TODO -> First complete the page layout and add just one option for toggling the undo button
 public class SettingsActivity extends AppCompatActivity {
 
     private void initialise() {

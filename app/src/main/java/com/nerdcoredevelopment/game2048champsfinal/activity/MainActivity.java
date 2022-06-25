@@ -23,23 +23,6 @@ import com.nerdcoredevelopment.game2048champsfinal.manager.MainManager;
 
 import java.util.List;
 
-// TODO -> Implement functionality to ask user to rate app on Play Store
-// TODO -> Do a limited time glowing animation for get-premium version icon so that the user can take that hint
-// TODO -> If possible use Fragments where we can replace them with activities. For e.g. for passing GameModes object
-/*
-TODO -> Implement Rail Mode for this game. Later in Ads Version of app, this mode can also be unlocked by another
-        way where for certain condition which signifies that the user has played the game a lot OR else this game
-        mode can only be unlock via purchase of the premium version of the app
-*/
-/*
-TODO -> A limited premium version offer for say only first 1000 premium users and link the countdown to your website
-*/
-// TODO -> In Settings, give user the option to customise the block cell with different images like rock, skull etc.
-// TODO -> When we do release an ads version of the app, give user a free run without ads for the 1st 2-3 days
-// TODO -> Send different notifications as the life of the user grows more and more
-// TODO -> In Setting the user should be given the option to customise the backdrop of the game layout
-// TODO -> Setup Google Play Services for this project (Status - Play Games Services configuration started)
-// TODO -> In Settings, allow users to choose from more than 1 swipe speeds
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
     private MainManager mainManager;
@@ -150,14 +133,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Upgrade to Premium Icon Clicked", Toast.LENGTH_SHORT).show();
     }
 
-    /*
-    TODO -> Show number of moves setting in settings menu to toggle on/off in game layout.
-            Setting page reference from NordPass.
-    */
-    /*
-    TODO -> Champs mode tutorial should be unlocked only after the player has at-least once reached the
-            Champs mode.
-    */
     public void settingsClicked(View view) {
         Toast.makeText(this, "Settings Icon Clicked", Toast.LENGTH_SHORT).show();
     }

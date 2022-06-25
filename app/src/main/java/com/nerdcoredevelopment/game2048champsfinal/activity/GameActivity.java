@@ -406,8 +406,6 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    // TODO -> Remove the following temporary undo by implementing the special tools
-    // TODO -> Undo for the first move should have a different dialog text instead current text
     public void undoTool(View view) {
         if (!gameManager.getUndoManager().isUndoUsed()) { // Undo was not used, so using it now
             movesQueue.clear();

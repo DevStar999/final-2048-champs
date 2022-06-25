@@ -37,7 +37,6 @@ public class UndoManager {
         return gameMatrixPreviousStates.pollFirst();
     }
 
-    // TODO -> Implement the multiple moves Undo feature
     public Pair<Integer, List<List<Integer>>> undoTillUndoLimit() {
         movesSinceUndoLimit = 0;
         undoUsed = true;

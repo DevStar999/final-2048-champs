@@ -16,8 +16,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // TODO -> Create different product flavours for free and paid version of the app
-
     buildTypes {
         debug {
             minifyEnabled true
