@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.Window;
@@ -70,13 +71,16 @@ public class GameActivity extends AppCompatActivity {
     private AppCompatTextView goalTileTextView;
 
     private void initialiseVariableAttributes() {
-        sharedPreferences = this.getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
         gson = new Gson();
         currentGameMode = GameModes.getGameModeEnum(
                 getIntent().getIntExtra("gameMatrixRows", 4),
                 getIntent().getIntExtra("gameMatrixColumns", 4),
                 getIntent().getStringExtra("gameMode"));
         gameManager = new GameManager(GameActivity.this, currentGameMode);
+        gameManager.setCurrentGameState(GameStates.values()[
+                sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+                        + " " + currentGameMode.getDimensions(), 0)]);
         swipeUtility = new SwipeUtility(currentGameMode.getRows(), currentGameMode.getColumns());
         movesQueue = new ArrayDeque<>();
         goalDone = sharedPreferences.getBoolean("GoalDone" + " " + currentGameMode.getMode()
@@ -302,16 +306,36 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private ArrayList<ArrayList<Integer>> getCopyOfGivenBoard(ArrayList<ArrayList<Integer>> givenBoard) {
+        ArrayList<ArrayList<Integer>> copyOfGivenBoard = new ArrayList<>();
+        for (int i = 0; i < givenBoard.size(); i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = 0; j < givenBoard.get(i).size(); j++) {
+                row.add(givenBoard.get(i).get(j));
+            }
+            copyOfGivenBoard.add(row);
+        }
+        return copyOfGivenBoard;
+    }
+
     private void saveGameState() {
         // Saving the current state of the game to play later
+        sharedPreferences.edit().putInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), gameManager.getCurrentGameState().ordinal()).apply();
         sharedPreferences.edit().putString("CurrentScore" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), currentScoreTextView.getText().toString()).apply();
-        sharedPreferences.edit().putString("CurrentBoard" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getGameMatrix())).apply();
         sharedPreferences.edit().putString("UndoManager" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getUndoManager())).apply();
         sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), goalDone).apply();
+        if (gameManager.getCurrentGameState() == GameStates.GAME_START) {
+            Log.i("Info", "saveGameState: currentGameMode.blockCells = " + currentGameMode.getBlockCells());
+            sharedPreferences.edit().putString("CurrentBoard" + " " + currentGameMode.getMode()
+                    + " " + currentGameMode.getDimensions(), gson.toJson(getCopyOfGivenBoard(currentGameMode.getBlockCells()))).apply();
+        } else {
+            sharedPreferences.edit().putString("CurrentBoard" + " " + currentGameMode.getMode()
+                    + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getGameMatrix())).apply();
+        }
     }
 
     public void resetGameAndStartIfFlagTrue(boolean flag) {
@@ -319,6 +343,7 @@ public class GameActivity extends AppCompatActivity {
         gameManager = new GameManager(GameActivity.this, currentGameMode);
         goalDone = false;
         gameManager.setHasGoalBeenCompleted(false);
+        gameManager.setCurrentGameState(GameStates.GAME_START);
         saveGameState();
 
         if (flag) {

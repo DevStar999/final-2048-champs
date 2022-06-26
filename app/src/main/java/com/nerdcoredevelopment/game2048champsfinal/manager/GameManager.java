@@ -6,6 +6,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 
@@ -36,7 +37,6 @@ public class GameManager {
     private boolean hasMoveBeenCompleted;
     private boolean hasGoalBeenCompleted;
     private List<List<Integer>> gameMatrix;
-    private List<List<Integer>> startStateGameMatrix;
     private UndoManager undoManager;
     private List<List<Boolean>> areAllAnimationsDone; // Boolean matrix to check if all animations are done
     private GameStates currentGameState;
@@ -50,21 +50,20 @@ public class GameManager {
         hasMoveBeenCompleted = true;
 
         gameMatrix = new ArrayList<>();
-        startStateGameMatrix = new ArrayList<>();
         undoManager = new UndoManager();
         areAllAnimationsDone = new ArrayList<>();
         for (int row = 0; row < this.currentGameMode.getRows(); row++) {
             List<Integer> gameMatrixRow = new ArrayList<>();
             List<Boolean> areAllAnimationsDoneRow = new ArrayList<>();
             for (int column = 0; column < this.currentGameMode.getColumns(); column++) {
-                if (this.currentGameMode.getBlockCells().get(row).get(column)) { // This is a block cell
+                if (this.currentGameMode.getBlockCells().get(row).get(column).equals(-1)) { // This is a block cell
                     gameMatrixRow.add(-1);
                 } else { // This is a free cell
                     gameMatrixRow.add(0); // At first, we fill all cells with zero
                 }
                 areAllAnimationsDoneRow.add(false); // At first, we assign all values to false
             }
-            gameMatrix.add(gameMatrixRow); startStateGameMatrix.add(gameMatrixRow);
+            gameMatrix.add(gameMatrixRow);
             areAllAnimationsDone.add(areAllAnimationsDoneRow);
         }
     }
@@ -93,10 +92,9 @@ public class GameManager {
             goalTileTextView.setText("GOAL TILE");
         }
 
-        if (gameMatrix.equals(startStateGameMatrix)) {
+        if (currentGameState == GameStates.GAME_START) {
             // Adding 2 new random values to the gameMatrix, if game has just started
             addNewValues(2);
-            currentGameState = GameStates.GAME_START;
         } else { // Not adding 2 new random values if game is being resumed
             currentGameState = GameStates.GAME_ONGOING;
         }

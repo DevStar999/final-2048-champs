@@ -1,6 +1,8 @@
 package com.nerdcoredevelopment.game2048champsfinal.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,6 +21,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameExitDialog;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
+import com.nerdcoredevelopment.game2048champsfinal.enums.GameStates;
 import com.nerdcoredevelopment.game2048champsfinal.manager.MainManager;
 
 import java.util.List;
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private List<String> allGameModes;
     private AppCompatButton gameModeButton;
 
+    // Attributes for determining game state
+    private SharedPreferences sharedPreferences;
+
     // Attributes for determining game size
     private List<String> allCurrentGameSizes;
     private AppCompatButton gameSizeButton;
@@ -42,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private LottieAnimationView gamePreviewSpotLightLottie;
     private AppCompatImageView gamePreviewImageView;
     private LottieAnimationView startGameLottie;
+    private AppCompatButton startGameButton;
     private AppCompatImageView modeLeft;
     private AppCompatImageView modeRight;
     private AppCompatImageView sizeLeft;
@@ -60,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
         gameModeButton.setText(currentGameMode.getMode());
         mainManager.updateModeBrowseIcons(currentGameMode.getMode(), allGameModes);
 
+        // Initialising sharedPreferences
+        sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
+
         // Initialising allCurrentGameSizes List and gameSizeTextView TextView
         allCurrentGameSizes = GameModes.getAllGameVariantsOfMode(currentGameMode.getMode());
         gameSizeButton = findViewById(R.id.game_size_button);
@@ -69,6 +79,13 @@ public class MainActivity extends AppCompatActivity {
         gamePreviewSpotLightLottie = findViewById(R.id.game_preview_spotlight_lottie);
         gamePreviewImageView = findViewById(R.id.game_preview_image_view);
         startGameLottie = findViewById(R.id.start_game_lottie);
+        startGameButton = findViewById(R.id.start_game_button);
+        if (sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
+            startGameButton.setText("RESUME GAME");
+        } else {
+            startGameButton.setText("START GAME");
+        }
         modeLeft = findViewById(R.id.game_mode_left_arrow_image_view);
         modeRight = findViewById(R.id.game_mode_right_arrow_image_view);
         sizeLeft = findViewById(R.id.game_size_left_arrow_image_view);
@@ -229,6 +246,14 @@ public class MainActivity extends AppCompatActivity {
 
             // Updating Preview
             mainManager.updatePreview(currentGameMode.getGamePreviewAssetFileName());
+
+            // Update the text of the start game button
+            if (sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+                    + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
+                startGameButton.setText("RESUME GAME");
+            } else {
+                startGameButton.setText("START GAME");
+            }
         }
     }
 
@@ -255,6 +280,14 @@ public class MainActivity extends AppCompatActivity {
 
             // Updating Preview
             mainManager.updatePreview(currentGameMode.getGamePreviewAssetFileName());
+
+            // Update the text of the start game button
+            if (sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+                    + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
+                startGameButton.setText("RESUME GAME");
+            } else {
+                startGameButton.setText("START GAME");
+            }
         }
     }
 }

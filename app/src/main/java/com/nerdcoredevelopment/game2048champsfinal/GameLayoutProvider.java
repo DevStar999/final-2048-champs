@@ -35,7 +35,7 @@ public class GameLayoutProvider {
         for (int i = 0; i < gameMode.getRows(); i++) {
             for (int j = 0; j < gameMode.getColumns(); j++) {
                 AppCompatImageView imageView = new AppCompatImageView(context);
-                if (gameMode.getBlockCells().get(i).get(j)) {
+                if (gameMode.getBlockCells().get(i).get(j).equals(-1)) {
                     imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.block_cell_x));
                 } else {
                     imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.rounded_corner_cell));
