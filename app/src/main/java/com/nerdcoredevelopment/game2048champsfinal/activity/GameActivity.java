@@ -312,24 +312,27 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void saveGameState() {
+        // Saving the current state of the game to play later
+        sharedPreferences.edit().putString("CurrentScore" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), currentScoreTextView.getText().toString()).apply();
+        sharedPreferences.edit().putString("CurrentBoard" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getGameMatrix())).apply();
+        sharedPreferences.edit().putString("UndoManager" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getUndoManager())).apply();
+        sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), goalDone).apply();
+    }
+
     private void setupGamePausedDialog() {
         movesQueue.clear();
+        saveGameState();
         GamePausedDialog gamePausedDialog = new GamePausedDialog(this);
         gamePausedDialog.show();
         gamePausedDialog.setGamePausedDialogListener(new GamePausedDialog.GamePausedDialogListener() {
             @Override
             public void getResponseOfPausedDialog(boolean response) {
                 if (response) {
-                    // Saving the current state of the game to play later
-                    sharedPreferences.edit().putString("CurrentScore" + " " + currentGameMode.getMode()
-                            + " " + currentGameMode.getDimensions(), currentScoreTextView.getText().toString()).apply();
-                    sharedPreferences.edit().putString("CurrentBoard" + " " + currentGameMode.getMode()
-                            + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getGameMatrix())).apply();
-                    sharedPreferences.edit().putString("UndoManager" + " " + currentGameMode.getMode()
-                            + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getUndoManager())).apply();
-                    sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
-                            + " " + currentGameMode.getDimensions(), goalDone).apply();
-
                     // Switching to MainActivity
                     Intent intent = new Intent(GameActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -339,9 +342,24 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
+    // For when the 'Back' button on the device is pressed
     @Override
     public void onBackPressed() {
         setupGamePausedDialog();
+    }
+
+    // For when the 'Home' button on the device is pressed
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveGameState();
+    }
+
+    // For when the 'Recent Apps' button on the device is pressed
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        saveGameState();
     }
 
     /**
