@@ -109,6 +109,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        /* Persisting the screen settings even if the user leaves the app mid use for when he/she
+           returns to use the app again
+        */
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
+    @Override
     public void onBackPressed() {
         GameExitDialog gameExitDialog = new GameExitDialog(this);
         gameExitDialog.show();
