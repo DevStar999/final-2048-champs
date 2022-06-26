@@ -450,7 +450,9 @@ public class GameActivity extends AppCompatActivity {
             gameManager.updateGameMatrixPostUndo(previousStateInfo.second);
             updateBoardOnUndo();
         } else { // Undo was used, so we need to show a message here
-            new GameUndoDialog(this).show();
+            String undoMessageText = (gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) ?
+                    "UNDO WAS USED ALREADY" : "NO MOVE HAS BEEN MADE YET";
+            new GameUndoDialog(this, undoMessageText).show();
         }
     }
 

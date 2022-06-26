@@ -33,12 +33,13 @@ public class GameUndoDialog extends Dialog {
         gameUndoButtonsLinearLayout.setVisibility(visibility);
     }
 
-    public GameUndoDialog(@NonNull Context context) {
+    public GameUndoDialog(@NonNull Context context, String undoMessageText) {
         super(context, R.style.CustomDialogTheme);
         setContentView(R.layout.dialog_game_undo);
 
         initialise();
 
+        gameUndoText.setText(undoMessageText);
         gameUndoContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
