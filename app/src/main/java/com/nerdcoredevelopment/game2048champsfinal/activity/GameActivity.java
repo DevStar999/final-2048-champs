@@ -302,27 +302,6 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void resetGameAndStartIfFlagTrue(boolean flag) {
-        updateScore("0");
-        gameManager = new GameManager(GameActivity.this, currentGameMode);
-        goalDone = false;
-        gameManager.setHasGoalBeenCompleted(false);
-        sharedPreferences.edit().putString("CurrentScore" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), currentScoreTextView.getText().toString()).apply();
-        sharedPreferences.edit().putString("CurrentBoard" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getGameMatrix())).apply();
-        sharedPreferences.edit().putString("UndoManager" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getUndoManager())).apply();
-        sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), goalDone).apply();
-
-        if (flag) {
-            swipeUtility = new SwipeUtility(currentGameMode.getRows(), currentGameMode.getColumns());
-            movesQueue.clear();
-            gameManager.startGame();
-        }
-    }
-
     private void saveGameState() {
         // Saving the current state of the game to play later
         sharedPreferences.edit().putString("CurrentScore" + " " + currentGameMode.getMode()
@@ -333,6 +312,20 @@ public class GameActivity extends AppCompatActivity {
                 + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getUndoManager())).apply();
         sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), goalDone).apply();
+    }
+
+    public void resetGameAndStartIfFlagTrue(boolean flag) {
+        updateScore("0");
+        gameManager = new GameManager(GameActivity.this, currentGameMode);
+        goalDone = false;
+        gameManager.setHasGoalBeenCompleted(false);
+        saveGameState();
+
+        if (flag) {
+            swipeUtility = new SwipeUtility(currentGameMode.getRows(), currentGameMode.getColumns());
+            movesQueue.clear();
+            gameManager.startGame();
+        }
     }
 
     private void setupGamePausedDialog() {
