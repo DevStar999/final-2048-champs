@@ -19,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.nerdcoredevelopment.game2048champsfinal.R;
+import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingFeatureDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameExitDialog;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameStates;
@@ -181,38 +182,42 @@ public class MainActivity extends AppCompatActivity {
      */
     // onClick listener for start game button is as follows
     public void startGameButtonPressed(View view) {
-        ConstraintLayout rootLayout = findViewById(R.id.root_layout_main_activity);
-        view.setEnabled(false);
-        rootLayout.setEnabled(false);
-        modeLeft.setEnabled(false); modeRight.setEnabled(false);
-        sizeLeft.setEnabled(false); sizeRight.setEnabled(false);
+        if (currentGameMode.isCanAccess()) {
+            ConstraintLayout rootLayout = findViewById(R.id.root_layout_main_activity);
+            view.setEnabled(false);
+            rootLayout.setEnabled(false);
+            modeLeft.setEnabled(false); modeRight.setEnabled(false);
+            sizeLeft.setEnabled(false); sizeRight.setEnabled(false);
 
 
-        gamePreviewSpotLightLottie.setVisibility(View.INVISIBLE);
-        gamePreviewImageView.setVisibility(View.INVISIBLE);
-        startGameLottie.setVisibility(View.VISIBLE);
+            gamePreviewSpotLightLottie.setVisibility(View.INVISIBLE);
+            gamePreviewImageView.setVisibility(View.INVISIBLE);
+            startGameLottie.setVisibility(View.VISIBLE);
 
-        startGameLottie.playAnimation();
+            startGameLottie.playAnimation();
 
-        new CountDownTimer(1500, 1500) {
-            @Override
-            public void onTick(long millisUntilFinished) {}
-            @Override
-            public void onFinish() {
-                view.setEnabled(true);
-                rootLayout.setEnabled(true);
-                modeLeft.setEnabled(true); modeRight.setEnabled(true);
-                sizeLeft.setEnabled(true); sizeRight.setEnabled(true);
-                startGameLottie.pauseAnimation();
+            new CountDownTimer(1500, 1500) {
+                @Override
+                public void onTick(long millisUntilFinished) {}
+                @Override
+                public void onFinish() {
+                    view.setEnabled(true);
+                    rootLayout.setEnabled(true);
+                    modeLeft.setEnabled(true); modeRight.setEnabled(true);
+                    sizeLeft.setEnabled(true); sizeRight.setEnabled(true);
+                    startGameLottie.pauseAnimation();
 
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                intent.putExtra("gameMode", currentGameMode.getMode());
-                intent.putExtra("gameMatrixRows", currentGameMode.getRows());
-                intent.putExtra("gameMatrixColumns", currentGameMode.getColumns());
-                startActivity(intent);
-                finish();
-            }
-        }.start();
+                    Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                    intent.putExtra("gameMode", currentGameMode.getMode());
+                    intent.putExtra("gameMatrixRows", currentGameMode.getRows());
+                    intent.putExtra("gameMatrixColumns", currentGameMode.getColumns());
+                    startActivity(intent);
+                    finish();
+                }
+            }.start();
+        } else {
+            new ArrivingFeatureDialog(this).show();
+        }
     }
 
     // onClick listener to change game mode option is as follows

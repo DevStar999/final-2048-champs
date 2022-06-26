@@ -31,8 +31,12 @@ public enum GameLayoutProperties {
             32, 32, 32, 23, 20),
     BLOCK_MIDDLE_5X5_LAYOUT_PROPERTIES("BLOCK_MIDDLE_5X5", "1:1", 3,
             30, 30, 30, 22, 19),
+    BLOCK_MIDDLE_6X6_LAYOUT_PROPERTIES("BLOCK_MIDDLE_6X6", "1:1", 3,
+            27, 27, 27, 20, 16),
     BLOCK_2_CORNERS_4X4_LAYOUT_PROPERTIES("BLOCK_2_CORNERS_4X4", "1:1", 4,
-            36, 36, 36, 28, 24);
+            36, 36, 36, 28, 24),
+    BLOCK_2_CORNERS_5X5_LAYOUT_PROPERTIES("BLOCK_2_CORNERS_5X5", "1:1", 4,
+                                                  30, 30, 30, 22, 19);
 
     private final String gameModeName;
     private final String dimensionRatio;
