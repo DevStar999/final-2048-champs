@@ -235,28 +235,32 @@ public class GameActivity extends AppCompatActivity {
 
         rootGameConstraintLayout.setOnTouchListener(new OnSwipeTouchListener(GameActivity.this) {
             public void onSwipeLeftToRight() {
-                if (gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) {
+                if (gameManager.getCurrentGameState() == GameStates.GAME_START ||
+                        gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) {
                     movesQueue.add(Direction.RIGHT);
                     executeMove();
                 }
             }
 
             public void onSwipeRightToLeft() {
-                if (gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) {
+                if (gameManager.getCurrentGameState() == GameStates.GAME_START ||
+                        gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) {
                     movesQueue.add(Direction.LEFT);
                     executeMove();
                 }
             }
 
             public void onSwipeTopToBottom() {
-                if (gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) {
+                if (gameManager.getCurrentGameState() == GameStates.GAME_START ||
+                        gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) {
                     movesQueue.add(Direction.DOWN);
                     executeMove();
                 }
             }
 
             public void onSwipeBottomToTop() {
-                if (gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) {
+                if (gameManager.getCurrentGameState() == GameStates.GAME_START ||
+                        gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) {
                     movesQueue.add(Direction.UP);
                     executeMove();
                 }

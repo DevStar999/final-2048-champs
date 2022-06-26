@@ -36,6 +36,7 @@ public class GameManager {
     private boolean hasMoveBeenCompleted;
     private boolean hasGoalBeenCompleted;
     private List<List<Integer>> gameMatrix;
+    private List<List<Integer>> startStateGameMatrix;
     private UndoManager undoManager;
     private List<List<Boolean>> areAllAnimationsDone; // Boolean matrix to check if all animations are done
     private GameStates currentGameState;
@@ -49,6 +50,7 @@ public class GameManager {
         hasMoveBeenCompleted = true;
 
         gameMatrix = new ArrayList<>();
+        startStateGameMatrix = new ArrayList<>();
         undoManager = new UndoManager();
         areAllAnimationsDone = new ArrayList<>();
         for (int row = 0; row < this.currentGameMode.getRows(); row++) {
@@ -62,11 +64,9 @@ public class GameManager {
                 }
                 areAllAnimationsDoneRow.add(false); // At first, we assign all values to false
             }
-            gameMatrix.add(gameMatrixRow);
+            gameMatrix.add(gameMatrixRow); startStateGameMatrix.add(gameMatrixRow);
             areAllAnimationsDone.add(areAllAnimationsDoneRow);
         }
-
-        currentGameState = GameStates.GAME_ONGOING;
     }
 
     private void addNewValues(int numberOfCellsToAdd) {
@@ -93,8 +93,13 @@ public class GameManager {
             goalTileTextView.setText("GOAL TILE");
         }
 
-        // Adding 2 new random values to the gameMatrix
-        addNewValues(2);
+        if (gameMatrix.equals(startStateGameMatrix)) {
+            // Adding 2 new random values to the gameMatrix, if game has just started
+            addNewValues(2);
+            currentGameState = GameStates.GAME_START;
+        } else { // Not adding 2 new random values if game is being resumed
+            currentGameState = GameStates.GAME_ONGOING;
+        }
 
         // Updating the board in layout as per the values
         for (int row = 0; row < currentGameMode.getRows(); row++) {
@@ -292,6 +297,7 @@ public class GameManager {
             for (int row = 0; row < currentGameMode.getRows(); row++) {
                 for (int column = 0; column < currentGameMode.getColumns(); column++) {
                     if (gameMatrix.get(row).get(column) >= currentGameMode.getGoal()) {
+                        currentGameState = GameStates.GAME_ONGOING;
                         hasGoalBeenCompleted = true;
                         return;
                     }
