@@ -30,6 +30,9 @@ import java.util.List;
 /* TODO -> In the logo of the app, center the position of crown and make it more spread out over
            more digits.
 */
+/* TODO -> When the user returns back to the MainActivity, the most recently played game mode should
+           be displayed to the user instead of the default i.e. SQUARE, 4x4 mode
+*/
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
     private MainManager mainManager;
