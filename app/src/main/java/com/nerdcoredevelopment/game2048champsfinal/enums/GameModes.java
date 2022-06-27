@@ -32,14 +32,14 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
     }}, "square_5x5.jpg"), // Total 25 cells.
 
-    SQUARE_6X6(6,6,"6 X 6","SQUARE",8192, true, new ArrayList<ArrayList<Integer>>() {{
+    SQUARE_6X6(6,6,"? X ?","SQUARE",8192, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
-    }}, "square_6x6.jpg"), // Total 36 cells.
+    }}, "arriving_game_mode.jpg"), // Total 36 cells.
 
     RECTANGLE_3X4(3,4,"3 X 4","RECTANGLE",512, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
@@ -64,15 +64,16 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
     }}, "rectangle_4x5.jpg"), // Total 20 cells.
 
-    RECTANGLE_4X6(4,6,"4 X 6","RECTANGLE",4096, true, new ArrayList<ArrayList<Integer>>() {{
+    RECTANGLE_4X6(4,6,"? X ?","RECTANGLE",4096, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
-    }}, "rectangle_4x6.jpg"), // Total 24 cells.
+    }}, "arriving_game_mode.jpg"), // Total 24 cells.
 
+    /*
     RECTANGLE_5X6(5,6,"5 X 6","RECTANGLE",8192, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
@@ -81,6 +82,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
     }}, "rectangle_5x6.jpg"), // Total 30 cells.
+    */
 
     BLOCK_MIDDLE_5X5(5, 5, "5 X 5", "BLOCK MIDDLE", 2048, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
@@ -175,9 +177,9 @@ public enum GameModes {
                 if (columns == 3) {
                     return ((rows == 4) ? valueOf("RECTANGLE_3X4") : valueOf("RECTANGLE_3X5"));
                 } else if (columns == 4) {
-                    return ((rows == 5) ? valueOf("RECTANGLE_4X5") : valueOf("RECTANGLE_4X6"));
+                    return valueOf("RECTANGLE_4X5");
                 } else {
-                    return valueOf("RECTANGLE_5X6");
+                    return valueOf("RECTANGLE_4X6");
                 }
             }
             // For BLOCK MIDDLE board
