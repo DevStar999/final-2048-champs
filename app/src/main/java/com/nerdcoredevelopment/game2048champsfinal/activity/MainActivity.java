@@ -27,6 +27,9 @@ import com.nerdcoredevelopment.game2048champsfinal.manager.MainManager;
 
 import java.util.List;
 
+/* TODO -> In the logo of the app, center the position of crown and make it more spread out over
+           more digits.
+*/
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
     private MainManager mainManager;
