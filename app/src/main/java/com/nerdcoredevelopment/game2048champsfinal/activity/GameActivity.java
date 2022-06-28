@@ -103,7 +103,7 @@ public class GameActivity extends AppCompatActivity {
 
         String jsonRetrieveBoard = sharedPreferences.getString("CurrentBoard" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getGameMatrix()));
-        Type typeBoard = new TypeToken<ArrayList<ArrayList<Integer>>>(){}.getType();
+        Type typeBoard = new TypeToken<List<List<Integer>>>(){}.getType();
         gameManager.setGameMatrix(gson.fromJson(jsonRetrieveBoard, typeBoard));
 
         String jsonRetrieveUndoManager = sharedPreferences.getString("UndoManager" + " " + currentGameMode.getMode()
