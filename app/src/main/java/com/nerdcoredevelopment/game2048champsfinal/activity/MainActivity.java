@@ -33,6 +33,7 @@ import java.util.List;
 /* TODO -> When the user returns back to the MainActivity, the most recently played game mode should
            be displayed to the user instead of the default i.e. SQUARE, 4x4 mode
 */
+// Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
     private MainManager mainManager;
