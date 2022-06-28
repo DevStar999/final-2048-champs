@@ -31,7 +31,7 @@
         android:layout_marginVertical="18dp"
         android:paddingHorizontal="8dp"
         android:letterSpacing="0.04"
-        android:text="This game mode is arriving soon, so stay tuned!"
+        android:text="This game mode is arriving soon, so stay tuned for updates !!"
         android:textAlignment="center"
         android:textColor="@color/game_text_color"
         android:textSize="20sp"
