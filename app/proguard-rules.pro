@@ -20,12 +20,19 @@
 # hide the original source file name.
 -renamesourcefileattribute SourceFile
 
-# /* Custom Proguard rules are as follows */
+# /** Custom Proguard rules are as follows **/
 -dontwarn javax.**
 -dontwarn lombok.**
 -dontwarn org.apache.**
 
 # // For TypeToken class in Gson library for retrieving back data
--keep class com.google.gson.reflect.TypeToken
--keep class * extends com.google.gson.reflect.TypeToken
--keep public class * implements java.lang.reflect.Type
+# Gson uses generic type information stored in a class file when working with fields. Proguard
+# removes such information by default, so configure it to keep all of it.
+-keepattributes Signature
+
+# Gson specific classes
+#-keep class sun.misc.Unsafe { *; }
+#-keep class com.google.gson.stream.** { *; }
+
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.google.gson.examples.android.model.** { *; }
