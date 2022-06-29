@@ -14,6 +14,12 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 
+/* TODO -> ## Bug ## : We need an answer among one of the two options given in this dialog from the
+           user. If in case it happens that we get an unexpected action or event from user then we
+           need to handle that in such a way that undo is called automatically (Starting a
+           new game is more beneficial to us then letting the user go to the menu as there are
+           higher chances that they might stop playing the game for now)
+*/
 public class GameOverDialog extends Dialog {
     private LottieAnimationView gameOverLottie;
     private AppCompatTextView gameOverText;
