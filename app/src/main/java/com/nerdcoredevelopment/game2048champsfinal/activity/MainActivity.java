@@ -34,6 +34,9 @@ import java.util.List;
            played game mode should be displayed to the user instead of the default
            i.e. SQUARE, 4x4 mode
 */
+/* TODO -> Sort out the mess of git tags for release versions & versionCode and versionName in
+           app/build.gradle file at the time of Initial release
+*/
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
