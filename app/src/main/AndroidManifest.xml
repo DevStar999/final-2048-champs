@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.nerdcoredevelopment.game2048champsfinal">
 
+    <!-- TODO -> Use a better approach of using a splash screen also change the logo on splash
+                 screen and add the text 'Nerdcore Development' -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
