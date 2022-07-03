@@ -38,6 +38,10 @@ import java.util.List;
            app/build.gradle file at the time of Initial release
 */
 // TODO -> ## User Experience ## : Adjust the layout files by making tweaks for Tablet users
+/* TODO -> If score and best score displays are apart make sure that they are visible, problem is
+           arising when a user just reaches best score and merge animation starts and midway the
+           user presses Undo
+ */
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
