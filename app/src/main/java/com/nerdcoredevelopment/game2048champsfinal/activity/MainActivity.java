@@ -37,6 +37,7 @@ import java.util.List;
 /* TODO -> Sort out the mess of git tags for release versions & versionCode and versionName in
            app/build.gradle file at the time of Initial release
 */
+// TODO -> ## User Experience ## : Adjust the layout files by making tweaks for Tablet users
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
