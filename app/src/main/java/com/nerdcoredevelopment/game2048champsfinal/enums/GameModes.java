@@ -8,7 +8,8 @@ import lombok.Getter;
 /* TODO -> ## Bug ## : The sizes are all traversed using 'dimensions' string for a question mark
            string like '? X ?' so when call to getGameModeEnum() method is made this mode better be
            covered in the last else block, or else the app will crash
- */
+*/
+// TODO -> Replace the current preview images with more HD images
 @Getter
 public enum GameModes {
     SQUARE_3X3(3, 3, "3 X 3", "SQUARE", 256, true, new ArrayList<ArrayList<Integer>>() {{
