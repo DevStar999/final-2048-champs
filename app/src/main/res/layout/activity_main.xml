@@ -145,6 +145,7 @@
                 android:id="@+id/game_mode_left_arrow_image_view"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
+                android:contentDescription="Game mode browse left"
                 android:onClick="gameModeBrowse"
                 app:srcCompat="@drawable/arrow_left" />
 
@@ -164,6 +165,7 @@
                 android:id="@+id/game_mode_right_arrow_image_view"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
+                android:contentDescription="Game mode browse right"
                 android:onClick="gameModeBrowse"
                 app:srcCompat="@drawable/arrow_right" />
 
@@ -181,6 +183,7 @@
                 android:id="@+id/game_size_left_arrow_image_view"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
+                android:contentDescription="Game size browse left"
                 android:onClick="gameSizeBrowse"
                 app:srcCompat="@drawable/arrow_left" />
 
@@ -200,6 +203,7 @@
                 android:id="@+id/game_size_right_arrow_image_view"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
+                android:contentDescription="Game size browse right"
                 android:onClick="gameSizeBrowse"
                 app:srcCompat="@drawable/arrow_right" />
 
