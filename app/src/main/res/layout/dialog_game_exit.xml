@@ -55,7 +55,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/game_exit_exit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/dialog_buttons"
             android:letterSpacing="0.04"
@@ -71,7 +71,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/game_exit_cancel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/dialog_buttons"
             android:letterSpacing="0.04"

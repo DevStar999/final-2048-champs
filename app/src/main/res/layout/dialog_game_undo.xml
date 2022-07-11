@@ -54,7 +54,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/game_undo_continue"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/dialog_buttons"
             android:letterSpacing="0.04"
