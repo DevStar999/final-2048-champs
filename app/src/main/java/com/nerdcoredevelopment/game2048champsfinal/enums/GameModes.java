@@ -9,21 +9,20 @@ import lombok.Getter;
            string like '? X ?' so when call to getGameModeEnum() method is made this mode better be
            covered in the last else block, or else the app will crash
 */
-// TODO -> Replace the current preview images with more HD images
 @Getter
 public enum GameModes {
     SQUARE_3X3(3, 3, "3 X 3", "SQUARE", 256, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
-    }}, "square_3x3.jpg"), // Total 9 cells.
+    }}, "square_3x3.png"), // Total 9 cells.
 
     SQUARE_4X4(4, 4, "4 X 4", "SQUARE", 2048, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
-    }}, "square_4x4.jpg"), // Total 16 cells.
+    }}, "square_4x4.png"), // Total 16 cells.
 
     SQUARE_5X5(5,5,"5 X 5","SQUARE",4096, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
@@ -31,7 +30,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-    }}, "square_5x5.jpg"), // Total 25 cells.
+    }}, "square_5x5.png"), // Total 25 cells.
 
     SQUARE_6X6(6,6,"? X ?","SQUARE",8192, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
@@ -47,7 +46,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
-    }}, "rectangle_3x4.jpg"), // Total 12 cells.
+    }}, "rectangle_3x4.png"), // Total 12 cells.
 
     RECTANGLE_3X5(3,5,"3 X 5","RECTANGLE",1024, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
@@ -55,7 +54,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
-    }}, "rectangle_3x5.jpg"), // Total 15 cells.
+    }}, "rectangle_3x5.png"), // Total 15 cells.
 
     RECTANGLE_4X5(4,5,"4 X 5","RECTANGLE",2048, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
@@ -63,7 +62,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
-    }}, "rectangle_4x5.jpg"), // Total 20 cells.
+    }}, "rectangle_4x5.png"), // Total 20 cells.
 
     RECTANGLE_4X6(4,6,"? X ?","RECTANGLE",4096, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
@@ -82,7 +81,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-    }}, "rectangle_5x6.jpg"), // Total 30 cells.
+    }}, "rectangle_5x6.png"), // Total 30 cells.
     */
 
     BLOCK_MIDDLE_5X5(5, 5, "5 X 5", "BLOCK MIDDLE", 2048, true, new ArrayList<ArrayList<Integer>>() {{
@@ -91,7 +90,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(-1); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-    }}, "block_middle_5x5.jpg"), // Total 25 cells.
+    }}, "block_middle_5x5.png"), // Total 25 cells.
 
     BLOCK_MIDDLE_6X6(6,6,"? X ?","BLOCK MIDDLE",4096, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
@@ -107,7 +106,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(-1);}});
-    }}, "block_2_corners_4x4.jpg"), // Total 16 cells.
+    }}, "block_2_corners_4x4.png"), // Total 16 cells.
 
     BLOCK_2_CORNERS_5X5(5, 5, "? X ?", "BLOCK 2 CORNERS", 4096, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(-1); add(-1); add(0); add(0); add(0);}});
@@ -125,7 +124,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(-1); add(-1);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(-1); add(-1);}});
-    }}, "block_2_corners_6x6.jpg"); // Total 36 cells.
+    }}, "block_2_corners_6x6.png"); // Total 36 cells.
     */
 
     private final int rows;
