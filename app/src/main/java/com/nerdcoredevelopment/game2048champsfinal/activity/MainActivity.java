@@ -41,7 +41,10 @@ import java.util.List;
 /* TODO -> If score and best score displays are apart make sure that they are visible, problem is
            arising when a user just reaches best score and merge animation starts and midway the
            user presses Undo
- */
+*/
+/* TODO -> Add emojis in the text of buttons in Main Activity for e.g. a game console emoji besides
+           the 'START GAME'/'RESUME GAME' button
+*/
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
