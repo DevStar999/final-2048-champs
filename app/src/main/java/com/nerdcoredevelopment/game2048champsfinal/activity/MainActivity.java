@@ -45,6 +45,9 @@ import java.util.List;
 /* TODO -> Add emojis in the text of buttons in Main Activity for e.g. a game console emoji besides
            the 'START GAME'/'RESUME GAME' button
 */
+/* TODO -> At some later point in development, we can give options for different audio assets to be
+           played for different actions or buttons etc.
+*/
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
