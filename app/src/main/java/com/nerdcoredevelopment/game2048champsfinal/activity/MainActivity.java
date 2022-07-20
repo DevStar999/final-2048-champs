@@ -52,7 +52,6 @@ import java.util.List;
            and rotating light animation that we have here in the main activity to show the preview
            of the board and similarly for dark theme there should be a different set of animations
 */
-// TODO -> Decide later if you want to implement Haptic Feedback for any event/action
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
