@@ -48,10 +48,6 @@ import java.util.List;
 /* TODO -> At some later point in development, we can give options for different audio assets to be
            played for different actions or buttons etc.
 */
-/* TODO -> For normal theme, there should be a different set of animations to replace the glowing
-           and rotating light animation that we have here in the main activity to show the preview
-           of the board and similarly for dark theme there should be a different set of animations
-*/
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
