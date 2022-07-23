@@ -48,6 +48,10 @@ import java.util.List;
 /* TODO -> At some later point in development, we can give options for different audio assets to be
            played for different actions or buttons etc.
 */
+/* TODO -> Use the 'Switch' selection control for toggling the settings when we create the settings
+           page. We can refer the Selection Controls section project from the Material Design Course
+           hands-on projects
+ */
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
