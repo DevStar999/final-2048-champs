@@ -39,12 +39,6 @@ import java.util.List;
            arising when a user just reaches best score and merge animation starts and midway the
            user presses Undo
 */
-/* TODO -> Add emojis in the text of buttons in Main Activity for e.g. a game console emoji besides
-           the 'START GAME'/'RESUME GAME' button
-*/
-/* TODO -> At some later point in development, we can give options for different audio assets to be
-           played for different actions or buttons etc.
-*/
 /* TODO -> Use the 'Switch' selection control for toggling the settings when we create the settings
            page. We can refer the Selection Controls section project from the Material Design Course
            hands-on projects
