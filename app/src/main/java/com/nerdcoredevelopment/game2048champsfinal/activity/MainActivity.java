@@ -34,9 +34,6 @@ import java.util.List;
            played game mode should be displayed to the user instead of the default
            i.e. SQUARE, 4x4 mode
 */
-/* TODO -> Sort out the mess of git tags for release versions & versionCode and versionName in
-           app/build.gradle file at the time of Initial release
-*/
 // TODO -> ## User Experience ## : Adjust the layout files by making tweaks for Tablet users
 /* TODO -> If score and best score displays are apart make sure that they are visible, problem is
            arising when a user just reaches best score and merge animation starts and midway the
