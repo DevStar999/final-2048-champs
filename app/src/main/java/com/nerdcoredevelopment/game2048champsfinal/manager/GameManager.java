@@ -316,27 +316,31 @@ public class GameManager {
         // Still, GAME_ONGOING if we find that user can merge cells
         for (int row = 0; row < currentGameMode.getRows() - 1; row++) {
             for (int column = 0; column < currentGameMode.getColumns() - 1; column++) {
-                if (gameMatrix.get(row).get(column)
-                        .equals(gameMatrix.get(row + 1).get(column)) ||
-                        gameMatrix.get(row).get(column)
-                                .equals(gameMatrix.get(row).get(column + 1))) {
+                if (gameMatrix.get(row).get(column) != -1) {
+                    if (gameMatrix.get(row).get(column).equals(gameMatrix.get(row + 1).get(column)) ||
+                            gameMatrix.get(row).get(column).equals(gameMatrix.get(row).get(column + 1))) {
+                        currentGameState = GameStates.GAME_ONGOING;
+                        return;
+                    }
+                }
+            }
+        }
+        for (int row = 0; row < currentGameMode.getRows() - 1; row++) {
+            if (gameMatrix.get(row).get(currentGameMode.getColumns() - 1) != -1) {
+                if (gameMatrix.get(row).get(currentGameMode.getColumns() - 1)
+                        .equals(gameMatrix.get(row + 1).get(currentGameMode.getColumns() - 1))) {
                     currentGameState = GameStates.GAME_ONGOING;
                     return;
                 }
             }
         }
-        for (int row = 0; row < currentGameMode.getRows() - 1; row++) {
-            if (gameMatrix.get(row).get(currentGameMode.getColumns() - 1)
-                    .equals(gameMatrix.get(row + 1).get(currentGameMode.getColumns() - 1))) {
-                currentGameState = GameStates.GAME_ONGOING;
-                return;
-            }
-        }
         for (int column = 0; column < currentGameMode.getColumns() - 1; column++) {
-            if (gameMatrix.get(currentGameMode.getRows() - 1).get(column)
-                    .equals(gameMatrix.get(currentGameMode.getRows() - 1).get(column + 1))) {
-                currentGameState = GameStates.GAME_ONGOING;
-                return;
+            if (gameMatrix.get(currentGameMode.getRows() - 1).get(column) != -1) {
+                if (gameMatrix.get(currentGameMode.getRows() - 1).get(column)
+                        .equals(gameMatrix.get(currentGameMode.getRows() - 1).get(column + 1))) {
+                    currentGameState = GameStates.GAME_ONGOING;
+                    return;
+                }
             }
         }
 
