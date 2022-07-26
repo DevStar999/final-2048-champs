@@ -30,10 +30,6 @@ import java.util.List;
 /* TODO -> In the logo of the app, center the position of crown and make it more spread out over
            more digits.
 */
-/* TODO -> ## User Experience ## : When the user returns back to the MainActivity, the most recently
-           played game mode should be displayed to the user instead of the default
-           i.e. SQUARE, 4x4 mode
-*/
 // TODO -> ## User Experience ## : Adjust the layout files by making tweaks for Tablet users
 /* TODO -> If score and best score displays are apart make sure that they are visible, problem is
            arising when a user just reaches best score and merge animation starts and midway the
@@ -48,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
     private MainManager mainManager;
 
+    // Attributes for determining game state
+    private SharedPreferences sharedPreferences;
+
     // Using the GameModes enum for storing the game mode selected by the user
     private GameModes currentGameMode;
 
     // Attributes for determining game mode
     private List<String> allGameModes;
     private AppCompatButton gameModeButton;
-
-    // Attributes for determining game state
-    private SharedPreferences sharedPreferences;
 
     // Attributes for determining game size
     private List<String> allCurrentGameSizes;
@@ -76,17 +72,20 @@ public class MainActivity extends AppCompatActivity {
         // Initialising MainManager
         mainManager = new MainManager(MainActivity.this);
 
+        // Initialising sharedPreferences
+        sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
+
         // The default game mode
-        currentGameMode = GameModes.getGameModeEnum(4, 4, "SQUARE");
+        currentGameMode = GameModes.getGameModeEnum(
+                sharedPreferences.getInt("gameMatrixColumns", 4),
+                sharedPreferences.getInt("gameMatrixRows", 4),
+                sharedPreferences.getString("gameMode", "SQUARE"));
 
         // Initialising allGameModes List and gameModeTextView TextView
         allGameModes = GameModes.getAllGameModes();
         gameModeButton = findViewById(R.id.game_mode_button);
         gameModeButton.setText(currentGameMode.getMode());
         mainManager.updateModeBrowseIcons(currentGameMode.getMode(), allGameModes);
-
-        // Initialising sharedPreferences
-        sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
 
         // Initialising allCurrentGameSizes List and gameSizeTextView TextView
         allCurrentGameSizes = GameModes.getAllGameVariantsOfMode(currentGameMode.getMode());
@@ -206,10 +205,13 @@ public class MainActivity extends AppCompatActivity {
             modeLeft.setEnabled(false); modeRight.setEnabled(false);
             sizeLeft.setEnabled(false); sizeRight.setEnabled(false);
 
-
             gamePreviewSpotLightLottie.setVisibility(View.INVISIBLE);
             gamePreviewImageView.setVisibility(View.INVISIBLE);
             startGameLottie.setVisibility(View.VISIBLE);
+
+            sharedPreferences.edit().putString("gameMode", currentGameMode.getMode()).apply();
+            sharedPreferences.edit().putInt("gameMatrixColumns", currentGameMode.getColumns()).apply();
+            sharedPreferences.edit().putInt("gameMatrixRows", currentGameMode.getRows()).apply();
 
             startGameLottie.playAnimation();
 
@@ -226,8 +228,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this, GameActivity.class);
                     intent.putExtra("gameMode", currentGameMode.getMode());
-                    intent.putExtra("gameMatrixRows", currentGameMode.getRows());
                     intent.putExtra("gameMatrixColumns", currentGameMode.getColumns());
+                    intent.putExtra("gameMatrixRows", currentGameMode.getRows());
                     startActivity(intent);
                     finish();
                 }
