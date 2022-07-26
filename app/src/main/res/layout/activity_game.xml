@@ -261,6 +261,8 @@
         app:layout_constraintVertical_weight="1"
         app:srcCompat="@drawable/special_tools_undo" />
 
+    <!-- TODO -> This message should either be changed to something else or
+                 removed when the goal tile is reached -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tutorial_text_view"
         android:layout_width="wrap_content"
