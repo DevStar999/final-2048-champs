@@ -84,15 +84,15 @@ public enum GameModes {
     }}, "rectangle_5x6.png"), // Total 30 cells.
     */
 
-    BLOCK_MIDDLE_5X5(5, 5, "5 X 5", "BLOCK MIDDLE", 2048, true, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_MIDDLE_SQUARE_5X5(5, 5, "5 X 5", "BLOCK MIDDLE (SQ.)", 2048, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(-1); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-    }}, "block_middle_5x5.png"), // Total 25 cells.
+    }}, "block_middle_square_5x5.png"), // Total 25 cells.
 
-    BLOCK_MIDDLE_6X6(6,6,"? X ?","BLOCK MIDDLE",4096, false, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_MIDDLE_SQUARE_6X6(6,6,"? X ?","BLOCK MIDDLE (SQ.)",4096, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(-1); add(-1); add(0); add(0);}});
@@ -101,14 +101,14 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
     }}, "arriving_game_mode.jpg"), // Total 36 cells.
 
-    BLOCK_2_CORNERS_4X4(4, 4, "4 X 4", "BLOCK 2 CORNERS", 2048, true, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_2_CORNERS_SQUARE_4X4(4, 4, "4 X 4", "BLOCK 2 CORNERS (SQ.)", 2048, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(-1); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(-1);}});
-    }}, "block_2_corners_4x4.png"), // Total 16 cells.
+    }}, "block_2_corners_square_4x4.png"), // Total 16 cells.
 
-    BLOCK_2_CORNERS_5X5(5, 5, "? X ?", "BLOCK 2 CORNERS", 4096, false, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_2_CORNERS_SQUARE_5X5(5, 5, "? X ?", "BLOCK 2 CORNERS (SQ.)", 4096, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(-1); add(-1); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(-1); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
@@ -183,21 +183,21 @@ public enum GameModes {
                 }
             }
             // For BLOCK MIDDLE board
-            case "BLOCK MIDDLE": {
+            case "BLOCK MIDDLE (SQ.)": {
                 if (rows == 5) {
-                    return valueOf("BLOCK_MIDDLE_5X5");
+                    return valueOf("BLOCK_MIDDLE_SQUARE_5X5");
                 } else {
-                    return valueOf("BLOCK_MIDDLE_6X6");
+                    return valueOf("BLOCK_MIDDLE_SQUARE_6X6");
                 }
             }
             // For BLOCK 2 CORNERS board
-            case "BLOCK 2 CORNERS": {
+            case "BLOCK 2 CORNERS (SQ.)": {
                 if (rows == 4) {
-                    return valueOf("BLOCK_2_CORNERS_4X4");
+                    return valueOf("BLOCK_2_CORNERS_SQUARE_4X4");
                 } else if (rows == 6) {
-                    return valueOf("BLOCK_2_CORNERS_6X6");
+                    return valueOf("BLOCK_2_CORNERS_SQUARE_6X6");
                 } else {
-                    return valueOf("BLOCK_2_CORNERS_5X5");
+                    return valueOf("BLOCK_2_CORNERS_SQUARE_5X5");
                 }
             }
             // For SQUARE board

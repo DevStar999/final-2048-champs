@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/game_primary_background_color"
-    android:padding="16dp"
+    android:padding="4dp"
     tools:context=".activity.MainActivity">
 
     <!-- TODO -> Implement this feature and change visibility
@@ -124,10 +124,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="8dp"
             android:background="@drawable/rounded_corner_button"
-            android:maxEms="12"
-            android:minEms="10"
+            android:minEms="13"
             android:onClick="startGameButtonPressed"
             android:textColor="@color/game_text_color"
             android:textSize="16sp"
@@ -154,10 +152,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="8dp"
                 android:background="@drawable/rounded_corner_button"
-                android:maxEms="12"
-                android:minEms="10"
+                android:minEms="13"
                 android:textColor="@color/game_text_color"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -193,10 +189,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="8dp"
                 android:background="@drawable/rounded_corner_button"
-                android:maxEms="12"
-                android:minEms="10"
+                android:minEms="13"
                 android:textColor="@color/game_text_color"
                 android:textSize="16sp"
                 android:textStyle="bold" />
