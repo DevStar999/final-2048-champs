@@ -75,17 +75,6 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
     }}, "arriving_game_mode.jpg"), // Total 24 cells.
 
-    /*
-    RECTANGLE_5X6(5,6,"5 X 6","RECTANGLE",8192, true, new ArrayList<ArrayList<Integer>>() {{
-        add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-        add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-        add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-        add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-        add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-        add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
-    }}, "rectangle_5x6.png"), // Total 30 cells.
-    */
-
     BLOCK_MIDDLE_SQUARE_5X5(5, 5, "5 X 5", "BLOCK MIDDLE (SQ.)", 2048, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
