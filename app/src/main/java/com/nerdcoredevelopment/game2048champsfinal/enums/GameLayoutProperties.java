@@ -35,16 +35,16 @@ public enum GameLayoutProperties {
             27, 27, 27, 20, 16),
     BLOCK_MIDDLE_RECTANGLE_3X4_LAYOUT_PROPERTIES("BLOCK_MIDDLE_RECTANGLE_3X4", "1:1", 4,
             42, 42, 42, 36, 32),
-//    BLOCK_MIDDLE_RECTANGLE_3X5_LAYOUT_PROPERTIES("BLOCK_MIDDLE_RECTANGLE_3X5", "1:1.15", 4,
-//            42, 42, 42, 36, 32),
+    BLOCK_MIDDLE_RECTANGLE_3X5_LAYOUT_PROPERTIES("BLOCK_MIDDLE_RECTANGLE_3X5", "1:1.15", 4,
+            42, 42, 42, 36, 32),
     BLOCK_2_CORNERS_SQUARE_4X4_LAYOUT_PROPERTIES("BLOCK_2_CORNERS_SQUARE_4X4", "1:1", 4,
             36, 36, 36, 28, 24),
     BLOCK_2_CORNERS_SQUARE_5X5_LAYOUT_PROPERTIES("BLOCK_2_CORNERS_SQUARE_5X5", "1:1", 4,
                                                   30, 30, 30, 22, 19),
     BLOCK_2_CORNERS_RECTANGLE_3X4_LAYOUT_PROPERTIES("BLOCK_2_CORNERS_RECTANGLE_3X4", "1:1", 4,
+                                                         42, 42, 42, 36, 32),
+    BLOCK_2_CORNERS_RECTANGLE_3X5_LAYOUT_PROPERTIES("BLOCK_2_CORNERS_RECTANGLE_3X5", "1:1.15", 4,
                                                          42, 42, 42, 36, 32);
-//    BLOCK_2_CORNERS_RECTANGLE_3X5_LAYOUT_PROPERTIES("BLOCK_2_CORNERS_RECTANGLE_3X5", "1:1.15", 4,
-//                                                         42, 42, 42, 36, 32);
 
     private final String gameModeName;
     private final String dimensionRatio;

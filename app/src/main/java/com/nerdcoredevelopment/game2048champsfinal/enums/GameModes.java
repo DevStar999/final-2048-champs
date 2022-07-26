@@ -1,5 +1,7 @@
 package com.nerdcoredevelopment.game2048champsfinal.enums;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,13 +110,13 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
     }}, "block_middle_rectangle_3x4.png"), // Total 12 cells.
 
-//    BLOCK_MIDDLE_RECTANGLE_3X5(3,5,"? X ?","BLOCK MIDDLE (REC.)",512, false, new ArrayList<ArrayList<Integer>>() {{
-//        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
-//        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
-//        add(new ArrayList<Integer>() {{add(0); add(-1); add(0);}});
-//        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
-//        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
-//    }}, "arriving_game_mode.jpg"), // Total 15 cells.
+    BLOCK_MIDDLE_RECTANGLE_3X5(3,5,"? X ?","BLOCK MIDDLE (REC.)",512, false, new ArrayList<ArrayList<Integer>>() {{
+        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
+        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
+        add(new ArrayList<Integer>() {{add(0); add(-1); add(0);}});
+        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
+        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
+    }}, "arriving_game_mode.jpg"), // Total 15 cells.
 
     BLOCK_2_CORNERS_SQUARE_4X4(4, 4, "4 X 4", "BLOCK 2 CORNERS (SQ.)", 2048, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(-1); add(0); add(0); add(0);}});
@@ -136,15 +138,15 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(-1);}});
-    }}, "block_2_corners_rectangle_3x4.png"); // Total 12 cells.
+    }}, "block_2_corners_rectangle_3x4.png"), // Total 12 cells.
 
-//    BLOCK_2_CORNERS_RECTANGLE_3X5(3,5,"? X ?","BLOCK 2 CORNERS (REC.)",256, false, new ArrayList<ArrayList<Integer>>() {{
-//        add(new ArrayList<Integer>() {{add(-1); add(0); add(0);}});
-//        add(new ArrayList<Integer>() {{add(-1); add(0); add(0);}});
-//        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
-//        add(new ArrayList<Integer>() {{add(0); add(0); add(-1);}});
-//        add(new ArrayList<Integer>() {{add(0); add(0); add(-1);}});
-//    }}, "arriving_game_mode.jpg"); // Total 15 cells.
+    BLOCK_2_CORNERS_RECTANGLE_3X5(3,5,"? X ?","BLOCK 2 CORNERS (REC.)",256, false, new ArrayList<ArrayList<Integer>>() {{
+        add(new ArrayList<Integer>() {{add(-1); add(0); add(0);}});
+        add(new ArrayList<Integer>() {{add(-1); add(0); add(0);}});
+        add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
+        add(new ArrayList<Integer>() {{add(0); add(0); add(-1);}});
+        add(new ArrayList<Integer>() {{add(0); add(0); add(-1);}});
+    }}, "arriving_game_mode.jpg"); // Total 15 cells.
 
     private final int rows;
     private final int columns;
@@ -211,12 +213,11 @@ public enum GameModes {
             }
             // For BLOCK MIDDLE RECTANGLE board
             case "BLOCK MIDDLE (REC.)": {
-//                if (columns == 4) {
-//                    return valueOf("BLOCK_MIDDLE_RECTANGLE_3X4");
-//                } else {
-//                    return valueOf("BLOCK_MIDDLE_RECTANGLE_3X5");
-//                }
-                return valueOf("BLOCK_MIDDLE_RECTANGLE_3X4");
+                if (rows == 4) {
+                    return valueOf("BLOCK_MIDDLE_RECTANGLE_3X4");
+                } else {
+                    return valueOf("BLOCK_MIDDLE_RECTANGLE_3X5");
+                }
             }
             // For BLOCK 2 CORNERS board
             case "BLOCK 2 CORNERS (SQ.)": {
@@ -230,12 +231,11 @@ public enum GameModes {
             }
             // For BLOCK 2 CORNERS RECTANGLE board
             case "BLOCK 2 CORNERS (REC.)": {
-//                if (columns == 4) {
-//                    return valueOf("BLOCK_2_CORNERS_RECTANGLE_3X4");
-//                } else {
-//                    return valueOf("BLOCK_2_CORNERS_RECTANGLE_3X5");
-//                }
-                return valueOf("BLOCK_2_CORNERS_RECTANGLE_3X4");
+                if (rows == 4) {
+                    return valueOf("BLOCK_2_CORNERS_RECTANGLE_3X4");
+                } else {
+                    return valueOf("BLOCK_2_CORNERS_RECTANGLE_3X5");
+                }
             }
             // For SQUARE board
             default: {
