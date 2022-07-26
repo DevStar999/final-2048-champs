@@ -74,8 +74,8 @@ public class GameActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
         gson = new Gson();
         currentGameMode = GameModes.getGameModeEnum(
-                getIntent().getIntExtra("gameMatrixRows", 4),
                 getIntent().getIntExtra("gameMatrixColumns", 4),
+                getIntent().getIntExtra("gameMatrixRows", 4),
                 getIntent().getStringExtra("gameMode"));
         gameManager = new GameManager(GameActivity.this, currentGameMode);
         gameManager.setCurrentGameState(GameStates.values()[

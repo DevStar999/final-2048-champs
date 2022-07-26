@@ -251,10 +251,9 @@ public class MainActivity extends AppCompatActivity {
             String newGameMode = allGameModes.get(indexOfCurrentMode);
             allCurrentGameSizes = GameModes.getAllGameVariantsOfMode(newGameMode);
             currentGameMode = GameModes.getGameModeEnum(
-                    Character.getNumericValue(allCurrentGameSizes.get(0)
-                            .charAt(allCurrentGameSizes.get(0).length() - 1)),
                     Character.getNumericValue(allCurrentGameSizes.get(0).charAt(0)),
-                    newGameMode);
+                    Character.getNumericValue(allCurrentGameSizes.get(0)
+                                    .charAt(allCurrentGameSizes.get(0).length() - 1)), newGameMode);
 
             // Updating the text views for both mode and size
             gameModeButton.setText(currentGameMode.getMode());
@@ -292,8 +291,8 @@ public class MainActivity extends AppCompatActivity {
             // Make changes to the game size
             String newGameSize = allCurrentGameSizes.get(indexOfCurrentSize);
             currentGameMode = GameModes.getGameModeEnum(
-                    Character.getNumericValue(newGameSize.charAt(newGameSize.length() - 1)),
                     Character.getNumericValue(newGameSize.charAt(0)),
+                    Character.getNumericValue(newGameSize.charAt(newGameSize.length() - 1)),
                     currentGameMode.getMode());
             gameSizeButton.setText(currentGameMode.getDimensions());
 

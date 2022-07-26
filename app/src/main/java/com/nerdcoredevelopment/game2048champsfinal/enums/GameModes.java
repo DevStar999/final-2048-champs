@@ -148,8 +148,8 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(-1);}});
     }}, "arriving_game_mode.jpg"); // Total 15 cells.
 
-    private final int rows;
     private final int columns;
+    private final int rows;
     private final String dimensions;
     private final String mode;
     private final int goal;
@@ -160,8 +160,8 @@ public enum GameModes {
 
     GameModes(int columns, int rows, String dimensions, String mode, int goal, boolean canAccess,
               ArrayList<ArrayList<Integer>> blockCells, String gamePreviewAssetFileName) {
-        this.rows = rows;
         this.columns = columns;
+        this.rows = rows;
         this.dimensions = dimensions;
         this.mode = mode;
         this.goal = goal;
@@ -191,7 +191,7 @@ public enum GameModes {
         return allGameModes;
     }
 
-    public static GameModes getGameModeEnum(int rows, int columns, String mode) {
+    public static GameModes getGameModeEnum(int columns, int rows, String mode) {
         switch (mode) {
             // For RECTANGLE board
             case "RECTANGLE": {
