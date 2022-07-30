@@ -75,7 +75,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
     }}, "arriving_game_mode.jpg"), // Total 24 cells.
 
-    BLOCK_MIDDLE_SQUARE_5X5(5, 5, "5 X 5", "BLOCK MIDDLE (SQ.)", 2048, true, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_MIDDLE_SQUARE_5X5(5, 5, "5 X 5", "BLOCK MIDDLE, SQ", 2048, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(-1); add(0); add(0);}});
@@ -83,7 +83,7 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
     }}, "block_middle_square_5x5.png"), // Total 25 cells.
 
-    BLOCK_MIDDLE_SQUARE_6X6(6,6,"? X ?","BLOCK MIDDLE (SQ.)",4096, false, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_MIDDLE_SQUARE_6X6(6,6,"? X ?","BLOCK MIDDLE, SQ",4096, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(-1); add(-1); add(0); add(0);}});
@@ -92,14 +92,14 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0); add(0);}});
     }}, "arriving_game_mode.jpg"), // Total 36 cells.
 
-    BLOCK_MIDDLE_RECTANGLE_3X4(3, 4, "3 X 4", "BLOCK MIDDLE (REC.)", 256, true, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_MIDDLE_RECTANGLE_3X4(3, 4, "3 X 4", "BLOCK MIDDLE, REC", 256, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(-1); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(-1); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
     }}, "block_middle_rectangle_3x4.png"), // Total 12 cells.
 
-    BLOCK_MIDDLE_RECTANGLE_3X5(3,5,"? X ?","BLOCK MIDDLE (REC.)",512, false, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_MIDDLE_RECTANGLE_3X5(3,5,"? X ?","BLOCK MIDDLE, REC",512, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(-1); add(0);}});
@@ -107,14 +107,14 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
     }}, "arriving_game_mode.jpg"), // Total 15 cells.
 
-    BLOCK_2_CORNERS_SQUARE_4X4(4, 4, "4 X 4", "BLOCK 2 CORNERS (SQ.)", 2048, true, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_2_CORNERS_SQUARE_4X4(4, 4, "4 X 4", "BLOCK 2 CORNERS, SQ", 2048, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(-1); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(-1);}});
     }}, "block_2_corners_square_4x4.png"), // Total 16 cells.
 
-    BLOCK_2_CORNERS_SQUARE_5X5(5, 5, "? X ?", "BLOCK 2 CORNERS (SQ.)", 4096, false, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_2_CORNERS_SQUARE_5X5(5, 5, "? X ?", "BLOCK 2 CORNERS, SQ", 4096, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(-1); add(-1); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(-1); add(0); add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(0); add(0);}});
@@ -122,14 +122,14 @@ public enum GameModes {
         add(new ArrayList<Integer>() {{add(0); add(0); add(0); add(-1); add(-1);}});
     }}, "arriving_game_mode.jpg"), // Total 25 cells.
 
-    BLOCK_2_CORNERS_RECTANGLE_3X4(3, 4, "3 X 4", "BLOCK 2 CORNERS (REC.)", 128, true, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_2_CORNERS_RECTANGLE_3X4(3, 4, "3 X 4", "BLOCK 2 CORNERS, REC", 128, true, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(-1); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(-1);}});
     }}, "block_2_corners_rectangle_3x4.png"), // Total 12 cells.
 
-    BLOCK_2_CORNERS_RECTANGLE_3X5(3,5,"? X ?","BLOCK 2 CORNERS (REC.)",256, false, new ArrayList<ArrayList<Integer>>() {{
+    BLOCK_2_CORNERS_RECTANGLE_3X5(3,5,"? X ?","BLOCK 2 CORNERS, REC",256, false, new ArrayList<ArrayList<Integer>>() {{
         add(new ArrayList<Integer>() {{add(-1); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(-1); add(0); add(0);}});
         add(new ArrayList<Integer>() {{add(0); add(0); add(0);}});
@@ -193,7 +193,7 @@ public enum GameModes {
                 }
             }
             // For BLOCK MIDDLE SQUARE board
-            case "BLOCK MIDDLE (SQ.)": {
+            case "BLOCK MIDDLE, SQ": {
                 if (rows == 5) {
                     return valueOf("BLOCK_MIDDLE_SQUARE_5X5");
                 } else {
@@ -201,7 +201,7 @@ public enum GameModes {
                 }
             }
             // For BLOCK MIDDLE RECTANGLE board
-            case "BLOCK MIDDLE (REC.)": {
+            case "BLOCK MIDDLE, REC": {
                 if (rows == 4) {
                     return valueOf("BLOCK_MIDDLE_RECTANGLE_3X4");
                 } else {
@@ -209,7 +209,7 @@ public enum GameModes {
                 }
             }
             // For BLOCK 2 CORNERS board
-            case "BLOCK 2 CORNERS (SQ.)": {
+            case "BLOCK 2 CORNERS, SQ": {
                 if (rows == 4) {
                     return valueOf("BLOCK_2_CORNERS_SQUARE_4X4");
                 } else if (rows == 6) {
@@ -219,7 +219,7 @@ public enum GameModes {
                 }
             }
             // For BLOCK 2 CORNERS RECTANGLE board
-            case "BLOCK 2 CORNERS (REC.)": {
+            case "BLOCK 2 CORNERS, REC": {
                 if (rows == 4) {
                     return valueOf("BLOCK_2_CORNERS_RECTANGLE_3X4");
                 } else {

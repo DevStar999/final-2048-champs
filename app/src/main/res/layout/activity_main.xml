@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/game_primary_background_color"
-    android:padding="4dp"
     tools:context=".activity.MainActivity">
 
     <!-- TODO -> Implement this feature and change visibility
@@ -125,10 +124,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded_corner_button"
-            android:minEms="13"
+            android:minEms="12"
             android:onClick="startGameButtonPressed"
             android:textColor="@color/game_text_color"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -141,8 +140,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/game_mode_left_arrow_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="Game mode browse left"
                 android:onClick="gameModeBrowse"
                 app:srcCompat="@drawable/arrow_left" />
@@ -153,15 +152,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/rounded_corner_button"
-                android:minEms="13"
+                android:minEms="12"
                 android:textColor="@color/game_text_color"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/game_mode_right_arrow_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="Game mode browse right"
                 android:onClick="gameModeBrowse"
                 app:srcCompat="@drawable/arrow_right" />
@@ -178,8 +177,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/game_size_left_arrow_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="Game size browse left"
                 android:onClick="gameSizeBrowse"
                 app:srcCompat="@drawable/arrow_left" />
@@ -190,15 +189,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/rounded_corner_button"
-                android:minEms="13"
+                android:minEms="12"
                 android:textColor="@color/game_text_color"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/game_size_right_arrow_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="Game size browse right"
                 android:onClick="gameSizeBrowse"
                 app:srcCompat="@drawable/arrow_right" />
