@@ -131,6 +131,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <!-- TODO -> Settle the arrows inside the button using a ConstraintLayout -->
         <LinearLayout
             android:id="@+id/game_mode_options_linear_layout"
             android:layout_width="wrap_content"
@@ -169,6 +170,7 @@
 
         </LinearLayout>
 
+        <!-- TODO -> Settle the arrows inside the button using a ConstraintLayout -->
         <LinearLayout
             android:id="@+id/game_size_options_linear_layout"
             android:layout_width="wrap_content"
