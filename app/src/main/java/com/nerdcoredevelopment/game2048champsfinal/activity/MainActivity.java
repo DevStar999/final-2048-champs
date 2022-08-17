@@ -39,6 +39,7 @@ import java.util.List;
            page. We can refer the Selection Controls section project from the Material Design Course
            hands-on projects
 */
+// TODO -> At a later stage in the development, add a disco theme
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity
