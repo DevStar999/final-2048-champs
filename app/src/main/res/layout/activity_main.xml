@@ -139,13 +139,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="8dp"
-            android:background="@color/game_primary_background_color"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/game_mode_left_arrow_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/game_primary_background_color"
                 android:contentDescription="Game mode browse left"
                 android:onClick="gameModeBrowse"
                 app:srcCompat="@drawable/arrow_left" />
@@ -166,6 +166,7 @@
                 android:id="@+id/game_mode_right_arrow_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/game_primary_background_color"
                 android:contentDescription="Game mode browse right"
                 android:onClick="gameModeBrowse"
                 app:srcCompat="@drawable/arrow_right" />
@@ -178,7 +179,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@color/game_primary_background_color"
             android:layout_marginHorizontal="8dp"
             android:orientation="horizontal">
 
@@ -186,6 +186,7 @@
                 android:id="@+id/game_size_left_arrow_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/game_primary_background_color"
                 android:contentDescription="Game size browse left"
                 android:onClick="gameSizeBrowse"
                 app:srcCompat="@drawable/arrow_left" />
@@ -206,6 +207,7 @@
                 android:id="@+id/game_size_right_arrow_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/game_primary_background_color"
                 android:contentDescription="Game size browse right"
                 android:onClick="gameSizeBrowse"
                 app:srcCompat="@drawable/arrow_right" />
