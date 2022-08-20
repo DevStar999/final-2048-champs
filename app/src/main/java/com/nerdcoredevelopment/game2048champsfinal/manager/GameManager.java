@@ -4,9 +4,9 @@ import static java.lang.Character.toChars;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 
@@ -83,6 +83,7 @@ public class GameManager {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void startGame() {
         AppCompatTextView goalTileTextView = parentActivity.findViewById(R.id.goal_tile_text_view);
         if (hasGoalBeenCompleted) { // True, goal completed
@@ -140,6 +141,7 @@ public class GameManager {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void addNewRandomValuePostMove(List<List<CellTransitionInfoMatrix>> ctiMatrix) {
         addNewValues(1);
 
@@ -165,6 +167,7 @@ public class GameManager {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void displayMoveAnimations(List<List<CellTransitionInfoMatrix>> ctiMatrix, Direction swipeDirection) {
         // Before starting an any animations setting them to false
         for (int row = 0; row < currentGameMode.getRows(); row++) {

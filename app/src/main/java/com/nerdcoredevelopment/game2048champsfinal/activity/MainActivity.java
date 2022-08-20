@@ -1,5 +1,6 @@
 package com.nerdcoredevelopment.game2048champsfinal.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         mainManager.updatePreview(currentGameMode.getGamePreviewAssetFileName());
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         indicator, network status other icons etc. Note, this is done before setting the layout with
         the line -> setContentView(R.layout.activity_main);
         */
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
