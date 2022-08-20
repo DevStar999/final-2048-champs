@@ -15,6 +15,8 @@
     <color name="board_color">#BBADA0</color>
     <color name="empty_cell">#D6CDC4</color>
     <color name="game_text_color">#967969</color>
+    <!-- Current opacity for following color = 20% i.e. in hex = 32 -->
+    <color name="game_text_color_translucent">#32967969</color>
     <color name="game_text_color_dark">#442E19</color>
     <color name="dialog_background_color">#EADDCA</color>
     <color name="white_opacity_40_percent">#66FFFFFF</color>

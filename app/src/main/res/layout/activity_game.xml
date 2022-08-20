@@ -16,6 +16,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@drawable/background_film"
     tools:context=".activity.GameActivity">
 
     <LinearLayout
@@ -272,6 +273,7 @@
         android:textColor="@color/number_color_0002"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:background="@color/game_primary_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/undo_icon"
