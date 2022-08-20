@@ -2,6 +2,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/black" />
     <item
-        android:drawable="@drawable/developer_logo_cropped"
-        android:gravity="center"/>
+        android:drawable="@drawable/developer_banner"
+        android:gravity="center" />
 </layer-list>
