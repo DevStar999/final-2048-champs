@@ -27,9 +27,6 @@ import com.nerdcoredevelopment.game2048champsfinal.manager.MainManager;
 
 import java.util.List;
 
-/* TODO -> In the logo of the app, center the position of crown and make it more spread out over
-           more digits.
-*/
 // TODO -> ## User Experience ## : Adjust the layout files by making tweaks for Tablet users
 /* TODO -> If score and best score displays are apart make sure that they are visible, problem is
            arising when a user just reaches best score and merge animation starts and midway the
