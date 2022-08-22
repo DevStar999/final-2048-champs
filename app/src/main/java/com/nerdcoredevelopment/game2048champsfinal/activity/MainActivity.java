@@ -30,10 +30,6 @@ import com.nerdcoredevelopment.game2048champsfinal.manager.MainManager;
 import java.util.List;
 
 // TODO -> ## User Experience ## : Adjust the layout files by making tweaks for Tablet users
-/* TODO -> If score and best score displays are apart make sure that they are visible, problem is
-           arising when a user just reaches best score and merge animation starts and midway the
-           user presses Undo
-*/
 /* TODO -> Use the 'Switch' selection control for toggling the settings when we create the settings
            page. We can refer the Selection Controls section project from the Material Design Course
            hands-on projects
