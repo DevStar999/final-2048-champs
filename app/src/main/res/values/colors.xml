@@ -19,6 +19,8 @@
     <color name="game_text_color_translucent_bgf1">#32967969</color>
     <!-- Current opacity for following color = 30% i.e. in hex = 4D -->
     <color name="game_text_color_translucent_bgf2">#4D967969</color>
+    <!-- Current opacity for following color = 30% i.e. in hex = 4D -->
+    <color name="game_text_color_translucent_bgf3">#4D967969</color>
     <color name="game_text_color_dark">#442E19</color>
     <color name="dialog_background_color">#EADDCA</color>
     <color name="white_opacity_40_percent">#66FFFFFF</color>
