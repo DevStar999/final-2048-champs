@@ -145,10 +145,12 @@
                 android:id="@+id/game_mode_left_arrow_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
                 android:background="@color/game_primary_background_color"
                 android:contentDescription="Game mode browse left"
                 android:onClick="gameModeBrowse"
-                app:srcCompat="@drawable/arrow_left" />
+                app:srcCompat="@drawable/arrow_left_solid" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/game_mode_button"
@@ -166,10 +168,12 @@
                 android:id="@+id/game_mode_right_arrow_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
                 android:background="@color/game_primary_background_color"
                 android:contentDescription="Game mode browse right"
                 android:onClick="gameModeBrowse"
-                app:srcCompat="@drawable/arrow_right" />
+                app:srcCompat="@drawable/arrow_right_solid" />
 
         </LinearLayout>
 
@@ -186,10 +190,12 @@
                 android:id="@+id/game_size_left_arrow_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
                 android:background="@color/game_primary_background_color"
                 android:contentDescription="Game size browse left"
                 android:onClick="gameSizeBrowse"
-                app:srcCompat="@drawable/arrow_left" />
+                app:srcCompat="@drawable/arrow_left_solid" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/game_size_button"
@@ -207,10 +213,12 @@
                 android:id="@+id/game_size_right_arrow_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
                 android:background="@color/game_primary_background_color"
                 android:contentDescription="Game size browse right"
                 android:onClick="gameSizeBrowse"
-                app:srcCompat="@drawable/arrow_right" />
+                app:srcCompat="@drawable/arrow_right_solid" />
 
         </LinearLayout>
 
