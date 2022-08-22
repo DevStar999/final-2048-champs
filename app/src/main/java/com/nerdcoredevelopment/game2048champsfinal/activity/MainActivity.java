@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -50,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
     // Attributes for determining game mode
     private List<String> allGameModes;
-    private AppCompatButton gameModeButton;
+    private AppCompatTextView gameModeTextView;
 
     // Attributes for determining game size
     private List<String> allCurrentGameSizes;
-    private AppCompatButton gameSizeButton;
+    private AppCompatTextView gameSizeTextView;
 
     // Game modes customisation UI elements
     private LottieAnimationView gamePreviewSpotLightLottie;
@@ -81,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialising allGameModes List and gameModeTextView TextView
         allGameModes = GameModes.getAllGameModes();
-        gameModeButton = findViewById(R.id.game_mode_button);
-        gameModeButton.setText(currentGameMode.getMode());
+        gameModeTextView = findViewById(R.id.game_mode_text_view);
+        gameModeTextView.setText(currentGameMode.getMode());
         mainManager.updateModeBrowseIcons(currentGameMode.getMode(), allGameModes);
 
         // Initialising allCurrentGameSizes List and gameSizeTextView TextView
         allCurrentGameSizes = GameModes.getAllGameVariantsOfMode(currentGameMode.getMode());
-        gameSizeButton = findViewById(R.id.game_size_button);
-        gameSizeButton.setText(currentGameMode.getDimensions());
+        gameSizeTextView = findViewById(R.id.game_size_text_view);
+        gameSizeTextView.setText(currentGameMode.getDimensions());
         mainManager.updateSizeBrowseIcons(currentGameMode.getDimensions(), allCurrentGameSizes);
 
         gamePreviewSpotLightLottie = findViewById(R.id.game_preview_spotlight_lottie);
@@ -257,8 +258,8 @@ public class MainActivity extends AppCompatActivity {
                                     .charAt(allCurrentGameSizes.get(0).length() - 1)), newGameMode);
 
             // Updating the text views for both mode and size
-            gameModeButton.setText(currentGameMode.getMode());
-            gameSizeButton.setText(currentGameMode.getDimensions());
+            gameModeTextView.setText(currentGameMode.getMode());
+            gameSizeTextView.setText(currentGameMode.getDimensions());
 
             // Updating Game Mode Browse Icons
             mainManager.updateModeBrowseIcons(currentGameMode.getMode(), allGameModes);
@@ -295,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
                     Character.getNumericValue(newGameSize.charAt(0)),
                     Character.getNumericValue(newGameSize.charAt(newGameSize.length() - 1)),
                     currentGameMode.getMode());
-            gameSizeButton.setText(currentGameMode.getDimensions());
+            gameSizeTextView.setText(currentGameMode.getDimensions());
 
             // Updating Game Size Browse Icons
             mainManager.updateSizeBrowseIcons(currentGameMode.getDimensions(), allCurrentGameSizes);
