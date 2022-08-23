@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -38,6 +39,7 @@ import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameWinDialog;
 import com.nerdcoredevelopment.game2048champsfinal.enums.CellValues;
 import com.nerdcoredevelopment.game2048champsfinal.enums.Direction;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
+import com.nerdcoredevelopment.game2048champsfinal.enums.GameOverDialogOptions;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameStates;
 import com.nerdcoredevelopment.game2048champsfinal.manager.GameManager;
 import com.nerdcoredevelopment.game2048champsfinal.manager.UndoManager;
@@ -191,15 +193,25 @@ public class GameActivity extends AppCompatActivity {
                             gameOverDialog.show();
                             gameOverDialog.setGameOverDialogListener(new GameOverDialog.GameOverDialogListener() {
                                 @Override
-                                public void getResponseOfOverDialog(boolean response) {
-                                    if (response) {
-                                        resetGameAndStartIfFlagTrue(true);
-                                    } else {
-                                        resetGameAndStartIfFlagTrue(false);
+                                public void getResponseOfOverDialog(GameOverDialogOptions optionSelected,
+                                                                    boolean didUserRespond) {
+                                    if (didUserRespond) {
+                                        if (optionSelected == GameOverDialogOptions.MAIN_MENU) {
+                                            resetGameAndStartIfFlagTrue(false);
 
-                                        Intent intent = new Intent(GameActivity.this, MainActivity.class);
-                                        startActivity(intent);
-                                        finish();
+                                            Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        } else if (optionSelected == GameOverDialogOptions.PLAY_AGAIN) {
+                                            resetGameAndStartIfFlagTrue(true);
+                                        } else if (optionSelected == GameOverDialogOptions.UNDO_LAST_MOVE) {
+                                            undoProcess();
+                                        }
+                                    } else {
+                                        undoProcess();
+                                        // TODO -> Do something more neat and clean instead of a Toast message
+                                        Toast.makeText(GameActivity.this,
+                                                "Last move has been undone", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -284,7 +296,7 @@ public class GameActivity extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
-    public void updateScore(String currentScore) {
+    private void updateScore(String currentScore) {
         currentScoreTextView.setText(currentScore);
 
         if ((Integer.parseInt(currentScoreTextView.getText().toString())
@@ -437,6 +449,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void updateBoardOnUndo() {
         for (int row = 0; row < currentGameMode.getRows(); row++) {
             for (int column = 0; column < currentGameMode.getColumns(); column++) {
@@ -459,7 +472,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void undoTool(View view) {
+        undoProcess();
+    }
+
+    private void undoProcess() {
         if (!gameManager.getUndoManager().isUndoUsed()) { // Undo was not used, so using it now
+            gameManager.setCurrentGameState(GameStates.GAME_ONGOING);
             movesQueue.clear();
             Pair<Integer, List<List<Integer>>> previousStateInfo = gameManager.getUndoManager().undoToPreviousState();
             // Revert score to previous state score

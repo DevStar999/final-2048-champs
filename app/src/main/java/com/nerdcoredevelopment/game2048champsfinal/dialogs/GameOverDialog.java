@@ -13,33 +13,34 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.nerdcoredevelopment.game2048champsfinal.R;
+import com.nerdcoredevelopment.game2048champsfinal.enums.GameOverDialogOptions;
 
-/* TODO -> ## Bug ## : We need an answer among one of the two options given in this dialog from the
-           user. If in case it happens that we get an unexpected action or event from user then we
-           need to handle that in such a way that undo is called automatically (Starting a
-           new game is more beneficial to us then letting the user go to the menu as there are
-           higher chances that they might stop playing the game for now)
-*/
 public class GameOverDialog extends Dialog {
+    private boolean didUserGiveResponse;
+    private GameOverDialogOptions optionSelected;
     private LottieAnimationView gameOverLottie;
     private AppCompatTextView gameOverText;
-    private LinearLayout gameOverButtonsLinearLayout;
+    private LinearLayout gameOverAllButtonsLinearLayout;
     private AppCompatButton gameOverMainMenu;
     private AppCompatButton gameOverPlayAgain;
+    private AppCompatButton gameOverUndoLastMove;
     private GameOverDialogListener gameOverDialogListener;
 
     private void initialise() {
+        didUserGiveResponse = false;
+        optionSelected = GameOverDialogOptions.UNDO_LAST_MOVE;
         gameOverLottie = findViewById(R.id.game_over_lottie);
         gameOverText = findViewById(R.id.game_over_text);
-        gameOverButtonsLinearLayout = findViewById(R.id.game_over_buttons_linear_layout);
+        gameOverAllButtonsLinearLayout = findViewById(R.id.game_over_all_buttons_linear_layout);
         gameOverMainMenu = findViewById(R.id.game_over_main_menu);
         gameOverPlayAgain = findViewById(R.id.game_over_play_again);
+        gameOverUndoLastMove = findViewById(R.id.game_over_undo_last_move);
     }
 
     private void setVisibilityOfViews(int visibility) {
         gameOverLottie.setVisibility(visibility);
         gameOverText.setVisibility(visibility);
-        gameOverButtonsLinearLayout.setVisibility(visibility);
+        gameOverAllButtonsLinearLayout.setVisibility(visibility);
     }
 
     public GameOverDialog(@NonNull Context context) {
@@ -58,7 +59,8 @@ public class GameOverDialog extends Dialog {
                     public void onTick(long millisUntilFinished) {}
                     @Override
                     public void onFinish() {
-                        gameOverDialogListener.getResponseOfOverDialog(false);
+                        optionSelected = GameOverDialogOptions.MAIN_MENU;
+                        didUserGiveResponse = true;
                         dismiss();
                     }
                 }.start();
@@ -74,7 +76,24 @@ public class GameOverDialog extends Dialog {
                     public void onTick(long millisUntilFinished) {}
                     @Override
                     public void onFinish() {
-                        gameOverDialogListener.getResponseOfOverDialog(true);
+                        optionSelected = GameOverDialogOptions.PLAY_AGAIN;
+                        didUserGiveResponse = true;
+                        dismiss();
+                    }
+                }.start();
+            }
+        });
+        gameOverUndoLastMove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // First, the views will disappear, then the dialog box will close
+                setVisibilityOfViews(View.INVISIBLE);
+                new CountDownTimer(100, 100) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {}
+                    @Override
+                    public void onFinish() {
+                        didUserGiveResponse = true;
                         dismiss();
                     }
                 }.start();
@@ -110,11 +129,17 @@ public class GameOverDialog extends Dialog {
         }.start();
     }
 
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        gameOverDialogListener.getResponseOfOverDialog(optionSelected, didUserGiveResponse);
+    }
+
     public void setGameOverDialogListener(GameOverDialogListener gameOverDialogListener) {
         this.gameOverDialogListener = gameOverDialogListener;
     }
 
     public interface GameOverDialogListener {
-        void getResponseOfOverDialog(boolean response);
+        void getResponseOfOverDialog(GameOverDialogOptions optionSelected, boolean didUserRespond);
     }
 }

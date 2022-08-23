@@ -10,6 +10,6 @@ public enum GameOverDialogOptions {
     /* If the user wants to play the game again */
     PLAY_AGAIN,
 
-    /* User has made one or more moves */
+    /* User has made one or more moves and he/she wants to undo the last move */
     UNDO_LAST_MOVE
 }
