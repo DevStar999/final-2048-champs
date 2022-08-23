@@ -445,6 +445,7 @@ public class GameActivity extends AppCompatActivity {
     private void updateScoreOnUndo(String currentScore) {
         currentScoreTextView.setText(currentScore);
 
+        // Making a check if the current score and the best scores need to be split or not
         if ((Integer.parseInt(currentScoreTextView.getText().toString())
                 < Integer.parseInt(bestScoreTextView.getText().toString()))) {
             if (isCurrentScoreTheBest) {
@@ -452,6 +453,21 @@ public class GameActivity extends AppCompatActivity {
                 AnimationUtility.splitScoreDisplays(currentScoreLinearLayout, bestScoreLinearLayout, 750);
             }
         }
+
+        // Making a check if the goal completion is still intact or not
+        for (int row = 0; row < currentGameMode.getRows(); row++) {
+            for (int column = 0; column < currentGameMode.getColumns(); column++) {
+                int value = gameManager.getGameMatrix().get(row).get(column);
+                if (value >= gameManager.getCurrentGameMode().getGoal()) {
+                    return;
+                }
+            }
+        }
+        goalDone = false;
+        goalTileTextView.setText("GOAL TILE");
+        tutorialTextView.setText("Merge the tiles to form the GOAL TILE!");
+        sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), goalDone).apply();
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -485,12 +501,12 @@ public class GameActivity extends AppCompatActivity {
             gameManager.setCurrentGameState(GameStates.GAME_ONGOING);
             movesQueue.clear();
             Pair<Integer, List<List<Integer>>> previousStateInfo = gameManager.getUndoManager().undoToPreviousState();
-            // Revert score to previous state score
-            gameManager.setCurrentScore(previousStateInfo.first);
-            updateScoreOnUndo(String.valueOf(gameManager.getCurrentScore()));
             // Revert the state of the board to the previous state
             gameManager.updateGameMatrixPostUndo(previousStateInfo.second);
             updateBoardOnUndo();
+            // Revert score to previous state score
+            gameManager.setCurrentScore(previousStateInfo.first);
+            updateScoreOnUndo(String.valueOf(gameManager.getCurrentScore()));
         } else { // Undo was used, so we need to show a message here
             String undoMessageText = (gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) ?
                     "UNDO WAS USED ALREADY" : "NO MOVE HAS BEEN MADE YET";
