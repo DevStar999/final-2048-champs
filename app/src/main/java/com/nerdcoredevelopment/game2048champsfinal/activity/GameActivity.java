@@ -59,6 +59,7 @@ public class GameActivity extends AppCompatActivity {
     private SwipeUtility swipeUtility;
     private Queue<Direction> movesQueue;
     private boolean goalDone;
+    private boolean isCurrentScoreTheBest; // Flag to check if best score and current score displays have been merged
     private boolean isSoundOn;
 
     // UI Elements
@@ -67,10 +68,11 @@ public class GameActivity extends AppCompatActivity {
     private LinearLayout bestScoreLinearLayout;
     private ConstraintLayout rootGameConstraintLayout;
     /* Views */
-    private boolean isCurrentScoreTheBest; // Flag to check if best score and current score displays have been merged
+
     private AppCompatTextView currentScoreTextView;
     private AppCompatTextView bestScoreTextView;
     private AppCompatTextView goalTileTextView;
+    private AppCompatTextView tutorialTextView;
 
     private void initialiseVariableAttributes() {
         sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
@@ -87,6 +89,7 @@ public class GameActivity extends AppCompatActivity {
         movesQueue = new ArrayDeque<>();
         goalDone = sharedPreferences.getBoolean("GoalDone" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), false); // Keep default as 'false'
+        isCurrentScoreTheBest = false;
         isSoundOn = true;
     }
 
@@ -117,8 +120,9 @@ public class GameActivity extends AppCompatActivity {
         bestScoreTextView.setText(sharedPreferences.getString("BestScore" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), "0"));
         goalTileTextView = findViewById(R.id.goal_tile_text_view);
-        isCurrentScoreTheBest = false;
         updateScore(currentScoreTextView.getText().toString());
+
+        tutorialTextView = findViewById(R.id.tutorial_text_view);
     }
 
     private void initialiseGoalText() {
@@ -183,6 +187,7 @@ public class GameActivity extends AppCompatActivity {
                             int greenTickEmojiUnicode = 0x2705;
                             goalTileTextView.setText(String.format("GOAL TILE %s",
                                     String.valueOf(toChars(greenTickEmojiUnicode))));
+                            tutorialTextView.setText("Merge for higher tiles, SKY IS THE LIMIT");
                             sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
                                     + " " + currentGameMode.getDimensions(), goalDone).apply();
                             movesQueue.clear();

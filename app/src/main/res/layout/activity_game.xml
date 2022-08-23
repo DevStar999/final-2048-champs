@@ -261,19 +261,18 @@
         app:layout_constraintVertical_weight="1"
         app:srcCompat="@drawable/special_tools_undo" />
 
-    <!-- TODO -> This message should either be changed to something else or
-                 removed when the goal tile is reached -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tutorial_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal|bottom"
+        android:gravity="center"
         android:text="Merge the tiles to form the GOAL TILE!"
         android:textAlignment="center"
         android:textColor="@color/number_color_0002"
         android:textSize="18sp"
         android:textStyle="bold"
         android:background="@color/game_primary_background_color"
+        android:scrollHorizontally="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/undo_icon"
