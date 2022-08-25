@@ -125,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setTheme(R.style.Theme_2048Champs);
         setContentView(R.layout.activity_main);
 
         // To Disable screen rotation and keep the device in Portrait mode
