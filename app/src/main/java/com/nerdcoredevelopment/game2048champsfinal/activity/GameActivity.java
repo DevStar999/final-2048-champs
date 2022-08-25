@@ -10,7 +10,6 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.Window;
@@ -356,7 +355,6 @@ public class GameActivity extends AppCompatActivity {
         sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), goalDone).apply();
         if (gameManager.getCurrentGameState() == GameStates.GAME_START) {
-            Log.i("Info", "saveGameState: currentGameMode.blockCells = " + currentGameMode.getBlockCells());
             sharedPreferences.edit().putString("CurrentBoard" + " " + currentGameMode.getMode()
                     + " " + currentGameMode.getDimensions(), gson.toJson(getCopyOfGivenBoard(currentGameMode.getBlockCells()))).apply();
         } else {
