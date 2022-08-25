@@ -25,8 +25,6 @@
     <color name="dialog_background_color">#EADDCA</color>
     <!-- Current opacity for following color = 40% i.e. in hex = 66 -->
     <color name="white_dialog_background_translucent">#66FFFFFF</color>
-    <!-- Current opacity for following color = 10% i.e. in hex = 1A -->
-    <color name="white_splash_screen_translucent">#1AFFFFFF</color>
 
     <!-- Number Colors -->
     <color name="number_color_0002">#766D64</color>
