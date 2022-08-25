@@ -86,11 +86,14 @@ public class GameManager {
     @SuppressLint("UseCompatLoadingForDrawables")
     public void startGame() {
         AppCompatTextView goalTileTextView = parentActivity.findViewById(R.id.goal_tile_text_view);
+        AppCompatTextView tutorialTextView = parentActivity.findViewById(R.id.tutorial_text_view);
         if (hasGoalBeenCompleted) { // True, goal completed
             int greenTickEmojiUnicode = 0x2705;
             goalTileTextView.setText(String.format("GOAL TILE %s", String.valueOf(toChars(greenTickEmojiUnicode))));
+            tutorialTextView.setText("Merge for higher tiles, SKY IS THE LIMIT");
         } else { // False, goal in progress
             goalTileTextView.setText("GOAL TILE");
+            tutorialTextView.setText("Merge the tiles to form the GOAL TILE!");
         }
 
         if (currentGameState == GameStates.GAME_START) {

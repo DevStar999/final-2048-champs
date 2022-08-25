@@ -123,6 +123,15 @@ public class GameActivity extends AppCompatActivity {
         updateScore(currentScoreTextView.getText().toString());
 
         tutorialTextView = findViewById(R.id.tutorial_text_view);
+        if (goalDone) {
+            int greenTickEmojiUnicode = 0x2705;
+            goalTileTextView.setText(String.format("GOAL TILE %s",
+                    String.valueOf(toChars(greenTickEmojiUnicode))));
+            tutorialTextView.setText("Merge for higher tiles, SKY IS THE LIMIT");
+        } else {
+            goalTileTextView.setText("GOAL TILE");
+            tutorialTextView.setText("Merge the tiles to form the GOAL TILE!");
+        }
     }
 
     private void initialiseGoalText() {

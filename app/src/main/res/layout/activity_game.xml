@@ -266,7 +266,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Merge the tiles to form the GOAL TILE!"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/number_color_0002"
         android:textSize="18sp"
