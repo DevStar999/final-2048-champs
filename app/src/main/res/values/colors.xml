@@ -23,7 +23,8 @@
     <color name="game_text_color_translucent_bgf3">#4D967969</color>
     <color name="game_text_color_dark">#442E19</color>
     <color name="dialog_background_color">#EADDCA</color>
-    <color name="white_opacity_40_percent">#66FFFFFF</color>
+    <!-- Current opacity for following color = 40% i.e. in hex = 66 -->
+    <color name="white_dialog_background_translucent">#66FFFFFF</color>
 
     <!-- Number Colors -->
     <color name="number_color_0002">#766D64</color>

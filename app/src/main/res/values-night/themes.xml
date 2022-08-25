@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">@color/game_primary_background_color</item>
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/game_primary_background_color</item>
-        <item name="colorBackgroundFloating">@color/white_opacity_40_percent</item>
+        <item name="colorBackgroundFloating">@color/white_dialog_background_translucent</item>
         <item name="android:windowBackground">@color/game_primary_background_color</item>
     </style>
 
@@ -26,7 +26,7 @@
     <style name="CustomDialogTheme" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
-        <item name="android:windowBackground">@color/white_opacity_40_percent</item>
+        <item name="android:windowBackground">@color/white_dialog_background_translucent</item>
         <item name="android:windowAnimationStyle">@style/CustomDialogAnimation</item>
     </style>
 
