@@ -17,6 +17,12 @@
         <item name="android:windowBackground">@color/game_primary_background_color</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.2048Champs">
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowBackground">@color/black</item>
+    </style>
+
     <style name="CustomDialogTheme" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
