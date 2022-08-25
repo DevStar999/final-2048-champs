@@ -84,7 +84,11 @@ public class GameManager {
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void startGame() {
+    public boolean startGameIfGameClosedCorrectly() {
+        if (currentGameState == GameStates.GAME_OVER) {
+            return false;
+        }
+
         AppCompatTextView goalTileTextView = parentActivity.findViewById(R.id.goal_tile_text_view);
         AppCompatTextView tutorialTextView = parentActivity.findViewById(R.id.tutorial_text_view);
         if (hasGoalBeenCompleted) { // True, goal completed
@@ -99,8 +103,6 @@ public class GameManager {
         if (currentGameState == GameStates.GAME_START) {
             // Adding 2 new random values to the gameMatrix, if game has just started
             addNewValues(2);
-        } else { // Not adding 2 new random values if game is being resumed
-            currentGameState = GameStates.GAME_ONGOING;
         }
 
         // Updating the board in layout as per the values
@@ -121,6 +123,8 @@ public class GameManager {
                 }
             }
         }
+
+        return true;
     }
 
     public void updateGameMatrix(List<List<Integer>> afterMoveGameMatrix) {

@@ -33,12 +33,6 @@ import java.util.List;
            page. We can refer the Selection Controls section project from the Material Design Course
            hands-on projects
 */
-/* TODO -> ## Bug ## : If Game Over Dialog Appears and while the dialog is open the user chooses to
-           press the 'Recents' or 'Home' button then the user goes and closes the app from 'Recents'
-           without ever entering into the app while the Game Over Dialog Appears, then when the user
-           plays that specific game mode where this happened in the MainActivity it shows 'START GAME'
-           but loads the previously ended game
-*/
 // Creating a new release version as we ran into some blocks
 public class MainActivity extends AppCompatActivity {
     // Utility class for MainActivity

@@ -119,7 +119,11 @@ public class GameActivity extends AppCompatActivity {
         bestScoreTextView.setText(sharedPreferences.getString("BestScore" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), "0"));
         goalTileTextView = findViewById(R.id.goal_tile_text_view);
-        updateScore(currentScoreTextView.getText().toString());
+        if (gameManager.getCurrentGameState() == GameStates.GAME_OVER) {
+            updateScore("0");
+        } else {
+            updateScore(currentScoreTextView.getText().toString());
+        }
 
         tutorialTextView = findViewById(R.id.tutorial_text_view);
         if (goalDone) {
@@ -154,7 +158,9 @@ public class GameActivity extends AppCompatActivity {
         initialiseGoalText();
         GameLayoutProvider.provideGameFrameLayout(GameActivity.this, rootGameConstraintLayout,
                 findViewById(R.id.game_frame_layout), currentGameMode); // initialise tiles
-        gameManager.startGame();
+        if (!gameManager.startGameIfGameClosedCorrectly()) { // Means game was not closed correctly
+            resetGameAndStartIfFlagTrue(true);
+        }
     }
 
     private void executeMove() {
@@ -202,6 +208,7 @@ public class GameActivity extends AppCompatActivity {
                             new GameWinDialog(GameActivity.this).show();
                         } else if (gameManager.getCurrentGameState() == GameStates.GAME_OVER) {
                             movesQueue.clear();
+                            saveGameState();
                             GameOverDialog gameOverDialog = new GameOverDialog(GameActivity.this);
                             gameOverDialog.show();
                             gameOverDialog.setGameOverDialogListener(new GameOverDialog.GameOverDialogListener() {
@@ -374,7 +381,7 @@ public class GameActivity extends AppCompatActivity {
         if (flag) {
             swipeUtility = new SwipeUtility(currentGameMode.getRows(), currentGameMode.getColumns());
             movesQueue.clear();
-            gameManager.startGame();
+            gameManager.startGameIfGameClosedCorrectly();
         }
     }
 
