@@ -67,7 +67,6 @@ public class GameActivity extends AppCompatActivity {
     private LinearLayout bestScoreLinearLayout;
     private ConstraintLayout rootGameConstraintLayout;
     /* Views */
-
     private AppCompatTextView currentScoreTextView;
     private AppCompatTextView bestScoreTextView;
     private AppCompatTextView goalTileTextView;

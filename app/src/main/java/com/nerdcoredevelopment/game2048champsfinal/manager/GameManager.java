@@ -110,11 +110,12 @@ public class GameManager {
             for (int column = 0; column < currentGameMode.getColumns(); column++) {
                 GridLayout gameGridLayout = parentActivity.findViewById(R.id.game_grid_layout);
                 AppCompatTextView textView = gameGridLayout.findViewWithTag("gameCell" + row + column);
-                if (gameMatrix.get(row).get(column) == 0 || gameMatrix.get(row).get(column) == -1) {
+                int currentCellValue = gameMatrix.get(row).get(column);
+                if (currentCellValue == 0 || currentCellValue == -1) {
                     textView.setVisibility(View.INVISIBLE);
                 } else {
-                    CellValues cellValueEnum = CellValues.getCellValueEnum(gameMatrix.get(row).get(column));
-                    cellValueEnum.setCellValue(gameMatrix.get(row).get(column));
+                    CellValues cellValueEnum = CellValues.getCellValueEnum(currentCellValue);
+                    cellValueEnum.setCellValue(currentCellValue);
 
                     AnimationUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
                             parentActivity.getResources().getColor(cellValueEnum.getNumberColorResourceId()),
