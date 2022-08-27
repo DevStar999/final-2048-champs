@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_2048Champs);
+
         /*
         Following lines of code hide the status bar at the very top of the screen which battery
         indicator, network status other icons etc. Note, this is done before setting the layout with
@@ -119,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setTheme(R.style.Theme_2048Champs);
         setContentView(R.layout.activity_main);
 
         // To Disable screen rotation and keep the device in Portrait mode
