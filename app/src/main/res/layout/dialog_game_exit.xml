@@ -64,7 +64,7 @@
             android:padding="10dp"
             android:text="EXIT"
             android:textAlignment="center"
-            android:textColor="@color/game_text_color"
+            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -80,7 +80,7 @@
             android:padding="10dp"
             android:text="CANCEL"
             android:textAlignment="center"
-            android:textColor="@color/game_text_color"
+            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 

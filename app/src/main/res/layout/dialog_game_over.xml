@@ -70,7 +70,7 @@
                 android:padding="10dp"
                 android:text="MAIN MENU"
                 android:textAlignment="center"
-                android:textColor="@color/game_text_color"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -86,7 +86,7 @@
                 android:padding="10dp"
                 android:text="PLAY AGAIN"
                 android:textAlignment="center"
-                android:textColor="@color/game_text_color"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -105,7 +105,7 @@
             android:padding="10dp"
             android:text="UNDO LAST MOVE"
             android:textAlignment="center"
-            android:textColor="@color/game_text_color"
+            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>

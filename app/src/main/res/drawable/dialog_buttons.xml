@@ -3,9 +3,9 @@
     android:shape="rectangle">
     <stroke
         android:width="2dp"
-        android:color="@color/game_text_color" />
+        android:color="@color/button_background_color" />
 
-    <solid android:color="@color/dialog_background_color" />
+    <solid android:color="@color/button_background_color" />
 
     <corners
         android:bottomLeftRadius="24dp"
