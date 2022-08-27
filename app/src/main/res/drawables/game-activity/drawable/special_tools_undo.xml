@@ -3,6 +3,10 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
+    <!-- Better alternative Icons are as follows ->
+    (1) https://www.svgrepo.com/svg/215714/undo
+    (2) https://www.svgrepo.com/svg/182839/undo -->
+
     <path
         android:fillAlpha="0"
         android:fillColor="#FFFFFF"
