@@ -7,6 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="orange_50_400">#FFA726</color>
+    <color name="orange_50_200">#FFCC80</color>
+    <color name="orange_button">#F2B179</color>
 
     <color name="game_primary_background_color">#FBF8EF</color>
     <color name="game_primary_background_color_opacity_60_percent">#99FBF8EF</color>
@@ -25,6 +28,7 @@
     <color name="dialog_background_color">#EADDCA</color>
     <!-- Current opacity for following color = 40% i.e. in hex = 66 -->
     <color name="white_dialog_background_translucent">#66FFFFFF</color>
+    <color name="button_background_color">@color/orange_button</color>
 
     <!-- Number Colors -->
     <color name="number_color_0002">#766D64</color>
@@ -45,7 +49,7 @@
     <!-- Background Colors of Numbers -->
     <color name="background_color_0002">#EEE4DA</color>
     <color name="background_color_0004">#EDE0C8</color>
-    <color name="background_color_0008">#F2B179</color>
+    <color name="background_color_0008">@color/orange_button</color>
     <color name="background_color_0016">#F59563</color>
     <color name="background_color_0032">#F57C5F</color>
     <color name="background_color_0064">#F65D3B</color>

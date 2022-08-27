@@ -128,7 +128,7 @@
             android:contentDescription="Game mode display button"
             android:minEms="10"
             android:onClick="startGameButtonPressed"
-            android:textColor="@color/game_text_color"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold" />
 
