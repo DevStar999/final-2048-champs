@@ -8,38 +8,6 @@
     android:background="@drawable/background_film1"
     tools:context=".activity.MainActivity">
 
-    <!-- TODO -> Implement this feature and change visibility
-                 to VISIBLE -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/google_play_console_image_view"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:onClick="signInToGooglePlay"
-        android:scaleType="fitXY"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1"
-        app:srcCompat="@drawable/top_google_play_console" />
-
-    <!-- TODO -> Implement this feature and change visibility
-             to VISIBLE -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/premium_icon_image_view"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="upgradeToPremium"
-        android:scaleType="fitXY"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1"
-        app:srcCompat="@drawable/top_premium_icon" />
-
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/game_title_image_view"
         android:layout_width="wrap_content"
