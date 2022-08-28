@@ -188,48 +188,4 @@
 
     </LinearLayout>
 
-    <!-- TODO -> Implement this feature and change visibility
-             to VISIBLE -->
-    <LinearLayout
-        android:id="@+id/bottom_icons_linear_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:divider="@drawable/gap_horizontal"
-        android:orientation="horizontal"
-        android:showDividers="middle"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_options_linear_layout">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/settings_icon_image_view"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_gravity="center_vertical"
-            android:onClick="settingsClicked"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/bottom_settings" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/achievements_icon_image_view"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:layout_gravity="center_vertical"
-            android:onClick="achievementsClicked"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/bottom_achievements" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/menu_icon_image_view"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_gravity="center_vertical"
-            android:onClick="menuClicked"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/bottom_menu" />
-
-    </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
