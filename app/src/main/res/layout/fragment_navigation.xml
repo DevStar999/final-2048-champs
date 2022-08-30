@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".NavigationFragment">
+
+    <FrameLayout
+        android:id="@+id/fragment_navigation_pregame_frame_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="64dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragment_navigation_pregame_image_view"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/game_controller_edited" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_navigation_pregame_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@color/game_primary_background_color"
+            android:text="PLAY GAME"
+            android:textAlignment="center"
+            android:textColor="@color/game_text_color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_navigation_navigation_pages_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/fragment_navigation_announcements_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragment_navigation_announcements_image_view"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                app:srcCompat="@drawable/announcements_edited" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment_navigation_announcements_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="4dp"
+                android:background="@color/game_primary_background_color"
+                android:text="ANNOUCEMENTS"
+                android:textAlignment="center"
+                android:textColor="@color/game_text_color"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_navigation_settings_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragment_navigation_settings_image_view"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="12dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                app:srcCompat="@drawable/settings_edited" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment_navigation_settings_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="4dp"
+                android:background="@color/game_primary_background_color"
+                android:text="SETTINGS"
+                android:textAlignment="center"
+                android:textColor="@color/game_text_color"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
