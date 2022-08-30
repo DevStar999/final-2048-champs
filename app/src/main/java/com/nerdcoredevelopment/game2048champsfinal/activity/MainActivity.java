@@ -26,7 +26,8 @@ import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingFeatureDialog
 
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
-        PreGameFragment.OnPreGameFragmentInteractionListener {
+        PreGameFragment.OnPreGameFragmentInteractionListener,
+        SettingsFragment.OnSettingsFragmentInteractionListener {
     private LogoLottieFragment logoLottieFragment;
     private NavigationFragment navigationFragment;
 
@@ -160,5 +161,10 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onPreGameFragmentInteractionShowArrivingFeatureDialog() {
         new ArrivingFeatureDialog(this).show();
+    }
+
+    @Override
+    public void onSettingsFragmentInteractionBackClicked() {
+        onBackPressed();
     }
 }

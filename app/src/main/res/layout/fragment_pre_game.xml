@@ -36,7 +36,7 @@
             android:id="@+id/title_back_pregame_fragment_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="start|center_vertical"
             android:padding="6dp"
             android:layout_marginStart="12dp"
             android:contentDescription="Back button for closing PreGameFragment"
@@ -44,13 +44,6 @@
             android:alpha="1"
             app:srcCompat="@drawable/back_arrow" />
     </FrameLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/horizontal_guide_title_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/pregame_fragment_title_frame_layout"/>
 
     <FrameLayout
         android:id="@+id/game_preview_pregame_fragment_frame_layout"
@@ -60,7 +53,7 @@
         app:layout_constraintDimensionRatio="1.5:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/horizontal_guide_title_bottom">
+        app:layout_constraintTop_toBottomOf="@id/pregame_fragment_title_frame_layout">
 
         <!-- Lottie Animation Link = https://lottiefiles.com/42266-roatating-light -->
         <com.airbnb.lottie.LottieAnimationView
@@ -128,7 +121,6 @@
             android:background="@drawable/rounded_corner_button"
             android:contentDescription="Game mode display button"
             android:minEms="10"
-            android:onClick="startGameButtonPressed"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -148,7 +140,6 @@
                 android:scaleX="1.4"
                 android:scaleY="1.4"
                 android:contentDescription="Game mode browse left"
-                android:onClick="gameModeBrowse"
                 app:srcCompat="@drawable/arrow_left_solid" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -171,7 +162,6 @@
                 android:scaleX="1.4"
                 android:scaleY="1.4"
                 android:contentDescription="Game mode browse right"
-                android:onClick="gameModeBrowse"
                 app:srcCompat="@drawable/arrow_right_solid" />
 
         </LinearLayout>
@@ -191,7 +181,6 @@
                 android:scaleX="1.4"
                 android:scaleY="1.4"
                 android:contentDescription="Game size browse left"
-                android:onClick="gameSizeBrowse"
                 app:srcCompat="@drawable/arrow_left_solid" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -214,7 +203,6 @@
                 android:scaleX="1.4"
                 android:scaleY="1.4"
                 android:contentDescription="Game size browse right"
-                android:onClick="gameSizeBrowse"
                 app:srcCompat="@drawable/arrow_right_solid" />
 
         </LinearLayout>
