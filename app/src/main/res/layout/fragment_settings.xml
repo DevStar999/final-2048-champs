@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="@drawable/background1_complete"
-    tools:context=".SettingsFragment">
+    tools:context=".fragment.SettingsFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/settings_fragment_temp_text_view"

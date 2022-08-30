@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="@drawable/background1_complete"
-    tools:context=".AnnouncementsFragment">
+    tools:context=".fragment.AnnouncementsFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/announcements_fragment_temp_text_view"
