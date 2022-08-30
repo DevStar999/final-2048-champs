@@ -1,109 +1,38 @@
 package com.nerdcoredevelopment.game2048champsfinal.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.airbnb.lottie.LottieAnimationView;
+import com.nerdcoredevelopment.game2048champsfinal.fragment.AnnouncementsFragment;
+import com.nerdcoredevelopment.game2048champsfinal.activity.GameActivity;
+import com.nerdcoredevelopment.game2048champsfinal.fragment.LogoLottieFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragment.NavigationFragment;
 import com.nerdcoredevelopment.game2048champsfinal.R;
+import com.nerdcoredevelopment.game2048champsfinal.fragment.SettingsFragment;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingFeatureDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameExitDialog;
-import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
-import com.nerdcoredevelopment.game2048champsfinal.enums.GameStates;
-import com.nerdcoredevelopment.game2048champsfinal.manager.MainManager;
+import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
+import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingFeatureDialog;
 
-import java.util.List;
-
-/* TODO -> Use the 'Switch' selection control for toggling the settings when we create the settings
-           page. We can refer the Selection Controls section project from the Material Design Course
-           hands-on projects
-*/
-// Creating a new release version as we ran into some blocks
-public class MainActivity extends AppCompatActivity {
-    // Utility class for MainActivity
-    private MainManager mainManager;
-
-    // Attributes for determining game state
-    private SharedPreferences sharedPreferences;
-
-    // Using the GameModes enum for storing the game mode selected by the user
-    private GameModes currentGameMode;
-
-    // Attributes for determining game mode
-    private List<String> allGameModes;
-    private AppCompatTextView gameModeTextView;
-
-    // Attributes for determining game size
-    private List<String> allCurrentGameSizes;
-    private AppCompatTextView gameSizeTextView;
-
-    // Game modes customisation UI elements
-    private LottieAnimationView gamePreviewSpotLightLottie;
-    private AppCompatImageView gamePreviewImageView;
-    private LottieAnimationView startGameLottie;
-    private AppCompatButton startGameButton;
-    private AppCompatImageView modeLeft;
-    private AppCompatImageView modeRight;
-    private AppCompatImageView sizeLeft;
-    private AppCompatImageView sizeRight;
+public class MainActivity extends AppCompatActivity implements
+        NavigationFragment.OnNavigationFragmentInteractionListener,
+        PreGameFragment.OnPreGameFragmentInteractionListener {
+    private LogoLottieFragment logoLottieFragment;
+    private NavigationFragment navigationFragment;
 
     private void initialise() {
-        // Initialising MainManager
-        mainManager = new MainManager(MainActivity.this);
-
-        // Initialising sharedPreferences
-        sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
-
-        // The default game mode
-        currentGameMode = GameModes.getGameModeEnum(
-                sharedPreferences.getInt("gameMatrixColumns", 4),
-                sharedPreferences.getInt("gameMatrixRows", 4),
-                sharedPreferences.getString("gameMode", "SQUARE"));
-
-        // Initialising allGameModes List and gameModeTextView TextView
-        allGameModes = GameModes.getAllGameModes();
-        gameModeTextView = findViewById(R.id.game_mode_text_view);
-        gameModeTextView.setText(currentGameMode.getMode());
-        mainManager.updateModeBrowseIcons(currentGameMode.getMode(), allGameModes);
-
-        // Initialising allCurrentGameSizes List and gameSizeTextView TextView
-        allCurrentGameSizes = GameModes.getAllGameVariantsOfMode(currentGameMode.getMode());
-        gameSizeTextView = findViewById(R.id.game_size_text_view);
-        gameSizeTextView.setText(currentGameMode.getDimensions());
-        mainManager.updateSizeBrowseIcons(currentGameMode.getDimensions(), allCurrentGameSizes);
-
-        gamePreviewSpotLightLottie = findViewById(R.id.game_preview_spotlight_lottie);
-        gamePreviewImageView = findViewById(R.id.game_preview_image_view);
-        startGameLottie = findViewById(R.id.start_game_lottie);
-        startGameButton = findViewById(R.id.start_game_button);
-        if (sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
-            startGameButton.setText("RESUME GAME");
-        } else {
-            startGameButton.setText("START GAME");
-        }
-        modeLeft = findViewById(R.id.game_mode_left_arrow_image_view);
-        modeRight = findViewById(R.id.game_mode_right_arrow_image_view);
-        sizeLeft = findViewById(R.id.game_size_left_arrow_image_view);
-        sizeRight = findViewById(R.id.game_size_right_arrow_image_view);
-
-        // Updating the preview accordingly
-        mainManager.updatePreview(currentGameMode.getGamePreviewAssetFileName());
+        logoLottieFragment = new LogoLottieFragment();
+        navigationFragment = new NavigationFragment();
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -136,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         initialise();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.logo_lottie_fragment_container, logoLottieFragment)
+                .replace(R.id.navigation_fragment_container, navigationFragment)
+                .commit();
     }
 
     @Override
@@ -154,136 +88,77 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        GameExitDialog gameExitDialog = new GameExitDialog(this);
-        gameExitDialog.show();
-        gameExitDialog.setGameExitDialogListener(new GameExitDialog.GameExitDialogListener() {
-            @Override
-            public void getResponseOfExitDialog(boolean response) {
-                if (response) {
-                    MainActivity.super.onBackPressed();
-                }
-            }
-        });
-    }
-
-    /**
-     * onClick listeners of Game Mode Options Linear Layout are as follows
-     */
-    // onClick listener for start game button is as follows
-    public void startGameButtonPressed(View view) {
-        if (currentGameMode.isCanAccess()) {
-            ConstraintLayout rootLayout = findViewById(R.id.root_layout_main_activity);
-            view.setEnabled(false);
-            rootLayout.setEnabled(false);
-            modeLeft.setEnabled(false); modeRight.setEnabled(false);
-            sizeLeft.setEnabled(false); sizeRight.setEnabled(false);
-
-            gamePreviewSpotLightLottie.setVisibility(View.INVISIBLE);
-            gamePreviewImageView.setVisibility(View.INVISIBLE);
-            startGameLottie.setVisibility(View.VISIBLE);
-
-            sharedPreferences.edit().putString("gameMode", currentGameMode.getMode()).apply();
-            sharedPreferences.edit().putInt("gameMatrixColumns", currentGameMode.getColumns()).apply();
-            sharedPreferences.edit().putInt("gameMatrixRows", currentGameMode.getRows()).apply();
-
-            startGameLottie.playAnimation();
-
-            new CountDownTimer(1500, 1500) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            // Back button was pressed from activity
+            GameExitDialog gameExitDialog = new GameExitDialog(this);
+            gameExitDialog.show();
+            gameExitDialog.setGameExitDialogListener(new GameExitDialog.GameExitDialogListener() {
                 @Override
-                public void onTick(long millisUntilFinished) {}
-                @Override
-                public void onFinish() {
-                    view.setEnabled(true);
-                    rootLayout.setEnabled(true);
-                    modeLeft.setEnabled(true); modeRight.setEnabled(true);
-                    sizeLeft.setEnabled(true); sizeRight.setEnabled(true);
-                    startGameLottie.pauseAnimation();
-
-                    Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                    intent.putExtra("gameMode", currentGameMode.getMode());
-                    intent.putExtra("gameMatrixColumns", currentGameMode.getColumns());
-                    intent.putExtra("gameMatrixRows", currentGameMode.getRows());
-                    startActivity(intent);
-                    finish();
+                public void getResponseOfExitDialog(boolean response) {
+                    if (response) {
+                        MainActivity.super.onBackPressed();
+                    }
                 }
-            }.start();
+            });
         } else {
-            new ArrivingFeatureDialog(this).show();
+            // Back button was pressed from fragment
+            getSupportFragmentManager().popBackStack();
         }
     }
 
-    // onClick listener to change game mode option is as follows
-    public void gameModeBrowse(View view) {
-        if (view.getVisibility() == View.VISIBLE) {
-            int indexOfCurrentMode = allGameModes.indexOf(currentGameMode.getMode());
-            if (view.getId() == R.id.game_mode_left_arrow_image_view) {
-                indexOfCurrentMode--;
-            } else {
-                indexOfCurrentMode++;
-            }
-
-            // Make changes to the game mode and size both
-            String newGameMode = allGameModes.get(indexOfCurrentMode);
-            allCurrentGameSizes = GameModes.getAllGameVariantsOfMode(newGameMode);
-            currentGameMode = GameModes.getGameModeEnum(
-                    Character.getNumericValue(allCurrentGameSizes.get(0).charAt(0)),
-                    Character.getNumericValue(allCurrentGameSizes.get(0)
-                                    .charAt(allCurrentGameSizes.get(0).length() - 1)), newGameMode);
-
-            // Updating the text views for both mode and size
-            gameModeTextView.setText(currentGameMode.getMode());
-            gameSizeTextView.setText(currentGameMode.getDimensions());
-
-            // Updating Game Mode Browse Icons
-            mainManager.updateModeBrowseIcons(currentGameMode.getMode(), allGameModes);
-
-            // Updating Game Size Browse Icons
-            mainManager.updateSizeBrowseIcons(currentGameMode.getDimensions(), allCurrentGameSizes);
-
-            // Updating Preview
-            mainManager.updatePreview(currentGameMode.getGamePreviewAssetFileName());
-
-            // Update the text of the start game button
-            if (sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
-                    + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
-                startGameButton.setText("RESUME GAME");
-            } else {
-                startGameButton.setText("START GAME");
-            }
-        }
+    @Override
+    public void onNavigationFragmentSettingsClicked() {
+        SettingsFragment fragment = new SettingsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.full_screen_fragment_container, fragment, "SETTINGS_FRAGMENT")
+                .commit();
     }
 
-    // onClick listener to change game size option is as follows
-    public void gameSizeBrowse(View view) {
-        if (view.getVisibility() == View.VISIBLE) {
-            int indexOfCurrentSize = allCurrentGameSizes.indexOf(currentGameMode.getDimensions());
-            if (view.getId() == R.id.game_size_left_arrow_image_view) {
-                indexOfCurrentSize--;
-            } else {
-                indexOfCurrentSize++;
-            }
+    @Override
+    public void onNavigationFragmentAnnouncementsClicked() {
+        AnnouncementsFragment fragment = new AnnouncementsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.full_screen_fragment_container, fragment, "ANNOUNCEMENTS_FRAGMENT")
+                .commit();
+    }
 
-            // Make changes to the game size
-            String newGameSize = allCurrentGameSizes.get(indexOfCurrentSize);
-            currentGameMode = GameModes.getGameModeEnum(
-                    Character.getNumericValue(newGameSize.charAt(0)),
-                    Character.getNumericValue(newGameSize.charAt(newGameSize.length() - 1)),
-                    currentGameMode.getMode());
-            gameSizeTextView.setText(currentGameMode.getDimensions());
+    @Override
+    public void onNavigationFragmentPreGameClicked() {
+        PreGameFragment fragment = new PreGameFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.full_screen_fragment_container, fragment, "PREGAME_FRAGMENT")
+                .commit();
+    }
 
-            // Updating Game Size Browse Icons
-            mainManager.updateSizeBrowseIcons(currentGameMode.getDimensions(), allCurrentGameSizes);
+    @Override
+    public void onPreGameFragmentInteractionBackClicked() {
+        onBackPressed();
+    }
 
-            // Updating Preview
-            mainManager.updatePreview(currentGameMode.getGamePreviewAssetFileName());
+    @Override
+    public void onPreGameFragmentInteractionStartGame(String gameMode, int gameMatrixColumns, int gameMatrixRows) {
+        Intent intent = new Intent(MainActivity.this, GameActivity.class);
+        intent.putExtra("gameMode", gameMode);
+        intent.putExtra("gameMatrixColumns", gameMatrixColumns);
+        intent.putExtra("gameMatrixRows", gameMatrixRows);
+        startActivity(intent);
+        finish();
+    }
 
-            // Update the text of the start game button
-            if (sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
-                    + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
-                startGameButton.setText("RESUME GAME");
-            } else {
-                startGameButton.setText("START GAME");
-            }
-        }
+    @Override
+    public void onPreGameFragmentInteractionShowArrivingFeatureDialog() {
+        new ArrivingFeatureDialog(this).show();
     }
 }
