@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/developer_message_text"
             android:layout_width="wrap_content"
@@ -26,7 +27,7 @@
             android:textAlignment="center"
             android:textColor="@color/white_translucent_splash_screen"
             android:textSize="22sp"
-            android:textStyle="normal"/>
+            android:textStyle="normal" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/developer_logo_image_view"
@@ -48,24 +49,7 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="54sp"
-            android:textStyle="normal"/>
+            android:textStyle="normal" />
     </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/copyright_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="20dp"
-        android:ems="16"
-        android:scrollHorizontally="false"
-        android:text="Copyright © Nerdcore Development 2021-2022. All rights reserved"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
