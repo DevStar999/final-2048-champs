@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scrollHorizontally="false"
-            android:text="Settings"
+            android:text="SETTINGS"
             android:textAlignment="center"
             android:textColor="@color/game_primary_background_color"
             android:textSize="24sp"

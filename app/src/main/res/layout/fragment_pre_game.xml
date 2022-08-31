@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scrollHorizontally="false"
-            android:text="Select Game Mode"
+            android:text="SELECT GAME MODE"
             android:textAlignment="center"
             android:textColor="@color/game_primary_background_color"
             android:textSize="24sp"
