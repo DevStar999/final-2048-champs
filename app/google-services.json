@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "707068481295",
+    "project_id": "champs-32978",
+    "storage_bucket": "champs-32978.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707068481295:android:43c5370f4c23ee34dff87a",
+        "android_client_info": {
+          "package_name": "com.nerdcoredevelopment.game2048champsfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707068481295-nbp09sr38gh98nkr2cicjrdgip5osqni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nerdcoredevelopment.game2048champsfinal",
+            "certificate_hash": "26af4727096de680a2deaa8f78b17fda045a7a67"
+          }
+        },
+        {
+          "client_id": "707068481295-cgitpqustbenvcab43tt8unmno50qi4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc0ypMi6Xntqhi2r515mR091LjsbpcQF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707068481295-cgitpqustbenvcab43tt8unmno50qi4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
