@@ -16,7 +16,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 
 public class IntroActivity extends AppCompatActivity {
-    private AppCompatImageView developerLogoImageView;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
@@ -34,7 +33,7 @@ public class IntroActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-        developerLogoImageView = findViewById(R.id.developer_logo_image_view);
+        AppCompatImageView developerLogoImageView = findViewById(R.id.developer_logo_image_view);
         developerLogoImageView.animate().alpha(1).setDuration(2000).start();
 
         new Handler().postDelayed(new Runnable() {
