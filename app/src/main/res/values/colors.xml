@@ -12,6 +12,7 @@
     <color name="orange_button">#F2B179</color>
     <color name="orange_button_dark">#F59563</color>
 
+    <color name="ic_launcher_background">#EEC22E</color>
     <color name="game_primary_background_color">#FBF8EF</color>
     <color name="game_primary_background_color_opacity_60_percent">#99FBF8EF</color>
     <color name="game_primary_background_color_opacity_80_percent">#CCFBF8EF</color>
