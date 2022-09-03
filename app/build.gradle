@@ -37,8 +37,9 @@ android {
         main {
             res {
                 srcDirs 'src/main/res',
-                        'src/main/res/drawables/main-activity',
                         'src/main/res/drawables/cells',
+                        'src/main/res/drawables/blocks',
+                        'src/main/res/drawables/main-activity',
                         'src/main/res/drawables/game-activity',
                         'src/main/res/drawables/navigation-fragment',
                         'src/main/res/drawables/pregame-fragment',

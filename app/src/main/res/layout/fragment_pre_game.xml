@@ -139,8 +139,9 @@
                 android:layout_height="wrap_content"
                 android:scaleX="1.4"
                 android:scaleY="1.4"
+                android:background="@color/game_primary_background_color"
                 android:contentDescription="Game mode browse left"
-                app:srcCompat="@drawable/arrow_left_solid" />
+                app:srcCompat="@drawable/arrow_left" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/game_mode_pregame_fragment_text_view"
@@ -161,8 +162,9 @@
                 android:layout_height="wrap_content"
                 android:scaleX="1.4"
                 android:scaleY="1.4"
+                android:background="@color/game_primary_background_color"
                 android:contentDescription="Game mode browse right"
-                app:srcCompat="@drawable/arrow_right_solid" />
+                app:srcCompat="@drawable/arrow_right" />
 
         </LinearLayout>
 
@@ -180,8 +182,9 @@
                 android:layout_height="wrap_content"
                 android:scaleX="1.4"
                 android:scaleY="1.4"
+                android:background="@color/game_primary_background_color"
                 android:contentDescription="Game size browse left"
-                app:srcCompat="@drawable/arrow_left_solid" />
+                app:srcCompat="@drawable/arrow_left" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/game_size_pregame_fragment_text_view"
@@ -202,8 +205,9 @@
                 android:layout_height="wrap_content"
                 android:scaleX="1.4"
                 android:scaleY="1.4"
+                android:background="@color/game_primary_background_color"
                 android:contentDescription="Game size browse right"
-                app:srcCompat="@drawable/arrow_right_solid" />
+                app:srcCompat="@drawable/arrow_right" />
 
         </LinearLayout>
 

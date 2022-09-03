@@ -38,7 +38,7 @@ public class GameLayoutProvider {
                 if (gameMode.getBlockCells().get(i).get(j).equals(-1)) {
                     imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.block_cell_x));
                 } else {
-                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.rounded_corner_cell));
+                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.cell_empty));
                 }
 
                 imageView.setTag("emptyCell" + i + j);
@@ -66,7 +66,7 @@ public class GameLayoutProvider {
                 textView.setTag("gameCell" + i + j);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
-                textView.setBackground(context.getResources().getDrawable(R.drawable.rounded_corner_cell));
+                textView.setBackground(context.getResources().getDrawable(R.drawable.cell_empty));
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                 params.height = 1;
                 params.width = 1;

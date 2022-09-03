@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public enum CellValues {
-    CELL_VALUE_EMPTY(0, R.color.transparent_color, R.color.empty_cell, R.drawable.rounded_corner_cell),
+    CELL_VALUE_EMPTY(0, R.color.transparent_color, R.color.empty_cell, R.drawable.cell_empty),
     CELL_VALUE_0002(2, R.color.number_color_0002, R.color.background_color_0002, R.drawable.cell_value_0002),
     CELL_VALUE_0004(4, R.color.number_color_0004, R.color.background_color_0004, R.drawable.cell_value_0004),
     CELL_VALUE_0008(8, R.color.number_color_0008, R.color.background_color_0008, R.drawable.cell_value_0008),
