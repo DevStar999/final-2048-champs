@@ -39,7 +39,10 @@ android {
                 srcDirs 'src/main/res',
                         'src/main/res/drawables/main-activity',
                         'src/main/res/drawables/cells',
-                        'src/main/res/drawables/game-activity'
+                        'src/main/res/drawables/game-activity',
+                        'src/main/res/drawables/navigation-fragment',
+                        'src/main/res/drawables/pregame-fragment',
+                        'src/main/res/drawables/settings-fragment'
             }
             assets {
                 srcDirs 'src/main/assets'
