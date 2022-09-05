@@ -10,6 +10,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        //noinspection JcenterRepositoryObsolete (Using it only for Auto-Image Slider Dependency)
+        jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
     }
 }
 rootProject.name = "2048 Champs"
