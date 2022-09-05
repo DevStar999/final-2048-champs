@@ -71,6 +71,39 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <!-- TODO -> Enable leaderboards in game and set the visibility to
+                     VISIBLE -->
+        <FrameLayout
+            android:id="@+id/fragment_navigation_leaderboards_linear_layout"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragment_navigation_leaderboards_image_view"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleX="0.75"
+                android:scaleY="0.75"
+                app:srcCompat="@drawable/navigation_leaderboards" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment_navigation_leaderboards_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="4dp"
+                android:background="@color/game_primary_background_color"
+                android:text="LEADERBOARDS"
+                android:textAlignment="center"
+                android:textColor="@color/game_text_color"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
         <FrameLayout
             android:id="@+id/fragment_navigation_settings_linear_layout"
             android:layout_width="wrap_content"
@@ -95,6 +128,39 @@
                 android:layout_marginBottom="4dp"
                 android:background="@color/game_primary_background_color"
                 android:text="SETTINGS"
+                android:textAlignment="center"
+                android:textColor="@color/game_text_color"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <!-- TODO -> Enable leaderboards in game and set the visibility to
+                     VISIBLE -->
+        <FrameLayout
+            android:id="@+id/fragment_navigation_shop_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginHorizontal="12dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragment_navigation_shop_image_view"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="12dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleX="0.85"
+                android:scaleY="0.9"
+                app:srcCompat="@drawable/navigation_shop" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment_navigation_shop_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="4dp"
+                android:background="@color/game_primary_background_color"
+                android:text="SHOP"
                 android:textAlignment="center"
                 android:textColor="@color/game_text_color"
                 android:textSize="12sp"

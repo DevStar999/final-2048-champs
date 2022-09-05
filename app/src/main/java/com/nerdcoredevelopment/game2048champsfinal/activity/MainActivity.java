@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -109,14 +110,14 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onNavigationFragmentSettingsClicked() {
-        SettingsFragment fragment = new SettingsFragment();
+    public void onNavigationFragmentPreGameClicked() {
+        PreGameFragment fragment = new PreGameFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
                 R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.addToBackStack(null);
-        transaction.replace(R.id.full_screen_fragment_container, fragment, "SETTINGS_FRAGMENT")
+        transaction.replace(R.id.full_screen_fragment_container, fragment, "PREGAME_FRAGMENT")
                 .commit();
     }
 
@@ -133,15 +134,25 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onNavigationFragmentPreGameClicked() {
-        PreGameFragment fragment = new PreGameFragment();
+    public void onNavigationFragmentLeaderboardsClicked() {
+        Toast.makeText(MainActivity.this, "Leaderboards Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNavigationFragmentSettingsClicked() {
+        SettingsFragment fragment = new SettingsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
                 R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.addToBackStack(null);
-        transaction.replace(R.id.full_screen_fragment_container, fragment, "PREGAME_FRAGMENT")
+        transaction.replace(R.id.full_screen_fragment_container, fragment, "SETTINGS_FRAGMENT")
                 .commit();
+    }
+
+    @Override
+    public void onNavigationFragmentShopClicked() {
+        Toast.makeText(MainActivity.this, "Shop Clicked", Toast.LENGTH_SHORT).show();
     }
 
     @Override
