@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="320"
+    android:viewportHeight="320">
+    <!-- Source Link = https://www.svgrepo.com/svg/84164/competition -->
+
+    <!-- This path tag is for -> Middle Stand Left Background -->
+    <path
+        android:fillColor="@color/game_text_color_dark"
+        android:pathData="M110,160h100v160h-100z" />
+
+    <!-- This path tag is for -> Middle Stand Right Background -->
+    <path
+        android:fillColor="@color/game_text_color_dark"
+        android:pathData="M160,160h50v160h-50z" />
+
+    <!-- This path tag is for -> Left Stand Left Background -->
+    <path
+        android:fillColor="@color/game_text_color_dark"
+        android:pathData="M10,260h100v60h-100z" />
+
+    <!-- This path tag is for -> Left Stand Right Background -->
+    <path
+        android:fillColor="@color/game_text_color_dark"
+        android:pathData="M60,260h50v60h-50z" />
+
+    <!-- This path tag is for -> Right Stand Left Background -->
+    <path
+        android:fillColor="@color/game_text_color_dark"
+        android:pathData="M210,210h100v110h-100z" />
+
+    <!-- This path tag is for -> Right Stand Right Background -->
+    <path
+        android:fillColor="@color/game_text_color_dark"
+        android:pathData="M260,210h50v110h-50z" />
+
+    <!-- This path tag is for -> Handle bottom, left -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M90.36,68.46m-11.54,0a11.54,11.54 0,1 1,23.08 0a11.54,11.54 0,1 1,-23.08 0" />
+
+    <!-- This path tag is for -> Handle main, left -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M83.44,43.08m-23.08,0a23.08,23.08 0,1 1,46.15 0a23.08,23.08 0,1 1,-46.15 0" />
+
+    <!-- This path tag is for -> Handle gap, left -->
+    <path
+        android:fillColor="@color/orange_button_dark"
+        android:pathData="M83.44,43.08m-9.23,0a9.23,9.23 0,1 1,18.46 0a9.23,9.23 0,1 1,-18.46 0" />
+
+    <!-- This path tag is for -> Handle bottom, right -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M229.64,68.46m-11.54,0a11.54,11.54 0,1 1,23.08 0a11.54,11.54 0,1 1,-23.08 0" />
+
+    <!-- This path tag is for -> Handle main, right -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M236.56,43.08m-23.08,0a23.08,23.08 0,1 1,46.15 0a23.08,23.08 0,1 1,-46.15 0" />
+
+    <!-- This path tag is for -> Handle gap right -->
+    <path
+        android:fillColor="@color/orange_button_dark"
+        android:pathData="M236.56,43.08m-9.23,0a9.23,9.23 0,1 1,18.46 0a9.23,9.23 0,1 1,-18.46 0" />
+
+    <!-- This path tag is for -> Trophy bottom, right -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M210,160l-50,0l0,-30l20,0z" />
+
+    <!-- This path tag is for -> Trophy bottom, left -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M110,160l50,0l0,-30l-20,0z" />
+
+    <!-- This path tag is for -> Trophy top, right -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M90,17.27V30c0,38.66 31.34,70 70,70s70,-31.34 70,-70V17.27H90z" />
+
+    <!-- This path tag is for -> Trophy top, left -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M160,17.27H90V30c0,38.66 31.34,70 70,70V17.27z" />
+
+    <!-- This path tag is for -> Trophy top edge, left -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M90,0h70v20h-70z" />
+
+    <!-- This path tag is for -> Trophy top edge, right -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M160,0h70v20h-70z" />
+
+    <!-- This path tag is for -> Trophy middle, right -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M140,90h20v40h-20z" />
+
+    <!-- This path tag is for -> Trophy middle, left -->
+    <path
+        android:fillColor="@color/game_text_color"
+        android:pathData="M160,90h20v40h-20z" />
+
+    <!-- This path tag is for -> Middle Stand, left label -->
+    <path
+        android:fillColor="@color/orange_button_dark"
+        android:pathData="M140,280h20v20h-20z" />
+
+    <!-- This path tag is for -> Middle Stand, right label -->
+    <path
+        android:fillColor="@color/orange_button_dark"
+        android:pathData="M160,280h20v20h-20z" />
+
+    <!-- This path tag is for -> Left Stand, left label -->
+    <path
+        android:fillColor="@color/orange_button_dark"
+        android:pathData="M40,280h20v20h-20z" />
+
+    <!-- This path tag is for -> Left Stand, right label -->
+    <path
+        android:fillColor="@color/orange_button_dark"
+        android:pathData="M60,280h20v20h-20z" />
+
+    <!-- This path tag is for -> Right Stand, left label -->
+    <path
+        android:fillColor="@color/orange_button_dark"
+        android:pathData="M240,280h20v20h-20z" />
+
+    <!-- This path tag is for -> Right Stand, right label -->
+    <path
+        android:fillColor="@color/orange_button_dark"
+        android:pathData="M260,280h20v20h-20z" />
+</vector>
