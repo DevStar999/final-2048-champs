@@ -25,7 +25,12 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
 
 /* TODO -> Look into Animated Gradient Background (Something like the Instagram start screen)
            Resource Link -> https://www.youtube.com/watch?v=x_DXXGvyfh8
- */
+*/
+/* TODO -> Add a 'Share' button for sharing app download link & 'Promote' button for sharing promo
+           code of possibly a premium product/scheme together as one group having these 2 buttons
+           in the SettingsFragment
+*/
+// TODO -> Add a 'Check Updates' button for In-app updates in the SettingsFragment
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
