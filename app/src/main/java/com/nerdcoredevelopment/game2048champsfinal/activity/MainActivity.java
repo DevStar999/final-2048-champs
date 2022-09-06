@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.nerdcoredevelopment.game2048champsfinal.fragment.AnnouncementsFragment;
-import com.nerdcoredevelopment.game2048champsfinal.activity.GameActivity;
 import com.nerdcoredevelopment.game2048champsfinal.fragment.LogoLottieFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragment.NavigationFragment;
 import com.nerdcoredevelopment.game2048champsfinal.R;
@@ -23,8 +22,10 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.SettingsFragment;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingFeatureDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameExitDialog;
 import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
-import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingFeatureDialog;
 
+/* TODO -> Look into Animated Gradient Background (Something like the Instagram start screen)
+           Resource Link -> https://www.youtube.com/watch?v=x_DXXGvyfh8
+ */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
