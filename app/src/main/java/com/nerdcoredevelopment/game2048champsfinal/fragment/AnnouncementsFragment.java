@@ -12,8 +12,15 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import com.nerdcoredevelopment.game2048champsfinal.R;
+import com.nerdcoredevelopment.game2048champsfinal.SliderAdapter;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnnouncementsFragment extends Fragment {
+    private Context context;
     private OnAnnouncementsFragmentInteractionListener mListener;
 
     public AnnouncementsFragment() {
@@ -41,6 +48,19 @@ public class AnnouncementsFragment extends Fragment {
             }
         });
 
+        SliderView sliderView = view.findViewById(R.id.imageSlider);
+        List<Integer> layoutResourceIds = new ArrayList() {{
+            add(R.layout.announcement1);
+            add(R.layout.announcement2);
+            add(R.layout.announcement3);
+        }};
+        SliderAdapter sliderAdapter = new SliderAdapter(context, layoutResourceIds);
+        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.setAutoCycle(true);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
+        sliderView.startAutoCycle();
+
         return view;
     }
 
@@ -57,6 +77,7 @@ public class AnnouncementsFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnAnnouncementsFragmentInteractionListener");
         }
+        this.context = context;
     }
 
     @Override
