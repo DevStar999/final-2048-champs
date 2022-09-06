@@ -20,6 +20,8 @@
     <color name="board_color">#BBADA0</color>
     <color name="empty_cell">#D6CDC4</color>
     <color name="game_text_color">#967969</color>
+    <!-- Current opacity for following color = 50% i.e. in hex = 80 -->
+    <color name="game_text_color_divider_line">#80967969</color>
     <!-- Current opacity for following color = 20% i.e. in hex = 32 -->
     <color name="game_text_color_translucent_bgf1">#32967969</color>
     <!-- Current opacity for following color = 30% i.e. in hex = 4D -->
@@ -33,6 +35,8 @@
     <!-- Current opacity for following color = 75% i.e. in hex = BF -->
     <color name="white_translucent_splash_screen">#BFFFFFFF</color>
     <color name="button_background_color">@color/orange_button</color>
+    <!-- Current opacity for following color ~ 2.5% i.e. in hex = 05 -->
+    <color name="black_translucent_film">#05000000</color>
 
     <!-- Number Colors -->
     <color name="number_color_0002">#766D64</color>
