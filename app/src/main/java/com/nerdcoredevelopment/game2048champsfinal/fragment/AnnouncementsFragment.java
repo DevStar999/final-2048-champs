@@ -49,7 +49,7 @@ public class AnnouncementsFragment extends Fragment {
         });
 
         SliderView sliderView = view.findViewById(R.id.imageSlider);
-        List<Integer> layoutResourceIds = new ArrayList() {{
+        List<Integer> layoutResourceIds = new ArrayList<>() {{
             add(R.layout.announcement1);
             add(R.layout.announcement2);
             add(R.layout.announcement3);
