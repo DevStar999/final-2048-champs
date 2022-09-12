@@ -5,27 +5,43 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- To learn more about the attribute 'android:hardwareAccelerated'
+         refer the link -> https://developers.google.com/admob/android/banner#hardware
+         Although, the gist of the article is that we should use it and set it to 'true' at
+         application level and (a) for activities that use ads, it should be set to 'true' &
+         (b) for activities that don't use ads, it should be set to 'false' -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme"
         tools:targetApi="32">
+        <!-- Actual Admob App Id: ca-app-pub-4247468904518611~7012519655 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4247468904518611~7012519655" />
+
         <activity
             android:name=".activity.IntroActivity"
-            android:noHistory="true"
-            android:exported="true">
+            android:exported="true"
+            android:hardwareAccelerated="false"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GameActivity" />
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.GameActivity"
+            android:hardwareAccelerated="false" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:hardwareAccelerated="false" />
     </application>
 
 </manifest>

@@ -80,4 +80,7 @@ dependencies {
 
     // For Auto-Image Slider
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
+    // For AdMob
+    implementation 'com.google.android.gms:play-services-ads:21.2.0'
 }
