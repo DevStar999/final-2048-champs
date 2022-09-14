@@ -113,6 +113,11 @@ public class PreGameFragment extends Fragment {
         preGameManager.updateSizeBrowseIcons(currentGameMode.getDimensions(), allCurrentGameSizes);
 
         gamePreviewSpotLightLottie = layoutView.findViewById(R.id.game_preview_pregame_fragment_spotlight_lottie);
+        if (sharedPreferences.getBoolean("toggleRotatingLight", true)) {
+            gamePreviewSpotLightLottie.playAnimation();
+        } else {
+            gamePreviewSpotLightLottie.pauseAnimation();
+        }
         gamePreviewImageView = layoutView.findViewById(R.id.game_preview_pregame_fragment_image_view);
         startGameLottie = layoutView.findViewById(R.id.start_game_pregame_fragment_lottie);
         startGameButton = layoutView.findViewById(R.id.start_game_pregame_fragment_button);
