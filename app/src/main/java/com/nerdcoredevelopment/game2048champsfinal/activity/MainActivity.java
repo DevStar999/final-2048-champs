@@ -35,6 +35,7 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
 /* TODO -> Multiple quick dialog open clicks cause the dialog to open multiple times, we have to
            find a way to avoid that
 */
+// TODO -> Remove smaller sized game modes as we get close to the publicity launch
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
