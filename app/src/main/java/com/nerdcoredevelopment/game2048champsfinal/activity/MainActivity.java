@@ -32,7 +32,6 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
            in the SettingsFragment
 */
 // TODO -> Add a 'Check Updates' button for In-app updates in the SettingsFragment
-// TODO -> Investigate if reducing the speed of the rotating light animation has slowed down the app
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
