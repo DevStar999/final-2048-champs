@@ -36,6 +36,12 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
            find a way to avoid that
 */
 // TODO -> Remove smaller sized game modes as we get close to the publicity launch
+/* TODO -> Even with the current arrangement whenever a dialog opens up the status bar at the top
+           which shows time, battery percentage etc. shows up for a split second. We have to find a
+           way to avoid this
+*/
+// TODO -> Implement the In-app updates button in the SettingsFragment
+// TODO -> Implement the In-app review feature working properly with quotas
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
