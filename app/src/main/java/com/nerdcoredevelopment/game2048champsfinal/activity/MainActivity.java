@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.nerdcoredevelopment.game2048champsfinal.fragment.AnnouncementsFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragment.BlockDesignFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragment.LogoLottieFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragment.NavigationFragment;
 import com.nerdcoredevelopment.game2048champsfinal.R;
@@ -34,8 +35,9 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
+        AnnouncementsFragment.OnAnnouncementsFragmentInteractionListener,
         SettingsFragment.OnSettingsFragmentInteractionListener,
-        AnnouncementsFragment.OnAnnouncementsFragmentInteractionListener {
+        BlockDesignFragment.OnBlockDesignFragmentInteractionListener {
     private LogoLottieFragment logoLottieFragment;
     private NavigationFragment navigationFragment;
 
@@ -182,12 +184,52 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onAnnouncementsFragmentInteractionBackClicked() {
+        onBackPressed();
+    }
+
+    @Override
     public void onSettingsFragmentInteractionBackClicked() {
         onBackPressed();
     }
 
     @Override
-    public void onAnnouncementsFragmentInteractionBackClicked() {
+    public void onSettingsFragmentInteractionGetPremiumClicked() {
+        // TODO -> Remove toast and implement the ShopFragment
+        Toast.makeText(MainActivity.this, "Shop Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSettingsFragmentInteractionChangeThemeClicked() {
+        // TODO -> Remove toast and implement the ChangeThemeFragment
+        Toast.makeText(MainActivity.this, "Change Theme Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSettingsFragmentInteractionToggleRotatingLightClicked(boolean isChecked) {
+        logoLottieFragment.updateRotatingLightState(isChecked);
+    }
+
+    @Override
+    public void onSettingsFragmentInteractionBlockDesignClicked() {
+        BlockDesignFragment fragment = new BlockDesignFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.full_screen_fragment_container, fragment, "BLOCK_DESIGN_FRAGMENT")
+                .commit();
+    }
+
+    @Override
+    public void onSettingsFragmentInteractionCheckUpdatesClicked() {
+        // TODO -> Remove toast and implement the In-app updates functionality
+        Toast.makeText(MainActivity.this, "Check Updates", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBlockDesignFragmentInteractionBackClicked() {
         onBackPressed();
     }
 }
