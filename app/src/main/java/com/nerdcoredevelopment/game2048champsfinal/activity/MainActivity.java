@@ -32,6 +32,9 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
            in the SettingsFragment
 */
 // TODO -> Add a 'Check Updates' button for In-app updates in the SettingsFragment
+/* TODO -> Multiple quick dialog open clicks cause the dialog to open multiple times, we have to
+           find a way to avoid that
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
