@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_fragment_title"
-        android:paddingVertical="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -42,6 +41,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="start|center_vertical"
+            android:layout_marginVertical="8dp"
             android:layout_marginStart="16dp"
             android:alpha="1"
             android:background="@drawable/rounded_corner_button_small"
@@ -59,6 +59,7 @@
         android:layout_height="0dp"
         android:background="@color/black_translucent_film"
         android:scrollbars="none"
+        android:layout_marginVertical="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,24 +70,193 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:background="@drawable/rounded_corner_card_settings"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/get_premium_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/click_settings_buttons_top_and_bottom"
+                    android:padding="16dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/get_premium_icon_image_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="12dp"
+                        app:srcCompat="@drawable/settings_get_premium_icon" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/get_premium_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Get Premium"
+                        android:textColor="@color/game_text_color"
+                        android:textSize="16sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/change_theme_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/click_settings_buttons_top"
+                    android:padding="16dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/change_theme_icon_image_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="12dp"
+                        app:srcCompat="@drawable/settings_change_theme_icon" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/change_theme_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Change Theme"
+                        android:textColor="@color/game_text_color"
+                        android:textSize="16sp"
+                        android:textStyle="normal" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/change_theme_redirect_image_view"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="14dp"
+                        app:srcCompat="@drawable/settings_redirect" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@color/game_text_color_divider_line" />
+
+                <LinearLayout
+                    android:id="@+id/toggle_rotating_light_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/click_settings_buttons_middle"
+                    android:padding="16dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/toggle_rotating_light_icon_image_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="12dp"
+                        app:srcCompat="@drawable/settings_toggle_rotating_light_icon" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/toggle_rotating_light_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Toggle Rotating Light"
+                        android:textColor="@color/game_text_color"
+                        android:textSize="16sp"
+                        android:textStyle="normal" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/toggle_rotating_light_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="14dp"
+                        android:checked="true"
+                        app:trackTint="@color/settings_switch_track"
+                        app:thumbTint="@color/settings_switch_thumb"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@color/game_text_color_divider_line" />
+
+                <LinearLayout
+                    android:id="@+id/block_design_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/click_settings_buttons_bottom"
+                    android:padding="16dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/block_design_icon_image_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="12dp"
+                        app:srcCompat="@drawable/settings_block_design_icon" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/block_design_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Block Design"
+                        android:textColor="@color/game_text_color"
+                        android:textSize="16sp"
+                        android:textStyle="normal" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/block_design_redirect_image_view"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="14dp"
+                        app:srcCompat="@drawable/settings_redirect" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/rate_us_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:background="@drawable/click_settings_buttons_top"
+                    android:padding="16dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/rate_us_icon_image_view"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -110,17 +280,18 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/game_text_color_divider_line"
-                    android:layout_marginHorizontal="8dp"/>
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@color/game_text_color_divider_line" />
 
                 <LinearLayout
                     android:id="@+id/feedback_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:background="@drawable/click_settings_buttons_middle"
+                    android:padding="16dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/feedback_icon_image_view"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -143,23 +314,58 @@
                         android:textStyle="normal" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@color/game_text_color_divider_line" />
+
+                <LinearLayout
+                    android:id="@+id/check_updates_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/click_settings_buttons_bottom"
+                    android:padding="16dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/check_updates_icon_image_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="12dp"
+                        app:srcCompat="@drawable/settings_check_updates_icon" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/check_updates_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Check Updates"
+                        android:textColor="@color/game_text_color"
+                        android:textSize="16sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:background="@drawable/rounded_corner_card_settings"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/facebook_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:background="@drawable/click_settings_buttons_top"
+                    android:padding="16dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/facebook_icon_image_view"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -183,17 +389,18 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/game_text_color_divider_line"
-                    android:layout_marginHorizontal="8dp"/>
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@color/game_text_color_divider_line" />
 
                 <LinearLayout
                     android:id="@+id/instagram_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:background="@drawable/click_settings_buttons_middle"
+                    android:padding="16dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/instagram_icon_image_view"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -219,17 +426,18 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/game_text_color_divider_line"
-                    android:layout_marginHorizontal="8dp"/>
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@color/game_text_color_divider_line" />
 
                 <LinearLayout
                     android:id="@+id/twitter_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:background="@drawable/click_settings_buttons_bottom"
+                    android:padding="16dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/twitter_icon_image_view"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -256,17 +464,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:background="@drawable/rounded_corner_card_settings"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/privacy_policy_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:background="@drawable/click_settings_buttons_top"
+                    android:padding="16dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/privacy_policy_icon_image_view"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -290,17 +498,18 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/game_text_color_divider_line"
-                    android:layout_marginHorizontal="8dp"/>
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@color/game_text_color_divider_line" />
 
                 <LinearLayout
                     android:id="@+id/terms_of_service_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:background="@drawable/click_settings_buttons_bottom"
+                    android:padding="16dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/terms_of_service_icon_image_view"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
