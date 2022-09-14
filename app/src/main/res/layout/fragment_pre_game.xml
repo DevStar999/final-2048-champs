@@ -66,7 +66,7 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/rotating_light"
-            app:lottie_speed="0.75" />
+            app:lottie_speed="0.25" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/game_preview_pregame_fragment_image_constraint_layout"

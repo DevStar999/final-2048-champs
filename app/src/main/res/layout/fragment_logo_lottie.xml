@@ -26,7 +26,7 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/rotating_light"
-            app:lottie_speed="0.75" />
+            app:lottie_speed="0.25" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/game_preview_image_view"
