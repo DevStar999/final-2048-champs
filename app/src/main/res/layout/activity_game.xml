@@ -16,7 +16,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/background_film1"
+    android:background="@color/game_primary_background_color"
     tools:context=".activity.GameActivity">
 
     <LinearLayout
