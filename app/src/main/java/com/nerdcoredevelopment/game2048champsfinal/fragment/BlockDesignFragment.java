@@ -55,6 +55,7 @@ public class BlockDesignFragment extends Fragment {
         List<AppCompatImageView> blockDesignOptionSelectedImageViewList = new ArrayList<>();
 
         // Programmatically filling up the block design options
+        boolean isSelectionDone = false;
         for (int i = 0; i < blockDesignDrawableResourceIds.size(); i += 3) {
             int rowNumber = (i / 3) + 1;
             RelativeLayout blockDesignOptionsRow = new RelativeLayout(context);
@@ -114,6 +115,7 @@ public class BlockDesignFragment extends Fragment {
                         == blockDesignDrawableResourceIds.get(i + j).first)
                         && (sharedPreferences.getInt("blockDrawablePreviewResourceId", R.drawable.block_preview_cell_x)
                         == blockDesignDrawableResourceIds.get(i + j).second)) {
+                    isSelectionDone = true;
                     blockDesignOptionImageView.setClickable(false);
                     blockDesignOptionSelectedBackground.setVisibility(View.VISIBLE);
                     blockDesignOptionSelectedImageView.setVisibility(View.VISIBLE);
@@ -126,6 +128,14 @@ public class BlockDesignFragment extends Fragment {
             }
 
             blockDesignOptionsScrollViewChild.addView(blockDesignOptionsRow);
+        }
+
+        if (!isSelectionDone) {
+            blockDesignOptionImageViewList.get(0).setClickable(false);
+            blockDesignOptionSelectedBackgroundList.get(0).setVisibility(View.VISIBLE);
+            blockDesignOptionSelectedImageViewList.get(0).setVisibility(View.VISIBLE);
+            blockDesignOptionInUseImageView.setImageResource(blockDesignDrawableResourceIds.get(0).first);
+            blockDesignPreviewImageView.setImageResource(blockDesignDrawableResourceIds.get(0).second);
         }
 
         // Setting onClick listeners to the block design options
@@ -162,6 +172,7 @@ public class BlockDesignFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         requireActivity().getWindow().getDecorView()
                 .setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);

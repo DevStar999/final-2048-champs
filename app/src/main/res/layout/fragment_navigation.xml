@@ -41,8 +41,11 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
+        <!-- TODO -> Enable Announcements in game and set the visibility to
+                     VISIBLE -->
         <FrameLayout
             android:id="@+id/fragment_navigation_announcements_linear_layout"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp">
@@ -134,13 +137,10 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
-        <!-- TODO -> Enable leaderboards in game and set the visibility to
-                     VISIBLE -->
         <FrameLayout
             android:id="@+id/fragment_navigation_shop_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginHorizontal="12dp">
 
             <androidx.appcompat.widget.AppCompatImageView

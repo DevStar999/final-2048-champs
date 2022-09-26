@@ -121,7 +121,7 @@ public class PreGameFragment extends Fragment {
         gamePreviewImageView = layoutView.findViewById(R.id.game_preview_pregame_fragment_image_view);
         startGameLottie = layoutView.findViewById(R.id.start_game_pregame_fragment_lottie);
         startGameButton = layoutView.findViewById(R.id.start_game_pregame_fragment_button);
-        if (sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+        if (sharedPreferences.getInt("gameStateEnumIndex" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
             startGameButton.setText("RESUME GAME");
         } else {
@@ -206,7 +206,7 @@ public class PreGameFragment extends Fragment {
         preGameManager.updatePreview(currentGameMode.getGamePreviewAssetFileName());
 
         // Update the text of the start game button
-        if (sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+        if (sharedPreferences.getInt("gameStateEnumIndex" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
             startGameButton.setText("RESUME GAME");
         } else {
@@ -253,7 +253,7 @@ public class PreGameFragment extends Fragment {
         preGameManager.updatePreview(currentGameMode.getGamePreviewAssetFileName());
 
         // Update the text of the start game button
-        if (sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+        if (sharedPreferences.getInt("gameStateEnumIndex" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
             startGameButton.setText("RESUME GAME");
         } else {
@@ -289,6 +289,7 @@ public class PreGameFragment extends Fragment {
                              Bundle savedInstanceState) {
         requireActivity().getWindow().getDecorView()
                 .setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);

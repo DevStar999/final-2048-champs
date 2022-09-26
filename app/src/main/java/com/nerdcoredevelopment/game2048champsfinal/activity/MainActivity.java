@@ -23,6 +23,7 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.SettingsFragment;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingFeatureDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameExitDialog;
 import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragment.ShopFragment;
 
 /* TODO -> Look into Animated Gradient Background (Something like the Instagram start screen)
            Resource Link -> https://www.youtube.com/watch?v=x_DXXGvyfh8
@@ -47,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements
         PreGameFragment.OnPreGameFragmentInteractionListener,
         AnnouncementsFragment.OnAnnouncementsFragmentInteractionListener,
         SettingsFragment.OnSettingsFragmentInteractionListener,
-        BlockDesignFragment.OnBlockDesignFragmentInteractionListener {
+        BlockDesignFragment.OnBlockDesignFragmentInteractionListener,
+        ShopFragment.OnShopFragmentInteractionListener {
     private LogoLottieFragment logoLottieFragment;
     private NavigationFragment navigationFragment;
 
@@ -118,17 +120,8 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            // Back button was pressed from activity
-            GameExitDialog gameExitDialog = new GameExitDialog(this);
-            gameExitDialog.show();
-            gameExitDialog.setGameExitDialogListener(new GameExitDialog.GameExitDialogListener() {
-                @Override
-                public void getResponseOfExitDialog(boolean response) {
-                    if (response) {
-                        MainActivity.super.onBackPressed();
-                    }
-                }
-            });
+            // Back button was pressed from activity, do nothing as we want to eliminate this option
+            // to exit from the homepage
         } else {
             // Back button was pressed from fragment
             getSupportFragmentManager().popBackStack();
@@ -143,8 +136,8 @@ public class MainActivity extends AppCompatActivity implements
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
                 R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.addToBackStack(null);
-        transaction.replace(R.id.full_screen_fragment_container, fragment, "PREGAME_FRAGMENT")
-                .commit();
+        transaction.replace(R.id.main_activity_full_screen_fragment_container,
+                fragment, "PREGAME_FRAGMENT").commit();
     }
 
     @Override
@@ -155,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
                 R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.addToBackStack(null);
-        transaction.replace(R.id.full_screen_fragment_container, fragment, "ANNOUNCEMENTS_FRAGMENT")
-                .commit();
+        transaction.replace(R.id.main_activity_full_screen_fragment_container,
+                fragment, "ANNOUNCEMENTS_FRAGMENT").commit();
     }
 
     @Override
@@ -172,13 +165,20 @@ public class MainActivity extends AppCompatActivity implements
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
                 R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.addToBackStack(null);
-        transaction.replace(R.id.full_screen_fragment_container, fragment, "SETTINGS_FRAGMENT")
-                .commit();
+        transaction.replace(R.id.main_activity_full_screen_fragment_container,
+                fragment, "SETTINGS_FRAGMENT").commit();
     }
 
     @Override
     public void onNavigationFragmentShopClicked() {
-        Toast.makeText(MainActivity.this, "Shop Clicked", Toast.LENGTH_SHORT).show();
+        ShopFragment fragment = new ShopFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.main_activity_full_screen_fragment_container,
+                fragment, "SHOP_FRAGMENT").commit();
     }
 
     @Override
@@ -213,8 +213,14 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onSettingsFragmentInteractionGetPremiumClicked() {
-        // TODO -> Remove toast and implement the ShopFragment
-        Toast.makeText(MainActivity.this, "Shop Clicked", Toast.LENGTH_SHORT).show();
+        ShopFragment fragment = new ShopFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.main_activity_full_screen_fragment_container,
+                fragment, "SHOP_FRAGMENT").commit();
     }
 
     @Override
@@ -236,18 +242,74 @@ public class MainActivity extends AppCompatActivity implements
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
                 R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.addToBackStack(null);
-        transaction.add(R.id.full_screen_fragment_container, fragment, "BLOCK_DESIGN_FRAGMENT")
-                .commit();
+        transaction.add(R.id.main_activity_full_screen_fragment_container,
+                fragment, "BLOCK_DESIGN_FRAGMENT").commit();
     }
 
     @Override
-    public void onSettingsFragmentInteractionCheckUpdatesClicked() {
-        // TODO -> Remove toast and implement the In-app updates functionality
-        Toast.makeText(MainActivity.this, "Check Updates", Toast.LENGTH_SHORT).show();
+    public void onSettingsFragmentInteractionHowToPlayClicked() {
+        // TODO -> Remove toast and implement the 'How To Play' fragment
+        Toast.makeText(MainActivity.this, "'How To Play' button clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSettingsFragmentInteractionHelpClicked() {
+        // TODO -> Remove toast and implement the 'Help' fragment where we would answer FAQs
+        Toast.makeText(MainActivity.this, "'Help' button clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSettingsFragmentInteractionExitClicked() {
+        GameExitDialog gameExitDialog = new GameExitDialog(this);
+        gameExitDialog.show();
+        gameExitDialog.setGameExitDialogListener(new GameExitDialog.GameExitDialogListener() {
+            @Override
+            public void getResponseOfExitDialog(boolean response) {
+                if (response) {
+                    MainActivity.this.finish();
+                }
+            }
+        });
     }
 
     @Override
     public void onBlockDesignFragmentInteractionBackClicked() {
         onBackPressed();
+    }
+
+    @Override
+    public void onShopFragmentInteractionBackClicked() {
+        onBackPressed();
+    }
+
+    @Override
+    public void onShopFragmentInteractionRestorePurchaseClicked() {
+        Toast.makeText(MainActivity.this, "Restore Purchases Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onShopFragmentInteractionPurchaseOptionClicked(int purchaseOptionViewId) {
+        if (purchaseOptionViewId == R.id.shop_coins_level1_constraint_layout
+                || purchaseOptionViewId == R.id.shop_coins_level1_purchase_button) {
+            Toast.makeText(MainActivity.this, "Shop Option 1 Clicked", Toast.LENGTH_SHORT).show();
+        } else if (purchaseOptionViewId == R.id.shop_coins_level2_constraint_layout
+                || purchaseOptionViewId == R.id.shop_coins_level2_purchase_button) {
+            Toast.makeText(MainActivity.this, "Shop Option 2 Clicked", Toast.LENGTH_SHORT).show();
+        } else if (purchaseOptionViewId == R.id.shop_coins_level3_constraint_layout
+                || purchaseOptionViewId == R.id.shop_coins_level3_purchase_button) {
+            Toast.makeText(MainActivity.this, "Shop Option 3 Clicked", Toast.LENGTH_SHORT).show();
+        } else if (purchaseOptionViewId == R.id.shop_coins_level4_constraint_layout
+                || purchaseOptionViewId == R.id.shop_coins_level4_purchase_button) {
+            Toast.makeText(MainActivity.this, "Shop Option 4 Clicked", Toast.LENGTH_SHORT).show();
+        } else if (purchaseOptionViewId == R.id.shop_coins_level5_constraint_layout
+                || purchaseOptionViewId == R.id.shop_coins_level5_purchase_button) {
+            Toast.makeText(MainActivity.this, "Shop Option 5 Clicked", Toast.LENGTH_SHORT).show();
+        } else if (purchaseOptionViewId == R.id.shop_coins_level6_constraint_layout
+                || purchaseOptionViewId == R.id.shop_coins_level6_purchase_button) {
+            Toast.makeText(MainActivity.this, "Shop Option 6 Clicked", Toast.LENGTH_SHORT).show();
+        } else if (purchaseOptionViewId == R.id.shop_coins_level7_constraint_layout
+                || purchaseOptionViewId == R.id.shop_coins_level7_purchase_button) {
+            Toast.makeText(MainActivity.this, "Shop Option 7 Clicked", Toast.LENGTH_SHORT).show();
+        }
     }
 }

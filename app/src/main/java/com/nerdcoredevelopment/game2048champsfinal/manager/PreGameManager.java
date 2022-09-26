@@ -41,7 +41,7 @@ public class PreGameManager {
 
         gamePreviewImage = currentFragmentLayoutView.findViewById(R.id.game_preview_pregame_fragment_image_view);
         rotatingLightView = currentFragmentLayoutView.findViewById(R.id.game_preview_pregame_fragment_spotlight_lottie);
-        gamePreviewAnimationsDone = new ArrayList<Boolean>(){{add(false); add(false);}};
+        gamePreviewAnimationsDone = new ArrayList<>(){{add(false); add(false);}};
     }
 
     public void updateModeBrowseIcons(String currentMode, List<String> allModes) {

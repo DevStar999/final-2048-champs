@@ -23,8 +23,6 @@ import com.nerdcoredevelopment.game2048champsfinal.BuildConfig;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.RateUsPromptDialog;
 
-import java.util.Objects;
-
 public class SettingsFragment extends Fragment {
     private final static String FACEBOOK_URL = "https://www.facebook.com/Nerdcore-Development-109351035183956";
     private final static String FACEBOOK_PAGE_ID = "Nerdcore-Development-109351035183956";
@@ -42,14 +40,16 @@ public class SettingsFragment extends Fragment {
     private LinearLayout toggleRotatingLightLinearLayout;
     private SwitchCompat toggleRotatingLightSwitch;
     private LinearLayout blockDesignLinearLayout;
+    private LinearLayout howToPlayLinearLayout;
+    private LinearLayout helpLinearLayout;
     private LinearLayout rateUsLinearLayout;
-    private LinearLayout checkUpdatesLinearLayout;
     private LinearLayout feedbackLinearLayout;
     private LinearLayout facebookLinearLayout;
     private LinearLayout instagramLinearLayout;
     private LinearLayout twitterLinearLayout;
     private LinearLayout privacyLinearLayout;
     private LinearLayout termsLinearLayout;
+    private LinearLayout exitLinearLayout;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -169,6 +169,22 @@ public class SettingsFragment extends Fragment {
                 }
             }
         });
+        howToPlayLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onSettingsFragmentInteractionHowToPlayClicked();
+                }
+            }
+        });
+        helpLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onSettingsFragmentInteractionHelpClicked();
+                }
+            }
+        });
         rateUsLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -210,14 +226,6 @@ public class SettingsFragment extends Fragment {
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
         });
-        checkUpdatesLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mListener != null) {
-                    mListener.onSettingsFragmentInteractionCheckUpdatesClicked();
-                }
-            }
-        });
         facebookLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,6 +265,14 @@ public class SettingsFragment extends Fragment {
                 startActivity(browserIntent);
             }
         });
+        exitLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onSettingsFragmentInteractionExitClicked();
+                }
+            }
+        });
     }
 
     @Nullable
@@ -264,9 +280,10 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         requireActivity().getWindow().getDecorView()
                 .setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         sharedPreferences = context.getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
 
@@ -283,14 +300,16 @@ public class SettingsFragment extends Fragment {
             toggleRotatingLightSwitch.setChecked(false);
         }
         blockDesignLinearLayout = view.findViewById(R.id.block_design_linear_layout);
+        howToPlayLinearLayout = view.findViewById(R.id.how_to_play_linear_layout);
+        helpLinearLayout = view.findViewById(R.id.help_linear_layout);
         rateUsLinearLayout = view.findViewById(R.id.rate_us_linear_layout);
         feedbackLinearLayout = view.findViewById(R.id.feedback_linear_layout);
-        checkUpdatesLinearLayout = view.findViewById(R.id.check_updates_linear_layout);
         facebookLinearLayout = view.findViewById(R.id.facebook_linear_layout);
         instagramLinearLayout = view.findViewById(R.id.instagram_linear_layout);
         twitterLinearLayout = view.findViewById(R.id.twitter_linear_layout);
         privacyLinearLayout = view.findViewById(R.id.privacy_policy_linear_layout);
         termsLinearLayout = view.findViewById(R.id.terms_of_service_linear_layout);
+        exitLinearLayout = view.findViewById(R.id.exit_game_linear_layout);
 
         settingOnClickListeners();
 
@@ -303,7 +322,9 @@ public class SettingsFragment extends Fragment {
         void onSettingsFragmentInteractionChangeThemeClicked();
         void onSettingsFragmentInteractionToggleRotatingLightClicked(boolean isChecked);
         void onSettingsFragmentInteractionBlockDesignClicked();
-        void onSettingsFragmentInteractionCheckUpdatesClicked();
+        void onSettingsFragmentInteractionHowToPlayClicked();
+        void onSettingsFragmentInteractionHelpClicked();
+        void onSettingsFragmentInteractionExitClicked();
     }
 
     @Override

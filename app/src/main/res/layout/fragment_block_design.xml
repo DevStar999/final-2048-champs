@@ -44,7 +44,7 @@
             android:layout_marginVertical="8dp"
             android:layout_marginStart="16dp"
             android:alpha="1"
-            android:background="@drawable/rounded_corner_button_small"
+            android:background="@drawable/click_button_small"
             android:contentDescription="Back button for closing BlockDesignFragment"
             android:padding="6dp"
             app:srcCompat="@drawable/back_arrow" />
