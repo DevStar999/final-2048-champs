@@ -43,6 +43,7 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.ShopFragment;
 */
 // TODO -> Implement the In-app updates button in the SettingsFragment
 // TODO -> Implement the In-app review feature working properly with quotas
+// TODO -> Click effect for NavigationFragment buttons as well
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
