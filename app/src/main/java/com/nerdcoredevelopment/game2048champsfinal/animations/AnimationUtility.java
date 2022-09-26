@@ -4,15 +4,15 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.graphics.drawable.Drawable;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.enums.Direction;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameLayoutProperties;
 
@@ -266,66 +266,36 @@ public class AnimationUtility {
     }
 
     /**
-     * The following are the animations for merging and splitting of the score displays in GameActivity
+     * The following animations are for when there is a use of a tool
      */
-    public static void mergeScoreDisplays(LinearLayout currentScoreLinearLayout, LinearLayout bestScoreLinearLayout,
-                                          LottieAnimationView scoresMerge, float screenDensity, long duration) {
-        int pixelAmount = 49; // This is a manual calculation as per the current state of the layout
-        int slideByPixels = (int) (pixelAmount * screenDensity);
-
-        ObjectAnimator currentScoreSlide = ObjectAnimator.ofFloat(currentScoreLinearLayout,
-                View.TRANSLATION_X, slideByPixels).setDuration(duration);
-        ObjectAnimator bestScoreSlide = ObjectAnimator.ofFloat(bestScoreLinearLayout,
-                View.TRANSLATION_X, (-1 * slideByPixels)).setDuration(duration);
-        AnimatorSet scoresAnimatorSet = new AnimatorSet();
-        scoresAnimatorSet.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {}
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                currentScoreLinearLayout.setVisibility(View.INVISIBLE);
-                scoresMerge.setVisibility(View.VISIBLE);
-                scoresMerge.playAnimation();
-                new CountDownTimer(4000, 4000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {}
-                    @Override
-                    public void onFinish() {
-                        scoresMerge.setVisibility(View.INVISIBLE);
-                    }
-                }.start();
-            }
-            @Override
-            public void onAnimationCancel(Animator animator) {}
-            @Override
-            public void onAnimationRepeat(Animator animator) {}
-        });
-        scoresAnimatorSet.playTogether(currentScoreSlide, bestScoreSlide);
-        scoresAnimatorSet.start();
-    }
-
-    public static void splitScoreDisplays(LinearLayout currentScoreLinearLayout, LinearLayout bestScoreLinearLayout,
-                                          long duration) {
-        int slideByPixels = 0;
-
-        ObjectAnimator currentScoreSlide = ObjectAnimator.ofFloat(currentScoreLinearLayout,
-                View.TRANSLATION_X, slideByPixels).setDuration(duration);
-        ObjectAnimator bestScoreSlide = ObjectAnimator.ofFloat(bestScoreLinearLayout,
-                View.TRANSLATION_X, slideByPixels).setDuration(duration);
-        AnimatorSet scoresAnimatorSet = new AnimatorSet();
-        scoresAnimatorSet.addListener(new Animator.AnimatorListener() {
+    public static void normalToolsUndo(LottieAnimationView gridLottieView, ConstraintLayout rootGameConstraintLayout) {
+        gridLottieView.setVisibility(View.VISIBLE);
+        gridLottieView.setRotationY(180f);
+        gridLottieView.setBackgroundResource(R.drawable.rounded_corner_grid_lottie);
+        gridLottieView.setAnimation(R.raw.normal_tools_undo);
+        gridLottieView.setSpeed(1.5f);
+        gridLottieView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
-                currentScoreLinearLayout.setVisibility(View.VISIBLE);
+                rootGameConstraintLayout.setEnabled(false);
             }
+
             @Override
-            public void onAnimationEnd(Animator animator) {}
+            public void onAnimationEnd(Animator animator) {
+                gridLottieView.setVisibility(View.GONE);
+                gridLottieView.setRotationY(0f);
+                gridLottieView.setBackgroundResource(0); // To remove background drawable
+                rootGameConstraintLayout.setEnabled(true);
+            }
+
             @Override
-            public void onAnimationCancel(Animator animator) {}
+            public void onAnimationCancel(Animator animator) {
+            }
+
             @Override
-            public void onAnimationRepeat(Animator animator) {}
+            public void onAnimationRepeat(Animator animator) {
+            }
         });
-        scoresAnimatorSet.playTogether(currentScoreSlide, bestScoreSlide);
-        scoresAnimatorSet.start();
+        gridLottieView.playAnimation();
     }
 }
