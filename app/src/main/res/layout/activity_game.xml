@@ -2,9 +2,9 @@
 <!-- List of things that we need to check while creating a layout are as follows:
      1) root_game_constraint_layout
      a. padding="16dp" (Correct, Always keep this value)
-     2) goal_title_text_view, current_score_title_text_view, best_score_title_text_view 
+     2) goal_title_text_view, current_score_title_text_view, best_score_title_text_view
      a. layout_height="24dp" (Adjust according to board size)
-     b. textSize="12sp" (Adjust according to above layout_height) 
+     b. textSize="12sp" (Adjust according to above layout_height)
      3) goal_value_text_view, current_score_value_text_view, best_score_value_text_view
      a. layout_width="90dp"
      b. layout_height="36dp"
@@ -15,9 +15,144 @@
     android:id="@+id/root_game_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/game_primary_background_color"
     tools:context=".activity.GameActivity">
+
+    <LinearLayout
+        android:id="@+id/game_activity_top_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/current_coins_count_game_activity_linear_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/rounded_corner_current_coins"
+                android:onClick="currentCoinsAddCoinsLayout"
+                android:orientation="horizontal"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="4dp">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:scaleX="1.4"
+                        android:scaleY="1.4"
+                        app:srcCompat="@drawable/coin_symbol" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:alpha="0.85"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"
+                        app:srcCompat="@drawable/sparkle_icon" />
+
+                </FrameLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/current_coins_game_activity_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="10dp"
+                    android:scrollHorizontally="false"
+                    android:text="-"
+                    android:textColor="@color/game_primary_background_color"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/current_coins_add_coins_image_view"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:onClick="currentCoinsAddCoinsButton"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/plus_icon" />
+
+            </LinearLayout>
+
+            <!-- The text color is taken from the crown_icon
+                     drawable file -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/current_score_value_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="4dp"
+                android:scrollHorizontally="false"
+                android:text="-"
+                android:textColor="@color/game_text_color"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/best_score_game_activity_linear_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/rounded_corner_current_coins"
+                android:orientation="horizontal"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="4dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    app:srcCompat="@drawable/crown_icon" />
+
+                <!-- The text color is taken from the coin_symbol
+                     drawable file -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/best_score_value_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:scrollHorizontally="false"
+                    android:text="-"
+                    android:textColor="#F4DE7F"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/game_text_color_divider_line" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/goal_linear_layout"
@@ -25,10 +160,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_display_base"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/normal_tools_linear_layout"
-        app:layout_constraintEnd_toEndOf="@+id/normal_tools_linear_layout"
-        app:layout_constraintStart_toStartOf="@+id/normal_tools_linear_layout"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/game_tools_linear_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/game_activity_top_display"
         app:layout_constraintVertical_weight="1">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -55,110 +190,11 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/scores_frame_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/special_tools_linear_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1">
-
-        <LinearLayout
-            android:id="@+id/scores_linear_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/current_score_linear_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:background="@drawable/rounded_corner_display_base"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/current_score_title_text_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="24dp"
-                    android:background="@drawable/rounded_corner_display_top"
-                    android:gravity="center_horizontal|bottom"
-                    android:text="SCORE"
-                    android:textAlignment="center"
-                    android:textColor="@color/number_color_0002"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <!-- TODO - Handling the display of very large numbers
-                            beyond 10 digits, up-to 24 digits-->
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/current_score_value_text_view"
-                    android:layout_width="90dp"
-                    android:layout_height="36dp"
-                    android:gravity="center"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/best_score_linear_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:background="@drawable/rounded_corner_display_base"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/best_score_title_text_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="24dp"
-                    android:background="@drawable/rounded_corner_display_top"
-                    android:gravity="center_horizontal|bottom"
-                    android:text="BEST"
-                    android:textAlignment="center"
-                    android:textColor="@color/number_color_0002"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <!-- TODO - Handling the display of very large numbers
-                            beyond 10 digits, up-to 24 digits-->
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/best_score_value_text_view"
-                    android:layout_width="90dp"
-                    android:layout_height="36dp"
-                    android:gravity="center"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <!-- Lottie Animation Link = https://lottiefiles.com/6650-sparkles-burst -->
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/scores_layout_lottie"
-            android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            app:lottie_autoPlay="false"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/scores_merge"
-            app:lottie_repeatCount="2"
-            app:lottie_repeatMode="restart"
-            app:lottie_speed="1.25" />
-
-    </FrameLayout>
-
     <LinearLayout
-        android:id="@+id/normal_tools_linear_layout"
+        android:id="@+id/game_tools_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/tutorial_text_view"
         app:layout_constraintStart_toStartOf="parent"
@@ -170,124 +206,255 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginHorizontal="4dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:background="@drawable/rounded_corner_icons"
+            android:background="@drawable/click_game_tools"
             android:contentDescription="Pause Game"
             android:onClick="pauseClicked"
             android:padding="2dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/normal_tools_pause" />
+            app:srcCompat="@drawable/game_tools_pause" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/reset_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginHorizontal="4dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:background="@drawable/rounded_corner_icons"
+            android:background="@drawable/click_game_tools"
             android:contentDescription="Reset Game"
             android:onClick="resetClicked"
             android:padding="2dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/normal_tools_reset" />
+            app:srcCompat="@drawable/game_tools_reset" />
     </LinearLayout>
 
-    <!-- TODO -> Implement all the special tool features
-                and turn on the visibility of this layout.
-                Add android:layout_marginEnd="16dp" in the
-                following LinearLayout -->
-    <LinearLayout
-        android:id="@+id/special_tools_linear_layout"
+    <FrameLayout
+        android:id="@+id/tools_frame_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="invisible"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/tutorial_text_view"
-        app:layout_constraintEnd_toEndOf="@+id/scores_frame_layout"
-        app:layout_constraintStart_toStartOf="@+id/scores_frame_layout"
-        app:layout_constraintTop_toBottomOf="@+id/scores_frame_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal_linear_layout"
         app:layout_constraintVertical_weight="1">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/special_tools_undo_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner_icons"
-            android:onClick="specialToolsUndo"
-            android:padding="2dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/special_tools_undo" />
+        <LinearLayout
+            android:id="@+id/normal_tools_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/special_tools_change_value_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner_icons"
-            android:contentDescription="Undo Move"
-            android:onClick="specialToolsChangeValue"
-            android:padding="4dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/special_tools_change_value" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/special_tools_eliminate_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner_icons"
-            android:onClick="specialToolsEliminate"
-            android:padding="6dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/special_tools_eliminate" />
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/rounded_corner_tool_cost"
+                    android:orientation="horizontal"
+                    android:padding="1dp">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/undo_icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/rounded_corner_icons"
-        android:onClick="undoTool"
-        android:padding="2dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/special_tools_linear_layout"
-        app:layout_constraintEnd_toEndOf="@+id/special_tools_linear_layout"
-        app:layout_constraintStart_toStartOf="@+id/special_tools_linear_layout"
-        app:layout_constraintTop_toTopOf="@+id/special_tools_linear_layout"
-        app:layout_constraintVertical_weight="1"
-        app:srcCompat="@drawable/special_tools_undo" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginVertical="1dp"
+                        android:layout_marginHorizontal="2dp"
+                        android:scaleX="1.4"
+                        android:scaleY="1.4"
+                        app:srcCompat="@drawable/coin_symbol" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/normal_tools_undo_cost_game_activity_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginEnd="1dp"
+                        android:scrollHorizontally="false"
+                        android:text="125"
+                        android:textColor="@color/game_primary_background_color"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/normal_tools_undo_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/click_normal_tools"
+                    android:contentDescription="Undo Move"
+                    android:onClick="normalToolsUndo"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/normal_tools_undo" />
+
+            </LinearLayout>
+
+            <!-- TODO -> Implement this tool and set
+                         android:visibility to 'visible' -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/normal_tools_eliminate_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/click_normal_tools_temp"
+                android:contentDescription="Eliminate One Cell"
+                android:onClick="normalToolsEliminateCell"
+                android:padding="2dp"
+                android:scaleType="fitXY"
+                android:visibility="visible"
+                app:srcCompat="@drawable/question_mark_icon" />
+
+            <!-- TODO -> Implement this tool and set
+                         android:visibility to 'visible' -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/normal_tools_change_one_value_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/click_normal_tools_temp"
+                android:contentDescription="Change Value Of One Cell"
+                android:onClick="normalToolsChangeOneValue"
+                android:padding="2dp"
+                android:scaleType="fitXY"
+                android:visibility="visible"
+                app:srcCompat="@drawable/question_mark_icon" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/special_tools_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/special_tools_bomb_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/click_special_tools"
+                android:contentDescription="Use Bomb"
+                android:onClick="specialToolsBombArea"
+                android:padding="2dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/normal_tools_undo" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/special_tools_swap_two_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/click_special_tools"
+                android:contentDescription="Swap Two Cells"
+                android:onClick="specialToolsSwapTwoCells"
+                android:padding="6dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/normal_tools_eliminate" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/special_tools_eliminate_one_value_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/click_special_tools"
+                android:contentDescription="Eliminate One Value"
+                android:onClick="specialToolsEliminateOneValue"
+                android:padding="4dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/normal_tools_change_value" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tools_lottie_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/tools_lottie_start"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                app:lottie_rawRes="@raw/tools_transition_lottie" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/tools_lottie_middle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                app:lottie_rawRes="@raw/tools_transition_lottie" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/tools_lottie_right"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                app:lottie_rawRes="@raw/tools_transition_lottie" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- TODO -> In the later stages of development, remove this tutorial
+                 textview from layout and from code -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tutorial_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/game_primary_background_color"
         android:gravity="center"
+        android:scrollHorizontally="false"
         android:text=""
         android:textAlignment="center"
         android:textColor="@color/number_color_0002"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:background="@color/game_primary_background_color"
-        android:scrollHorizontally="false"
+        app:layout_constraintBottom_toTopOf="@+id/game_frame_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/undo_icon"
-        app:layout_constraintBottom_toTopOf="@+id/game_frame_layout"
-        app:layout_constraintVertical_weight="1"/>
+        app:layout_constraintTop_toBottomOf="@+id/tools_frame_layout"
+        app:layout_constraintVertical_weight="1" />
 
     <!-- The following attribute is used just ease the work with layout
          here in the xml file, and it is anyway overridden in the
-         GameLayoutProvider class:
+         com.example.gameside2048champs.GameLayoutProvider class:
          app:layout_constraintDimensionRatio="1:1" -->
     <FrameLayout
         android:id="@+id/game_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/sound_state_image_view"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintBottom_toTopOf="@id/game_activity_temp_view"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -299,20 +466,24 @@
 
     </FrameLayout>
 
-    <!-- TODO -> Implement game audio sound and turn on the
-                 visibility of the this icon -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/sound_state_image_view"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_margin="4dp"
-        android:onClick="changeSoundState"
-        android:scaleType="fitXY"
+    <View
+        android:id="@+id/game_activity_temp_view"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_frame_layout"
-        app:layout_constraintVertical_weight="1"
-        app:srcCompat="@drawable/sound_on" />
+        app:layout_constraintTop_toBottomOf="@id/game_frame_layout"
+        app:layout_constraintVertical_weight="1" />
+
+    <FrameLayout
+        android:id="@+id/game_activity_full_screen_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

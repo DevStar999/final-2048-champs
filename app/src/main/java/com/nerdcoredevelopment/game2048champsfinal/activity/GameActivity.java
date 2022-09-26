@@ -15,14 +15,15 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nerdcoredevelopment.game2048champsfinal.GameLayoutProvider;
@@ -30,6 +31,7 @@ import com.nerdcoredevelopment.game2048champsfinal.OnSwipeTouchListener;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.SwipeUtility;
 import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationUtility;
+import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingToolDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameOverDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GamePausedDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameResetDialog;
@@ -40,6 +42,7 @@ import com.nerdcoredevelopment.game2048champsfinal.enums.Direction;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameOverDialogOptions;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameStates;
+import com.nerdcoredevelopment.game2048champsfinal.fragment.ShopFragment;
 import com.nerdcoredevelopment.game2048champsfinal.manager.GameManager;
 import com.nerdcoredevelopment.game2048champsfinal.manager.UndoManager;
 
@@ -49,7 +52,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements
+        ShopFragment.OnShopFragmentInteractionListener {
     // Variable Attributes
     private SharedPreferences sharedPreferences;
     private Gson gson;
@@ -58,19 +62,22 @@ public class GameActivity extends AppCompatActivity {
     private SwipeUtility swipeUtility;
     private Queue<Direction> movesQueue;
     private boolean goalDone;
+    private int currentCoins;
+    private int normalToolsUndoCost;
+    private int currentScore;
+    private int bestScore;
     private boolean isCurrentScoreTheBest; // Flag to check if best score and current score displays have been merged
-    private boolean isSoundOn;
 
     // UI Elements
     /* Layouts */
-    private LinearLayout currentScoreLinearLayout;
-    private LinearLayout bestScoreLinearLayout;
     private ConstraintLayout rootGameConstraintLayout;
     /* Views */
+    private AppCompatTextView currentCoinsTextView;
     private AppCompatTextView currentScoreTextView;
     private AppCompatTextView bestScoreTextView;
     private AppCompatTextView goalTileTextView;
     private AppCompatTextView tutorialTextView;
+    private LottieAnimationView gridLottieView;
 
     private void initialiseVariableAttributes() {
         sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
@@ -81,47 +88,51 @@ public class GameActivity extends AppCompatActivity {
                 getIntent().getStringExtra("gameMode"));
         gameManager = new GameManager(GameActivity.this, currentGameMode);
         gameManager.setCurrentGameState(GameStates.values()[
-                sharedPreferences.getInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+                sharedPreferences.getInt("gameStateEnumIndex" + " " + currentGameMode.getMode()
                         + " " + currentGameMode.getDimensions(), 0)]);
         swipeUtility = new SwipeUtility(currentGameMode.getRows(), currentGameMode.getColumns());
         movesQueue = new ArrayDeque<>();
-        goalDone = sharedPreferences.getBoolean("GoalDone" + " " + currentGameMode.getMode()
+        goalDone = sharedPreferences.getBoolean("goalDone" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), false); // Keep default as 'false'
+        currentCoins = sharedPreferences.getInt("currentCoins", 2000);
+        normalToolsUndoCost = 125;
+        currentScore = sharedPreferences.getInt("currentScore" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), 0);
+        bestScore = sharedPreferences.getInt("bestScore" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), 0);
         isCurrentScoreTheBest = false;
-        isSoundOn = true;
     }
 
     private void initialiseLayouts() {
-        currentScoreLinearLayout = findViewById(R.id.current_score_linear_layout);
-        bestScoreLinearLayout = findViewById(R.id.best_score_linear_layout);
         rootGameConstraintLayout = findViewById(R.id.root_game_constraint_layout);
     }
 
     private void initialiseViews() {
+        currentCoinsTextView = findViewById(R.id.current_coins_game_activity_text_view);
+        currentCoinsTextView.setText(String.valueOf(currentCoins));
+
         currentScoreTextView = findViewById(R.id.current_score_value_text_view);
-        currentScoreTextView.setText(sharedPreferences.getString("CurrentScore" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), "0"));
-        gameManager.setCurrentScore(Integer.parseInt(currentScoreTextView.getText().toString()));
+        currentScoreTextView.setText(String.valueOf(currentScore));
+        gameManager.setCurrentScore(currentScore);
         gameManager.setHasGoalBeenCompleted(goalDone);
 
-        String jsonRetrieveBoard = sharedPreferences.getString("CurrentBoard" + " " + currentGameMode.getMode()
+        String jsonRetrieveBoard = sharedPreferences.getString("currentBoard" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getGameMatrix()));
         Type typeBoard = new TypeToken<List<List<Integer>>>(){}.getType();
         gameManager.setGameMatrix(gson.fromJson(jsonRetrieveBoard, typeBoard));
 
-        String jsonRetrieveUndoManager = sharedPreferences.getString("UndoManager" + " " + currentGameMode.getMode()
+        String jsonRetrieveUndoManager = sharedPreferences.getString("undoManager" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getUndoManager()));
         Type typeUndoManager = new TypeToken<UndoManager>(){}.getType();
         gameManager.setUndoManager(gson.fromJson(jsonRetrieveUndoManager, typeUndoManager));
 
         bestScoreTextView = findViewById(R.id.best_score_value_text_view);
-        bestScoreTextView.setText(sharedPreferences.getString("BestScore" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), "0"));
+        bestScoreTextView.setText(String.valueOf(bestScore));
         goalTileTextView = findViewById(R.id.goal_tile_text_view);
         if (gameManager.getCurrentGameState() == GameStates.GAME_OVER) {
-            updateScore("0");
+            updateScore(0);
         } else {
-            updateScore(currentScoreTextView.getText().toString());
+            updateScore(currentScore);
         }
 
         tutorialTextView = findViewById(R.id.tutorial_text_view);
@@ -150,6 +161,10 @@ public class GameActivity extends AppCompatActivity {
         goalTextView.setBackground(goalScoreGradientDrawable);
     }
 
+    private void initialiseViewsPostGameLayout() {
+        gridLottieView = findViewById(R.id.grid_lottie_view);
+    }
+
     private void initialise() {
         initialiseVariableAttributes();
         initialiseLayouts();
@@ -160,6 +175,7 @@ public class GameActivity extends AppCompatActivity {
         if (!gameManager.startGameIfGameClosedCorrectly()) { // Means game was not closed correctly
             resetGameAndStartIfFlagTrue(true);
         }
+        initialiseViewsPostGameLayout();
     }
 
     private void executeMove() {
@@ -194,14 +210,14 @@ public class GameActivity extends AppCompatActivity {
                 public void onTick(long millisUntilFinished) {
                     if (gameManager.isHasMoveBeenCompleted()) {
                         gameManager.updateGameState();
-                        updateScore(String.valueOf(gameManager.getCurrentScore()));
+                        updateScore(gameManager.getCurrentScore());
                         if (gameManager.isHasGoalBeenCompleted() && !goalDone) {
                             goalDone = true;
                             int greenTickEmojiUnicode = 0x2705;
                             goalTileTextView.setText(String.format("GOAL TILE %s",
                                     String.valueOf(toChars(greenTickEmojiUnicode))));
                             tutorialTextView.setText("Merge for higher tiles, SKY IS THE LIMIT");
-                            sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
+                            sharedPreferences.edit().putBoolean("goalDone" + " " + currentGameMode.getMode()
                                     + " " + currentGameMode.getDimensions(), goalDone).apply();
                             movesQueue.clear();
                             new GameWinDialog(GameActivity.this).show();
@@ -227,10 +243,9 @@ public class GameActivity extends AppCompatActivity {
                                             undoProcess();
                                         }
                                     } else {
-                                        undoProcess();
-                                        // TODO -> Do something more neat and clean instead of a Toast message
-                                        Toast.makeText(GameActivity.this,
-                                                "Last move has been undone", Toast.LENGTH_SHORT).show();
+                                        // If the user does not respond we will start a new game
+                                        // from our side
+                                        resetGameAndStartIfFlagTrue(true);
                                     }
                                 }
                             });
@@ -323,25 +338,21 @@ public class GameActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
-    private void updateScore(String currentScore) {
-        currentScoreTextView.setText(currentScore);
+    private void updateScore(int updatedCurrentScore) {
+        currentScore = updatedCurrentScore;
+        currentScoreTextView.setText(String.valueOf(currentScore));
 
-        if ((Integer.parseInt(currentScoreTextView.getText().toString())
-                >= Integer.parseInt(bestScoreTextView.getText().toString()))
-                && Integer.parseInt(currentScoreTextView.getText().toString()) > 0) {
-            bestScoreTextView.setText(currentScoreTextView.getText().toString());
-            sharedPreferences.edit().putString("BestScore" + " " + currentGameMode.getMode()
-                    + " " + currentGameMode.getDimensions(), bestScoreTextView.getText().toString()).apply();
+        if ((currentScore >= bestScore) && currentScore > 0) {
+            bestScore = currentScore;
+            bestScoreTextView.setText(String.valueOf(bestScore));
+            sharedPreferences.edit().putInt("bestScore" + " " + currentGameMode.getMode()
+                    + " " + currentGameMode.getDimensions(), bestScore).apply();
             if (!isCurrentScoreTheBest) {
                 isCurrentScoreTheBest = true;
-                AnimationUtility.mergeScoreDisplays(currentScoreLinearLayout, bestScoreLinearLayout,
-                        findViewById(R.id.scores_layout_lottie),
-                        getResources().getDisplayMetrics().density, 750);
             }
         } else {
             if (isCurrentScoreTheBest) {
                 isCurrentScoreTheBest = false;
-                AnimationUtility.splitScoreDisplays(currentScoreLinearLayout, bestScoreLinearLayout, 750);
             }
         }
     }
@@ -360,25 +371,25 @@ public class GameActivity extends AppCompatActivity {
 
     private void saveGameState() {
         // Saving the current state of the game to play later
-        sharedPreferences.edit().putInt("GameStateEnumIndex" + " " + currentGameMode.getMode()
+        sharedPreferences.edit().putInt("gameStateEnumIndex" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), gameManager.getCurrentGameState().ordinal()).apply();
-        sharedPreferences.edit().putString("CurrentScore" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), currentScoreTextView.getText().toString()).apply();
-        sharedPreferences.edit().putString("UndoManager" + " " + currentGameMode.getMode()
+        sharedPreferences.edit().putInt("currentScore" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), currentScore).apply();
+        sharedPreferences.edit().putString("undoManager" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getUndoManager())).apply();
-        sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
+        sharedPreferences.edit().putBoolean("goalDone" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), goalDone).apply();
         if (gameManager.getCurrentGameState() == GameStates.GAME_START) {
-            sharedPreferences.edit().putString("CurrentBoard" + " " + currentGameMode.getMode()
+            sharedPreferences.edit().putString("currentBoard" + " " + currentGameMode.getMode()
                     + " " + currentGameMode.getDimensions(), gson.toJson(getCopyOfGivenBoard(currentGameMode.getBlockCells()))).apply();
         } else {
-            sharedPreferences.edit().putString("CurrentBoard" + " " + currentGameMode.getMode()
+            sharedPreferences.edit().putString("currentBoard" + " " + currentGameMode.getMode()
                     + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getGameMatrix())).apply();
         }
     }
 
     public void resetGameAndStartIfFlagTrue(boolean flag) {
-        updateScore("0");
+        updateScore(0);
         gameManager = new GameManager(GameActivity.this, currentGameMode);
         goalDone = false;
         gameManager.setHasGoalBeenCompleted(false);
@@ -413,7 +424,13 @@ public class GameActivity extends AppCompatActivity {
     // For when the 'Back' button on the device is pressed
     @Override
     public void onBackPressed() {
-        setupGamePausedDialog();
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            // Back button was pressed from activity
+            setupGamePausedDialog();
+        } else {
+            // Back button was pressed from fragment
+            getSupportFragmentManager().popBackStack();
+        }
     }
 
     // For when the 'Home' button on the device is pressed
@@ -428,6 +445,28 @@ public class GameActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         saveGameState();
+    }
+
+    /**
+     * onClick listeners for purchasing coins are as follows
+     */
+    public void currentCoinsAddCoinsLayout(View view) {
+        openShopFragment();
+    }
+
+    public void currentCoinsAddCoinsButton(View view) {
+        openShopFragment();
+    }
+
+    private void openShopFragment() {
+        ShopFragment fragment = new ShopFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.game_activity_full_screen_fragment_container,
+                fragment, "SHOP_FRAGMENT").commit();
     }
 
     /**
@@ -451,27 +490,14 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    public void specialToolsUndo(View view) {
-        //Toast.makeText(this, "Undo Icon Clicked", Toast.LENGTH_SHORT).show();
-    }
-
-    public void specialToolsChangeValue(View view) {
-        //Toast.makeText(this, "Change Value Icon Clicked", Toast.LENGTH_SHORT).show();
-    }
-
-    public void specialToolsEliminate(View view) {
-        //Toast.makeText(this, "Eliminate Icon Clicked", Toast.LENGTH_SHORT).show();
-    }
-
-    private void updateScoreOnUndo(String currentScore) {
-        currentScoreTextView.setText(currentScore);
+    private void updateScoreOnUndo(int updatedCurrentScore) {
+        currentScore = updatedCurrentScore;
+        currentScoreTextView.setText(String.valueOf(currentScore));
 
         // Making a check if the current score and the best scores need to be split or not
-        if ((Integer.parseInt(currentScoreTextView.getText().toString())
-                < Integer.parseInt(bestScoreTextView.getText().toString()))) {
+        if (currentScore < bestScore) {
             if (isCurrentScoreTheBest) {
                 isCurrentScoreTheBest = false;
-                AnimationUtility.splitScoreDisplays(currentScoreLinearLayout, bestScoreLinearLayout, 750);
             }
         }
 
@@ -487,7 +513,7 @@ public class GameActivity extends AppCompatActivity {
         goalDone = false;
         goalTileTextView.setText("GOAL TILE");
         tutorialTextView.setText("Merge the tiles to form the GOAL TILE!");
-        sharedPreferences.edit().putBoolean("GoalDone" + " " + currentGameMode.getMode()
+        sharedPreferences.edit().putBoolean("goalDone" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), goalDone).apply();
     }
 
@@ -513,21 +539,59 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void undoTool(View view) {
+    public void normalToolsUndo(View view) {
         undoProcess();
+    }
+
+    public void normalToolsEliminateCell(View view) {
+        new ArrivingToolDialog(this).show();
+    }
+
+    public void normalToolsChangeOneValue(View view) {
+        new ArrivingToolDialog(this).show();
+    }
+
+    public void specialToolsBombArea(View view) {
+        // Toast.makeText(this, "Special Tool Bomb", Toast.LENGTH_SHORT).show();
+    }
+
+    public void specialToolsSwapTwoCells(View view) {
+        // Toast.makeText(this, "Special Tool Swap 2 Cells", Toast.LENGTH_SHORT).show();
+    }
+
+    public void specialToolsEliminateOneValue(View view) {
+        // Toast.makeText(this, "Special Tool Eliminate 1 Value", Toast.LENGTH_SHORT).show();
     }
 
     private void undoProcess() {
         if (!gameManager.getUndoManager().isUndoUsed()) { // Undo was not used, so using it now
-            gameManager.setCurrentGameState(GameStates.GAME_ONGOING);
-            movesQueue.clear();
-            Pair<Integer, List<List<Integer>>> previousStateInfo = gameManager.getUndoManager().undoToPreviousState();
-            // Revert the state of the board to the previous state
-            gameManager.updateGameMatrixPostUndo(previousStateInfo.second);
-            updateBoardOnUndo();
-            // Revert score to previous state score
-            gameManager.setCurrentScore(previousStateInfo.first);
-            updateScoreOnUndo(String.valueOf(gameManager.getCurrentScore()));
+            if (currentCoins >= normalToolsUndoCost) {
+                AnimationUtility.normalToolsUndo(gridLottieView, rootGameConstraintLayout);
+                new CountDownTimer(1000, 10000) {
+                    @Override
+                    public void onTick(long l) {
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        gameManager.setCurrentGameState(GameStates.GAME_ONGOING);
+                        movesQueue.clear();
+                        Pair<Integer, List<List<Integer>>> previousStateInfo = gameManager.getUndoManager().undoToPreviousState();
+                        // Revert the state of the board to the previous state
+                        gameManager.updateGameMatrixPostUndo(previousStateInfo.second);
+                        updateBoardOnUndo();
+                        // Revert score to previous state score
+                        gameManager.setCurrentScore(previousStateInfo.first);
+                        updateScoreOnUndo(gameManager.getCurrentScore());
+                        // Update the reduced number of coins
+                        currentCoins -= normalToolsUndoCost;
+                        sharedPreferences.edit().putInt("currentCoins", currentCoins).apply();
+                        currentCoinsTextView.setText(String.valueOf(currentCoins));
+                    }
+                }.start();
+            } else {
+                openShopFragment();
+            }
         } else { // Undo was used, so we need to show a message here
             String undoMessageText = (gameManager.getCurrentGameState() == GameStates.GAME_ONGOING) ?
                     "UNDO WAS USED ALREADY" : "NO MOVE HAS BEEN MADE YET";
@@ -535,17 +599,34 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void changeSoundState(View view) {
-        /*
-        if (isSoundOn) {
-            isSoundOn = false;
-            ((AppCompatImageView) view).setImageDrawable(getDrawable(R.drawable.sound_off));
-            Toast.makeText(this, "Sound Turned OFF Clicked", Toast.LENGTH_SHORT).show();
-        } else {
-            isSoundOn = true;
-            ((AppCompatImageView) view).setImageDrawable(getDrawable(R.drawable.sound_on));
-            Toast.makeText(this, "Sound Turned ON Clicked", Toast.LENGTH_SHORT).show();
+    @Override
+    public void onShopFragmentInteractionBackClicked() {
+        onBackPressed();
+        if (gameManager.getCurrentGameState() == GameStates.GAME_OVER) {
+            GameOverDialog gameOverDialog = new GameOverDialog(GameActivity.this);
+            gameOverDialog.show();
+            gameOverDialog.setGameOverDialogListener(new GameOverDialog.GameOverDialogListener() {
+                @Override
+                public void getResponseOfOverDialog(GameOverDialogOptions optionSelected,
+                                                    boolean didUserRespond) {
+                    if (didUserRespond) {
+                        if (optionSelected == GameOverDialogOptions.MAIN_MENU) {
+                            resetGameAndStartIfFlagTrue(false);
+
+                            Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else if (optionSelected == GameOverDialogOptions.PLAY_AGAIN) {
+                            resetGameAndStartIfFlagTrue(true);
+                        } else if (optionSelected == GameOverDialogOptions.UNDO_LAST_MOVE) {
+                            undoProcess();
+                        }
+                    } else {
+                        // If the user does not respond we will start a new game from our side
+                        resetGameAndStartIfFlagTrue(true);
+                    }
+                }
+            });
         }
-        */
     }
 }
