@@ -445,9 +445,9 @@
         app:layout_constraintTop_toBottomOf="@+id/tools_frame_layout"
         app:layout_constraintVertical_weight="1" />
 
-    <!-- The following attribute is used just ease the work with layout
+    <!-- The following attribute is used just to ease the work with layout
          here in the xml file, and it is anyway overridden in the
-         com.example.gameside2048champs.GameLayoutProvider class:
+         com.nerdcoredevelopment.game2048champsfinal.GameLayoutProvider class:
          app:layout_constraintDimensionRatio="1:1" -->
     <FrameLayout
         android:id="@+id/game_frame_layout"
