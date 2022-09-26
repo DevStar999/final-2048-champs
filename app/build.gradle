@@ -48,7 +48,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
@@ -75,7 +75,7 @@ dependencies {
     // For Google Play Games Services
     implementation "com.google.android.gms:play-services-games-v2:17.0.0"
 
-    // For In-App Review from the user
+    // For In-App Review and In-App Updates from the user
     implementation "com.google.android.play:core:1.10.3"
 
     // For Auto-Image Slider
