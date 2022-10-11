@@ -27,7 +27,7 @@ import com.nerdcoredevelopment.game2048champsfinal.dialogs.RateUsPromptDialog;
 public class SettingsFragment extends Fragment {
     private final static String FACEBOOK_URL = "http://www.facebook.com/Nerdcore-Development-109351035183956";
     private final static String FACEBOOK_PAGE_ID = "Nerdcore-Development-109351035183956";
-    private final static String INSTAGRAM_URL = "http://www.instagram.com/nerdcoredev";
+    private final static String INSTAGRAM_USERNAME = "nerdcoredev";
     private final static String TWITTER_USERNAME = "NerdcoreDev";
     private final static String DEVELOPER_MAIL_ID = "nerdcoredevelopment@gmail.com";
     private final static String FEEDBACK_MAIL_SUBJECT = "Feedback - 2048 Champs";
@@ -208,9 +208,7 @@ public class SettingsFragment extends Fragment {
         instagramLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = SettingsFragment.INSTAGRAM_URL
-                        .substring(SettingsFragment.INSTAGRAM_URL.lastIndexOf("/") + 1);
-                Uri uri = Uri.parse("http://instagram.com/_u/" + username);
+                Uri uri = Uri.parse("http://instagram.com/_u/" + INSTAGRAM_USERNAME);
 
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 intent.setPackage("com.instagram.android");
@@ -219,7 +217,7 @@ public class SettingsFragment extends Fragment {
                     startActivity(intent);
                 } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://instagram.com/" + username)));
+                            Uri.parse("http://instagram.com/" + INSTAGRAM_USERNAME)));
                 }
             }
         });
@@ -234,7 +232,7 @@ public class SettingsFragment extends Fragment {
                     startActivity(intent);
                 } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("https://twitter.com/#!/" + TWITTER_USERNAME)));
+                            Uri.parse("http://twitter.com/#!/" + TWITTER_USERNAME)));
                 }
             }
         });
