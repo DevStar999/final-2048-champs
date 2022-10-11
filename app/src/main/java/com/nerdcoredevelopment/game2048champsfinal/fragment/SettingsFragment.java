@@ -198,11 +198,12 @@ public class SettingsFragment extends Fragment {
                         } else { // older versions of fb app
                             uriFacebook = "fb://page/" + FACEBOOK_PAGE_ID;
                         }
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriFacebook)));
                     }
                 } catch (Exception e) {
                     uriFacebook = FACEBOOK_URL; // normal web url
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriFacebook)));
                 }
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriFacebook)));
             }
         });
         instagramLinearLayout.setOnClickListener(new View.OnClickListener() {
