@@ -25,9 +25,9 @@ import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.RateUsPromptDialog;
 
 public class SettingsFragment extends Fragment {
-    private final static String FACEBOOK_URL = "www.facebook.com/Nerdcore-Development-109351035183956";
+    private final static String FACEBOOK_URL = "http://www.facebook.com/Nerdcore-Development-109351035183956";
     private final static String FACEBOOK_PAGE_ID = "Nerdcore-Development-109351035183956";
-    private final static String INSTAGRAM_URL = "www.instagram.com/nerdcoredev";
+    private final static String INSTAGRAM_URL = "http://www.instagram.com/nerdcoredev";
     private final static String TWITTER_USERNAME = "NerdcoreDev";
     private final static String DEVELOPER_MAIL_ID = "nerdcoredevelopment@gmail.com";
     private final static String FEEDBACK_MAIL_SUBJECT = "Feedback - 2048 Champs";
