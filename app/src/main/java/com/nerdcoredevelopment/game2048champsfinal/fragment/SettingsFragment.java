@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,50 +59,6 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    private String getFacebookPageURL(Context context) {
-        PackageManager packageManager = context.getPackageManager();
-        try {
-            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
-            if (versionCode >= 3002850) { //newer versions of fb app
-                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
-            } else { //older versions of fb app
-                return "fb://page/" + FACEBOOK_PAGE_ID;
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            return FACEBOOK_URL; //normal web url
-        }
-    }
-
-    private Intent instagramProfileIntent(PackageManager packageManager) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        try {
-            if (packageManager.getPackageInfo("com.instagram.android", 0) != null) {
-                String username = SettingsFragment.INSTAGRAM_URL
-                        .substring(SettingsFragment.INSTAGRAM_URL.lastIndexOf("/") + 1);
-                intent.setData(Uri.parse("http://instagram.com/_u/" + username));
-                intent.setPackage("com.instagram.android");
-                return intent;
-            }
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-        intent.setData(Uri.parse(SettingsFragment.INSTAGRAM_URL));
-        return intent;
-    }
-
-    private Intent twitterProfileIntent(PackageManager packageManager) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        try {
-            if (packageManager.getPackageInfo("com.twitter.android", 0) != null) {
-                intent.setData(Uri.parse("twitter://user?screen_name=" + TWITTER_USERNAME));
-                intent.setPackage("com.twitter.android");
-                return intent;
-            }
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-        intent.setData(Uri.parse("https://twitter.com/#!/" + TWITTER_USERNAME));
-        return intent;
     }
 
     private void settingOnClickListeners() {
@@ -229,24 +186,56 @@ public class SettingsFragment extends Fragment {
         facebookLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-                String facebookUrl = getFacebookPageURL(context);
-                browserIntent.setData(Uri.parse(facebookUrl));
-                startActivity(browserIntent);
+                String uriFacebook = "";
+                PackageManager packageManager = context.getPackageManager();
+                try {
+                    ApplicationInfo applicationInfo = packageManager.getApplicationInfo("com.facebook.katana", 0);
+
+                    if (applicationInfo.enabled) {
+                        int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+                        if (versionCode >= 3002850) { // newer versions of fb app
+                            uriFacebook = "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+                        } else { // older versions of fb app
+                            uriFacebook = "fb://page/" + FACEBOOK_PAGE_ID;
+                        }
+                    }
+                } catch (Exception e) {
+                    uriFacebook = FACEBOOK_URL; // normal web url
+                }
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriFacebook)));
             }
         });
         instagramLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = instagramProfileIntent(context.getPackageManager());
-                startActivity(browserIntent);
+                String username = SettingsFragment.INSTAGRAM_URL
+                        .substring(SettingsFragment.INSTAGRAM_URL.lastIndexOf("/") + 1);
+                Uri uri = Uri.parse("http://instagram.com/_u/" + username);
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                intent.setPackage("com.instagram.android");
+
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://instagram.com/" + username)));
+                }
             }
         });
         twitterLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = twitterProfileIntent(context.getPackageManager());
-                startActivity(browserIntent);
+                Uri uri = Uri.parse("twitter://user?screen_name=" + TWITTER_USERNAME);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                intent.setPackage("com.twitter.android");
+
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://twitter.com/#!/" + TWITTER_USERNAME)));
+                }
             }
         });
         privacyLinearLayout.setOnClickListener(new View.OnClickListener() {
