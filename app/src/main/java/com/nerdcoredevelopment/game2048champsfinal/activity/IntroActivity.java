@@ -20,7 +20,6 @@ import com.nerdcoredevelopment.game2048champsfinal.R;
            testing purposes. Also ensure to use the Actual id just before creating a
            release AAB or APK as then we want to have an actual Admob App Id
 */
-// TODO -> Link app on AdMob to Firebase
 public class IntroActivity extends AppCompatActivity {
 
     @SuppressLint("SourceLockedOrientationActivity")
