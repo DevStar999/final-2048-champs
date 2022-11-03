@@ -33,8 +33,8 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.ShopFragment;
            in the SettingsFragment
 */
 // TODO -> Add a 'Check Updates' button for In-app updates in the SettingsFragment
-/* TODO -> Multiple quick dialog open clicks cause the dialog to open multiple times, we have to
-           find a way to avoid that
+/* TODO -> Multiple quick dialog OR activity open clicks cause the dialog OR activity to open multiple times, we have to
+           find a way to avoid that. Basically wherever a new page is opening there we need to stop this from happening
 */
 // TODO -> Remove smaller sized game modes as we get close to the publicity launch
 /* TODO -> Even with the current arrangement whenever a dialog opens up the status bar at the top
