@@ -45,6 +45,9 @@ import com.nerdcoredevelopment.game2048champsfinal.fragment.ShopFragment;
 // TODO -> Implement the In-app review feature working properly with quotas
 // TODO -> Click effect for NavigationFragment buttons as well
 // TODO -> Remove this TODO whenever suitable: Temp TODO for a new release version
+/* TODO -> When it will be time to implement App Open Ad, change logo transition time to 3 seconds and splash screen time
+           to 4 seconds
+ */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
