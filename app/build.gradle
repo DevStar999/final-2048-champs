@@ -84,10 +84,6 @@ dependencies {
     // For AdMob
     implementation 'com.google.android.gms:play-services-ads:21.3.0'
 
-    // For In-App Purchases, Subscriptions etc. (noinspection GradleDependency)
-    implementation 'com.android.billingclient:billing:4.0.0'
-
-    // For Volley
-    def volley_version = "1.2.1"
-    implementation "com.android.volley:volley:$volley_version"
+    // For Qonversion
+    implementation 'io.qonversion.android.sdk:sdk:3.4.1'
 }
