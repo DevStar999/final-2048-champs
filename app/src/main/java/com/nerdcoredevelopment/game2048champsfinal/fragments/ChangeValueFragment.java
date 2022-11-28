@@ -100,6 +100,7 @@ public class ChangeValueFragment extends Fragment {
         valueOptionSelectionImageView.setVisibility(View.VISIBLE);
         valueOptionSelectionImageView.setBackgroundResource(R.drawable.change_value_fragment_selection_background);
         valueOptionSelectionImageView.setImageResource(R.drawable.change_value_options_locked);
+        valueOptionSelectionImageView.setClickable(true); // To avoid click from going through this image view on the option
 
         optionFrameLayout.addView(valueOptionTextView);
         valueOptionTextViews.add(valueOptionTextView);
