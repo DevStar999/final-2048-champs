@@ -7,6 +7,7 @@ import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.util.Pair;
 import android.view.View;
 import android.widget.GridLayout;
 
@@ -68,7 +69,7 @@ public class GameManager {
         }
     }
 
-    private void addNewValues(int numberOfCellsToAdd) {
+    public void addNewValues(int numberOfCellsToAdd, List<List<Integer>> givenBoard) {
         // Assigning some random start values to play with at start
         Random random = new Random();
         for (int currentCell = 0; currentCell < numberOfCellsToAdd; currentCell++) {
@@ -78,8 +79,8 @@ public class GameManager {
                 randomRow = random.nextInt(currentGameMode.getRows());
                 randomColumn = random.nextInt(currentGameMode.getColumns());
             }
-            while (gameMatrix.get(randomRow).get(randomColumn) != 0);
-            gameMatrix.get(randomRow).set(randomColumn, randomStartValue);
+            while (givenBoard.get(randomRow).get(randomColumn) != 0);
+            givenBoard.get(randomRow).set(randomColumn, randomStartValue);
         }
     }
 
@@ -102,7 +103,7 @@ public class GameManager {
 
         if (currentGameState == GameStates.GAME_START) {
             // Adding 2 new random values to the gameMatrix, if game has just started
-            addNewValues(2);
+            addNewValues(2, gameMatrix);
         }
 
         // Updating the board in layout as per the values
@@ -141,6 +142,30 @@ public class GameManager {
         undoManager.saveStatePostMove(currentScore, shallowCopyGameMatrix);
     }
 
+    public int findGameTilesCurrentlyOnBoard(List<List<Integer>> givenBoard) {
+        int gameTilesCount = 0;
+        for (int row = 0; row < givenBoard.size(); row++) {
+            for (int column = 0; column < givenBoard.get(row).size(); column++) {
+                if (givenBoard.get(row).get(column) != 0 && givenBoard.get(row).get(column) != -1) {
+                    gameTilesCount++;
+                }
+            }
+        }
+        return gameTilesCount;
+    }
+
+    public List<Pair<Integer, Integer>> giveAllTilesPositionsOfGivenValue(List<List<Integer>> givenBoard, int targetValue) {
+        List<Pair<Integer, Integer>> targetValueTilesPositions = new ArrayList<>();
+        for (int row = 0; row < givenBoard.size(); row++) {
+            for (int column = 0; column < givenBoard.get(row).size(); column++) {
+                if (givenBoard.get(row).get(column).equals(targetValue)) {
+                    targetValueTilesPositions.add(new Pair<>(row, column));
+                }
+            }
+        }
+        return targetValueTilesPositions;
+    }
+
     public void updateGameMatrixPostUndo(List<List<Integer>> previousGameState) {
         for (int row = 0; row < currentGameMode.getRows(); row++) {
             for (int column = 0; column < currentGameMode.getColumns(); column++) {
@@ -151,7 +176,7 @@ public class GameManager {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void addNewRandomValuePostMove(List<List<CellTransitionInfoMatrix>> ctiMatrix) {
-        addNewValues(1);
+        addNewValues(1, gameMatrix);
 
         currentScore += moveScore;
         moveScore = 0;
