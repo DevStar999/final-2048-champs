@@ -6,9 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
-    <!-- TODO -> Change splash theme to original theme and get it to work properly (Refer GameSide 2048 Champs) -->
-    <!-- TODO -> Add the MyApplication class reference here (Refer Practise 2048 Champs Project) -->
     <application
+        android:name="com.nerdcoredevelopment.game2048champsfinal.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/SplashTheme"
+        android:theme="@style/Theme.2048Champs"
         tools:targetApi="32">
         <!-- Actual Admob App Id: ca-app-pub-4247468904518611~7012519655 -->
         <meta-data
