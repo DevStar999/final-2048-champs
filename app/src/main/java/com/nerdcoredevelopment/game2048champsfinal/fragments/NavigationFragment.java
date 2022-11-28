@@ -1,4 +1,4 @@
-package com.nerdcoredevelopment.game2048champsfinal.fragment;
+package com.nerdcoredevelopment.game2048champsfinal.fragments;
 
 import android.content.Context;
 import android.os.Bundle;

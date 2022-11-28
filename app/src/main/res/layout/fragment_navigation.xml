@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".fragment.NavigationFragment">
+    tools:context=".fragments.NavigationFragment">
 
     <FrameLayout
         android:id="@+id/fragment_navigation_pregame_frame_layout"

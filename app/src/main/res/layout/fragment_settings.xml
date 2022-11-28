@@ -7,7 +7,7 @@
     android:background="@drawable/background_with_black_film"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".fragment.SettingsFragment">
+    tools:context=".fragments.SettingsFragment">
 
     <FrameLayout
         android:id="@+id/settings_fragment_title_frame_layout"

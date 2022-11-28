@@ -7,7 +7,7 @@
     android:background="@color/game_primary_background_color"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".fragment.BlockDesignFragment">
+    tools:context=".fragments.BlockDesignFragment">
 
     <FrameLayout
         android:id="@+id/block_design_fragment_title_frame_layout"

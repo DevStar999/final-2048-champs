@@ -43,7 +43,7 @@ import com.nerdcoredevelopment.game2048champsfinal.enums.Direction;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameOverDialogOptions;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameStates;
-import com.nerdcoredevelopment.game2048champsfinal.fragment.ShopFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.ShopFragment;
 import com.nerdcoredevelopment.game2048champsfinal.manager.GameManager;
 import com.nerdcoredevelopment.game2048champsfinal.manager.UndoManager;
 

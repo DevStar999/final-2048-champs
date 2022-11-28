@@ -14,16 +14,16 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.nerdcoredevelopment.game2048champsfinal.fragment.AnnouncementsFragment;
-import com.nerdcoredevelopment.game2048champsfinal.fragment.BlockDesignFragment;
-import com.nerdcoredevelopment.game2048champsfinal.fragment.LogoLottieFragment;
-import com.nerdcoredevelopment.game2048champsfinal.fragment.NavigationFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.AnnouncementsFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.BlockDesignFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.LogoLottieFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.NavigationFragment;
 import com.nerdcoredevelopment.game2048champsfinal.R;
-import com.nerdcoredevelopment.game2048champsfinal.fragment.SettingsFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.SettingsFragment;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingFeatureDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameExitDialog;
-import com.nerdcoredevelopment.game2048champsfinal.fragment.PreGameFragment;
-import com.nerdcoredevelopment.game2048champsfinal.fragment.ShopFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.PreGameFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.ShopFragment;
 
 /* TODO -> Look into Animated Gradient Background (Something like the Instagram start screen)
            Resource Link -> https://www.youtube.com/watch?v=x_DXXGvyfh8
