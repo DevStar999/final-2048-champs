@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
+    <!-- TODO -> Change splash theme to original theme and get it to work properly (Refer GameSide 2048 Champs) -->
+    <!-- TODO -> Add the MyApplication class reference here (Refer Practise 2048 Champs Project) -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
