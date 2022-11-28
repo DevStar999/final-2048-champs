@@ -54,7 +54,11 @@ import java.util.List;
 // TODO -> Remove this TODO whenever suitable: Temp TODO for a new release version
 /* TODO -> When it will be time to implement App Open Ad, change logo transition time to 3 seconds and splash screen time
            to 4 seconds
- */
+*/
+/* TODO -> Complete the following changes related to tools -
+           (a) Make the tools transition faster
+           (b) The final state of the tools fragment look should have similar look in terms of description text
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
