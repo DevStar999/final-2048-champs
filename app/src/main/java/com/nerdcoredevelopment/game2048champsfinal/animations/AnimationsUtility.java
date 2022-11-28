@@ -19,7 +19,7 @@ import com.nerdcoredevelopment.game2048champsfinal.enums.GameLayoutProperties;
 
 import java.util.List;
 
-public class AnimationUtility {
+public class AnimationsUtility {
     public static void gamePreviewShrinkAnimation(LottieAnimationView rotatingLightView, AppCompatImageView gameImage,
                                                   AppCompatImageView modeLeft, AppCompatImageView modeRight,
                                                   AppCompatImageView sizeLeft, AppCompatImageView sizeRight,

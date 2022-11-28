@@ -17,7 +17,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationUtility;
+import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 
 public class SwapTilesFragment extends Fragment {
@@ -90,7 +90,7 @@ public class SwapTilesFragment extends Fragment {
             public void onTick(long l) {}
             @Override
             public void onFinish() {
-                AnimationUtility.toolLottieEmergeAnimation(swapTilesPreviewLottie, 575);
+                AnimationsUtility.toolLottieEmergeAnimation(swapTilesPreviewLottie, 575);
                 postFragmentSetupTimer.start();
             }
         }.start();
@@ -120,7 +120,7 @@ public class SwapTilesFragment extends Fragment {
         // 2nd set of events is as follows - Setting the selection animation for the first swap tile
         this.firstSwapTilePosition = new Pair<>(firstSwapTilePosition.first, firstSwapTilePosition.second);
         this.firstSwapTileLottie = firstSwapTileLottie;
-        AnimationUtility.specialToolsSwapTilesFirstClickSelectionSetup(this.firstSwapTileLottie);
+        AnimationsUtility.specialToolsSwapTilesFirstClickSelectionSetup(this.firstSwapTileLottie);
         this.firstSwapTileLottie.playAnimation();
     }
 
@@ -163,8 +163,8 @@ public class SwapTilesFragment extends Fragment {
                 gameCellLottieLayout.setVisibility(View.VISIBLE);
 
                 // 5th set of events is as follows
-                AnimationUtility.specialToolsSwapTilesSwapTileSetup(SwapTilesFragment.this.firstSwapTileLottie);
-                AnimationUtility.specialToolsSwapTilesSwapTileSetup(SwapTilesFragment.this.secondSwapTileLottie);
+                AnimationsUtility.specialToolsSwapTilesSwapTileSetup(SwapTilesFragment.this.firstSwapTileLottie);
+                AnimationsUtility.specialToolsSwapTilesSwapTileSetup(SwapTilesFragment.this.secondSwapTileLottie);
                 SwapTilesFragment.this.secondSwapTileLottie.removeAllAnimatorListeners();
                 SwapTilesFragment.this.secondSwapTileLottie.addAnimatorListener(swapTilesLottieSwapAnimatorListener);
                 SwapTilesFragment.this.firstSwapTileLottie.playAnimation();
@@ -185,7 +185,7 @@ public class SwapTilesFragment extends Fragment {
                 gameCellLottieLayout.setVisibility(View.GONE);
 
                 // 4th set of events is as follows
-                AnimationUtility.specialToolsSwapTilesGridSetup(gridLottieView);
+                AnimationsUtility.specialToolsSwapTilesGridSetup(gridLottieView);
                 gridLottieView.addAnimatorListener(gridLottieAnimatorListener);
                 gridLottieView.playAnimation();
 
@@ -221,8 +221,8 @@ public class SwapTilesFragment extends Fragment {
                 SwapTilesFragment.this.secondSwapTileLottie.pauseAnimation();
 
                 // 3rd set of events is as follows
-                AnimationUtility.specialToolsSwapTilesSecondClickSecondSelectionSetup(SwapTilesFragment.this.firstSwapTileLottie);
-                AnimationUtility.specialToolsSwapTilesSecondClickSecondSelectionSetup(SwapTilesFragment.this.secondSwapTileLottie);
+                AnimationsUtility.specialToolsSwapTilesSecondClickSecondSelectionSetup(SwapTilesFragment.this.firstSwapTileLottie);
+                AnimationsUtility.specialToolsSwapTilesSecondClickSecondSelectionSetup(SwapTilesFragment.this.secondSwapTileLottie);
                 SwapTilesFragment.this.secondSwapTileLottie.removeAllAnimatorListeners();
                 SwapTilesFragment.this.secondSwapTileLottie.addAnimatorListener(swapTilesLottieSecondSelectionAnimatorListener);
                 SwapTilesFragment.this.firstSwapTileLottie.playAnimation();
@@ -239,8 +239,8 @@ public class SwapTilesFragment extends Fragment {
         this.firstSwapTileLottie.pauseAnimation();
         this.secondSwapTilePosition = new Pair<>(secondSwapTilePosition.first, secondSwapTilePosition.second);
         this.secondSwapTileLottie = secondSwapTileLottie;
-        AnimationUtility.specialToolsSwapTilesSecondClickFirstSelectionSetup(this.firstSwapTileLottie);
-        AnimationUtility.specialToolsSwapTilesSecondClickFirstSelectionSetup(this.secondSwapTileLottie);
+        AnimationsUtility.specialToolsSwapTilesSecondClickFirstSelectionSetup(this.firstSwapTileLottie);
+        AnimationsUtility.specialToolsSwapTilesSecondClickFirstSelectionSetup(this.secondSwapTileLottie);
         this.secondSwapTileLottie.addAnimatorListener(swapTilesLottieFirstSelectionAnimatorListener);
         this.firstSwapTileLottie.playAnimation(); this.secondSwapTileLottie.playAnimation();
     }

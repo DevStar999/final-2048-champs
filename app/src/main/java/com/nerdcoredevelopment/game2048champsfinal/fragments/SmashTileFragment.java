@@ -17,7 +17,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationUtility;
+import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 
 public class SmashTileFragment extends Fragment {
@@ -82,7 +82,7 @@ public class SmashTileFragment extends Fragment {
             public void onTick(long l) {}
             @Override
             public void onFinish() {
-                AnimationUtility.toolLottieEmergeAnimation(smashTilePreviewLottie, 575);
+                AnimationsUtility.toolLottieEmergeAnimation(smashTilePreviewLottie, 575);
                 postFragmentSetupTimer.start();
             }
         }.start();
@@ -138,7 +138,7 @@ public class SmashTileFragment extends Fragment {
                 gameCellLottieLayout.setVisibility(View.VISIBLE);
 
                 // 4th set of events is as follows
-                AnimationUtility.standardToolsSmashTileTargetTileSetup(individualTileLottie);
+                AnimationsUtility.standardToolsSmashTileTargetTileSetup(individualTileLottie);
                 individualTileLottie.removeAllAnimatorListeners();
                 individualTileLottie.addAnimatorListener(individualTileLottieSmashAnimatorListener);
                 individualTileLottie.playAnimation();
@@ -161,7 +161,7 @@ public class SmashTileFragment extends Fragment {
                 gameCellLottieLayout.setVisibility(View.GONE);
 
                 // 3rd set of events is as follows
-                AnimationUtility.standardToolsSmashTileGridSetup(gridLottieView);
+                AnimationsUtility.standardToolsSmashTileGridSetup(gridLottieView);
                 gridLottieView.addAnimatorListener(gridLottieAnimatorListener);
                 gridLottieView.playAnimation();
             }
@@ -172,7 +172,7 @@ public class SmashTileFragment extends Fragment {
         };
 
         // 2nd set of events is as follows
-        AnimationUtility.standardToolsSmashTileTargetTileSelectionSetup(individualTileLottie);
+        AnimationsUtility.standardToolsSmashTileTargetTileSelectionSetup(individualTileLottie);
         individualTileLottie.addAnimatorListener(individualTileLottieSelectionAnimatorListener);
         individualTileLottie.playAnimation();
     }

@@ -37,7 +37,7 @@ import com.nerdcoredevelopment.game2048champsfinal.GameLayoutProvider;
 import com.nerdcoredevelopment.game2048champsfinal.OnSwipeTouchListener;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.SwipeUtility;
-import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationUtility;
+import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingToolDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameOverDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GamePausedDialog;
@@ -691,7 +691,7 @@ public class GameActivity extends AppCompatActivity implements
                     CellValues cellValueEnum = CellValues.getCellValueEnum(value);
                     cellValueEnum.setCellValue(value);
 
-                    AnimationUtility.undoResetState(textView, cellValueEnum.getCellValue(),
+                    AnimationsUtility.undoResetState(textView, cellValueEnum.getCellValue(),
                             getResources().getColor(cellValueEnum.getNumberColorResourceId()),
                             getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                             currentGameMode.getGameLayoutProperties());
@@ -786,7 +786,7 @@ public class GameActivity extends AppCompatActivity implements
         movesQueue.clear();
         if (!gameManager.getUndoManager().isUndoUsed()) { // Undo was not used, so using it now
             if (currentCoins >= toolsCostMap.get("standardToolsUndoCost")) {
-                AnimationUtility.standardToolsUndo(gridLottieView, rootGameConstraintLayout);
+                AnimationsUtility.standardToolsUndo(gridLottieView, rootGameConstraintLayout);
                 new CountDownTimer(1000, 10000) {
                     @Override
                     public void onTick(long l) {
@@ -951,7 +951,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             SmashTileFragment fragment = new SmashTileFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -988,7 +988,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             ChangeValueFragment fragment = new ChangeValueFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -1025,7 +1025,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             SwapTilesFragment fragment = new SwapTilesFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -1062,7 +1062,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             EliminateValueFragment fragment = new EliminateValueFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -1099,7 +1099,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             DestroyAreaFragment fragment = new DestroyAreaFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -1185,7 +1185,7 @@ public class GameActivity extends AppCompatActivity implements
                         AppCompatTextView textView = rootGameConstraintLayout.findViewWithTag("gameCell" + row + column);
                         CellValues cellValueEnum = CellValues.getCellValueEnum(copyOfCurrentBoard.get(row).get(column));
                         cellValueEnum.setCellValue(copyOfCurrentBoard.get(row).get(column));
-                        AnimationUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
+                        AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
                                 getResources().getColor(cellValueEnum.getNumberColorResourceId()),
                                 getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                                 addNewRandomCellDuration, 500, currentGameMode.getGameLayoutProperties());
@@ -1230,7 +1230,7 @@ public class GameActivity extends AppCompatActivity implements
         CellValues cellValueEnumFirstPosition = CellValues.getCellValueEnum(newValue);
         cellValueEnumFirstPosition.setCellValue(newValue);
         // Executing the pop up animation for the chosen tile to change value
-        AnimationUtility.executePopUpAnimation(changeValueTilePositionTextView, cellValueEnumFirstPosition.getCellValue(),
+        AnimationsUtility.executePopUpAnimation(changeValueTilePositionTextView, cellValueEnumFirstPosition.getCellValue(),
                 getResources().getColor(cellValueEnumFirstPosition.getNumberColorResourceId()),
                 getDrawable(cellValueEnumFirstPosition.getBackgroundDrawableResourceId()),
                 popUpAnimationDuration, 0, currentGameMode.getGameLayoutProperties());
@@ -1282,11 +1282,11 @@ public class GameActivity extends AppCompatActivity implements
         CellValues cellValueEnumSecondPosition = CellValues.getCellValueEnum(firstValue);
         cellValueEnumSecondPosition.setCellValue(firstValue);
         // Executing the pop up animation for both cell one after the other
-        AnimationUtility.executePopUpAnimation(firstPositionTextView, cellValueEnumFirstPosition.getCellValue(),
+        AnimationsUtility.executePopUpAnimation(firstPositionTextView, cellValueEnumFirstPosition.getCellValue(),
                 getResources().getColor(cellValueEnumFirstPosition.getNumberColorResourceId()),
                 getDrawable(cellValueEnumFirstPosition.getBackgroundDrawableResourceId()),
                 popUpAnimationDuration, 0, currentGameMode.getGameLayoutProperties());
-        AnimationUtility.executePopUpAnimation(secondPositionTextView, cellValueEnumSecondPosition.getCellValue(),
+        AnimationsUtility.executePopUpAnimation(secondPositionTextView, cellValueEnumSecondPosition.getCellValue(),
                 getResources().getColor(cellValueEnumSecondPosition.getNumberColorResourceId()),
                 getDrawable(cellValueEnumSecondPosition.getBackgroundDrawableResourceId()),
                 popUpAnimationDuration, 0, currentGameMode.getGameLayoutProperties());
@@ -1339,7 +1339,7 @@ public class GameActivity extends AppCompatActivity implements
                         AppCompatTextView textView = gameGridLayout.findViewWithTag("gameCell" + row + column);
                         CellValues cellValueEnum = CellValues.getCellValueEnum(copyOfCurrentBoard.get(row).get(column));
                         cellValueEnum.setCellValue(copyOfCurrentBoard.get(row).get(column));
-                        AnimationUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
+                        AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
                                 getResources().getColor(cellValueEnum.getNumberColorResourceId()),
                                 getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                                 addNewRandomCellDuration, 500, currentGameMode.getGameLayoutProperties());

@@ -14,7 +14,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationUtility;
+import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 
 public class DestroyAreaFragment extends Fragment {
@@ -80,7 +80,7 @@ public class DestroyAreaFragment extends Fragment {
             public void onTick(long l) {}
             @Override
             public void onFinish() {
-                AnimationUtility.toolLottieEmergeAnimation(destroyAreaPreviewLottie, 575);
+                AnimationsUtility.toolLottieEmergeAnimation(destroyAreaPreviewLottie, 575);
                 postFragmentSetupTimer.start();
             }
         }.start();
