@@ -38,6 +38,7 @@ import com.nerdcoredevelopment.game2048champsfinal.OnSwipeTouchListener;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.SwipeUtility;
 import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationsUtility;
+import com.nerdcoredevelopment.game2048champsfinal.animations.ToolAnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingToolDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameOverDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GamePausedDialog;
@@ -691,7 +692,7 @@ public class GameActivity extends AppCompatActivity implements
                     CellValues cellValueEnum = CellValues.getCellValueEnum(value);
                     cellValueEnum.setCellValue(value);
 
-                    AnimationsUtility.undoResetState(textView, cellValueEnum.getCellValue(),
+                    ToolAnimationsUtility.standardToolsUndoResetState(textView, cellValueEnum.getCellValue(),
                             getResources().getColor(cellValueEnum.getNumberColorResourceId()),
                             getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                             currentGameMode.getGameLayoutProperties());
@@ -786,7 +787,7 @@ public class GameActivity extends AppCompatActivity implements
         movesQueue.clear();
         if (!gameManager.getUndoManager().isUndoUsed()) { // Undo was not used, so using it now
             if (currentCoins >= toolsCostMap.get("standardToolsUndoCost")) {
-                AnimationsUtility.standardToolsUndo(gridLottieView, rootGameConstraintLayout);
+                ToolAnimationsUtility.standardToolsUndo(gridLottieView, rootGameConstraintLayout);
                 new CountDownTimer(1000, 10000) {
                     @Override
                     public void onTick(long l) {
@@ -951,7 +952,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            ToolAnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             SmashTileFragment fragment = new SmashTileFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -988,7 +989,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            ToolAnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             ChangeValueFragment fragment = new ChangeValueFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -1025,7 +1026,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            ToolAnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             SwapTilesFragment fragment = new SwapTilesFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -1062,7 +1063,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            ToolAnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             EliminateValueFragment fragment = new EliminateValueFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -1099,7 +1100,7 @@ public class GameActivity extends AppCompatActivity implements
             addTempIndividualCellLottieLayer();
 
             // Initiate the tool entry transition
-            AnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
+            ToolAnimationsUtility.toolsBackgroundAppearAnimation(backgroundFilmImageView, 300);
             DestroyAreaFragment fragment = new DestroyAreaFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();

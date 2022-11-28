@@ -24,8 +24,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.R;
+import com.nerdcoredevelopment.game2048champsfinal.animations.ToolAnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.enums.CellValues;
 
 import java.util.ArrayList;
@@ -183,7 +183,7 @@ public class ChangeValueFragment extends Fragment {
             public void onTick(long l) {}
             @Override
             public void onFinish() {
-                AnimationsUtility.toolLottieEmergeAnimation(changeValuePreviewLottie, 575);
+                ToolAnimationsUtility.toolLottieEmergeAnimation(changeValuePreviewLottie, 575);
                 postFragmentSetupTimer.start();
             }
         }.start();
@@ -222,7 +222,7 @@ public class ChangeValueFragment extends Fragment {
         this.gridLottieView = gridLottieView;
 
         // 3rd set of events is as follows - Setting the selection animation for the change value tile
-        AnimationsUtility.standardToolsChangeValueFirstClickSelectionSetup(this.changeValueTileLottie);
+        ToolAnimationsUtility.standardToolsChangeValueFirstClickSelectionSetup(this.changeValueTileLottie);
         this.changeValueTileLottie.playAnimation();
     }
 
@@ -271,7 +271,7 @@ public class ChangeValueFragment extends Fragment {
                 ChangeValueFragment.this.gameCellLottieLayout.setVisibility(View.VISIBLE);
 
                 // 4th set of events is as follows
-                AnimationsUtility.standardToolsChangeValueTargetTileSetup(ChangeValueFragment.this.changeValueTileLottie);
+                ToolAnimationsUtility.standardToolsChangeValueTargetTileSetup(ChangeValueFragment.this.changeValueTileLottie);
                 ChangeValueFragment.this.changeValueTileLottie.removeAllAnimatorListeners();
                 ChangeValueFragment.this.changeValueTileLottie.addAnimatorListener(individualTileLottieSmashAnimatorListener);
                 ChangeValueFragment.this.changeValueTileLottie.playAnimation();
@@ -294,7 +294,7 @@ public class ChangeValueFragment extends Fragment {
                 ChangeValueFragment.this.gameCellLottieLayout.setVisibility(View.GONE);
 
                 // 3rd set of events is as follows
-                AnimationsUtility.standardToolsChangeValueGridSetup(ChangeValueFragment.this.gridLottieView);
+                ToolAnimationsUtility.standardToolsChangeValueGridSetup(ChangeValueFragment.this.gridLottieView);
                 ChangeValueFragment.this.gridLottieView.addAnimatorListener(gridLottieAnimatorListener);
                 ChangeValueFragment.this.gridLottieView.playAnimation();
             }
@@ -306,7 +306,7 @@ public class ChangeValueFragment extends Fragment {
 
         // 2nd set of events is as follows
         this.changeValueTileLottie.pauseAnimation();
-        AnimationsUtility.standardToolsChangeValueSecondClickSelectionSetup(this.changeValueTileLottie);
+        ToolAnimationsUtility.standardToolsChangeValueSecondClickSelectionSetup(this.changeValueTileLottie);
         this.changeValueTileLottie.addAnimatorListener(changeValueTileLottieSelectionAnimatorListener);
         this.changeValueTileLottie.playAnimation();
     }
