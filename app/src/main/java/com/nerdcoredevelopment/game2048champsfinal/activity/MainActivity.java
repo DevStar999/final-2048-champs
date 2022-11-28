@@ -1,7 +1,9 @@
 package com.nerdcoredevelopment.game2048champsfinal.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -24,6 +27,10 @@ import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingFeatureDialog
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameExitDialog;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.PreGameFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.ShopFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.ThemesFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /* TODO -> Look into Animated Gradient Background (Something like the Instagram start screen)
            Resource Link -> https://www.youtube.com/watch?v=x_DXXGvyfh8
@@ -54,13 +61,26 @@ public class MainActivity extends AppCompatActivity implements
         AnnouncementsFragment.OnAnnouncementsFragmentInteractionListener,
         SettingsFragment.OnSettingsFragmentInteractionListener,
         BlockDesignFragment.OnBlockDesignFragmentInteractionListener,
-        ShopFragment.OnShopFragmentInteractionListener {
-    private LogoLottieFragment logoLottieFragment;
-    private NavigationFragment navigationFragment;
+        ShopFragment.OnShopFragmentInteractionListener,
+        ThemesFragment.OnThemesFragmentInteractionListener {
+    private SharedPreferences sharedPreferences;
 
     private void initialise() {
-        logoLottieFragment = new LogoLottieFragment();
-        navigationFragment = new NavigationFragment();
+        sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
+    }
+
+    private void updateCoins(int currentCoins) {
+        sharedPreferences.edit().putInt("currentCoins", currentCoins).apply();
+        List<Fragment> fragments = new ArrayList<>(getSupportFragmentManager().getFragments());
+        for (int index = 0; index < fragments.size(); index++) {
+            Fragment currentFragment = fragments.get(index);
+            if (currentFragment != null && currentFragment.getTag() != null
+                    && !currentFragment.getTag().isEmpty()) {
+                if (currentFragment.getTag().equals("SHOP_FRAGMENT")) {
+                    ((ShopFragment) currentFragment).updateCoinsShopFragment(currentCoins);
+                }
+            }
+        }
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -97,9 +117,11 @@ public class MainActivity extends AppCompatActivity implements
 
         initialise();
 
+        LogoLottieFragment logoLottieFragment = new LogoLottieFragment();
+        NavigationFragment navigationFragment = new NavigationFragment();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.logo_lottie_fragment_container, logoLottieFragment)
-                .replace(R.id.navigation_fragment_container, navigationFragment)
+                .replace(R.id.logo_lottie_fragment_container, logoLottieFragment, "LOGO_LOTTIE_FRAGMENT")
+                .replace(R.id.navigation_fragment_container, navigationFragment, "NAVIGATION_FRAGMENT")
                 .commit();
     }
 
@@ -135,18 +157,38 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onNavigationFragmentPreGameClicked() {
+        // If PreGameFragment was opened and is currently on top, then return
+        int countOfFragments = getSupportFragmentManager().getFragments().size();
+        if (countOfFragments > 0) {
+            Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments-1);
+            if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()
+                    && topMostFragment.getTag().equals("PREGAME_FRAGMENT")) {
+                return;
+            }
+        }
+
         PreGameFragment fragment = new PreGameFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
                 R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.addToBackStack(null);
-        transaction.replace(R.id.main_activity_full_screen_fragment_container,
+        transaction.add(R.id.main_activity_full_screen_fragment_container,
                 fragment, "PREGAME_FRAGMENT").commit();
     }
 
     @Override
     public void onNavigationFragmentAnnouncementsClicked() {
+        // If AnnouncementsFragment was opened and is currently on top, then return
+        int countOfFragments = getSupportFragmentManager().getFragments().size();
+        if (countOfFragments > 0) {
+            Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments-1);
+            if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()
+                    && topMostFragment.getTag().equals("ANNOUNCEMENTS_FRAGMENT")) {
+                return;
+            }
+        }
+
         AnnouncementsFragment fragment = new AnnouncementsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -164,6 +206,16 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onNavigationFragmentSettingsClicked() {
+        // If SettingsFragment was opened and is currently on top, then return
+        int countOfFragments = getSupportFragmentManager().getFragments().size();
+        if (countOfFragments > 0) {
+            Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments-1);
+            if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()
+                    && topMostFragment.getTag().equals("SETTINGS_FRAGMENT")) {
+                return;
+            }
+        }
+
         SettingsFragment fragment = new SettingsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -176,6 +228,16 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onNavigationFragmentShopClicked() {
+        // If ShopFragment was opened and is currently on top, then return
+        int countOfFragments = getSupportFragmentManager().getFragments().size();
+        if (countOfFragments > 0) {
+            Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments-1);
+            if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()
+                    && topMostFragment.getTag().equals("SHOP_FRAGMENT")) {
+                return;
+            }
+        }
+
         ShopFragment fragment = new ShopFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -218,6 +280,16 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onSettingsFragmentInteractionGetPremiumClicked() {
+        // If ShopFragment was opened and is currently on top, then return
+        int countOfFragments = getSupportFragmentManager().getFragments().size();
+        if (countOfFragments > 0) {
+            Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments-1);
+            if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()
+                    && topMostFragment.getTag().equals("SHOP_FRAGMENT")) {
+                return;
+            }
+        }
+
         ShopFragment fragment = new ShopFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -230,17 +302,52 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onSettingsFragmentInteractionChangeThemeClicked() {
-        // TODO -> Remove toast and implement the ChangeThemeFragment
-        Toast.makeText(MainActivity.this, "Change Theme Clicked", Toast.LENGTH_SHORT).show();
+        // If ThemesFragment was opened and is currently on top, then return
+        int countOfFragments = getSupportFragmentManager().getFragments().size();
+        if (countOfFragments > 0) {
+            Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments-1);
+            if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()
+                    && topMostFragment.getTag().equals("THEMES_FRAGMENT")) {
+                return;
+            }
+        }
+
+        ThemesFragment fragment = new ThemesFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.main_activity_full_screen_fragment_container,
+                fragment, "THEMES_FRAGMENT").commit();
     }
 
     @Override
     public void onSettingsFragmentInteractionToggleRotatingLightClicked(boolean isChecked) {
-        logoLottieFragment.updateRotatingLightState(isChecked);
+        List<Fragment> fragments = new ArrayList<>(getSupportFragmentManager().getFragments());
+        for (int index = 0; index < fragments.size(); index++) {
+            Fragment currentFragment = fragments.get(index);
+            if (currentFragment != null && currentFragment.getTag() != null
+                    && !currentFragment.getTag().isEmpty()) {
+                if (currentFragment.getTag().equals("LOGO_LOTTIE_FRAGMENT")) {
+                    ((LogoLottieFragment) currentFragment).updateRotatingLightState(isChecked);
+                }
+            }
+        }
     }
 
     @Override
     public void onSettingsFragmentInteractionBlockDesignClicked() {
+        // If BlockDesignFragment was opened and is currently on top, then return
+        int countOfFragments = getSupportFragmentManager().getFragments().size();
+        if (countOfFragments > 0) {
+            Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments-1);
+            if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()
+                    && topMostFragment.getTag().equals("BLOCK_DESIGN_FRAGMENT")) {
+                return;
+            }
+        }
+
         BlockDesignFragment fragment = new BlockDesignFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -293,28 +400,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onShopFragmentInteractionPurchaseOptionClicked(int purchaseOptionViewId) {
-        if (purchaseOptionViewId == R.id.shop_coins_level1_constraint_layout
-                || purchaseOptionViewId == R.id.shop_coins_level1_purchase_button) {
-            Toast.makeText(MainActivity.this, "Shop Option 1 Clicked", Toast.LENGTH_SHORT).show();
-        } else if (purchaseOptionViewId == R.id.shop_coins_level2_constraint_layout
-                || purchaseOptionViewId == R.id.shop_coins_level2_purchase_button) {
-            Toast.makeText(MainActivity.this, "Shop Option 2 Clicked", Toast.LENGTH_SHORT).show();
-        } else if (purchaseOptionViewId == R.id.shop_coins_level3_constraint_layout
-                || purchaseOptionViewId == R.id.shop_coins_level3_purchase_button) {
-            Toast.makeText(MainActivity.this, "Shop Option 3 Clicked", Toast.LENGTH_SHORT).show();
-        } else if (purchaseOptionViewId == R.id.shop_coins_level4_constraint_layout
-                || purchaseOptionViewId == R.id.shop_coins_level4_purchase_button) {
-            Toast.makeText(MainActivity.this, "Shop Option 4 Clicked", Toast.LENGTH_SHORT).show();
-        } else if (purchaseOptionViewId == R.id.shop_coins_level5_constraint_layout
-                || purchaseOptionViewId == R.id.shop_coins_level5_purchase_button) {
-            Toast.makeText(MainActivity.this, "Shop Option 5 Clicked", Toast.LENGTH_SHORT).show();
-        } else if (purchaseOptionViewId == R.id.shop_coins_level6_constraint_layout
-                || purchaseOptionViewId == R.id.shop_coins_level6_purchase_button) {
-            Toast.makeText(MainActivity.this, "Shop Option 6 Clicked", Toast.LENGTH_SHORT).show();
-        } else if (purchaseOptionViewId == R.id.shop_coins_level7_constraint_layout
-                || purchaseOptionViewId == R.id.shop_coins_level7_purchase_button) {
-            Toast.makeText(MainActivity.this, "Shop Option 7 Clicked", Toast.LENGTH_SHORT).show();
-        }
+    public void onShopFragmentInteractionUpdateCoins(int currentCoins) {
+        updateCoins(currentCoins);
+    }
+
+    @Override
+    public void onThemesFragmentInteractionBackClicked() {
+        onBackPressed();
     }
 }

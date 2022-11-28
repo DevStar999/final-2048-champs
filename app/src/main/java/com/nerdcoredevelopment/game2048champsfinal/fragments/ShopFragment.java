@@ -1,5 +1,6 @@
 package com.nerdcoredevelopment.game2048champsfinal.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,34 +17,37 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.nerdcoredevelopment.game2048champsfinal.R;
+import com.qonversion.android.sdk.Qonversion;
+import com.qonversion.android.sdk.QonversionError;
+import com.qonversion.android.sdk.QonversionOfferingsCallback;
+import com.qonversion.android.sdk.QonversionPermissionsCallback;
+import com.qonversion.android.sdk.dto.QPermission;
+import com.qonversion.android.sdk.dto.offerings.QOffering;
+import com.qonversion.android.sdk.dto.offerings.QOfferings;
+import com.qonversion.android.sdk.dto.products.QProduct;
 
-import java.text.DecimalFormat;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ShopFragment extends Fragment {
     private Context context;
     private OnShopFragmentInteractionListener mListener;
     private SharedPreferences sharedPreferences;
+
+    /* Views related to this fragment */
     private AppCompatTextView currentCoinsTextView;
     private AppCompatImageView backButton;
     private AppCompatButton restorePurchase;
+    private List<ConstraintLayout> shopCoinsConstraintLayouts;
+    private List<AppCompatButton> shopCoinsPurchaseButtons;
 
-    /* Layouts of all purchase options */
-    private ConstraintLayout shopCoinsLevel1ConstraintLayout;
-    private ConstraintLayout shopCoinsLevel2ConstraintLayout;
-    private ConstraintLayout shopCoinsLevel3ConstraintLayout;
-    private ConstraintLayout shopCoinsLevel4ConstraintLayout;
-    private ConstraintLayout shopCoinsLevel5ConstraintLayout;
-    private ConstraintLayout shopCoinsLevel6ConstraintLayout;
-    private ConstraintLayout shopCoinsLevel7ConstraintLayout;
-
-    /* Purchase buttons of all purchase options */
-    private AppCompatButton shopCoinsLevel1PurchaseButton;
-    private AppCompatButton shopCoinsLevel2PurchaseButton;
-    private AppCompatButton shopCoinsLevel3PurchaseButton;
-    private AppCompatButton shopCoinsLevel4PurchaseButton;
-    private AppCompatButton shopCoinsLevel5PurchaseButton;
-    private AppCompatButton shopCoinsLevel6PurchaseButton;
-    private AppCompatButton shopCoinsLevel7PurchaseButton;
+    /* Variables related to this fragment */
+    private int currentCoins;
+    private Map<String, Integer> coinsReward;
 
     public ShopFragment() {
         // Required empty public constructor
@@ -71,76 +75,51 @@ public class ShopFragment extends Fragment {
                 }
             }
         });
+    }
 
-        shopCoinsLevel1ConstraintLayout.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
+    private void handlePurchaseOfCoins(QProduct qProduct, String productIdPrefix) {
+        Qonversion.purchase((Activity) context, qProduct, new QonversionPermissionsCallback() {
+            @Override
+            public void onSuccess(@NotNull Map<String, QPermission> permissions) {
+                currentCoins += coinsReward.get(productIdPrefix);
+                if (mListener != null) {
+                    mListener.onShopFragmentInteractionUpdateCoins(currentCoins);
+                }
+            }
+            @Override
+            public void onError(@NotNull QonversionError error) {
+                // TODO -> Create a purchase failed dialog
             }
         });
-        shopCoinsLevel2ConstraintLayout.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel3ConstraintLayout.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel4ConstraintLayout.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel5ConstraintLayout.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel6ConstraintLayout.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel7ConstraintLayout.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
+    }
 
-        shopCoinsLevel1PurchaseButton.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
+    private void loadItemPrices() {
+        Qonversion.offerings(new QonversionOfferingsCallback() {
+            @Override
+            public void onSuccess(@NotNull QOfferings offerings) {
+                if (!offerings.getAvailableOfferings().isEmpty()) {
+                    for (QOffering currentOffering: offerings.getAvailableOfferings()) {
+                        QProduct qProduct = currentOffering.getProducts().get(0);
+                        String storeId = qProduct.getStoreID();
+                        String prefix = "coins_level";
+                        if (storeId != null && storeId.startsWith(prefix)) {
+                            int level = Integer.parseInt(String.valueOf(storeId.charAt(prefix.length())));
+                            level--;
+                            if (qProduct.getSkuDetail() != null && !qProduct.getSkuDetail().getPrice().isEmpty()) {
+                                shopCoinsPurchaseButtons.get(level).setText(qProduct.getSkuDetail().getPrice());
+                            }
+                            String finalPrefix = prefix + (level+1);
+                            shopCoinsConstraintLayouts.get(level)
+                                    .setOnClickListener(view -> handlePurchaseOfCoins(qProduct, finalPrefix));
+                            shopCoinsPurchaseButtons.get(level)
+                                    .setOnClickListener(view -> handlePurchaseOfCoins(qProduct, finalPrefix));
+                        }
+                    }
+                }
             }
-        });
-        shopCoinsLevel2PurchaseButton.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel3PurchaseButton.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel4PurchaseButton.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel5PurchaseButton.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel6PurchaseButton.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
-            }
-        });
-        shopCoinsLevel7PurchaseButton.setOnClickListener(view -> {
-            if (mListener != null) {
-                mListener.onShopFragmentInteractionPurchaseOptionClicked(view.getId());
+            @Override
+            public void onError(@NotNull QonversionError error) {
+                loadItemPrices();
             }
         });
     }
@@ -160,36 +139,49 @@ public class ShopFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shop, container, false);
 
         currentCoinsTextView = view.findViewById(R.id.current_coins_shop_fragment_text_view);
-        DecimalFormat formatter = new DecimalFormat("#,###");
-        currentCoinsTextView.setText(formatter.format(sharedPreferences.getInt("currentCoins", 2000)));
         backButton = view.findViewById(R.id.title_back_shop_fragment_button);
         restorePurchase = view.findViewById(R.id.restore_purchases_shop_fragment_button);
 
-        shopCoinsLevel1ConstraintLayout = view.findViewById(R.id.shop_coins_level1_constraint_layout);
-        shopCoinsLevel2ConstraintLayout = view.findViewById(R.id.shop_coins_level2_constraint_layout);
-        shopCoinsLevel3ConstraintLayout = view.findViewById(R.id.shop_coins_level3_constraint_layout);
-        shopCoinsLevel4ConstraintLayout = view.findViewById(R.id.shop_coins_level4_constraint_layout);
-        shopCoinsLevel5ConstraintLayout = view.findViewById(R.id.shop_coins_level5_constraint_layout);
-        shopCoinsLevel6ConstraintLayout = view.findViewById(R.id.shop_coins_level6_constraint_layout);
-        shopCoinsLevel7ConstraintLayout = view.findViewById(R.id.shop_coins_level7_constraint_layout);
+        shopCoinsConstraintLayouts = new ArrayList<>();
+        for (int level = 1; level <= 7; level++) {
+            int layoutResId = context.getResources().getIdentifier("shop_coins_level" + level +
+                    "_constraint_layout", "id", context.getPackageName());
+            shopCoinsConstraintLayouts.add(view.findViewById(layoutResId));
+        }
 
-        shopCoinsLevel1PurchaseButton = view.findViewById(R.id.shop_coins_level1_purchase_button);
-        shopCoinsLevel2PurchaseButton = view.findViewById(R.id.shop_coins_level2_purchase_button);
-        shopCoinsLevel3PurchaseButton = view.findViewById(R.id.shop_coins_level3_purchase_button);
-        shopCoinsLevel4PurchaseButton = view.findViewById(R.id.shop_coins_level4_purchase_button);
-        shopCoinsLevel5PurchaseButton = view.findViewById(R.id.shop_coins_level5_purchase_button);
-        shopCoinsLevel6PurchaseButton = view.findViewById(R.id.shop_coins_level6_purchase_button);
-        shopCoinsLevel7PurchaseButton = view.findViewById(R.id.shop_coins_level7_purchase_button);
+        shopCoinsPurchaseButtons = new ArrayList<>();
+        for (int level = 1; level <= 7; level++) {
+            int layoutResId = context.getResources().getIdentifier("shop_coins_level" + level +
+                    "_purchase_button", "id", context.getPackageName());
+            shopCoinsPurchaseButtons.add(view.findViewById(layoutResId));
+        }
+
+        currentCoins = sharedPreferences.getInt("currentCoins", 2000);
+        currentCoinsTextView.setText(String.valueOf(currentCoins));
+        coinsReward = new HashMap<>() {{
+            put("coins_level1", 1000); put("coins_level2", 3000); put("coins_level3", 5000);
+            put("coins_level4", 10000); put("coins_level5", 25000);
+            put("coins_level6", 50000); put("coins_level7", 100000);
+        }};
 
         settingOnClickListeners();
 
+        loadItemPrices();
+
         return view;
+    }
+
+    public void updateCoinsShopFragment(int currentCoins) {
+        if (mListener != null) {
+            this.currentCoins = currentCoins;
+            currentCoinsTextView.setText(String.valueOf(currentCoins));
+        }
     }
 
     public interface OnShopFragmentInteractionListener {
         void onShopFragmentInteractionBackClicked();
         void onShopFragmentInteractionRestorePurchaseClicked();
-        void onShopFragmentInteractionPurchaseOptionClicked(int purchaseOptionViewId);
+        void onShopFragmentInteractionUpdateCoins(int currentCoins);
     }
 
     @Override
