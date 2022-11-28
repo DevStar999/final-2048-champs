@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.2048Champs" parent="Theme.AppCompat.Light.NoActionBar">
@@ -40,5 +41,10 @@
         <item name="cornerSizeTopRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="CustomCheckBox">
+        <item name="colorControlActivated">@color/game_text_color</item>
+        <item name="colorControlHighlight">@color/game_primary_background_color</item>
     </style>
 </resources>
