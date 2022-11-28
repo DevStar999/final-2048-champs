@@ -53,7 +53,7 @@
         android:layout_marginBottom="24dp"
         android:paddingHorizontal="24dp"
         android:letterSpacing="0.04"
-        android:text="Enjoying the game! Please take the time to give us a 5-star review. It really helps. Thanks for the support!"
+        android:text="Enjoying the game! Please take the time to give us a 5-star review. It really helps."
         android:textAlignment="center"
         android:textColor="@color/game_text_color"
         android:textSize="15sp"
