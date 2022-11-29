@@ -33,9 +33,10 @@
     <color name="dialog_background_color">#EADDCA</color>
     <color name="empty_cell">#D6CDC4</color>
     <color name="game_primary_background_color">#FBF8EF</color>
-    <!-- TODO -> Improve naming of the following 2 colors to match other color names -->
-    <color name="game_primary_background_color_opacity_60_percent">#99FBF8EF</color>
-    <color name="game_primary_background_color_opacity_80_percent">#CCFBF8EF</color>
+    <!-- Current opacity for following color = 60% i.e. in hex = 99 -->
+    <color name="game_primary_background_color_translucent1">#99FBF8EF</color>
+    <!-- Current opacity for following color = 80% i.e. in hex = CC -->
+    <color name="game_primary_background_color_translucent2">#CCFBF8EF</color>
     <color name="game_text_color">#967969</color>
     <color name="game_text_color_dark">#442E19</color>
     <!-- Current opacity for following color = 50% i.e. in hex = 80 -->
