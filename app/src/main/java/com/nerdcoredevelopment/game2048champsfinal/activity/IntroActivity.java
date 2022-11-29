@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.google.android.gms.ads.MobileAds;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 
 /* TODO -> !! Caution !! - Always make sure to use a testing id for debugging and
@@ -40,8 +39,6 @@ public class IntroActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
-        MobileAds.initialize(this);
 
         AppCompatImageView developerLogoImageView = findViewById(R.id.developer_logo_image_view);
         developerLogoImageView.animate().alpha(1).setDuration(2000).start();
