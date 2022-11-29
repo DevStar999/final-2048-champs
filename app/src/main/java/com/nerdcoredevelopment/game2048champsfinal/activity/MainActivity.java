@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_2048Champs);
 
         /*
         Following lines of code hide the status bar at the very top of the screen which battery
