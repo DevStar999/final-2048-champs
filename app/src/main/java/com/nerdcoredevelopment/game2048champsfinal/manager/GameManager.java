@@ -119,7 +119,7 @@ public class GameManager {
                     cellValueEnum.setCellValue(currentCellValue);
 
                     AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
-                            parentActivity.getResources().getColor(cellValueEnum.getNumberColorResourceId()),
+                            parentActivity.getColor(cellValueEnum.getNumberColorResourceId()),
                             parentActivity.getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                             300, 200, currentGameMode.getGameLayoutProperties());
                 }
@@ -192,7 +192,7 @@ public class GameManager {
                     CellValues cellValueEnum = CellValues.getCellValueEnum(gameMatrix.get(row).get(column));
                     cellValueEnum.setCellValue(gameMatrix.get(row).get(column));
                     AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
-                            parentActivity.getResources().getColor(cellValueEnum.getNumberColorResourceId()),
+                            parentActivity.getColor(cellValueEnum.getNumberColorResourceId()),
                             parentActivity.getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                             addNewRandomCellDuration, 0, currentGameMode.getGameLayoutProperties());
                 }
@@ -273,12 +273,12 @@ public class GameManager {
                     if (ctiMatrix.get(row).get(column).isDidMerge()) { // Merge happened here
                         moveScore += gameMatrix.get(row).get(column);
                         endPartAnimation = AnimationsUtility.getMergeAnimation(textView, cellValueEnum.getCellValue(),
-                                parentActivity.getResources().getColor(cellValueEnum.getNumberColorResourceId()),
+                                parentActivity.getColor(cellValueEnum.getNumberColorResourceId()),
                                 parentActivity.getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                                 endPartAnimationDuration, 0, currentGameMode.getGameLayoutProperties());
                     } else { // Simply appear here
                         endPartAnimation = AnimationsUtility.getSimplyAppearAnimation(textView, cellValueEnum.getCellValue(),
-                                parentActivity.getResources().getColor(cellValueEnum.getNumberColorResourceId()),
+                                parentActivity.getColor(cellValueEnum.getNumberColorResourceId()),
                                 parentActivity.getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                                 endPartAnimationDuration, 0, currentGameMode.getGameLayoutProperties());
                     }

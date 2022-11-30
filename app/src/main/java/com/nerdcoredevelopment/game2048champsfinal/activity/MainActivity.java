@@ -76,6 +76,9 @@ import java.util.List;
            revive the game, if game state is game over
 */
 // TODO -> Goal completion & game state status should be checked for (a) Smash Tile Tool (b) Eliminate Value Tool
+/* TODO -> Tile selection continuous lottie json files do not fit correctly on the tiles of rectangular board i.e. the boards
+           of game modes which have rectangular dimensions
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,

@@ -224,9 +224,9 @@ public class GameActivity extends AppCompatActivity implements
         goalCellValue.setCellValue(currentGameMode.getGoal());
         AppCompatTextView goalTextView = findViewById(R.id.goal_value_text_view);
         goalTextView.setText(String.valueOf(goalCellValue.getCellValue()));
-        goalTextView.setTextColor(getResources().getColor(goalCellValue.getNumberColorResourceId()));
+        goalTextView.setTextColor(getColor(goalCellValue.getNumberColorResourceId()));
         GradientDrawable goalScoreGradientDrawable = new GradientDrawable();
-        goalScoreGradientDrawable.setColor(getResources().getColor(goalCellValue.getBackgroundColorResourceId()));
+        goalScoreGradientDrawable.setColor(getColor(goalCellValue.getBackgroundColorResourceId()));
         float density = getResources().getDisplayMetrics().density;
         int radius = (int) (5 * density); // The corner radius is 5 dp
         goalScoreGradientDrawable.setCornerRadii(new float[]{0, 0, 0, 0, radius, radius, radius, radius});
@@ -692,7 +692,7 @@ public class GameActivity extends AppCompatActivity implements
                     cellValueEnum.setCellValue(value);
 
                     ToolAnimationsUtility.standardToolsUndoResetState(textView, cellValueEnum.getCellValue(),
-                            getResources().getColor(cellValueEnum.getNumberColorResourceId()),
+                            getColor(cellValueEnum.getNumberColorResourceId()),
                             getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                             currentGameMode.getGameLayoutProperties());
                 }
@@ -1186,7 +1186,7 @@ public class GameActivity extends AppCompatActivity implements
                         CellValues cellValueEnum = CellValues.getCellValueEnum(copyOfCurrentBoard.get(row).get(column));
                         cellValueEnum.setCellValue(copyOfCurrentBoard.get(row).get(column));
                         AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
-                                getResources().getColor(cellValueEnum.getNumberColorResourceId()),
+                                getColor(cellValueEnum.getNumberColorResourceId()),
                                 getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                                 addNewRandomCellDuration, 500, currentGameMode.getGameLayoutProperties());
                     }
@@ -1231,7 +1231,7 @@ public class GameActivity extends AppCompatActivity implements
         cellValueEnumFirstPosition.setCellValue(newValue);
         // Executing the pop up animation for the chosen tile to change value
         AnimationsUtility.executePopUpAnimation(changeValueTilePositionTextView, cellValueEnumFirstPosition.getCellValue(),
-                getResources().getColor(cellValueEnumFirstPosition.getNumberColorResourceId()),
+                getColor(cellValueEnumFirstPosition.getNumberColorResourceId()),
                 getDrawable(cellValueEnumFirstPosition.getBackgroundDrawableResourceId()),
                 popUpAnimationDuration, 0, currentGameMode.getGameLayoutProperties());
         // Updating the game matrix
@@ -1283,11 +1283,11 @@ public class GameActivity extends AppCompatActivity implements
         cellValueEnumSecondPosition.setCellValue(firstValue);
         // Executing the pop up animation for both cell one after the other
         AnimationsUtility.executePopUpAnimation(firstPositionTextView, cellValueEnumFirstPosition.getCellValue(),
-                getResources().getColor(cellValueEnumFirstPosition.getNumberColorResourceId()),
+                getColor(cellValueEnumFirstPosition.getNumberColorResourceId()),
                 getDrawable(cellValueEnumFirstPosition.getBackgroundDrawableResourceId()),
                 popUpAnimationDuration, 0, currentGameMode.getGameLayoutProperties());
         AnimationsUtility.executePopUpAnimation(secondPositionTextView, cellValueEnumSecondPosition.getCellValue(),
-                getResources().getColor(cellValueEnumSecondPosition.getNumberColorResourceId()),
+                getColor(cellValueEnumSecondPosition.getNumberColorResourceId()),
                 getDrawable(cellValueEnumSecondPosition.getBackgroundDrawableResourceId()),
                 popUpAnimationDuration, 0, currentGameMode.getGameLayoutProperties());
         // Updating the game matrix
@@ -1340,7 +1340,7 @@ public class GameActivity extends AppCompatActivity implements
                         CellValues cellValueEnum = CellValues.getCellValueEnum(copyOfCurrentBoard.get(row).get(column));
                         cellValueEnum.setCellValue(copyOfCurrentBoard.get(row).get(column));
                         AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
-                                getResources().getColor(cellValueEnum.getNumberColorResourceId()),
+                                getColor(cellValueEnum.getNumberColorResourceId()),
                                 getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
                                 addNewRandomCellDuration, 500, currentGameMode.getGameLayoutProperties());
                     }
