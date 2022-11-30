@@ -320,8 +320,7 @@ public class PreGameFragment extends Fragment {
         if (context instanceof OnPreGameFragmentInteractionListener) {
             mListener = (OnPreGameFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnPreGameFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnPreGameFragmentInteractionListener");
         }
         this.parentActivity = (Activity) context;
     }

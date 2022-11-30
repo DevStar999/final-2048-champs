@@ -322,8 +322,7 @@ public class ChangeValueFragment extends Fragment {
         if (context instanceof OnChangeValueFragmentInteractionListener) {
             mListener = (OnChangeValueFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnChangeValueFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnChangeValueFragmentInteractionListener");
         }
         this.context = context;
     }

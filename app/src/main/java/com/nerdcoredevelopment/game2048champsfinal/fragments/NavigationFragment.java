@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.nerdcoredevelopment.game2048champsfinal.R;
@@ -94,13 +95,12 @@ public class NavigationFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnNavigationFragmentInteractionListener) {
             mListener = (OnNavigationFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnNavigationFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnNavigationFragmentInteractionListener");
         }
     }
 

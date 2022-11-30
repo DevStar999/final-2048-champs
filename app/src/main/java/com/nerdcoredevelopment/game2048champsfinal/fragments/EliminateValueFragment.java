@@ -214,8 +214,7 @@ public class EliminateValueFragment extends Fragment {
         if (context instanceof OnEliminateValueFragmentInteractionListener) {
             mListener = (OnEliminateValueFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnEliminateValueFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnEliminateValueFragmentInteractionListener");
         }
     }
 

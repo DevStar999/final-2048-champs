@@ -104,8 +104,7 @@ public class DestroyAreaFragment extends Fragment {
         if (context instanceof OnDestroyAreaFragmentInteractionListener) {
             mListener = (OnDestroyAreaFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnDestroyAreaFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnDestroyAreaFragmentInteractionListener");
         }
     }
 

@@ -257,8 +257,7 @@ public class SwapTilesFragment extends Fragment {
         if (context instanceof OnSwapTilesFragmentInteractionListener) {
             mListener = (OnSwapTilesFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnSwapTilesFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnSwapTilesFragmentInteractionListener");
         }
     }
 

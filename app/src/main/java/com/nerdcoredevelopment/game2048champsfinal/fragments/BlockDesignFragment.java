@@ -76,7 +76,7 @@ public class BlockDesignFragment extends Fragment {
                     blockDesignOptionParams.addRule(RelativeLayout.ALIGN_PARENT_START, RelativeLayout.TRUE);
                 } else if (j == 1) {
                     blockDesignOptionParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-                } else if (j == 2) {
+                } else {
                     blockDesignOptionParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
                 }
                 blockDesignOption.setLayoutParams(blockDesignOptionParams);
@@ -225,8 +225,7 @@ public class BlockDesignFragment extends Fragment {
         if (context instanceof OnBlockDesignFragmentInteractionListener) {
             mListener = (OnBlockDesignFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnBlockDesignFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnBlockDesignFragmentInteractionListener");
         }
         this.context = context;
     }

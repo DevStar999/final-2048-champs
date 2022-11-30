@@ -188,8 +188,7 @@ public class SmashTileFragment extends Fragment {
         if (context instanceof OnSmashTileFragmentInteractionListener) {
             mListener = (OnSmashTileFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnSmashTileFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnSmashTileFragmentInteractionListener");
         }
     }
 

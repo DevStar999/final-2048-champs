@@ -282,11 +282,7 @@ public class SettingsFragment extends Fragment {
         changeThemeLinearLayout = view.findViewById(R.id.change_theme_linear_layout);
         toggleRotatingLightLinearLayout = view.findViewById(R.id.toggle_rotating_light_linear_layout);
         toggleRotatingLightSwitch = view.findViewById(R.id.toggle_rotating_light_switch);
-        if (sharedPreferences.getBoolean("toggleRotatingLight", true)) {
-            toggleRotatingLightSwitch.setChecked(true);
-        } else {
-            toggleRotatingLightSwitch.setChecked(false);
-        }
+        toggleRotatingLightSwitch.setChecked(sharedPreferences.getBoolean("toggleRotatingLight", true));
         blockDesignLinearLayout = view.findViewById(R.id.block_design_linear_layout);
         howToPlayLinearLayout = view.findViewById(R.id.how_to_play_linear_layout);
         helpLinearLayout = view.findViewById(R.id.help_linear_layout);
@@ -321,8 +317,7 @@ public class SettingsFragment extends Fragment {
         if (context instanceof OnSettingsFragmentInteractionListener) {
             mListener = (OnSettingsFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnSettingsFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnSettingsFragmentInteractionListener");
         }
         this.context = context;
     }

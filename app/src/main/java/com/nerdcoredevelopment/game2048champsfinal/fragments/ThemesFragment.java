@@ -71,8 +71,7 @@ public class ThemesFragment extends Fragment {
         if (context instanceof OnThemesFragmentInteractionListener) {
             mListener = (OnThemesFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnThemesFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnThemesFragmentInteractionListener");
         }
         this.context = context;
     }

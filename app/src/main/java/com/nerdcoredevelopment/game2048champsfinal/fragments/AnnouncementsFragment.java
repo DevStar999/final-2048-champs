@@ -81,8 +81,7 @@ public class AnnouncementsFragment extends Fragment {
         if (context instanceof OnAnnouncementsFragmentInteractionListener) {
             mListener = (OnAnnouncementsFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnAnnouncementsFragmentInteractionListener");
+            throw new RuntimeException(context + " must implement OnAnnouncementsFragmentInteractionListener");
         }
         this.context = context;
     }
