@@ -116,7 +116,6 @@ public class GameManager {
                     textView.setVisibility(View.INVISIBLE);
                 } else {
                     CellValues cellValueEnum = CellValues.getCellValueEnum(currentCellValue);
-                    cellValueEnum.setCellValue(currentCellValue);
 
                     AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
                             parentActivity.getColor(cellValueEnum.getNumberColorResourceId()),
@@ -190,7 +189,6 @@ public class GameManager {
                     GridLayout gameGridLayout = parentActivity.findViewById(R.id.game_grid_layout);
                     AppCompatTextView textView = gameGridLayout.findViewWithTag("gameCell" + row + column);
                     CellValues cellValueEnum = CellValues.getCellValueEnum(gameMatrix.get(row).get(column));
-                    cellValueEnum.setCellValue(gameMatrix.get(row).get(column));
                     AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
                             parentActivity.getColor(cellValueEnum.getNumberColorResourceId()),
                             parentActivity.getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
@@ -241,7 +239,6 @@ public class GameManager {
                 GridLayout gameGridLayout = parentActivity.findViewById(R.id.game_grid_layout);
                 AppCompatTextView textView = gameGridLayout.findViewWithTag("gameCell" + row + column);
                 CellValues cellValueEnum = CellValues.getCellValueEnum(gameMatrix.get(row).get(column));
-                cellValueEnum.setCellValue(gameMatrix.get(row).get(column));
 
                 AnimatorSet moveAnimation; // Either Empty Animation OR Some Move Animation
                 AnimatorSet endPartAnimation; // Either Empty Animation OR Simply Appear Animation OR Merge Animation

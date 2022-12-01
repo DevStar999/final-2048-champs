@@ -221,7 +221,6 @@ public class GameActivity extends AppCompatActivity implements
 
     private void initialiseGoalText() {
         CellValues goalCellValue = CellValues.getCellValueEnum(currentGameMode.getGoal());
-        goalCellValue.setCellValue(currentGameMode.getGoal());
         AppCompatTextView goalTextView = findViewById(R.id.goal_value_text_view);
         goalTextView.setText(String.valueOf(goalCellValue.getCellValue()));
         goalTextView.setTextColor(getColor(goalCellValue.getNumberColorResourceId()));
@@ -689,8 +688,6 @@ public class GameActivity extends AppCompatActivity implements
                     textView.setVisibility(View.INVISIBLE);
                 } else {
                     CellValues cellValueEnum = CellValues.getCellValueEnum(value);
-                    cellValueEnum.setCellValue(value);
-
                     ToolAnimationsUtility.standardToolsUndoResetState(textView, cellValueEnum.getCellValue(),
                             getColor(cellValueEnum.getNumberColorResourceId()),
                             getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
@@ -1184,7 +1181,6 @@ public class GameActivity extends AppCompatActivity implements
                     if (!copyOfCurrentBoard.get(row).get(column).equals(gameManager.getGameMatrix().get(row).get(column))) {
                         AppCompatTextView textView = rootGameConstraintLayout.findViewWithTag("gameCell" + row + column);
                         CellValues cellValueEnum = CellValues.getCellValueEnum(copyOfCurrentBoard.get(row).get(column));
-                        cellValueEnum.setCellValue(copyOfCurrentBoard.get(row).get(column));
                         AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
                                 getColor(cellValueEnum.getNumberColorResourceId()),
                                 getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),
@@ -1228,7 +1224,6 @@ public class GameActivity extends AppCompatActivity implements
         AppCompatTextView changeValueTilePositionTextView = rootGameConstraintLayout.findViewWithTag("gameCell" +
                 changeValueTilePosition.first + changeValueTilePosition.second);
         CellValues cellValueEnumFirstPosition = CellValues.getCellValueEnum(newValue);
-        cellValueEnumFirstPosition.setCellValue(newValue);
         // Executing the pop up animation for the chosen tile to change value
         AnimationsUtility.executePopUpAnimation(changeValueTilePositionTextView, cellValueEnumFirstPosition.getCellValue(),
                 getColor(cellValueEnumFirstPosition.getNumberColorResourceId()),
@@ -1275,12 +1270,10 @@ public class GameActivity extends AppCompatActivity implements
         AppCompatTextView firstPositionTextView = rootGameConstraintLayout.findViewWithTag("gameCell" +
                 firstSwapTilePosition.first + firstSwapTilePosition.second);
         CellValues cellValueEnumFirstPosition = CellValues.getCellValueEnum(secondValue);
-        cellValueEnumFirstPosition.setCellValue(secondValue);
         // Giving new look to second swap position
         AppCompatTextView secondPositionTextView = rootGameConstraintLayout.findViewWithTag("gameCell" +
                 secondSwapTilePosition.first + secondSwapTilePosition.second);
         CellValues cellValueEnumSecondPosition = CellValues.getCellValueEnum(firstValue);
-        cellValueEnumSecondPosition.setCellValue(firstValue);
         // Executing the pop up animation for both cell one after the other
         AnimationsUtility.executePopUpAnimation(firstPositionTextView, cellValueEnumFirstPosition.getCellValue(),
                 getColor(cellValueEnumFirstPosition.getNumberColorResourceId()),
@@ -1338,7 +1331,6 @@ public class GameActivity extends AppCompatActivity implements
                         GridLayout gameGridLayout = findViewById(R.id.game_grid_layout);
                         AppCompatTextView textView = gameGridLayout.findViewWithTag("gameCell" + row + column);
                         CellValues cellValueEnum = CellValues.getCellValueEnum(copyOfCurrentBoard.get(row).get(column));
-                        cellValueEnum.setCellValue(copyOfCurrentBoard.get(row).get(column));
                         AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
                                 getColor(cellValueEnum.getNumberColorResourceId()),
                                 getDrawable(cellValueEnum.getBackgroundDrawableResourceId()),

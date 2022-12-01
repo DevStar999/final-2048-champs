@@ -88,7 +88,6 @@ public class ChangeValueFragment extends Fragment {
 
         int currentOptionValue = optionValues.get(optionNumber);
         CellValues cellValueCurrentOption = CellValues.getCellValueEnum(currentOptionValue);
-        cellValueCurrentOption.setCellValue(currentOptionValue);
         valueOptionTextView.setText(String.valueOf(currentOptionValue));
         valueOptionTextView.setTextColor(ContextCompat.getColor(context, cellValueCurrentOption.getNumberColorResourceId()));
         valueOptionTextView.setBackgroundResource(cellValueCurrentOption.getBackgroundDrawableResourceId());
@@ -232,7 +231,6 @@ public class ChangeValueFragment extends Fragment {
         toolUseCompletedImageView.setImageResource(R.drawable.completed_icon);
         secondClickCheckBox.setChecked(true);
         CellValues cellValuesSelectedOption = CellValues.getCellValueEnum(optionValues.get(optionNumber));
-        cellValuesSelectedOption.setCellValue(optionValues.get(optionNumber));
         selectedOptionValueTextView.setText(String.valueOf(cellValuesSelectedOption.getCellValue()));
         selectedOptionValueTextView.setTextColor(ContextCompat.getColor(context,
                 cellValuesSelectedOption.getNumberColorResourceId()));
