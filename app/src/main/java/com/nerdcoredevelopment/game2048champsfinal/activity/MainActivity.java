@@ -39,19 +39,13 @@ import java.util.List;
            code of possibly a premium product/scheme together as one group having these 2 buttons
            in the SettingsFragment
 */
-// TODO -> Add a 'Check Updates' button for In-app updates in the SettingsFragment
 /* TODO -> Multiple quick dialog OR activity open clicks cause the dialog OR activity to open multiple times, we have to
            find a way to avoid that. Basically wherever a new page is opening there we need to stop this from happening
 */
 // TODO -> Remove smaller sized game modes as we get close to the publicity launch
-/* TODO -> Even with the current arrangement whenever a dialog opens up the status bar at the top
-           which shows time, battery percentage etc. shows up for a split second. We have to find a
-           way to avoid this
-*/
 // TODO -> Implement the In-app updates button in the SettingsFragment
 // TODO -> Implement the In-app review feature working properly with quotas
 // TODO -> Click effect for NavigationFragment buttons as well
-// TODO -> Remove this TODO whenever suitable: Temp TODO for a new release version
 /* TODO -> When it will be time to implement App Open Ad, change logo transition time to 3 seconds and splash screen time
            to 4 seconds
 */
