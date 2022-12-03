@@ -45,7 +45,6 @@ import java.util.List;
 // TODO -> Remove smaller sized game modes as we get close to the publicity launch
 // TODO -> Implement the In-app updates button in the SettingsFragment
 // TODO -> Implement the In-app review feature working properly with quotas
-// TODO -> Click effect for NavigationFragment buttons as well
 /* TODO -> When it will be time to implement App Open Ad, change logo transition time to 3 seconds and splash screen time
            to 4 seconds
 */
