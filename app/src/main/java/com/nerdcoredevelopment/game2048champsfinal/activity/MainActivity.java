@@ -59,19 +59,10 @@ import java.util.List;
            this bug after undo is done for game over and the first move is made after this undo (Check after bug has happened
            once before this)
 */
-/* TODO -> Set the scaleX and scaleY properties for the block drawables dynamically through code so as to have a good fit
-           of the block drawables in the cell space
-*/
-/* TODO -> Dialog text should have same case i.e. it should be uppercase or lowercase etc. uniform in all the dialogs
-           throughout the whole project
-*/
 /* TODO -> Implement the Game Over Dialog is such a way that it accommodates the use of the newly implemented tools to
            revive the game, if game state is game over
 */
 // TODO -> Goal completion & game state status should be checked for (a) Smash Tile Tool (b) Eliminate Value Tool
-/* TODO -> Tile selection continuous lottie json files do not fit correctly on the tiles of rectangular board i.e. the boards
-           of game modes which have rectangular dimensions
-*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
