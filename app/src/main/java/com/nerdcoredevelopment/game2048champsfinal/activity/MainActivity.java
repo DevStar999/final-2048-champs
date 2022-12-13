@@ -59,10 +59,6 @@ import java.util.List;
            this bug after undo is done for game over and the first move is made after this undo (Check after bug has happened
            once before this)
 */
-/* TODO -> Implement the Game Over Dialog is such a way that it accommodates the use of the newly implemented tools to
-           revive the game, if game state is game over
-*/
-// TODO -> Goal completion & game state status should be checked for (a) Smash Tile Tool (b) Eliminate Value Tool
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
