@@ -48,10 +48,6 @@ import java.util.List;
 /* TODO -> When it will be time to implement App Open Ad, change logo transition time to 3 seconds and splash screen time
            to 4 seconds
 */
-/* TODO -> Complete the following changes related to tools -
-           (a) Make the tools transition faster
-           (b) The final state of the tools fragment look should have similar look in terms of description text
-*/
 /* TODO -> !! Bug !! -> If we do undo exactly after the move in which we completed the goal, then goal completion is done.
            But now if the user makes any move even a move which does not lead to goal completion the code block for goal
            completion is being played. This happens also when Change Value tool reverses the goal completion status. Also
