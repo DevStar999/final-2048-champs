@@ -55,6 +55,7 @@ import java.util.List;
            this bug after undo is done for game over and the first move is made after this undo (Check after bug has happened
            once before this)
 */
+// TODO -> The width of the buttons in ShopFragment should be able to fit the text of the prices comfortably
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
