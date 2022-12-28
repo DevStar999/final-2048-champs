@@ -56,6 +56,10 @@ import java.util.List;
            once before this)
 */
 // TODO -> The width of the buttons in ShopFragment should be able to fit the text of the prices comfortably
+/* TODO -> Implement a combo bar which fills up in 20 or 30 or 50 etc. steps, where each step is added on completion of a
+           move in which merge occurs at 2 or more places i.e. a multi-merge move. When the bar fills up we reward the user
+           with coins
+ */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
