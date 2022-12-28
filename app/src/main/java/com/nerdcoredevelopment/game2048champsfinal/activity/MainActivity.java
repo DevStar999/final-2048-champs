@@ -59,7 +59,10 @@ import java.util.List;
 /* TODO -> Implement a combo bar which fills up in 20 or 30 or 50 etc. steps, where each step is added on completion of a
            move in which merge occurs at 2 or more places i.e. a multi-merge move. When the bar fills up we reward the user
            with coins
- */
+*/
+/* TODO -> If In-App Review causes any Google Play Policy violation in 'Feed the Animal' project then we will not implement
+           it in this app. But if it does not cause any violation then we can implement it in this app.
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
