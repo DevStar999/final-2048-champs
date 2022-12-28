@@ -63,6 +63,11 @@ import java.util.List;
 /* TODO -> If In-App Review causes any Google Play Policy violation in 'Feed the Animal' project then we will not implement
            it in this app. But if it does not cause any violation then we can implement it in this app.
 */
+/* TODO -> A list of tasks that need to be done w.r.t. the Review feature in a Pop-up manner, is as follows:
+           (1) Decide if we want to implement In-App Review feature or keep the normal review feature
+           (2) Decide the beginning DND (Do Not Disturb) period before which it should not be shown
+           (3) Decide the freq. and place (for e.g. the homepage of the app etc.) where it should be shown
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
