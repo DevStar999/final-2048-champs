@@ -70,7 +70,9 @@ import java.util.List;
            (3) Decide the freq. and place (for e.g. the homepage of the app etc.) where it should be shown
 */
 /* TODO -> A list of tasks that need to be done w.r.t. the Update App feature in an involuntary Pop-up manner, is as follows:
-           (3) Decide the place (for e.g. the homepage of the app etc.) and freq. with which it should be shown
+           (1) Decide the place (for e.g. the homepage of the app etc.) and freq. with which it should be shown
+           (2) Condition check to allow the Update App Pop Up Dialog to be triggered
+           (3) Code for functionality of 'Remind Later' button is pending
 */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
