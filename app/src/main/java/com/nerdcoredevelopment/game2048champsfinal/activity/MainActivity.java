@@ -77,6 +77,14 @@ import java.util.List;
            (5) The code is incomplete when it comes to checking internet connectivity. Write and test out a good working code
            which correctly checks internet connectivity
 */
+/* TODO -> Shift all the tools transition & layout related code into a separate fragment for two of the places which are as
+           follows:
+           (1) GameActivity
+           (2) GameOverDialog
+*/
+/* TODO -> Replace the LottieAnimationView for rotating light everywhere with AppCompatImageView and rotate it at places it
+           is required to be rotated. This should come in handy for when we implement the 'Change Theme' feature
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
