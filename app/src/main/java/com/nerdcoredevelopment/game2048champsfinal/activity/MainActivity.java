@@ -83,7 +83,11 @@ import java.util.List;
            (2) GameOverDialog
 */
 /* TODO -> Replace the LottieAnimationView for rotating light everywhere with AppCompatImageView and rotate it at places it
-           is required to be rotated. This should come in handy for when we implement the 'Change Theme' feature
+           is required to be rotated. This should come in handy for when we implement the 'Change Theme' feature. The places
+           this can be done are as follows:
+           (1) Homepage of the app
+           (2) ShopFragment
+           (3) PregameFragment
 */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
