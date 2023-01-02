@@ -89,6 +89,13 @@ import java.util.List;
            (2) ShopFragment
            (3) PregameFragment
 */
+/* TODO -> All the TODOs related to GPGS are as follows:
+           (1) Keep adding tasks from the link -> https://developer.android.com/games/pgs/quality, to this to do list for
+           GPGS features along with the progress of implementation of GPGS features
+           (2) The features which are as follows are to be implemented in the 2nd round of implementation are as follows:
+           (i) Friends (ii) Saved Games
+           (iii) Events (iv) Player Stats
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
