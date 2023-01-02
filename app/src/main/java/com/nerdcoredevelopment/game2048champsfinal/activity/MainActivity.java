@@ -95,6 +95,7 @@ import java.util.List;
            (2) The features which are as follows are to be implemented in the 2nd round of implementation are as follows:
            (i) Friends (ii) Saved Games
            (iii) Events (iv) Player Stats
+           (3) Fill up the details of the OAuth consent screen in GCP project like App logo, privacy policy link etc.
 */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
