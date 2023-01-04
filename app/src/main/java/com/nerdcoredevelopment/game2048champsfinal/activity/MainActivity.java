@@ -102,6 +102,8 @@ import java.util.List;
            version of a leaderboard can also be shown to the player
            (5) Take a look at the notes in 'Squares Addition' app over the MainActivity.java file for tasks that need to be
            done while implementing GPGS
+           (6) After all the features of GPGS are done, do a round of error handling for all GPGS features
+           (7) As of the current progress the 'Achievements' feature will be explored later
 */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
