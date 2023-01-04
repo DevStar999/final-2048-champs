@@ -96,6 +96,9 @@ import java.util.List;
            (i) Friends (ii) Saved Games
            (iii) Events (iv) Player Stats
            (3) Fill up the details of the OAuth consent screen in GCP project like App logo, privacy policy link etc.
+           (4) We need to instruct the user to share their gameplay activity to everyone in the Google Play Games app settings
+           so that the score of the user can be submitted in the public version of a leaderboard & same data can be fetched
+           and shown to the user in the app
 */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
