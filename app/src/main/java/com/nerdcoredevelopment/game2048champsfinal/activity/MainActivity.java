@@ -98,7 +98,10 @@ import java.util.List;
            (3) Fill up the details of the OAuth consent screen in GCP project like App logo, privacy policy link etc.
            (4) We need to instruct the user to share their gameplay activity to everyone in the Google Play Games app settings
            so that the score of the user can be submitted in the public version of a leaderboard & same data can be fetched
-           and shown to the user in the app
+           and shown to the user in the app. Also instruct them how to make friends on Google Play Games, so that social
+           version of a leaderboard can also be shown to the player
+           (5) Take a look at the notes in 'Squares Addition' app over the MainActivity.java file for tasks that need to be
+           done while implementing GPGS
 */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
