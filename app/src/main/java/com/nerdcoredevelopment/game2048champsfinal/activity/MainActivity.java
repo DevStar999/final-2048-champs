@@ -103,9 +103,8 @@ import java.util.List;
            (5) Take a look at the notes in 'Squares Addition' app over the MainActivity.java file for tasks that need to be
            done while implementing GPGS
            (6) After all the features of GPGS are done, do a round of error handling for all GPGS features
-           (7) As of the current progress the 'Achievements' feature will be explored later
-           (8) Do take a look at the Firebase consumption for the user of GPGS features in the project
-           (9) Check if the implementation of the following document is required ->
+           (7) Do take a look at the Firebase consumption for the user of GPGS features in the project
+           (8) Check if the implementation of the following document is required ->
            https://developers.google.com/games/services/android/offline-access
            If not required, then it would save us time. So, do check if it is required to be implemented or not
 */
