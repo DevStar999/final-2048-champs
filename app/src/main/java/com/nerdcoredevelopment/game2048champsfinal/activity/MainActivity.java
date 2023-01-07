@@ -107,6 +107,8 @@ import java.util.List;
            (8) Check if the implementation of the following document is required ->
            https://developers.google.com/games/services/android/offline-access
            If not required, then it would save us time. So, do check if it is required to be implemented or not
+           (9) Once game is published for Play Console and for Play Games services with all the implemented GPGS features,
+           then remember to turn on things like Anti-piracy, Tamper-protection etc.
 */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
