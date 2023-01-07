@@ -115,7 +115,8 @@ import java.util.List;
 // TODO -> Implement push notifications which will mature as the age of the user on the app matures
 /* TODO -> Conduct the experiment to know what happens to data stored in SharedPreferences after we update
            the app (In Production)
- */
+*/
+// TODO -> 'Hammer of Thor' name for the highest level achievement of use of Smash Tile Tool
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
