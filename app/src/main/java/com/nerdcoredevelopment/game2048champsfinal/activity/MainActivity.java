@@ -112,6 +112,7 @@ import java.util.List;
            (10) Check out this article to limit API usage and quota as follows ->
            https://developers.google.com/games/services/console/configuring#adjusting_api_usage_quotas
 */
+// TODO -> Implement push notifications which will mature as the age of the user on the app matures
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
