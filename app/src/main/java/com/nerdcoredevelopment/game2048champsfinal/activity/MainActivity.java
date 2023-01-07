@@ -109,6 +109,8 @@ import java.util.List;
            If not required, then it would save us time. So, do check if it is required to be implemented or not
            (9) Once game is published for Play Console and for Play Games services with all the implemented GPGS features,
            then remember to turn on things like Anti-piracy, Tamper-protection etc.
+           (10) Check out this article to limit API usage and quota as follows ->
+           https://developers.google.com/games/services/console/configuring#adjusting_api_usage_quotas
 */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
