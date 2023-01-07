@@ -113,6 +113,9 @@ import java.util.List;
            https://developers.google.com/games/services/console/configuring#adjusting_api_usage_quotas
 */
 // TODO -> Implement push notifications which will mature as the age of the user on the app matures
+/* TODO -> Conduct the experiment to know what happens to data stored in SharedPreferences after we update
+           the app (In Production)
+ */
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
