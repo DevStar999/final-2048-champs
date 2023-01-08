@@ -114,6 +114,11 @@ import java.util.List;
 */
 // TODO -> Implement push notifications which will mature as the age of the user on the app matures
 // TODO -> 'Hammer of Thor' name for the highest level achievement of use of Smash Tile Tool
+/* TODO -> 'Revive Tool' only available in GameOverDialog. Cost of use - 1000 coins. Tool Effect - Eliminates all the game
+            tiles except the tiles with the highest value, collects and starts placing them from the bottom left corner
+            towards right, if the last row fills up then in the row above from left to right and so on, each row from top to
+            bottom.
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
