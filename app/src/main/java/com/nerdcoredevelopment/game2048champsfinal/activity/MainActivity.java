@@ -90,24 +90,39 @@ import java.util.List;
            (1) Keep adding tasks from the link -> https://developer.android.com/games/pgs/quality, to this to do list for
            GPGS features along with the progress of implementation of GPGS features
            (2) The features which are as follows are to be implemented in the 2nd round of implementation are as follows:
-           (i) Friends (ii) Saved Games
-           (iii) Events (iv) Player Stats
-           (3) Fill up the details of the OAuth consent screen in GCP project like App logo, privacy policy link etc.
-           (4) We need to instruct the user to share their gameplay activity to everyone in the Google Play Games app settings
+           [i] Friends [ii] Saved Games
+           [iii] Events [iv] Player Stats
+           (3) We need to instruct the user to share their gameplay activity to everyone in the Google Play Games app settings
            so that the score of the user can be submitted in the public version of a leaderboard & same data can be fetched
            and shown to the user in the app. Also instruct them how to make friends on Google Play Games, so that social
            version of a leaderboard can also be shown to the player
-           (5) Take a look at the notes in 'Squares Addition' app over the MainActivity.java file for tasks that need to be
+           (4) Take a look at the notes in 'Squares Addition' app over the MainActivity.java file for tasks that need to be
            done while implementing GPGS
-           (6) After all the features of GPGS are done, do a round of error handling for all GPGS features
-           (7) Do take a look at the Firebase consumption for the user of GPGS features in the project
-           (8) Check if the implementation of the following document is required ->
+           (5) After all the features of GPGS are done, do a round of error handling for all GPGS features. For this we can
+           verify all the GPGS features are working correctly and proper error handling is done for the following -
+           [i] When user is not signed-in
+           [ii] No internet connection or any combination of the above two
+           [iii] Any other faulty scenario
+           (6) Do take a look at the Firebase consumption for the user of GPGS features in the project
+           (7) Check if the implementation of the following document is required (Enable Server-Side Access) ->
            https://developers.google.com/games/services/android/offline-access
            If not required, then it would save us time. So, do check if it is required to be implemented or not
-           (9) Once game is published for Play Console and for Play Games services with all the implemented GPGS features,
+           (8) Once game is published for Play Console and for Play Games services with all the implemented GPGS features,
            then remember to turn on things like Anti-piracy, Tamper-protection etc.
-           (10) Check out this article to limit API usage and quota as follows ->
+           (9) Check out this article to limit API usage and quota as follows ->
            https://developers.google.com/games/services/console/configuring#adjusting_api_usage_quotas
+           (10) We should create like a 'Fresh Data' button wherever it we may feel that it is required like before e.g.
+                showing the leaderboards, achievements, loading some data etc. After this button is clicked, for the
+                immediate next clicks for showing leaderboards, achievements etc. we should call the methods which fetch the
+                fresh data from the servers instead of the methods which we usually call which may show us cached/stale data
+                sometimes.
+           (11) Check out the TODOs of 'Squares Addition' app, specifically the one which talks about the reason to explore
+           the 'Saved Games' feature of GPGS
+           (12) Be sure to make the use of Player ID in the code, this may be required for saving data particular to them
+           [Remember, here we are talking about Player ID (ID that developers can use) not Player Username on GPGS (This is
+           shown to the user on Google Play Games and it can be edited by the user as well)]
+           (14) Whenever we are waiting for GPGS features to load or take effect, we can show something like a loading screen
+           etc. in the meanwhile
 */
 // TODO -> Implement push notifications which will mature as the age of the user on the app matures
 // TODO -> 'Hammer of Thor' name for the highest level achievement of use of Smash Tile Tool
