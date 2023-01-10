@@ -123,8 +123,9 @@ import java.util.List;
            shown to the user on Google Play Games and it can be edited by the user as well)]
            (14) Whenever we are waiting for GPGS features to load or take effect, we can show something like a loading screen
            etc. in the meanwhile
+           (15) Create an achievement on purchase of (a) 25K coins package (b) 50K coins package (c) 100K coins package
+           (d) Premium Version (e) Collecting 1 million coins (Incremental Achievement)
 */
-// TODO -> Implement push notifications which will mature as the age of the user on the app matures
 // TODO -> 'Hammer of Thor' name for the highest level achievement of use of Smash Tile Tool
 /* TODO -> 'Revive Game' tool only available in GameOverDialog. Cost of use - 1000 coins. Tool Effect - Eliminates all the
             game tiles except the tiles with the highest value, collects and starts placing them from the bottom left corner
