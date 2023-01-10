@@ -61,9 +61,6 @@ import java.util.List;
            with coins. As the progress bar fills up change it's color from red/orange to green or something like that, it
            will look cool and engaging
 */
-/* TODO -> If In-App Review causes any Google Play Policy violation in 'Feed the Animal' project then we will not implement
-           it in this app. But if it does not cause any violation then we can implement it in this app.
-*/
 /* TODO -> A list of tasks that need to be done w.r.t. the Review feature in an involuntary Pop-up manner, is as follows:
            (1) Decide if we want to implement In-App Review feature or keep the normal review feature
            (2) Decide the beginning DND (Do Not Disturb) period before which it should not be shown
