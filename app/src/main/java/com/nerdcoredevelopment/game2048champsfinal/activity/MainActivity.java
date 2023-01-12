@@ -132,6 +132,12 @@ import java.util.List;
             towards right, if the last row fills up then in the row above from left to right and so on, each row from top to
             bottom.
 */
+/* TODO -> Change the preview images after Changing theme colors & colors for blocks after implementing new game progression
+           system for -
+           (1) Game Preview Image (Ensure color change of board, cells, block cell x drawable color,and game tiles etc.)
+           (2) Block Preview Image (Ensure color change of board, only use board of existing game modes, all 20 block
+           drawable designs)
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
