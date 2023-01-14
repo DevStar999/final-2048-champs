@@ -48,13 +48,6 @@ import java.util.List;
 /* TODO -> When it will be time to implement App Open Ad, change logo transition time to 3 seconds and splash screen time
            to 4 seconds
 */
-/* TODO -> !! Bug !! -> If we do undo exactly after the move in which we completed the goal, then goal completion is done.
-           But now if the user makes any move even a move which does not lead to goal completion the code block for goal
-           completion is being played. This happens also when Change Value tool reverses the goal completion status. Also
-           check if, after this bug happens in the game once, it somehow happens again and again. Additionally, look out for
-           this bug after undo is done for game over and the first move is made after this undo (Check after bug has happened
-           once before this)
-*/
 // TODO -> The width of the buttons in ShopFragment should be able to fit the text of the prices comfortably
 /* TODO -> Implement a combo bar which fills up in 20 or 30 or 50 etc. steps, where each step is added on completion of a
            move in which merge occurs at 2 or more places i.e. a multi-merge move. When the bar fills up we reward the user
