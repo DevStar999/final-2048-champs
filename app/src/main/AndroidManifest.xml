@@ -25,14 +25,22 @@
         <activity
             android:name=".activity.IntroActivity"
             android:exported="true"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GameActivity" />
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.GameActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
     </application>
 
 </manifest>
