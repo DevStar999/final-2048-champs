@@ -103,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingVertical="4dp"
-        app:layout_constraintBottom_toTopOf="@id/restore_purchases_shop_fragment_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/coins_current_count_shop_fragment_linear_layout">
