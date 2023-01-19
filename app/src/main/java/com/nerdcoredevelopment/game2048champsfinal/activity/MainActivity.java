@@ -58,6 +58,8 @@ import java.util.List;
            (1) Decide if we want to implement In-App Review feature or keep the normal review feature
            (2) Decide the beginning DND (Do Not Disturb) period before which it should not be shown
            (3) Decide the freq. and place (for e.g. the homepage of the app etc.) where it should be shown
+           [Note - As of now, every thing for implementing this feature with a static button in the SettingsFragment has
+           been completed (as per the life-cycle of Review feature photo in Mobile photos in the OnePlus phone)]
 */
 /* TODO -> A list of tasks that need to be done w.r.t. the Update App feature in an involuntary Pop-up manner, is as follows:
            (1) Decide the place (for e.g. the homepage of the app etc.) and freq. with which it should be shown
