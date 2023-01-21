@@ -133,6 +133,7 @@ import java.util.List;
            (2) Block Preview Image (Ensure color change of board, only use board of existing game modes, all 20 block
            drawable designs)
 */
+// TODO -> In the later stages of development, think over the colors for the different buttons in all the dialogs
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
