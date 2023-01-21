@@ -66,8 +66,8 @@ import java.util.List;
            (2) Condition check to allow the Update App Pop Up Dialog to be triggered
            (3) Code for functionality of 'Remind Later' and 'Skip Version' buttons is pending
            (4) Handle the error condition with a dialog or something
-           (5) The code is incomplete when it comes to checking internet connectivity. Write and test out a good working code
-           which correctly checks internet connectivity
+           [Note - As of now, every thing for implementing this feature with a static button in the SettingsFragment has
+           been completed (as per the life-cycle of Review feature photo in Mobile photos in the OnePlus phone)]
 */
 /* TODO -> Shift all the tools transition & layout related code into a separate fragment for two of the places which are as
            follows:
