@@ -42,9 +42,7 @@ import java.util.List;
 /* TODO -> Multiple quick dialog OR activity open clicks cause the dialog OR activity to open multiple times, we have to
            find a way to avoid that. Basically wherever a new page is opening there we need to stop this from happening
 */
-// TODO -> Remove smaller sized game modes as we get close to the publicity launch
 // TODO -> Implement the In-app updates button in the SettingsFragment
-// TODO -> Implement the In-app review feature working properly with quotas
 /* TODO -> When it will be time to implement App Open Ad, change logo transition time to 3 seconds and splash screen time
            to 4 seconds
 */
