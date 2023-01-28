@@ -132,7 +132,6 @@ import java.util.List;
            (15) Create an achievement on purchase of (a) 25K coins package (b) 50K coins package (c) 100K coins package
            (d) Premium Version (e) Collecting 1 million coins (Incremental Achievement)
 */
-// TODO -> 'Hammer of Thor' name for the highest level achievement of use of Smash Tile Tool
 /* TODO -> 'Revive Game' tool only available in GameOverDialog. Cost of use - 1000 coins. Tool Effect - Eliminates all the
             game tiles except the tiles with the highest value, collects and starts placing them from the bottom left corner
             towards right, if the last row fills up then in the row above from left to right and so on, each row from top to
