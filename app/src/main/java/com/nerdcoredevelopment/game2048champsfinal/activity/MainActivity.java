@@ -32,9 +32,6 @@ import com.nerdcoredevelopment.game2048champsfinal.fragments.ThemesFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-/* TODO -> Look into Animated Gradient Background (Something like the Instagram start screen)
-           Resource Link -> https://www.youtube.com/watch?v=x_DXXGvyfh8
-*/
 /* TODO -> Add a 'Share' button for sharing app download link & 'Promote' button for sharing promo
            code of possibly a premium product/scheme together as one group having these 2 buttons
            in the SettingsFragment
@@ -42,7 +39,6 @@ import java.util.List;
 /* TODO -> Multiple quick dialog OR activity open clicks cause the dialog OR activity to open multiple times, we have to
            find a way to avoid that. Basically wherever a new page is opening there we need to stop this from happening
 */
-// TODO -> Implement the In-app updates button in the SettingsFragment
 /* TODO -> When it will be time to implement App Open Ad, change logo transition time to 3 seconds and splash screen time
            to 4 seconds
 */
