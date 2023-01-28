@@ -58,11 +58,12 @@ public class PreGameFragment extends Fragment {
     private LottieAnimationView gamePreviewSpotLightLottie;
     private AppCompatImageView gamePreviewImageView;
     private LottieAnimationView startGameLottie;
-    private AppCompatButton startGameButton;
+    private AppCompatTextView highScoreTextView;
     private AppCompatImageView modeLeft;
     private AppCompatImageView modeRight;
     private AppCompatImageView sizeLeft;
     private AppCompatImageView sizeRight;
+    private AppCompatButton startGameButton;
 
     public PreGameFragment() {
         // Required empty public constructor
@@ -120,6 +121,13 @@ public class PreGameFragment extends Fragment {
         }
         gamePreviewImageView = layoutView.findViewById(R.id.game_preview_pregame_fragment_image_view);
         startGameLottie = layoutView.findViewById(R.id.start_game_pregame_fragment_lottie);
+        highScoreTextView = layoutView.findViewById(R.id.high_score_pregame_fragment_text_view);
+        highScoreTextView.setText(String.valueOf(sharedPreferences.getLong("bestScore" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), 0L)));
+        modeLeft = layoutView.findViewById(R.id.game_mode_left_arrow_pregame_fragment_image_view);
+        modeRight = layoutView.findViewById(R.id.game_mode_right_arrow_pregame_fragment_image_view);
+        sizeLeft = layoutView.findViewById(R.id.game_size_left_arrow_pregame_fragment_image_view);
+        sizeRight = layoutView.findViewById(R.id.game_size_right_arrow_pregame_fragment_image_view);
         startGameButton = layoutView.findViewById(R.id.start_game_pregame_fragment_button);
         if (sharedPreferences.getInt("gameStateEnumIndex" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), 0) == GameStates.GAME_ONGOING.ordinal()) {
@@ -127,10 +135,6 @@ public class PreGameFragment extends Fragment {
         } else {
             startGameButton.setText("START GAME");
         }
-        modeLeft = layoutView.findViewById(R.id.game_mode_left_arrow_pregame_fragment_image_view);
-        modeRight = layoutView.findViewById(R.id.game_mode_right_arrow_pregame_fragment_image_view);
-        sizeLeft = layoutView.findViewById(R.id.game_size_left_arrow_pregame_fragment_image_view);
-        sizeRight = layoutView.findViewById(R.id.game_size_right_arrow_pregame_fragment_image_view);
 
         // Updating the preview accordingly
         preGameManager.updatePreview(currentGameMode.getGamePreviewAssetFileName());
@@ -196,6 +200,10 @@ public class PreGameFragment extends Fragment {
         gameModeTextView.setText(currentGameMode.getMode());
         gameSizeTextView.setText(currentGameMode.getDimensions());
 
+        // Updating the text view for the high score of the new current game mode
+        highScoreTextView.setText(String.valueOf(sharedPreferences.getLong("bestScore" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), 0L)));
+
         // Updating Game Mode Browse Icons
         preGameManager.updateModeBrowseIcons(currentGameMode.getMode(), allGameModes);
 
@@ -237,7 +245,7 @@ public class PreGameFragment extends Fragment {
         });
     }
 
-    public void handleGameSizeBrowse(int indexOfCurrentSize) {
+    private void handleGameSizeBrowse(int indexOfCurrentSize) {
         // Make changes to the game size
         String newGameSize = allCurrentGameSizes.get(indexOfCurrentSize);
         currentGameMode = GameModes.getGameModeEnum(
@@ -245,6 +253,10 @@ public class PreGameFragment extends Fragment {
                 Character.getNumericValue(newGameSize.charAt(newGameSize.length() - 1)),
                 currentGameMode.getMode());
         gameSizeTextView.setText(currentGameMode.getDimensions());
+
+        // Updating the text view for the high score of the new current game mode
+        highScoreTextView.setText(String.valueOf(sharedPreferences.getLong("bestScore" + " " + currentGameMode.getMode()
+                + " " + currentGameMode.getDimensions(), 0L)));
 
         // Updating Game Size Browse Icons
         preGameManager.updateSizeBrowseIcons(currentGameMode.getDimensions(), allCurrentGameSizes);
