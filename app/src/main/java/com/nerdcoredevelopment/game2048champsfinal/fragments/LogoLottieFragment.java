@@ -40,7 +40,7 @@ public class LogoLottieFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_logo_lottie, container, false);
 
-        gamePreviewSpotlightLottie = view.findViewById(R.id.game_preview_spotlight_lottie);
+        gamePreviewSpotlightLottie = view.findViewById(R.id.game_preview_spotlight_logo_lottie_fragment_lottie);
         if (sharedPreferences.getBoolean("toggleRotatingLight", true)) {
             gamePreviewSpotlightLottie.playAnimation();
         } else {
