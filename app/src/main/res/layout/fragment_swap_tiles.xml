@@ -18,7 +18,7 @@
         app:layout_constraintGuide_percent="0.35" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/back_button_swap_tiles_fragment"
+        android:id="@+id/back_swap_tiles_fragment_button"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/back_arrow" />
 
     <FrameLayout
-        android:id="@+id/tool_preview_frame_layout_swap_tiles_fragment"
+        android:id="@+id/tool_preview_swap_tiles_fragment_frame_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/rotating_light_swap_tiles_fragment"
+            android:id="@+id/rotating_light_swap_tiles_fragment_lottie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -54,7 +54,7 @@
             app:lottie_speed="0.8" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/swap_tiles_preview_lottie"
+            android:id="@+id/swap_tiles_preview_swap_tiles_fragment_lottie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -62,7 +62,7 @@
             android:scaleY="0.4"
             app:lottie_autoPlay="false"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/special_tools_swap_tiles_grid"
+            app:lottie_rawRes="@raw/standard_tools_swap_tiles_grid"
             app:lottie_repeatMode="restart"
             app:lottie_speed="0.7" />
 
@@ -78,7 +78,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/tool_title_linear_layout_swap_tiles_fragment"
+            android:id="@+id/tool_title_swap_tiles_fragment_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -88,18 +88,18 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tool_title_text_view_swap_tiles_fragment"
+                android:id="@+id/tool_title_swap_tiles_fragment_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:scrollHorizontally="false"
                 android:text="SWAP TILES"
-                android:textColor="@color/game_primary_background_color"
+                android:textColor="@color/text_color"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/tool_title_completed_image_view_swap_tiles_fragment"
+                android:id="@+id/tool_title_completed_swap_tiles_fragment_image_view"
                 android:layout_width="32dp"
                 android:layout_height="match_parent" />
 
@@ -115,14 +115,14 @@
             android:paddingStart="8dp"
             android:checked="false"
             android:text="Select 1st tile for swap"
-            android:textColor="@color/game_primary_background_color"
+            android:textColor="@color/text_color"
             android:textSize="16sp"
             android:textStyle="normal"
             android:button="@drawable/check_box_selector"
             app:theme="@style/CustomCheckBox"
             app:layout_constraintBottom_toTopOf="@id/second_click_swap_tiles_fragment_check_box"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tool_title_linear_layout_swap_tiles_fragment" />
+            app:layout_constraintTop_toBottomOf="@id/tool_title_swap_tiles_fragment_linear_layout" />
 
         <!-- android:button attribute is for actual CheckBox looks and
              app:theme is highlight colors when clicked -->
@@ -133,7 +133,7 @@
             android:paddingStart="8dp"
             android:checked="false"
             android:text="Select 2nd tile for swap"
-            android:textColor="@color/game_primary_background_color"
+            android:textColor="@color/text_color"
             android:textSize="16sp"
             android:textStyle="normal"
             android:button="@drawable/check_box_selector"

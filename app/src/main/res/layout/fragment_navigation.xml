@@ -8,30 +8,68 @@
     tools:context=".fragments.NavigationFragment">
 
     <FrameLayout
+        android:id="@+id/fragment_navigation_gpgs_sign_in_frame_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:background="@drawable/click_navigation_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="32dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragment_navigation_gpgs_sign_in_image_view"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/navigation_gpgs_sign_in" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_navigation_gpgs_sign_in_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:text="SIGN IN"
+            android:textAlignment="center"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/fragment_navigation_pregame_frame_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/click_navigation_button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="64dp">
+        android:layout_marginBottom="32dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/fragment_navigation_pregame_image_view"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/navigation_game_controller" />
+            android:scaleX="0.8"
+            android:scaleY="0.9"
+            app:srcCompat="@drawable/navigation_play_game" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/fragment_navigation_pregame_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:layout_gravity="center_horizontal|bottom"
-            android:background="@color/game_primary_background_color"
-            android:text="PLAY GAME"
+            android:visibility="invisible"
+            android:text="PLAY"
             android:textAlignment="center"
-            android:textColor="@color/game_text_color"
+            android:textColor="@color/text_color"
             android:textSize="14sp"
             android:textStyle="bold" />
+
     </FrameLayout>
 
     <LinearLayout
@@ -41,130 +79,80 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <!-- TODO -> Enable 'Announcements' in game and set the visibility to
-                     VISIBLE -->
+        <!-- TODO -> Enable 'Achievements' in game and set the visibility to
+             VISIBLE -->
         <FrameLayout
-            android:id="@+id/fragment_navigation_announcements_linear_layout"
+            android:id="@+id/fragment_navigation_achievements_frame_layout"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp">
+            android:background="@drawable/click_navigation_button_small"
+            android:layout_marginHorizontal="8dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/fragment_navigation_announcements_image_view"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="10dp"
+                android:id="@+id/fragment_navigation_achievements_image_view"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:padding="5dp"
                 android:layout_gravity="center_horizontal"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                app:srcCompat="@drawable/navigation_announcements" />
+                app:srcCompat="@drawable/navigation_achievements" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/fragment_navigation_announcements_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:layout_marginBottom="4dp"
-                android:background="@color/game_primary_background_color"
-                android:text="ANNOUNCEMENTS"
-                android:textAlignment="center"
-                android:textColor="@color/game_text_color"
-                android:textSize="12sp"
-                android:textStyle="bold" />
         </FrameLayout>
 
         <!-- TODO -> Enable 'Leaderboards' in game and set the visibility to
                      VISIBLE -->
         <FrameLayout
-            android:id="@+id/fragment_navigation_leaderboards_linear_layout"
+            android:id="@+id/fragment_navigation_leaderboards_frame_layout"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp">
+            android:background="@drawable/click_navigation_button_small"
+            android:layout_marginHorizontal="8dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/fragment_navigation_leaderboards_image_view"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="10dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:padding="7dp"
                 android:layout_gravity="center_horizontal"
-                android:scaleX="0.75"
-                android:scaleY="0.75"
                 app:srcCompat="@drawable/navigation_leaderboards" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/fragment_navigation_leaderboards_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:layout_marginBottom="4dp"
-                android:background="@color/game_primary_background_color"
-                android:text="LEADERBOARDS"
-                android:textAlignment="center"
-                android:textColor="@color/game_text_color"
-                android:textSize="12sp"
-                android:textStyle="bold" />
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/fragment_navigation_settings_linear_layout"
+            android:id="@+id/fragment_navigation_shop_frame_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/fragment_navigation_settings_image_view"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="12dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                app:srcCompat="@drawable/navigation_settings" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/fragment_navigation_settings_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:layout_marginBottom="4dp"
-                android:background="@color/game_primary_background_color"
-                android:text="SETTINGS"
-                android:textAlignment="center"
-                android:textColor="@color/game_text_color"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/fragment_navigation_shop_linear_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp">
+            android:background="@drawable/click_navigation_button_small"
+            android:layout_marginHorizontal="8dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/fragment_navigation_shop_image_view"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="12dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:paddingVertical="3dp"
+                android:paddingHorizontal="7dp"
                 android:layout_gravity="center_horizontal"
-                android:scaleX="0.85"
-                android:scaleY="0.9"
                 app:srcCompat="@drawable/navigation_shop" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/fragment_navigation_shop_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:layout_marginBottom="4dp"
-                android:background="@color/game_primary_background_color"
-                android:text="SHOP"
-                android:textAlignment="center"
-                android:textColor="@color/game_text_color"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_navigation_settings_frame_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/click_navigation_button_small"
+            android:layout_marginHorizontal="8dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragment_navigation_settings_image_view"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:paddingVertical="3dp"
+                android:paddingHorizontal="7dp"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/navigation_settings" />
+
         </FrameLayout>
 
     </LinearLayout>

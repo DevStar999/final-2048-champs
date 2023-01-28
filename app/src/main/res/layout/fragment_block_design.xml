@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/game_primary_background_color"
+    android:background="@color/primary_background_color_dark"
     android:clickable="true"
     android:focusable="true"
     tools:context=".fragments.BlockDesignFragment">
@@ -13,16 +13,10 @@
         android:id="@+id/block_design_fragment_title_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner_fragment_title"
+        android:background="@drawable/rounded_corners_fragment_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            app:srcCompat="@color/game_text_color_divider_line" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title_block_design_fragment_text_view"
@@ -32,7 +26,7 @@
             android:scrollHorizontally="false"
             android:text="BLOCK DESIGN"
             android:textAlignment="center"
-            android:textColor="@color/game_primary_background_color"
+            android:textColor="@color/text_color"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -60,10 +54,10 @@
         app:layout_constraintTop_toBottomOf="@id/block_design_fragment_title_frame_layout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/block_design_preview_constraint_layout"
+        android:id="@+id/block_design_preview_block_design_fragment_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/game_text_color_divider_line"
+        android:background="@color/primary_background_color_dark"
         android:paddingVertical="20dp"
         app:layout_constraintBottom_toTopOf="@id/horizontal_guide_block_design_fragment"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,73 +65,73 @@
         app:layout_constraintTop_toBottomOf="@id/block_design_fragment_title_frame_layout">
 
         <LinearLayout
-            android:id="@+id/block_design_option_in_use_linear_layout"
+            android:id="@+id/block_design_option_in_use_block_design_fragment_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/block_design_preview_linear_layout"
+            app:layout_constraintEnd_toStartOf="@id/block_design_preview_block_design_fragment_linear_layout"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/block_design_option_in_use_text_view"
+                android:id="@+id/block_design_option_in_use_block_design_fragment_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_text"
+                android:background="@drawable/rounded_corners_block_design_text"
                 android:padding="8dp"
                 android:scrollHorizontally="false"
                 android:text="Block In Use"
                 android:textAlignment="center"
-                android:textColor="@color/game_text_color"
+                android:textColor="@color/text_color"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/block_design_option_in_use_image_view"
+                android:id="@+id/block_design_option_in_use_block_design_fragment_image_view"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_corner_block_design_option"
+                android:background="@drawable/rounded_corners_block_design_option"
                 android:padding="8dp"
                 android:scaleType="fitXY" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/block_design_preview_linear_layout"
+            android:id="@+id/block_design_preview_block_design_fragment_linear_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1.4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/block_design_option_in_use_linear_layout"
+            app:layout_constraintStart_toEndOf="@id/block_design_option_in_use_block_design_fragment_linear_layout"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/block_design_preview_text_view"
+                android:id="@+id/block_design_preview_block_design_fragment_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
-                android:background="@drawable/rounded_corner_text"
+                android:background="@drawable/rounded_corners_block_design_text"
                 android:padding="8dp"
                 android:scrollHorizontally="false"
                 android:text="Block Mode Preview"
                 android:textAlignment="center"
-                android:textColor="@color/game_text_color"
+                android:textColor="@color/text_color"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/block_design_preview_image_view"
-                app:layout_constraintEnd_toEndOf="@id/block_design_preview_image_view"
-                app:layout_constraintStart_toStartOf="@id/block_design_preview_image_view" />
+                app:layout_constraintBottom_toTopOf="@id/block_design_preview_block_design_fragment_image_view"
+                app:layout_constraintEnd_toEndOf="@id/block_design_preview_block_design_fragment_image_view"
+                app:layout_constraintStart_toStartOf="@id/block_design_preview_block_design_fragment_image_view" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/block_design_preview_image_view"
+                android:id="@+id/block_design_preview_block_design_fragment_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
@@ -153,26 +147,27 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_marginHorizontal="8dp"
-        android:background="@color/game_text_color"
+        android:background="@color/text_color"
         app:layout_constraintBottom_toTopOf="@id/horizontal_guide_block_design_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/horizontal_guide_block_design_fragment" />
 
     <ScrollView
-        android:id="@+id/block_design_options_scrollview"
+        android:id="@+id/block_design_options_block_design_fragment_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingHorizontal="28dp"
         android:paddingVertical="24dp"
         android:scrollbars="none"
+        android:background="@color/primary_background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/horizontal_guide_block_design_fragment">
 
         <LinearLayout
-            android:id="@+id/block_design_options_scrollview_child_linear_layout"
+            android:id="@+id/block_design_options_scrollview_child_block_design_fragment_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@drawable/gap_vertical_block_options"

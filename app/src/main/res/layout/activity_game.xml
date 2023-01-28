@@ -5,7 +5,7 @@
      2) goal_title_text_view, current_score_title_text_view, best_score_title_text_view
      a. layout_height="24dp" (Adjust according to board size)
      b. textSize="12sp" (Adjust according to above layout_height)
-     3) goal_value_text_view, current_score_value_text_view, best_score_value_text_view
+     3) goal_value_game_activity_text_view, current_score_value_game_activity_text_view, best_score_value_game_activity_text_view
      a. layout_width="90dp"
      b. layout_height="36dp"
      c. textSize="20sp" -->
@@ -13,6 +13,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_game_constraint_layout"
+    android:background="@color/primary_background_color_dark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.GameActivity">
@@ -40,6 +41,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -48,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/rounded_corner_current_coins"
+                android:background="@drawable/rounded_corners_current_coins"
                 android:onClick="currentCoinsAddCoinsLayout"
                 android:orientation="horizontal"
                 android:paddingHorizontal="4dp"
@@ -81,16 +83,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginHorizontal="8dp"
                     android:scrollHorizontally="false"
                     android:text="-"
-                    android:textColor="@color/game_primary_background_color"
+                    android:textColor="@color/text_color"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/current_coins_add_coins_image_view"
+                    android:id="@+id/current_coins_add_coins_game_activity_image_view"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_gravity="end|center_vertical"
@@ -103,14 +104,14 @@
             <!-- The text color is taken from the crown_icon
                      drawable file -->
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/current_score_value_text_view"
+                android:id="@+id/current_score_value_game_activity_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginHorizontal="4dp"
                 android:scrollHorizontally="false"
                 android:text="-"
-                android:textColor="@color/game_text_color"
+                android:textColor="@color/text_color"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -118,9 +119,10 @@
                 android:id="@+id/best_score_game_activity_linear_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/rounded_corner_current_coins"
+                android:background="@drawable/rounded_corners_best_score"
                 android:orientation="horizontal"
                 android:paddingHorizontal="4dp"
                 android:paddingVertical="4dp">
@@ -138,7 +140,7 @@
                 <!-- The text color is taken from the coin_symbol
                      drawable file -->
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/best_score_value_text_view"
+                    android:id="@+id/best_score_value_game_activity_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
@@ -146,7 +148,7 @@
                     android:layout_weight="1"
                     android:scrollHorizontally="false"
                     android:text="-"
-                    android:textColor="#F4DE7F"
+                    android:textColor="@color/text_color"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -159,36 +161,82 @@
             android:layout_height="2dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="10dp"
-            android:background="@color/game_text_color_divider_line" />
+            android:background="@color/divider_line" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/goal_linear_layout"
+        android:id="@+id/multi_merge_combo_bar_game_activity_linear_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="12dp"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/game_activity_top_display">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/multi_merge_icon_game_activity_constraint_layout"
+            android:layout_width="33dp"
+            android:layout_height="35dp"
+            android:layout_gravity="start|center_vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/multi_merge_combo_bar_icon_fire_game_activity_image_view"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/combo_fire" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/multi_merge_combo_bar_icon_merge_image_view"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/combo_merge" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/multi_merge_combo_bar_game_activity_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_gravity="center_vertical"
+            style="?android:attr/progressBarStyleHorizontal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/goal_game_activity_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner_display_base"
+        android:background="@drawable/rounded_corners_display_base"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/game_tools_linear_layout"
-        app:layout_constraintEnd_toEndOf="@id/game_tools_linear_layout"
-        app:layout_constraintStart_toStartOf="@id/game_tools_linear_layout"
-        app:layout_constraintTop_toBottomOf="@id/game_activity_top_display"
+        app:layout_constraintBottom_toTopOf="@id/game_tools_game_activity_linear_layout"
+        app:layout_constraintEnd_toEndOf="@id/game_tools_game_activity_linear_layout"
+        app:layout_constraintStart_toStartOf="@id/game_tools_game_activity_linear_layout"
+        app:layout_constraintTop_toBottomOf="@id/multi_merge_combo_bar_game_activity_linear_layout"
         app:layout_constraintVertical_weight="1">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/goal_tile_text_view"
+            android:id="@+id/goal_tile_title_game_activity_text_view"
             android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:background="@drawable/rounded_corner_display_top"
+            android:background="@drawable/rounded_corners_display_top"
             android:gravity="center"
             android:text="GOAL TILE"
             android:textAlignment="center"
-            android:textColor="@color/number_color_0002"
+            android:textColor="@color/text_color"
             android:textSize="12sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/goal_value_text_view"
+            android:id="@+id/goal_value_game_activity_text_view"
             android:layout_width="90dp"
             android:layout_height="36dp"
             android:gravity="center"
@@ -200,37 +248,36 @@
     </LinearLayout>
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/tools_change_lottie"
+        android:id="@+id/tools_change_game_activity_lottie"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleX="5"
         android:scaleY="5"
         android:paddingBottom="14dp"
         android:paddingStart="7dp"
-        android:onClick="toolsChangeTransition"
         app:lottie_autoPlay="false"
         app:lottie_loop="false"
         app:lottie_rawRes="@raw/tools_chest_transition"
-        app:layout_constraintBottom_toTopOf="@id/tools_frame_layout"
-        app:layout_constraintEnd_toEndOf="@id/tools_frame_layout"
-        app:layout_constraintStart_toStartOf="@id/tools_frame_layout"
-        app:layout_constraintTop_toBottomOf="@id/game_activity_top_display"
+        app:layout_constraintBottom_toTopOf="@id/tools_game_activity_frame_layout"
+        app:layout_constraintEnd_toEndOf="@id/tools_game_activity_frame_layout"
+        app:layout_constraintStart_toStartOf="@id/tools_game_activity_frame_layout"
+        app:layout_constraintTop_toBottomOf="@id/multi_merge_combo_bar_game_activity_linear_layout"
         app:layout_constraintVertical_weight="1" />
 
     <LinearLayout
-        android:id="@+id/game_tools_linear_layout"
+        android:id="@+id/game_tools_game_activity_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/tutorial_text_view"
+        app:layout_constraintBottom_toTopOf="@+id/tutorial_game_activity_text_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tools_frame_layout"
-        app:layout_constraintTop_toBottomOf="@+id/goal_linear_layout"
+        app:layout_constraintEnd_toStartOf="@id/tools_game_activity_frame_layout"
+        app:layout_constraintTop_toBottomOf="@+id/goal_game_activity_linear_layout"
         app:layout_constraintVertical_weight="1">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/pause_icon"
+            android:id="@+id/pause_icon_game_activity_image_view"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginHorizontal="4dp"
@@ -243,7 +290,7 @@
             app:srcCompat="@drawable/game_tools_pause" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/reset_icon"
+            android:id="@+id/reset_icon_game_activity_image_view"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginHorizontal="4dp"
@@ -254,25 +301,26 @@
             android:padding="2dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/game_tools_reset" />
+
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/tools_frame_layout"
+        android:id="@+id/tools_game_activity_frame_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tutorial_text_view"
+        app:layout_constraintBottom_toTopOf="@+id/tutorial_game_activity_text_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/game_tools_linear_layout"
-        app:layout_constraintTop_toBottomOf="@+id/goal_linear_layout"
+        app:layout_constraintStart_toEndOf="@id/game_tools_game_activity_linear_layout"
+        app:layout_constraintTop_toBottomOf="@+id/goal_game_activity_linear_layout"
         app:layout_constraintVertical_weight="1">
 
         <LinearLayout
-            android:id="@+id/standard_tools_linear_layout"
+            android:id="@+id/standard_tools_game_activity_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="invisible">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -285,7 +333,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/rounded_corner_tool_cost"
+                    android:background="@drawable/rounded_corners_tool_cost"
                     android:orientation="horizontal"
                     android:padding="1dp">
 
@@ -300,7 +348,7 @@
                         app:srcCompat="@drawable/coin_symbol" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/standard_tools_undo_cost_text_view"
+                        android:id="@+id/standard_tools_undo_cost_game_activity_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -308,14 +356,14 @@
                         android:layout_marginEnd="1dp"
                         android:scrollHorizontally="false"
                         android:text="-"
-                        android:textColor="@color/game_primary_background_color"
+                        android:textColor="@color/text_color"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/standard_tools_undo_icon"
+                    android:id="@+id/standard_tools_undo_icon_game_activity_image_view"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
@@ -339,7 +387,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/rounded_corner_tool_cost"
+                    android:background="@drawable/rounded_corners_tool_cost"
                     android:orientation="horizontal"
                     android:padding="1dp">
 
@@ -354,7 +402,7 @@
                         app:srcCompat="@drawable/coin_symbol" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/standard_tools_smash_cost_text_view"
+                        android:id="@+id/standard_tools_smash_cost_game_activity_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -362,14 +410,14 @@
                         android:layout_marginEnd="1dp"
                         android:scrollHorizontally="false"
                         android:text="-"
-                        android:textColor="@color/game_primary_background_color"
+                        android:textColor="@color/text_color"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/standard_tools_smash_icon"
+                    android:id="@+id/standard_tools_smash_icon_game_activity_image_view"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
@@ -394,7 +442,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/rounded_corner_tool_cost"
+                    android:background="@drawable/rounded_corners_tool_cost"
                     android:orientation="horizontal"
                     android:padding="1dp">
 
@@ -409,7 +457,7 @@
                         app:srcCompat="@drawable/coin_symbol" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/standard_tools_change_value_cost_text_view"
+                        android:id="@+id/standard_tools_swap_tiles_cost_game_activity_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -417,34 +465,34 @@
                         android:layout_marginEnd="1dp"
                         android:scrollHorizontally="false"
                         android:text="-"
-                        android:textColor="@color/game_primary_background_color"
+                        android:textColor="@color/text_color"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/standard_tools_change_value_icon"
+                    android:id="@+id/standard_tools_swap_tiles_icon_game_activity_image_view"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/click_standard_tools"
-                    android:contentDescription="Change One Value"
-                    android:onClick="standardToolsChangeValue"
-                    android:padding="2dp"
+                    android:contentDescription="Swap Two Tiles"
+                    android:onClick="standardToolsSwapTiles"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/standard_tools_change_value" />
+                    android:padding="4dp"
+                    app:srcCompat="@drawable/standard_tools_swap_tiles" />
 
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/special_tools_linear_layout"
+            android:id="@+id/special_tools_game_activity_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -457,7 +505,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/rounded_corner_tool_cost"
+                    android:background="@drawable/rounded_corners_tool_cost"
                     android:orientation="horizontal"
                     android:padding="1dp">
 
@@ -472,7 +520,7 @@
                         app:srcCompat="@drawable/coin_symbol" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/special_tools_swap_tiles_cost_text_view"
+                        android:id="@+id/special_tools_change_value_cost_game_activity_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -480,22 +528,23 @@
                         android:layout_marginEnd="1dp"
                         android:scrollHorizontally="false"
                         android:text="-"
-                        android:textColor="@color/game_primary_background_color"
+                        android:textColor="@color/text_color"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/special_tools_swap_tiles_icon"
+                    android:id="@+id/special_tools_change_value_icon_game_activity_image_view"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/click_special_tools"
-                    android:contentDescription="Swap Two Tiles"
-                    android:onClick="specialToolsSwapTiles"
+                    android:contentDescription="Change One Value"
+                    android:onClick="specialToolsChangeValue"
+                    android:padding="2dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/special_tools_swap_tiles" />
+                    app:srcCompat="@drawable/special_tools_change_value" />
 
             </LinearLayout>
 
@@ -510,7 +559,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/rounded_corner_tool_cost"
+                    android:background="@drawable/rounded_corners_tool_cost"
                     android:orientation="horizontal"
                     android:padding="1dp">
 
@@ -525,7 +574,7 @@
                         app:srcCompat="@drawable/coin_symbol" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/special_tools_eliminate_value_cost_text_view"
+                        android:id="@+id/special_tools_eliminate_value_cost_game_activity_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -533,7 +582,7 @@
                         android:layout_marginEnd="1dp"
                         android:scrollHorizontally="false"
                         android:text="-"
-                        android:textColor="@color/game_primary_background_color"
+                        android:textColor="@color/text_color"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -541,7 +590,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/special_tools_eliminate_value_icon"
+                    android:id="@+id/special_tools_eliminate_value_icon_game_activity_image_view"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
@@ -565,7 +614,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/rounded_corner_tool_cost"
+                    android:background="@drawable/rounded_corners_tool_cost"
                     android:orientation="horizontal"
                     android:padding="1dp">
 
@@ -580,7 +629,7 @@
                         app:srcCompat="@drawable/coin_symbol" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/special_tools_destroy_area_cost_text_view"
+                        android:id="@+id/special_tools_destroy_area_cost_game_activity_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -588,14 +637,14 @@
                         android:layout_marginEnd="1dp"
                         android:scrollHorizontally="false"
                         android:text="-"
-                        android:textColor="@color/game_primary_background_color"
+                        android:textColor="@color/text_color"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/special_tools_destroy_area_icon"
+                    android:id="@+id/special_tools_destroy_area_icon_game_activity_image_view"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
@@ -611,14 +660,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/tools_lottie_linear_layout"
+            android:id="@+id/tools_lottie_game_activity_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone">
 
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/tools_lottie_left"
+                android:id="@+id/tools_lottie_left_game_activity_lottie"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="4dp"
@@ -627,10 +676,10 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 app:lottie_speed="1.75"
-                app:lottie_rawRes="@raw/tools_intro" />
+                app:lottie_rawRes="@raw/tool_intro" />
 
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/tools_lottie_middle"
+                android:id="@+id/tools_lottie_middle_game_activity_lottie"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="4dp"
@@ -639,10 +688,10 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 app:lottie_speed="1.75"
-                app:lottie_rawRes="@raw/tools_intro" />
+                app:lottie_rawRes="@raw/tool_intro" />
 
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/tools_lottie_right"
+                android:id="@+id/tools_lottie_right_game_activity_lottie"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="4dp"
@@ -651,7 +700,7 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 app:lottie_speed="1.75"
-                app:lottie_rawRes="@raw/tools_intro" />
+                app:lottie_rawRes="@raw/tool_intro" />
 
         </LinearLayout>
 
@@ -660,20 +709,20 @@
     <!-- TODO -> In the later stages of development, remove this tutorial
                  textview from layout and from code -->
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tutorial_text_view"
+        android:id="@+id/tutorial_game_activity_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:scrollHorizontally="false"
         android:text=""
         android:textAlignment="center"
-        android:textColor="@color/game_text_color"
+        android:textColor="@color/text_color"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/game_frame_layout"
+        app:layout_constraintBottom_toTopOf="@+id/game_activity_game_frame_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tools_frame_layout"
+        app:layout_constraintTop_toBottomOf="@+id/tools_game_activity_frame_layout"
         app:layout_constraintVertical_weight="1" />
 
     <!-- The following attribute is used just ease the work with layout
@@ -681,7 +730,7 @@
          com.example.gameside2048champs.GameLayoutProvider class:
          app:layout_constraintDimensionRatio="1:1" -->
     <FrameLayout
-        android:id="@+id/game_frame_layout"
+        android:id="@+id/game_activity_game_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
@@ -690,7 +739,7 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tutorial_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/tutorial_game_activity_text_view"
         app:layout_constraintVertical_weight="1">
 
         <!-- Here we will be inflating layouts for game background
@@ -702,7 +751,7 @@
         android:id="@+id/tool_use_game_activity_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/game_frame_layout"
+        app:layout_constraintBottom_toTopOf="@id/game_activity_game_frame_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

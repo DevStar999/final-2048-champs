@@ -9,64 +9,66 @@
     android:paddingVertical="24dp">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/rate_us_dialog_title_text"
+        android:id="@+id/update_app_static_unavailable_dialog_title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginHorizontal="16dp"
         android:letterSpacing="0.04"
-        android:text="🤩 RATE 5 STARS 🤩"
+        android:text="🎉 GAME UP-TO-DATE 🎉"
         android:textAlignment="center"
-        android:textColor="@color/text_color"
-        android:textSize="16.5sp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:scrollHorizontally="false"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/rate_us_dialog_lottie"
+        app:layout_constraintBottom_toTopOf="@id/update_app_static_unavailable_dialog_lottie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Lottie Animation Link = https://lottiefiles.com/103689-rate-us -->
+    <!-- Lottie Animation Link = https://lottiefiles.com/70563-green-tick -->
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/rate_us_dialog_lottie"
+        android:id="@+id/update_app_static_unavailable_dialog_lottie"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginVertical="8dp"
         android:visibility="invisible"
-        android:scaleX="1.2"
-        android:scaleY="1.4"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         app:lottie_clipToCompositionBounds="true"
-        app:layout_constraintBottom_toTopOf="@id/rate_us_dialog_text"
+        app:layout_constraintBottom_toTopOf="@id/update_app_static_unavailable_dialog_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rate_us_dialog_title_text"
+        app:layout_constraintTop_toBottomOf="@id/update_app_static_unavailable_dialog_title_text"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/rate_us"
+        app:lottie_rawRes="@raw/app_up_to_date"
         app:lottie_repeatCount="6"
+        app:lottie_speed="1.5"
         app:lottie_repeatMode="restart" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/rate_us_dialog_text"
+        android:id="@+id/update_app_static_unavailable_dialog_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:paddingHorizontal="24dp"
         android:letterSpacing="0.04"
-        android:text="Enjoying the game! Please take the time to give us a 5-star review. It really helps."
+        android:text="Game is already running the latest version 😎"
         android:textAlignment="center"
-        android:textColor="@color/text_color"
-        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:scrollHorizontally="false"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/rate_us_dialog_buttons_linear_layout"
+        app:layout_constraintBottom_toTopOf="@id/update_app_static_unavailable_dialog_buttons_linear_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rate_us_dialog_lottie" />
+        app:layout_constraintTop_toBottomOf="@id/update_app_static_unavailable_dialog_lottie" />
 
     <LinearLayout
-        android:id="@+id/rate_us_dialog_buttons_linear_layout"
+        android:id="@+id/update_app_static_unavailable_dialog_buttons_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -74,10 +76,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rate_us_dialog_text">
+        app:layout_constraintTop_toBottomOf="@id/update_app_static_unavailable_dialog_text">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/rate_us_dialog_no_thanks"
+            android:id="@+id/update_app_static_unavailable_dialog_continue"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginHorizontal="8dp"
@@ -86,23 +88,7 @@
             android:maxEms="10"
             android:minEms="6"
             android:padding="10dp"
-            android:text="NO, THANKS"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/rate_us_dialog_rate_us"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="8dp"
-            android:background="@drawable/click_dialog_button"
-            android:letterSpacing="0.04"
-            android:maxEms="10"
-            android:minEms="6"
-            android:padding="10dp"
-            android:text="RATE US"
+            android:text="CONTINUE"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="14sp"

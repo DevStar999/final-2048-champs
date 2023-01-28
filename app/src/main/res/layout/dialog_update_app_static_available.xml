@@ -1,48 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="300dp"
+    android:layout_width="325dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@drawable/dialog_background"
     android:paddingHorizontal="8dp"
     android:paddingVertical="24dp">
 
-    <!-- Lottie Animation Link = https://lottiefiles.com/53391-yelly-emoji-no -->
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/game_exit_lottie"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/update_app_static_available_dialog_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:letterSpacing="0.04"
+        android:text="UPDATE AVAILABLE"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:scrollHorizontally="false"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/game_exit_text"
+        app:layout_constraintBottom_toTopOf="@id/update_app_static_available_dialog_lottie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Lottie Animation Link = https://lottiefiles.com/90060-maintanance-and-update -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/update_app_static_available_dialog_lottie"
+        android:layout_width="100dp"
+        android:layout_height="125dp"
+        android:layout_marginVertical="8dp"
+        android:visibility="invisible"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:lottie_clipToCompositionBounds="true"
+        app:layout_constraintBottom_toTopOf="@id/update_app_static_available_dialog_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/update_app_static_available_dialog_title_text"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/game_exit"
-        app:lottie_repeatCount="4"
+        app:lottie_rawRes="@raw/update_now"
+        app:lottie_repeatCount="6"
+        app:lottie_speed="2"
         app:lottie_repeatMode="restart" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/game_exit_text"
+        android:id="@+id/update_app_static_available_dialog_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:paddingHorizontal="24dp"
         android:letterSpacing="0.04"
-        android:text="Do you want to leave?"
+        android:text="[ You can keep playing the game while the update downloads in the background ]"
         android:textAlignment="center"
-        android:textColor="@color/text_color"
-        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         android:textStyle="bold"
+        android:scrollHorizontally="false"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/game_exit_buttons_linear_layout"
+        app:layout_constraintBottom_toTopOf="@id/update_app_static_available_dialog_buttons_linear_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/game_exit_lottie" />
+        app:layout_constraintTop_toBottomOf="@id/update_app_static_available_dialog_lottie" />
 
     <LinearLayout
-        android:id="@+id/game_exit_buttons_linear_layout"
+        android:id="@+id/update_app_static_available_dialog_buttons_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -50,10 +77,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/game_exit_text">
+        app:layout_constraintTop_toBottomOf="@id/update_app_static_available_dialog_text">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/game_exit_exit"
+            android:id="@+id/update_app_static_available_dialog_no_thanks"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginHorizontal="8dp"
@@ -62,14 +89,14 @@
             android:maxEms="10"
             android:minEms="6"
             android:padding="10dp"
-            android:text="EXIT"
+            android:text="NO, THANKS"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/game_exit_cancel"
+            android:id="@+id/update_app_static_available_dialog_update_now"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginHorizontal="8dp"
@@ -78,7 +105,7 @@
             android:maxEms="10"
             android:minEms="6"
             android:padding="10dp"
-            android:text="CANCEL"
+            android:text="UPDATE NOW"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="14sp"

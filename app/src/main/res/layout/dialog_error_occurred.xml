@@ -8,43 +8,43 @@
     android:paddingHorizontal="8dp"
     android:paddingVertical="24dp">
 
-    <!-- Lottie Animation Link = https://lottiefiles.com/16317-emoji-wink -->
+    <!-- Lottie Animation Link = https://lottiefiles.com/85978-error-dialog -->
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/arriving_feature_lottie"
+        android:id="@+id/error_occurred_lottie"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/arriving_feature_text"
+        app:layout_constraintBottom_toTopOf="@id/error_occurred_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_speed="0.75"
-        app:lottie_rawRes="@raw/arriving_feature"
+        app:lottie_speed="2"
+        app:lottie_rawRes="@raw/error_occurred"
         app:lottie_repeatCount="4"
         app:lottie_repeatMode="restart" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/arriving_feature_text"
+        android:id="@+id/error_occurred_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="32dp"
         android:paddingHorizontal="8dp"
         android:letterSpacing="0.04"
-        android:text="This game mode is arriving soon, so stay tuned for updates !!"
         android:textAlignment="center"
         android:textColor="@color/text_color"
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/arriving_feature_buttons_linear_layout"
+        app:layout_constraintBottom_toTopOf="@id/error_occurred_buttons_linear_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/arriving_feature_lottie" />
+        app:layout_constraintTop_toBottomOf="@id/error_occurred_lottie" />
 
     <LinearLayout
-        android:id="@+id/arriving_feature_buttons_linear_layout"
+        android:id="@+id/error_occurred_buttons_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -52,10 +52,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/arriving_feature_text">
+        app:layout_constraintTop_toBottomOf="@id/error_occurred_text">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/arriving_feature_continue"
+            android:id="@+id/error_occurred_continue"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginHorizontal="8dp"
