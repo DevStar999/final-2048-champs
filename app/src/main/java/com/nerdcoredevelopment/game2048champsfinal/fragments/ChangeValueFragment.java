@@ -48,7 +48,7 @@ public class ChangeValueFragment extends Fragment {
     private LinearLayout changeValueOptionsLinearLayout;
     private LinearLayout changeValueOptionsFirstRow;
     private LinearLayout changeValueOptionsSecondRow;
-    private List<Integer> optionValues;
+    private List<Long> optionValues;
     private List<AppCompatTextView> valueOptionTextViews;
     private List<AppCompatImageView> valueOptionSelectionImageViews;
     private boolean isFirstClickDone;
@@ -86,7 +86,7 @@ public class ChangeValueFragment extends Fragment {
         valueOptionTextView.setTypeface(valueOptionTextView.getTypeface(), Typeface.BOLD);
         valueOptionTextView.setVisibility(View.VISIBLE);
 
-        int currentOptionValue = optionValues.get(optionNumber);
+        long currentOptionValue = optionValues.get(optionNumber);
         CellValues cellValueCurrentOption = CellValues.getCellValueEnum(currentOptionValue);
         valueOptionTextView.setText(String.valueOf(currentOptionValue));
         valueOptionTextView.setTextColor(ContextCompat.getColor(context, cellValueCurrentOption.getNumberColorResourceId()));
@@ -153,36 +153,36 @@ public class ChangeValueFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_change_value, container, false);
 
-        backButton = view.findViewById(R.id.back_button_change_value_fragment);
-        rotatingLightLottie = view.findViewById(R.id.rotating_light_change_value_fragment);
-        changeValuePreviewLottie = view.findViewById(R.id.change_value_preview_lottie);
-        toolUseCompletedImageView = view.findViewById(R.id.tool_title_completed_image_view_change_value_fragment);
+        backButton = view.findViewById(R.id.back_change_value_fragment_button);
+        rotatingLightLottie = view.findViewById(R.id.rotating_light_change_value_fragment_lottie);
+        changeValuePreviewLottie = view.findViewById(R.id.change_value_preview_change_value_fragment_lottie);
+        toolUseCompletedImageView = view.findViewById(R.id.tool_title_completed_change_value_fragment_image_view);
         firstClickCheckBox = view.findViewById(R.id.first_click_change_value_fragment_check_box);
         secondClickCheckBox = view.findViewById(R.id.second_click_change_value_fragment_check_box);
-        selectedOptionLinearLayout = view.findViewById(R.id.selected_option_linear_layout);
-        selectedOptionValueTextView = view.findViewById(R.id.selected_option_value_text_view);
-        changeValueOptionsLinearLayout = view.findViewById(R.id.change_value_options_linear_layout);
-        changeValueOptionsFirstRow = view.findViewById(R.id.change_value_options_first_row);
-        changeValueOptionsSecondRow = view.findViewById(R.id.change_value_options_second_row);
-        optionValues = new ArrayList<>() {{ add(2); add(4); add(8); add(16); add(32); }};
+        selectedOptionLinearLayout = view.findViewById(R.id.selected_option_change_value_fragment_linear_layout);
+        selectedOptionValueTextView = view.findViewById(R.id.selected_option_value_change_value_fragment_text_view);
+        changeValueOptionsLinearLayout = view.findViewById(R.id.change_value_options_change_value_fragment_linear_layout);
+        changeValueOptionsFirstRow = view.findViewById(R.id.change_value_options_first_row_change_value_fragment_linear_layout);
+        changeValueOptionsSecondRow = view.findViewById(R.id.change_value_options_second_row__change_value_fragment_linear_layout);
+        optionValues = new ArrayList<>() {{ add(2L); add(4L); add(8L); add(16L); add(32L); }};
         valueOptionTextViews = new ArrayList<>();
         valueOptionSelectionImageViews = new ArrayList<>();
         isFirstClickDone = true;
         isSecondClickDone = true;
 
         // Making tool lottie view emerge so that it grabs attention during the tool fragment transition
-        CountDownTimer postFragmentSetupTimer = new CountDownTimer(650, 10000) {
+        CountDownTimer postFragmentSetupTimer = new CountDownTimer(225, 10000) {
             @Override
             public void onTick(long l) {}
             @Override
             public void onFinish() { isFirstClickDone = false; isSecondClickDone = false; }
         };
-        new CountDownTimer(300, 10000) {
+        new CountDownTimer(150, 10000) {
             @Override
             public void onTick(long l) {}
             @Override
             public void onFinish() {
-                ToolAnimationsUtility.toolLottieEmergeAnimation(changeValuePreviewLottie, 575);
+                ToolAnimationsUtility.toolLottieEmergeAnimation(changeValuePreviewLottie, 200);
                 postFragmentSetupTimer.start();
             }
         }.start();
@@ -203,7 +203,7 @@ public class ChangeValueFragment extends Fragment {
     }
 
     public void handleChangeValueToolFirstClick(LottieAnimationView changeValueTileLottie, GridLayout gameCellLottieLayout,
-        LottieAnimationView gridLottieView, Pair<Integer, Integer> changeValueTilePosition) {
+                                                LottieAnimationView gridLottieView, Pair<Integer, Integer> changeValueTilePosition) {
         // 1st set of events is as follows
         isFirstClickDone = true;
         firstClickCheckBox.setChecked(true);
@@ -221,13 +221,14 @@ public class ChangeValueFragment extends Fragment {
         this.gridLottieView = gridLottieView;
 
         // 3rd set of events is as follows - Setting the selection animation for the change value tile
-        ToolAnimationsUtility.standardToolsChangeValueFirstClickSelectionSetup(this.changeValueTileLottie);
+        ToolAnimationsUtility.specialToolsChangeValueFirstClickSelectionSetup(this.changeValueTileLottie);
         this.changeValueTileLottie.playAnimation();
     }
 
-    private void handleChangeValueToolSecondClick(int newValue, int optionNumber) {
+    private void handleChangeValueToolSecondClick(long newValue, int optionNumber) {
         // 1st set of events is as follows
         isSecondClickDone = true;
+        backButton.setVisibility(View.GONE);
         toolUseCompletedImageView.setImageResource(R.drawable.completed_icon);
         secondClickCheckBox.setChecked(true);
         CellValues cellValuesSelectedOption = CellValues.getCellValueEnum(optionValues.get(optionNumber));
@@ -269,7 +270,7 @@ public class ChangeValueFragment extends Fragment {
                 ChangeValueFragment.this.gameCellLottieLayout.setVisibility(View.VISIBLE);
 
                 // 4th set of events is as follows
-                ToolAnimationsUtility.standardToolsChangeValueTargetTileSetup(ChangeValueFragment.this.changeValueTileLottie);
+                ToolAnimationsUtility.specialToolsChangeValueTargetTileSetup(ChangeValueFragment.this.changeValueTileLottie);
                 ChangeValueFragment.this.changeValueTileLottie.removeAllAnimatorListeners();
                 ChangeValueFragment.this.changeValueTileLottie.addAnimatorListener(individualTileLottieSmashAnimatorListener);
                 ChangeValueFragment.this.changeValueTileLottie.playAnimation();
@@ -292,7 +293,7 @@ public class ChangeValueFragment extends Fragment {
                 ChangeValueFragment.this.gameCellLottieLayout.setVisibility(View.GONE);
 
                 // 3rd set of events is as follows
-                ToolAnimationsUtility.standardToolsChangeValueGridSetup(ChangeValueFragment.this.gridLottieView);
+                ToolAnimationsUtility.specialToolsChangeValueGridSetup(ChangeValueFragment.this.gridLottieView);
                 ChangeValueFragment.this.gridLottieView.addAnimatorListener(gridLottieAnimatorListener);
                 ChangeValueFragment.this.gridLottieView.playAnimation();
             }
@@ -304,14 +305,14 @@ public class ChangeValueFragment extends Fragment {
 
         // 2nd set of events is as follows
         this.changeValueTileLottie.pauseAnimation();
-        ToolAnimationsUtility.standardToolsChangeValueSecondClickSelectionSetup(this.changeValueTileLottie);
+        ToolAnimationsUtility.specialToolsChangeValueSecondClickSelectionSetup(this.changeValueTileLottie);
         this.changeValueTileLottie.addAnimatorListener(changeValueTileLottieSelectionAnimatorListener);
         this.changeValueTileLottie.playAnimation();
     }
 
     public interface OnChangeValueFragmentInteractionListener {
         void onChangeValueFragmentInteractionBackClicked();
-        void onChangeValueFragmentInteractionProcessToolUse(Pair<Integer, Integer> changeValueTilePosition, int newValue);
+        void onChangeValueFragmentInteractionProcessToolUse(Pair<Integer, Integer> changeValueTilePosition, long newValue);
     }
 
     @Override

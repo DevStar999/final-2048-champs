@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,28 +70,28 @@ public class SwapTilesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_swap_tiles, container, false);
 
-        backButton = view.findViewById(R.id.back_button_swap_tiles_fragment);
-        rotatingLightLottie = view.findViewById(R.id.rotating_light_swap_tiles_fragment);
-        swapTilesPreviewLottie = view.findViewById(R.id.swap_tiles_preview_lottie);
-        toolUseCompletedImageView = view.findViewById(R.id.tool_title_completed_image_view_swap_tiles_fragment);
+        backButton = view.findViewById(R.id.back_swap_tiles_fragment_button);
+        rotatingLightLottie = view.findViewById(R.id.rotating_light_swap_tiles_fragment_lottie);
+        swapTilesPreviewLottie = view.findViewById(R.id.swap_tiles_preview_swap_tiles_fragment_lottie);
+        toolUseCompletedImageView = view.findViewById(R.id.tool_title_completed_swap_tiles_fragment_image_view);
         firstClickCheckBox = view.findViewById(R.id.first_click_swap_tiles_fragment_check_box);
         secondClickCheckBox = view.findViewById(R.id.second_click_swap_tiles_fragment_check_box);
         isFirstClickDone = true;
         isSecondClickDone = true;
 
         // Making tool lottie view emerge so that it grabs attention during the tool fragment transition
-        CountDownTimer postFragmentSetupTimer = new CountDownTimer(650, 10000) {
+        CountDownTimer postFragmentSetupTimer = new CountDownTimer(225, 10000) {
             @Override
             public void onTick(long l) {}
             @Override
             public void onFinish() { isFirstClickDone = false; isSecondClickDone = false; }
         };
-        new CountDownTimer(300, 10000) {
+        new CountDownTimer(150, 10000) {
             @Override
             public void onTick(long l) {}
             @Override
             public void onFinish() {
-                ToolAnimationsUtility.toolLottieEmergeAnimation(swapTilesPreviewLottie, 575);
+                ToolAnimationsUtility.toolLottieEmergeAnimation(swapTilesPreviewLottie, 200);
                 postFragmentSetupTimer.start();
             }
         }.start();
@@ -120,7 +121,7 @@ public class SwapTilesFragment extends Fragment {
         // 2nd set of events is as follows - Setting the selection animation for the first swap tile
         this.firstSwapTilePosition = new Pair<>(firstSwapTilePosition.first, firstSwapTilePosition.second);
         this.firstSwapTileLottie = firstSwapTileLottie;
-        ToolAnimationsUtility.specialToolsSwapTilesFirstClickSelectionSetup(this.firstSwapTileLottie);
+        ToolAnimationsUtility.standardToolsSwapTilesFirstClickSelectionSetup(this.firstSwapTileLottie);
         this.firstSwapTileLottie.playAnimation();
     }
 
@@ -128,6 +129,7 @@ public class SwapTilesFragment extends Fragment {
                                                LottieAnimationView gridLottieView, Pair<Integer, Integer> secondSwapTilePosition) {
         // 1st set of events is as follows
         isSecondClickDone = true;
+        backButton.setVisibility(View.GONE);
         toolUseCompletedImageView.setImageResource(R.drawable.completed_icon);
         secondClickCheckBox.setChecked(true);
 
@@ -163,8 +165,8 @@ public class SwapTilesFragment extends Fragment {
                 gameCellLottieLayout.setVisibility(View.VISIBLE);
 
                 // 5th set of events is as follows
-                ToolAnimationsUtility.specialToolsSwapTilesSwapTileSetup(SwapTilesFragment.this.firstSwapTileLottie);
-                ToolAnimationsUtility.specialToolsSwapTilesSwapTileSetup(SwapTilesFragment.this.secondSwapTileLottie);
+                ToolAnimationsUtility.standardToolsSwapTilesSwapTileSetup(SwapTilesFragment.this.firstSwapTileLottie);
+                ToolAnimationsUtility.standardToolsSwapTilesSwapTileSetup(SwapTilesFragment.this.secondSwapTileLottie);
                 SwapTilesFragment.this.secondSwapTileLottie.removeAllAnimatorListeners();
                 SwapTilesFragment.this.secondSwapTileLottie.addAnimatorListener(swapTilesLottieSwapAnimatorListener);
                 SwapTilesFragment.this.firstSwapTileLottie.playAnimation();
@@ -185,7 +187,7 @@ public class SwapTilesFragment extends Fragment {
                 gameCellLottieLayout.setVisibility(View.GONE);
 
                 // 4th set of events is as follows
-                ToolAnimationsUtility.specialToolsSwapTilesGridSetup(gridLottieView);
+                ToolAnimationsUtility.standardToolsSwapTilesGridSetup(gridLottieView);
                 gridLottieView.addAnimatorListener(gridLottieAnimatorListener);
                 gridLottieView.playAnimation();
 
@@ -193,10 +195,12 @@ public class SwapTilesFragment extends Fragment {
                 SwapTilesFragment.this.firstSwapTileLottie.setPadding(0,0,0,0);
                 SwapTilesFragment.this.firstSwapTileLottie.setScaleX(1f);
                 SwapTilesFragment.this.firstSwapTileLottie.setSpeed(1f);
+                SwapTilesFragment.this.firstSwapTileLottie.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 SwapTilesFragment.this.firstSwapTileLottie.pauseAnimation();
                 SwapTilesFragment.this.secondSwapTileLottie.setPadding(0,0,0,0);
                 SwapTilesFragment.this.secondSwapTileLottie.setScaleX(1f);
                 SwapTilesFragment.this.secondSwapTileLottie.setSpeed(1f);
+                SwapTilesFragment.this.secondSwapTileLottie.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 SwapTilesFragment.this.secondSwapTileLottie.pauseAnimation();
             }
             @Override
@@ -214,15 +218,17 @@ public class SwapTilesFragment extends Fragment {
                 SwapTilesFragment.this.firstSwapTileLottie.setProgress(0f);
                 SwapTilesFragment.this.firstSwapTileLottie.setPadding(0,0,0,0);
                 SwapTilesFragment.this.firstSwapTileLottie.setSpeed(1f);
+                SwapTilesFragment.this.firstSwapTileLottie.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 SwapTilesFragment.this.firstSwapTileLottie.pauseAnimation();
                 SwapTilesFragment.this.secondSwapTileLottie.setProgress(0f);
                 SwapTilesFragment.this.secondSwapTileLottie.setPadding(0,0,0,0);
                 SwapTilesFragment.this.secondSwapTileLottie.setSpeed(1f);
+                SwapTilesFragment.this.secondSwapTileLottie.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 SwapTilesFragment.this.secondSwapTileLottie.pauseAnimation();
 
                 // 3rd set of events is as follows
-                ToolAnimationsUtility.specialToolsSwapTilesSecondClickSecondSelectionSetup(SwapTilesFragment.this.firstSwapTileLottie);
-                ToolAnimationsUtility.specialToolsSwapTilesSecondClickSecondSelectionSetup(SwapTilesFragment.this.secondSwapTileLottie);
+                ToolAnimationsUtility.standardToolsSwapTilesSecondClickSecondSelectionSetup(SwapTilesFragment.this.firstSwapTileLottie);
+                ToolAnimationsUtility.standardToolsSwapTilesSecondClickSecondSelectionSetup(SwapTilesFragment.this.secondSwapTileLottie);
                 SwapTilesFragment.this.secondSwapTileLottie.removeAllAnimatorListeners();
                 SwapTilesFragment.this.secondSwapTileLottie.addAnimatorListener(swapTilesLottieSecondSelectionAnimatorListener);
                 SwapTilesFragment.this.firstSwapTileLottie.playAnimation();
@@ -239,8 +245,8 @@ public class SwapTilesFragment extends Fragment {
         this.firstSwapTileLottie.pauseAnimation();
         this.secondSwapTilePosition = new Pair<>(secondSwapTilePosition.first, secondSwapTilePosition.second);
         this.secondSwapTileLottie = secondSwapTileLottie;
-        ToolAnimationsUtility.specialToolsSwapTilesSecondClickFirstSelectionSetup(this.firstSwapTileLottie);
-        ToolAnimationsUtility.specialToolsSwapTilesSecondClickFirstSelectionSetup(this.secondSwapTileLottie);
+        ToolAnimationsUtility.standardToolsSwapTilesSecondClickFirstSelectionSetup(this.firstSwapTileLottie);
+        ToolAnimationsUtility.standardToolsSwapTilesSecondClickFirstSelectionSetup(this.secondSwapTileLottie);
         this.secondSwapTileLottie.addAnimatorListener(swapTilesLottieFirstSelectionAnimatorListener);
         this.firstSwapTileLottie.playAnimation(); this.secondSwapTileLottie.playAnimation();
     }

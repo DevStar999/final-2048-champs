@@ -12,8 +12,8 @@ import android.widget.GridLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -28,7 +28,7 @@ public class EliminateValueFragment extends Fragment {
     private LottieAnimationView rotatingLightLottie;
     private LottieAnimationView eliminateValuePreviewLottie;
     private AppCompatImageView toolUseCompletedImageView;
-    private AppCompatTextView toolDescriptionTextView;
+    private AppCompatCheckBox userActionCheckBox;
     private boolean isToolUseComplete;
 
     public EliminateValueFragment() {
@@ -63,15 +63,15 @@ public class EliminateValueFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_eliminate_value, container, false);
 
-        backButton = view.findViewById(R.id.back_button_eliminate_value_fragment);
-        rotatingLightLottie = view.findViewById(R.id.rotating_light_eliminate_value_fragment);
-        eliminateValuePreviewLottie = view.findViewById(R.id.eliminate_value_preview_lottie);
-        toolUseCompletedImageView = view.findViewById(R.id.tool_title_completed_image_view_eliminate_value_fragment);
-        toolDescriptionTextView = view.findViewById(R.id.tool_description_text_view_eliminate_value_fragment);
+        backButton = view.findViewById(R.id.back_eliminate_value_fragment_button);
+        rotatingLightLottie = view.findViewById(R.id.rotating_light_eliminate_value_fragment_lottie);
+        eliminateValuePreviewLottie = view.findViewById(R.id.eliminate_value_preview_eliminate_value_fragment_lottie);
+        toolUseCompletedImageView = view.findViewById(R.id.tool_title_completed_eliminate_value_fragment_image_view);
+        userActionCheckBox = view.findViewById(R.id.user_action_eliminate_value_fragment_check_box);
         isToolUseComplete = true;
 
         // Making tool lottie view emerge so that it grabs attention during the tool fragment transition
-        CountDownTimer postFragmentSetupTimer = new CountDownTimer(650, 10000) {
+        CountDownTimer postFragmentSetupTimer = new CountDownTimer(225, 10000) {
             @Override
             public void onTick(long l) {}
             @Override
@@ -79,12 +79,12 @@ public class EliminateValueFragment extends Fragment {
                 isToolUseComplete = false;
             }
         };
-        new CountDownTimer(300, 10000) {
+        new CountDownTimer(150, 10000) {
             @Override
             public void onTick(long l) {}
             @Override
             public void onFinish() {
-                ToolAnimationsUtility.toolLottieEmergeAnimation(eliminateValuePreviewLottie, 575);
+                ToolAnimationsUtility.toolLottieEmergeAnimation(eliminateValuePreviewLottie, 200);
                 postFragmentSetupTimer.start();
             }
         }.start();
@@ -153,8 +153,9 @@ public class EliminateValueFragment extends Fragment {
                                           LottieAnimationView gridLottieView, List<Pair<Integer, Integer>> targetTilesPositions) {
         // 1st set of events is as follows
         isToolUseComplete = true;
+        backButton.setVisibility(View.GONE);
         toolUseCompletedImageView.setImageResource(R.drawable.completed_icon);
-        toolDescriptionTextView.setVisibility(View.GONE);
+        userActionCheckBox.setChecked(true);
         rotatingLightLottie.pauseAnimation();
         eliminateValuePreviewLottie.setProgress(0f);
         eliminateValuePreviewLottie.pauseAnimation();
