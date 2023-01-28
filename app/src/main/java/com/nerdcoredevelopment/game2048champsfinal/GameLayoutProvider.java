@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.nerdcoredevelopment.game2048champsfinal.enums.BlockDesigns;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
 
 public class GameLayoutProvider {
@@ -40,13 +41,18 @@ public class GameLayoutProvider {
         gameBackgroundGridLayout.setId(R.id.game_background_grid_layout);
         gameBackgroundGridLayout.setRowCount(gameMode.getRows());
         gameBackgroundGridLayout.setColumnCount(gameMode.getRows());
-        gameBackgroundGridLayout.setBackground(context.getDrawable(R.drawable.rounded_corner_board));
+        gameBackgroundGridLayout.setBackground(context.getDrawable(R.drawable.rounded_corners_board));
         for (int i = 0; i < gameMode.getRows(); i++) {
             for (int j = 0; j < gameMode.getColumns(); j++) {
                 AppCompatImageView imageView = new AppCompatImageView(context);
-                if (gameMode.getBlockCells().get(i).get(j).equals(-1)) {
-                    imageView.setImageResource(sharedPreferences
-                            .getInt("blockDrawableResourceId", R.drawable.block_cell_x));
+                if (gameMode.getBlockCells().get(i).get(j).equals(-1L)) {
+                    BlockDesigns selectedBlockDesign = BlockDesigns.valueOf(sharedPreferences
+                            .getString("selectedBlockDrawableEnumName", BlockDesigns.BLOCK_CELL_X.name()));
+                    imageView.setImageResource(selectedBlockDesign.getBlockDrawableResourceId());
+                    imageView.setScaleX(selectedBlockDesign.getBlockDrawableScaleX());
+                    imageView.setScaleY(selectedBlockDesign.getBlockDrawableScaleY());
+                    imageView.setRotationX(selectedBlockDesign.getBlockDrawableRotationX());
+                    imageView.setRotationY(selectedBlockDesign.getBlockDrawableRotationY());
                 } else {
                     imageView.setImageResource(R.drawable.cell_empty);
                 }
