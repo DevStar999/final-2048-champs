@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import com.nerdcoredevelopment.game2048champsfinal.R;
+import com.nerdcoredevelopment.game2048champsfinal.enums.BlockDesigns;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class BlockDesignFragment extends Fragment {
     private Context context;
     private OnBlockDesignFragmentInteractionListener mListener;
     private SharedPreferences sharedPreferences;
-    private List<Pair<Integer, Integer>> blockDesignDrawableResourceIds;
+    private List<BlockDesigns> blockDesignsList;
     private AppCompatImageView blockDesignOptionInUseImageView;
     private AppCompatImageView blockDesignPreviewImageView;
 
@@ -48,7 +48,7 @@ public class BlockDesignFragment extends Fragment {
     @SuppressLint("DefaultLocale")
     private void initialiseBlockDesignOptions(View layoutView) {
         LinearLayout blockDesignOptionsScrollViewChild = layoutView
-                .findViewById(R.id.block_design_options_scrollview_child_linear_layout);
+                .findViewById(R.id.block_design_options_scrollview_child_block_design_fragment_linear_layout);
 
         List<AppCompatImageView> blockDesignOptionImageViewList = new ArrayList<>();
         List<AppCompatImageView> blockDesignOptionSelectedBackgroundList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class BlockDesignFragment extends Fragment {
 
         // Programmatically filling up the block design options
         boolean isSelectionDone = false;
-        for (int i = 0; i < blockDesignDrawableResourceIds.size(); i += 3) {
+        for (int i = 0; i < blockDesignsList.size(); i += 3) {
             int rowNumber = (i / 3) + 1;
             RelativeLayout blockDesignOptionsRow = new RelativeLayout(context);
             blockDesignOptionsRow.setLayoutParams(new ViewGroup.LayoutParams(
@@ -64,11 +64,11 @@ public class BlockDesignFragment extends Fragment {
 
             for (int j = 0; j < 3; j++) {
                 int optionNumber = j + 1;
-                if (i + j >= blockDesignDrawableResourceIds.size()) {
+                if (i + j >= blockDesignsList.size()) {
                     continue;
                 }
                 FrameLayout blockDesignOption = new FrameLayout(context);
-                blockDesignOption.setBackgroundResource(R.drawable.rounded_corner_block_design_option);
+                blockDesignOption.setBackgroundResource(R.drawable.rounded_corners_block_design_option);
                 RelativeLayout.LayoutParams blockDesignOptionParams =
                         new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                                 RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -82,18 +82,20 @@ public class BlockDesignFragment extends Fragment {
                 blockDesignOption.setLayoutParams(blockDesignOptionParams);
 
                 AppCompatImageView blockDesignOptionImageView = new AppCompatImageView(context);
-                blockDesignOptionImageView.setBackgroundResource(R.drawable.rounded_corner_block_design_option_image_view);
+                blockDesignOptionImageView.setBackgroundResource(R.drawable.rounded_corners_block_design_option_image_view);
                 blockDesignOptionImageView.setTag("blockOption_row" + String.format("%03d", rowNumber)
                         + "_option" + String.format("%03d", optionNumber));
                 blockDesignOptionImageView.setPadding(dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
                 blockDesignOptionImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                blockDesignOptionImageView.setImageResource(blockDesignDrawableResourceIds.get(i + j).first);
+                blockDesignOptionImageView.setImageResource(blockDesignsList.get(i + j).getBlockDrawableResourceId());
+                blockDesignOptionImageView.setRotationX(blockDesignsList.get(i + j).getBlockDrawableRotationX());
+                blockDesignOptionImageView.setRotationY(blockDesignsList.get(i + j).getBlockDrawableRotationY());
                 FrameLayout.LayoutParams blockDesignOptionImageViewParams = new FrameLayout.LayoutParams(dpToPx(72), dpToPx(72));
                 blockDesignOptionImageView.setLayoutParams(blockDesignOptionImageViewParams);
 
                 AppCompatImageView blockDesignOptionSelectedBackground = new AppCompatImageView(context);
                 blockDesignOptionSelectedBackground.setVisibility(View.GONE);
-                blockDesignOptionSelectedBackground.setImageResource(R.drawable.rounded_corner_block_design_option_selected);
+                blockDesignOptionSelectedBackground.setImageResource(R.drawable.rounded_corners_block_design_option_selected);
                 FrameLayout.LayoutParams blockDesignOptionSelectedBackgroundParams = new FrameLayout.LayoutParams(dpToPx(72), dpToPx(72));
                 blockDesignOptionSelectedBackground.setLayoutParams(blockDesignOptionSelectedBackgroundParams);
 
@@ -111,16 +113,17 @@ public class BlockDesignFragment extends Fragment {
 
                 blockDesignOptionsRow.addView(blockDesignOption);
 
-                if ((sharedPreferences.getInt("blockDrawableResourceId", R.drawable.block_cell_x)
-                        == blockDesignDrawableResourceIds.get(i + j).first)
-                        && (sharedPreferences.getInt("blockDrawablePreviewResourceId", R.drawable.block_preview_cell_x)
-                        == blockDesignDrawableResourceIds.get(i + j).second)) {
+                if (sharedPreferences.getString("selectedBlockDrawableEnumName", BlockDesigns.BLOCK_CELL_X.name())
+                        .equals(blockDesignsList.get(i + j).name())) {
                     isSelectionDone = true;
                     blockDesignOptionImageView.setClickable(false);
                     blockDesignOptionSelectedBackground.setVisibility(View.VISIBLE);
                     blockDesignOptionSelectedImageView.setVisibility(View.VISIBLE);
-                    blockDesignOptionInUseImageView.setImageResource(blockDesignDrawableResourceIds.get(i + j).first);
-                    blockDesignPreviewImageView.setImageResource(blockDesignDrawableResourceIds.get(i + j).second);
+                    blockDesignOptionInUseImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    blockDesignOptionInUseImageView.setImageResource(blockDesignsList.get(i + j).getBlockDrawableResourceId());
+                    blockDesignOptionInUseImageView.setRotationX(blockDesignsList.get(i + j).getBlockDrawableRotationX());
+                    blockDesignOptionInUseImageView.setRotationY(blockDesignsList.get(i + j).getBlockDrawableRotationY());
+                    blockDesignPreviewImageView.setImageResource(blockDesignsList.get(i + j).getBlockPreviewResourceId());
                 }
                 blockDesignOptionImageViewList.add(blockDesignOptionImageView);
                 blockDesignOptionSelectedBackgroundList.add(blockDesignOptionSelectedBackground);
@@ -134,12 +137,15 @@ public class BlockDesignFragment extends Fragment {
             blockDesignOptionImageViewList.get(0).setClickable(false);
             blockDesignOptionSelectedBackgroundList.get(0).setVisibility(View.VISIBLE);
             blockDesignOptionSelectedImageViewList.get(0).setVisibility(View.VISIBLE);
-            blockDesignOptionInUseImageView.setImageResource(blockDesignDrawableResourceIds.get(0).first);
-            blockDesignPreviewImageView.setImageResource(blockDesignDrawableResourceIds.get(0).second);
+            blockDesignOptionInUseImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            blockDesignOptionInUseImageView.setImageResource(blockDesignsList.get(0).getBlockDrawableResourceId());
+            blockDesignOptionInUseImageView.setRotationX(blockDesignsList.get(0).getBlockDrawableRotationX());
+            blockDesignOptionInUseImageView.setRotationY(blockDesignsList.get(0).getBlockDrawableRotationY());
+            blockDesignPreviewImageView.setImageResource(blockDesignsList.get(0).getBlockPreviewResourceId());
         }
 
         // Setting onClick listeners to the block design options
-        for (int i = 0; i < blockDesignDrawableResourceIds.size(); i++) {
+        for (int i = 0; i < blockDesignsList.size(); i++) {
             int finalI = i;
             blockDesignOptionImageViewList.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -147,10 +153,13 @@ public class BlockDesignFragment extends Fragment {
                     blockDesignOptionImageViewList.get(finalI).setClickable(false);
                     blockDesignOptionSelectedBackgroundList.get(finalI).setVisibility(View.VISIBLE);
                     blockDesignOptionSelectedImageViewList.get(finalI).setVisibility(View.VISIBLE);
-                    blockDesignOptionInUseImageView.setImageResource(blockDesignDrawableResourceIds.get(finalI).first);
-                    blockDesignPreviewImageView.setImageResource(blockDesignDrawableResourceIds.get(finalI).second);
+                    blockDesignOptionInUseImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    blockDesignOptionInUseImageView.setImageResource(blockDesignsList.get(finalI).getBlockDrawableResourceId());
+                    blockDesignOptionInUseImageView.setRotationX(blockDesignsList.get(finalI).getBlockDrawableRotationX());
+                    blockDesignOptionInUseImageView.setRotationY(blockDesignsList.get(finalI).getBlockDrawableRotationY());
+                    blockDesignPreviewImageView.setImageResource(blockDesignsList.get(finalI).getBlockPreviewResourceId());
 
-                    for (int j = 0; j < blockDesignDrawableResourceIds.size(); j++) {
+                    for (int j = 0; j < blockDesignsList.size(); j++) {
                         if (finalI != j) {
                             blockDesignOptionImageViewList.get(j).setClickable(true);
                             blockDesignOptionSelectedBackgroundList.get(j).setVisibility(View.GONE);
@@ -158,10 +167,8 @@ public class BlockDesignFragment extends Fragment {
                         }
                     }
 
-                    sharedPreferences.edit().putInt("blockDrawableResourceId",
-                            blockDesignDrawableResourceIds.get(finalI).first).apply();
-                    sharedPreferences.edit().putInt("blockDrawablePreviewResourceId",
-                            blockDesignDrawableResourceIds.get(finalI).second).apply();
+                    sharedPreferences.edit().putString("selectedBlockDrawableEnumName",
+                            blockDesignsList.get(finalI).name()).apply();
                 }
             });
         }
@@ -192,22 +199,10 @@ public class BlockDesignFragment extends Fragment {
             }
         });
 
-        blockDesignOptionInUseImageView = view.findViewById(R.id.block_design_option_in_use_image_view);
-        blockDesignPreviewImageView = view.findViewById(R.id.block_design_preview_image_view);
+        blockDesignOptionInUseImageView = view.findViewById(R.id.block_design_option_in_use_block_design_fragment_image_view);
+        blockDesignPreviewImageView = view.findViewById(R.id.block_design_preview_block_design_fragment_image_view);
 
-        blockDesignDrawableResourceIds = new ArrayList<>() {{
-            // Keeping the first entry as the default block entry
-            add(new Pair<>(R.drawable.block_cell_x, R.drawable.block_preview_cell_x));
-            add(new Pair<>(R.drawable.block_alien, R.drawable.block_preview_alien));
-            add(new Pair<>(R.drawable.block_heart, R.drawable.block_preview_heart));
-            add(new Pair<>(R.drawable.block_poop, R.drawable.block_preview_poop));
-            add(new Pair<>(R.drawable.block_rock, R.drawable.block_preview_rock));
-            add(new Pair<>(R.drawable.block_cactus, R.drawable.block_preview_cactus));
-            add(new Pair<>(R.drawable.block_hurdle, R.drawable.block_preview_hurdle));
-            add(new Pair<>(R.drawable.block_ninja, R.drawable.block_preview_ninja));
-            add(new Pair<>(R.drawable.block_stormtrooper, R.drawable.block_preview_stormtrooper));
-            add(new Pair<>(R.drawable.block_vault, R.drawable.block_preview_vault));
-        }};
+        blockDesignsList = new ArrayList<>(BlockDesigns.getAllBlockDesigns());
 
         initialiseBlockDesignOptions(view);
 
