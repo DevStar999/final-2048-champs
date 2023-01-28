@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="610.63"
+    android:viewportHeight="610.63">
+    <!-- Source Link -> https://www.svgrepo.com/svg/27558/document -->
+
+    <!-- This path tag is for -> Corner Fold -->
+    <path
+        android:pathData="M553.94,473.34l-135.65,0l0,137.29z" >
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="26.5"
+                android:startY="0"
+                android:endX="26.5"
+                android:endY="6.904"
+                android:type="linear">
+                <item android:offset="0" android:color="#FFDEDEE7"/>
+                <item android:offset="1" android:color="#FFCFD0E8"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- This path tag is for -> Main Icon -->
+    <path
+        android:pathData="M553.94,38.16C553.94,17.07 536.87,0 515.78,0H94.86C73.78,0 56.69,17.07 56.69,38.16v534.3c0,21.09 17.09,38.16 38.16,38.16h284.61V449.39c0,-10.55 8.53,-19.08 19.08,-19.08h155.39V38.16zM114.07,95.63h191.25v43.03h-191.25V95.63zM114.07,215.16h191.25v43.03h-191.25V215.16zM305.32,497.25h-191.25v-43.03h191.25V497.25zM487,377.72H114.07v-43.03h372.94V377.72zM487,258.19H367.47V95.63h119.53V258.19z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="16"
+                android:startY="0"
+                android:endX="16"
+                android:endY="32"
+                android:type="linear">
+                <item android:offset="0" android:color="#FFDEDEE7"/>
+                <item android:offset="1" android:color="#FFCFD0E8"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

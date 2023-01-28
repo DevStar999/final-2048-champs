@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <!-- Source Link -> https://www.svgrepo.com/svg/176737/facebook-social-media -->
+
+    <path
+        android:pathData="M476.69,512H35.31C15.89,512 0,496.11 0,476.69V35.31C0,15.89 15.89,0 35.31,0H476.69C496.11,0 512,15.89 512,35.31V476.69C512,496.11 496.11,512 476.69,512" >
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="16"
+                android:endY="29.917"
+                android:startX="300"
+                android:startY="2"
+                android:type="linear">
+                <item
+                    android:color="#FF18ACFE"
+                    android:offset="0" />
+                <item
+                    android:color="#FF0163E0"
+                    android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M432.55,88.28v88.28h-79.45c-9.71,0 -17.66,7.95 -17.66,17.66v52.97h88.28v88.28h-88.28V512h-88.28V335.45h-70.62v-88.28h70.62v-52.97c0,-55.61 42.37,-101.52 97.1,-105.93H432.55z" />
+</vector>
