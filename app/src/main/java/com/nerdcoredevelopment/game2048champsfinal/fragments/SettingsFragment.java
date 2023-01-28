@@ -37,12 +37,12 @@ public class SettingsFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private AppCompatImageView backButton;
     private LinearLayout getPremiumLinearLayout;
-    private LinearLayout changeThemeLinearLayout;
     private LinearLayout toggleRotatingLightLinearLayout;
     private SwitchCompat toggleRotatingLightSwitch;
     private LinearLayout blockDesignLinearLayout;
     private LinearLayout howToPlayLinearLayout;
     private LinearLayout helpLinearLayout;
+    private LinearLayout checkUpdatesLinearLayout;
     private LinearLayout rateUsLinearLayout;
     private LinearLayout feedbackLinearLayout;
     private LinearLayout facebookLinearLayout;
@@ -75,14 +75,6 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 if (mListener != null) {
                     mListener.onSettingsFragmentInteractionGetPremiumClicked();
-                }
-            }
-        });
-        changeThemeLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mListener != null) {
-                    mListener.onSettingsFragmentInteractionChangeThemeClicked();
                 }
             }
         });
@@ -139,6 +131,14 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 if (mListener != null) {
                     mListener.onSettingsFragmentInteractionHelpClicked();
+                }
+            }
+        });
+        checkUpdatesLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onSettingsFragmentInteractionCheckUpdatesClicked();
                 }
             }
         });
@@ -278,22 +278,22 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         backButton = view.findViewById(R.id.title_back_settings_fragment_button);
-        getPremiumLinearLayout = view.findViewById(R.id.get_premium_linear_layout);
-        changeThemeLinearLayout = view.findViewById(R.id.change_theme_linear_layout);
-        toggleRotatingLightLinearLayout = view.findViewById(R.id.toggle_rotating_light_linear_layout);
-        toggleRotatingLightSwitch = view.findViewById(R.id.toggle_rotating_light_switch);
+        getPremiumLinearLayout = view.findViewById(R.id.get_premium_settings_fragment_linear_layout);
+        toggleRotatingLightLinearLayout = view.findViewById(R.id.toggle_rotating_light_settings_fragment_linear_layout);
+        toggleRotatingLightSwitch = view.findViewById(R.id.toggle_rotating_light_settings_fragment_switch);
         toggleRotatingLightSwitch.setChecked(sharedPreferences.getBoolean("toggleRotatingLight", true));
-        blockDesignLinearLayout = view.findViewById(R.id.block_design_linear_layout);
-        howToPlayLinearLayout = view.findViewById(R.id.how_to_play_linear_layout);
-        helpLinearLayout = view.findViewById(R.id.help_linear_layout);
-        rateUsLinearLayout = view.findViewById(R.id.rate_us_linear_layout);
-        feedbackLinearLayout = view.findViewById(R.id.feedback_linear_layout);
-        facebookLinearLayout = view.findViewById(R.id.facebook_linear_layout);
-        instagramLinearLayout = view.findViewById(R.id.instagram_linear_layout);
-        twitterLinearLayout = view.findViewById(R.id.twitter_linear_layout);
-        privacyLinearLayout = view.findViewById(R.id.privacy_policy_linear_layout);
-        termsLinearLayout = view.findViewById(R.id.terms_of_service_linear_layout);
-        exitLinearLayout = view.findViewById(R.id.exit_game_linear_layout);
+        blockDesignLinearLayout = view.findViewById(R.id.block_design_settings_fragment_linear_layout);
+        howToPlayLinearLayout = view.findViewById(R.id.how_to_play_settings_fragment_linear_layout);
+        helpLinearLayout = view.findViewById(R.id.help_settings_fragment_linear_layout);
+        checkUpdatesLinearLayout = view.findViewById(R.id.check_updates_settings_fragment_linear_layout);
+        rateUsLinearLayout = view.findViewById(R.id.rate_us_settings_fragment_linear_layout);
+        feedbackLinearLayout = view.findViewById(R.id.feedback_settings_fragment_linear_layout);
+        facebookLinearLayout = view.findViewById(R.id.facebook_settings_fragment_linear_layout);
+        instagramLinearLayout = view.findViewById(R.id.instagram_settings_fragment_linear_layout);
+        twitterLinearLayout = view.findViewById(R.id.twitter_settings_fragment_linear_layout);
+        privacyLinearLayout = view.findViewById(R.id.privacy_policy_settings_fragment_linear_layout);
+        termsLinearLayout = view.findViewById(R.id.terms_of_service_settings_fragment_linear_layout);
+        exitLinearLayout = view.findViewById(R.id.exit_game_settings_fragment_linear_layout);
 
         settingOnClickListeners();
 
@@ -303,11 +303,11 @@ public class SettingsFragment extends Fragment {
     public interface OnSettingsFragmentInteractionListener {
         void onSettingsFragmentInteractionBackClicked();
         void onSettingsFragmentInteractionGetPremiumClicked();
-        void onSettingsFragmentInteractionChangeThemeClicked();
         void onSettingsFragmentInteractionToggleRotatingLightClicked(boolean isChecked);
         void onSettingsFragmentInteractionBlockDesignClicked();
         void onSettingsFragmentInteractionHowToPlayClicked();
         void onSettingsFragmentInteractionHelpClicked();
+        void onSettingsFragmentInteractionCheckUpdatesClicked();
         void onSettingsFragmentInteractionExitClicked();
     }
 
