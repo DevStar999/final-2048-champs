@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/* TODO -> Whenever the ShopFragment is opened give something like a toast message or a dialog that says 'Network connection
+           failed' etc. when internet is not connected (Or else the user will keep pressing the button but nothing will
+           happen.
+*/
 public class ShopFragment extends Fragment {
     private Context context;
     private OnShopFragmentInteractionListener mListener;
@@ -72,7 +77,10 @@ public class ShopFragment extends Fragment {
         Qonversion.purchase((Activity) context, qProduct, new QonversionPermissionsCallback() {
             @Override
             public void onSuccess(@NotNull Map<String, QPermission> permissions) {
-                currentCoins += coinsReward.get(productIdPrefix);
+                int rewardAmount = coinsReward.get(productIdPrefix);
+                currentCoins += rewardAmount;
+                Toast.makeText(context, "Purchase Successful \uD83E\uDD17 Rewarded +" + rewardAmount + " Coins",
+                        Toast.LENGTH_LONG).show();
                 if (mListener != null) {
                     mListener.onShopFragmentInteractionUpdateCoins(currentCoins);
                 }
@@ -135,18 +143,18 @@ public class ShopFragment extends Fragment {
         shopCoinsConstraintLayouts = new ArrayList<>();
         for (int level = 1; level <= 7; level++) {
             int layoutResId = context.getResources().getIdentifier("shop_coins_level" + level +
-                    "_constraint_layout", "id", context.getPackageName());
+                    "_shop_fragment_constraint_layout", "id", context.getPackageName());
             shopCoinsConstraintLayouts.add(view.findViewById(layoutResId));
         }
 
         shopCoinsPurchaseButtons = new ArrayList<>();
         for (int level = 1; level <= 7; level++) {
             int layoutResId = context.getResources().getIdentifier("shop_coins_level" + level +
-                    "_purchase_button", "id", context.getPackageName());
+                    "_shop_fragment_purchase_button", "id", context.getPackageName());
             shopCoinsPurchaseButtons.add(view.findViewById(layoutResId));
         }
 
-        currentCoins = sharedPreferences.getInt("currentCoins", 2000);
+        currentCoins = sharedPreferences.getInt("currentCoins", 3000);
         currentCoinsTextView.setText(String.valueOf(currentCoins));
         coinsReward = new HashMap<>() {{
             put("coins_level1", 1000); put("coins_level2", 3000); put("coins_level3", 5000);
@@ -170,7 +178,6 @@ public class ShopFragment extends Fragment {
 
     public interface OnShopFragmentInteractionListener {
         void onShopFragmentInteractionBackClicked();
-        void onShopFragmentInteractionRestorePurchaseClicked();
         void onShopFragmentInteractionUpdateCoins(int currentCoins);
     }
 
