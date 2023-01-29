@@ -17,7 +17,11 @@ import com.qonversion.android.sdk.dto.QLaunchResult;
 
 /** Application class that initializes, loads and show ads when activities change states. */
 public class MyApplication extends Application implements Application.ActivityLifecycleCallbacks, LifecycleObserver {
-    private void initialiseQonversion() {
+    private void initialiseQonversion(int retryAttemptCount) {
+        if (retryAttemptCount >= 10) {
+            return;
+        }
+
         // Qonversion.setDebugMode(); /* Always have this line commented out, un-comment only while testing */
         Qonversion.launch(this, "5KV0fBWmAdudW3_m6DuKt0F00M2FFDKo",
                 false, new QonversionLaunchCallback() {
@@ -25,12 +29,10 @@ public class MyApplication extends Application implements Application.ActivityLi
                     public void onSuccess(@NonNull QLaunchResult qLaunchResult) {}
                     @Override
                     public void onError(@NonNull QonversionError qonversionError) {
-                        initialiseQonversion();
+                        initialiseQonversion(retryAttemptCount + 1);
                     }
                 }
         );
-
-        PlayGamesSdk.initialize(this);
     }
 
     @Override
@@ -38,7 +40,9 @@ public class MyApplication extends Application implements Application.ActivityLi
         super.onCreate();
         this.registerActivityLifecycleCallbacks(this);
 
-        initialiseQonversion();
+        initialiseQonversion(0);
+
+        PlayGamesSdk.initialize(this);
     }
 
     /**

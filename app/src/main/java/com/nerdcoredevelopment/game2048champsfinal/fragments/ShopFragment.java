@@ -36,7 +36,7 @@ import java.util.Map;
 
 /* TODO -> Whenever the ShopFragment is opened give something like a toast message or a dialog that says 'Network connection
            failed' etc. when internet is not connected (Or else the user will keep pressing the button but nothing will
-           happen.
+           happen)
 */
 public class ShopFragment extends Fragment {
     private Context context;
@@ -92,7 +92,13 @@ public class ShopFragment extends Fragment {
         });
     }
 
-    private void loadItemPrices() {
+    private void loadItemPrices(int retryAttemptCount) {
+        if (retryAttemptCount >= 10) {
+            Toast.makeText(context, "Network connection failed. Please check Internet connectivity",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Qonversion.offerings(new QonversionOfferingsCallback() {
             @Override
             public void onSuccess(@NotNull QOfferings offerings) {
@@ -118,7 +124,7 @@ public class ShopFragment extends Fragment {
             }
             @Override
             public void onError(@NotNull QonversionError error) {
-                loadItemPrices();
+                loadItemPrices(retryAttemptCount + 1);
             }
         });
     }
@@ -164,7 +170,7 @@ public class ShopFragment extends Fragment {
 
         settingOnClickListeners();
 
-        loadItemPrices();
+        loadItemPrices(0);
 
         return view;
     }
