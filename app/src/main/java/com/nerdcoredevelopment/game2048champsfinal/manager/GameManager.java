@@ -13,6 +13,8 @@ import android.widget.GridLayout;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
+import com.google.android.gms.games.LeaderboardsClient;
+import com.google.android.gms.games.PlayGames;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.dataclasses.CellTransitionInfoMatrix;
@@ -41,6 +43,8 @@ public class GameManager {
     private UndoManager undoManager;
     private List<List<Boolean>> areAllAnimationsDone; // Boolean matrix to check if all animations are done
     private GameStates currentGameState;
+    private AchievementsManager achievementsManager;
+    private LeaderboardsClient leaderboardsClient;
 
     public GameManager(Activity parentActivity, GameModes currentGameMode) {
         this.parentActivity = parentActivity;
@@ -67,6 +71,9 @@ public class GameManager {
             gameMatrix.add(gameMatrixRow);
             areAllAnimationsDone.add(areAllAnimationsDoneRow);
         }
+
+        achievementsManager = new AchievementsManager(this.parentActivity);
+        leaderboardsClient = PlayGames.getLeaderboardsClient(this.parentActivity);
     }
 
     public void addNewValues(int numberOfCellsToAdd, List<List<Long>> givenBoard) {
@@ -138,7 +145,19 @@ public class GameManager {
             }
             shallowCopyGameMatrix.add(shallowCopyGameMatrixRow);
         }
+
+        // Making updates to the last saved game matrix state and score
         undoManager.saveStatePostMove(currentScore, shallowCopyGameMatrix);
+
+        /* This is a great opportunity for us to make the checks to see if conditions for unlocking the many achievements
+           offered in this game are met or not
+        */
+        for (int row = 0; row < currentGameMode.getRows(); row++) {
+            for (int column = 0; column < currentGameMode.getColumns(); column++) {
+                long tileValue = gameMatrix.get(row).get(column);
+                achievementsManager.checkTileUnlockAchievements(tileValue);
+            }
+        }
     }
 
     public int findGameTilesCurrentlyOnBoard(List<List<Long>> givenBoard) {

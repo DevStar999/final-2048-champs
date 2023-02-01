@@ -79,11 +79,9 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <!-- TODO -> Enable 'Achievements' in game and set the visibility to
-             VISIBLE -->
         <FrameLayout
             android:id="@+id/fragment_navigation_achievements_frame_layout"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/click_navigation_button_small"
@@ -99,11 +97,9 @@
 
         </FrameLayout>
 
-        <!-- TODO -> Enable 'Leaderboards' in game and set the visibility to
-                     VISIBLE -->
         <FrameLayout
             android:id="@+id/fragment_navigation_leaderboards_frame_layout"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/click_navigation_button_small"

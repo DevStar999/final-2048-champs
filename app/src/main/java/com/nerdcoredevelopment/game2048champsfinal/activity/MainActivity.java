@@ -10,6 +10,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,8 +23,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.games.AchievementsClient;
+import com.google.android.gms.games.AnnotatedData;
+import com.google.android.gms.games.AuthenticationResult;
+import com.google.android.gms.games.GamesSignInClient;
+import com.google.android.gms.games.LeaderboardsClient;
+import com.google.android.gms.games.PlayGames;
+import com.google.android.gms.games.Player;
+import com.google.android.gms.games.achievement.Achievement;
+import com.google.android.gms.games.achievement.AchievementBuffer;
+import com.google.android.gms.games.leaderboard.Leaderboard;
+import com.google.android.gms.games.leaderboard.LeaderboardBuffer;
+import com.google.android.gms.games.leaderboard.LeaderboardVariant;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
@@ -39,7 +54,11 @@ import com.nerdcoredevelopment.game2048champsfinal.dialogs.ErrorOccurredDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameExitDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.UpdateAppStaticAvailableDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.UpdateAppStaticUnavailableDialog;
+import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
+import com.nerdcoredevelopment.game2048champsfinal.enums.ScoringAchievements;
+import com.nerdcoredevelopment.game2048champsfinal.enums.TileUnlockAchievements;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.BlockDesignFragment;
+import com.nerdcoredevelopment.game2048champsfinal.fragments.LeaderboardsFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.LogoLottieFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.NavigationFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.PreGameFragment;
@@ -147,10 +166,19 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
+        LeaderboardsFragment.OnLeaderboardsFragmentInteractionListener,
+        ShopFragment.OnShopFragmentInteractionListener,
         SettingsFragment.OnSettingsFragmentInteractionListener,
-        BlockDesignFragment.OnBlockDesignFragmentInteractionListener,
-        ShopFragment.OnShopFragmentInteractionListener {
+        BlockDesignFragment.OnBlockDesignFragmentInteractionListener {
     private SharedPreferences sharedPreferences;
+
+    // Attributes for Google Play Games Services (GPGS) features
+    private boolean isUserSignedIn;
+    private GamesSignInClient gamesSignInClient;
+    private static final int RC_ACHIEVEMENT_UI = 9003;
+    private AchievementsClient achievementsClient;
+    public static final int RC_LEADERBOARD_UI = 9004;
+    private LeaderboardsClient leaderboardsClient;
 
     // Attributes required for In app updates feature
     public static final int UPDATE_REQUEST_CODE = 100;
@@ -158,7 +186,11 @@ public class MainActivity extends AppCompatActivity implements
     private InstallStateUpdatedListener installStateUpdatedListener;
 
     private void initialise() {
+        isUserSignedIn = true;
         sharedPreferences = getSharedPreferences("com.nerdcoredevelopment.game2048champsfinal", Context.MODE_PRIVATE);
+        gamesSignInClient = PlayGames.getGamesSignInClient(MainActivity.this);
+        achievementsClient = PlayGames.getAchievementsClient(MainActivity.this);
+        leaderboardsClient = PlayGames.getLeaderboardsClient(MainActivity.this);
     }
 
     @Override
@@ -190,6 +222,8 @@ public class MainActivity extends AppCompatActivity implements
                 .replace(R.id.logo_lottie_main_activity_fragment_container, logoLottieFragment, "LOGO_LOTTIE_FRAGMENT")
                 .replace(R.id.navigation_main_activity_fragment_container, navigationFragment, "NAVIGATION_FRAGMENT")
                 .commit();
+
+        verifyPlayGamesSignIn(false);
 
         setupInAppUpdate();
     }
@@ -287,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements
                for prompting the user to check their internet connection
              */
             Toast.makeText(MainActivity.this, "Network connection failed. Please check " +
-                    "internet connectivity", Toast.LENGTH_LONG).show();
+                    "Internet connectivity", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -329,6 +363,280 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
+    private void checkForNewSignedInPlayer() {
+        PlayGames.getPlayersClient(MainActivity.this).getCurrentPlayer()
+                .addOnCompleteListener(new OnCompleteListener<Player>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Player> task) {
+                        String playerId = task.getResult().getPlayerId();
+                        String previousSignedInPlayerId = sharedPreferences.getString("previousSignedInPlayerId",
+                                "<Default Signed In Player>");
+                        String currentSignedInPlayerId = sharedPreferences.getString("currentSignedInPlayerId",
+                                previousSignedInPlayerId); // Expected currently signed in player
+                        if (currentSignedInPlayerId.equals(playerId)) { // The previous player has
+                            // All is good here
+                        } else {
+                            sharedPreferences.edit().putString("previousSignedInPlayerId",
+                                    currentSignedInPlayerId).apply();
+                            sharedPreferences.edit().putString("currentSignedInPlayerId", playerId).apply();
+                            updateAchievementsProgress(0);
+                            updateLeaderboardsProgress(0);
+                        }
+                    }
+                });
+    }
+
+    private void verifyPlayGamesSignIn(boolean isSignInAttemptManual) {
+        gamesSignInClient.isAuthenticated().addOnCompleteListener(new OnCompleteListener<AuthenticationResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthenticationResult> isAuthenticatedTask) {
+                boolean isAuthenticated = (isAuthenticatedTask.isSuccessful()
+                        && isAuthenticatedTask.getResult().isAuthenticated());
+                if (isAuthenticated) {
+                    isUserSignedIn = true;
+                    hideSignInButtonThroughoutApp();
+                    checkForNewSignedInPlayer();
+                } else {
+                    isUserSignedIn = false;
+                    revealSignInButtonThroughoutApp();
+                    if (isSignInAttemptManual) {
+                        if (isInternetConnected()) {
+                            /* TODO -> Replace this toast with something better like a dialog etc. and more descriptive
+                                       (Sign In feature)
+                            */
+                            Toast.makeText(MainActivity.this, "Download the 'Google Play Games' app and " +
+                                    "select an account to play this game", Toast.LENGTH_LONG).show();
+                        } else { // Internet is NOT connected
+                            Toast.makeText(MainActivity.this, "Network connection failed. Please check " +
+                                    "Internet connectivity", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void verifyPlayGamesSignInPreAchievementsDisplay() {
+        gamesSignInClient.isAuthenticated().addOnCompleteListener(new OnCompleteListener<AuthenticationResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthenticationResult> isAuthenticatedTask) {
+                boolean isAuthenticated = (isAuthenticatedTask.isSuccessful()
+                        && isAuthenticatedTask.getResult().isAuthenticated());
+                if (isAuthenticated) {
+                    isUserSignedIn = true;
+                    hideSignInButtonThroughoutApp();
+                    checkForNewSignedInPlayer();
+                } else {
+                    isUserSignedIn = false;
+                    revealSignInButtonThroughoutApp();
+                    if (isInternetConnected()) {
+                        /* TODO -> Replace this toast with something better like a dialog etc. and more descriptive
+                                   (Achievements feature)
+                        */
+                        Toast.makeText(MainActivity.this, "Cannot access this feature without being Signed In",
+                                Toast.LENGTH_LONG).show();
+                    } else { // Internet is NOT connected
+                        Toast.makeText(MainActivity.this, "Network connection failed. Please check " +
+                                "Internet connectivity", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                if (isUserSignedIn) {
+                    showAchievementsDisplayPostVerification();
+                }
+            }
+        });
+    }
+
+    private void verifyPlayGamesSignInPreLeaderboardsDisplay() {
+        gamesSignInClient.isAuthenticated().addOnCompleteListener(new OnCompleteListener<AuthenticationResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthenticationResult> isAuthenticatedTask) {
+                boolean isAuthenticated = (isAuthenticatedTask.isSuccessful()
+                        && isAuthenticatedTask.getResult().isAuthenticated());
+                if (isAuthenticated) {
+                    isUserSignedIn = true;
+                    hideSignInButtonThroughoutApp();
+                    checkForNewSignedInPlayer();
+                } else {
+                    isUserSignedIn = false;
+                    revealSignInButtonThroughoutApp();
+                    if (isInternetConnected()) {
+                        /* TODO -> Replace this toast with something better like a dialog etc. and more descriptive
+                                   (Leaderboards feature)
+                        */
+                        Toast.makeText(MainActivity.this, "Ensure you are Signed In and 'Everyone can see your " +
+                                "game activity' in 'Google Play Games' app settings", Toast.LENGTH_LONG).show();
+                    } else { // Internet is NOT connected
+                        Toast.makeText(MainActivity.this, "Network connection failed. Please check " +
+                                "Internet connectivity", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                if (isUserSignedIn) {
+                    showLeaderboardsDisplayPostVerification();
+                }
+            }
+        });
+    }
+
+    private void hideSignInButtonThroughoutApp() {
+        List<Fragment> fragments = new ArrayList<>(getSupportFragmentManager().getFragments());
+        for (int index = 0; index < fragments.size(); index++) {
+            Fragment currentFragment = fragments.get(index);
+            if (currentFragment != null && currentFragment.getTag() != null
+                    && !currentFragment.getTag().isEmpty()) {
+                if (currentFragment.getTag().equals("NAVIGATION_FRAGMENT")) {
+                    ((NavigationFragment) currentFragment).hideSignInButton();
+                } else if (currentFragment.getTag().equals("SETTINGS_FRAGMENT")) {
+                    ((SettingsFragment) currentFragment).hideSignInButton();
+                }
+            }
+        }
+    }
+
+    private void revealSignInButtonThroughoutApp() {
+        List<Fragment> fragments = new ArrayList<>(getSupportFragmentManager().getFragments());
+        for (int index = 0; index < fragments.size(); index++) {
+            Fragment currentFragment = fragments.get(index);
+            if (currentFragment != null && currentFragment.getTag() != null
+                    && !currentFragment.getTag().isEmpty()) {
+                if (currentFragment.getTag().equals("NAVIGATION_FRAGMENT")) {
+                    ((NavigationFragment) currentFragment).revealSignInButton();
+                } else if (currentFragment.getTag().equals("SETTINGS_FRAGMENT")) {
+                    ((SettingsFragment) currentFragment).revealSignInButton();
+                }
+            }
+        }
+    }
+
+    private void updateAchievementsProgress(int retryAttempt) {
+        if (retryAttempt >= 3) {
+            return;
+        }
+
+        achievementsClient.load(false).addOnSuccessListener(new OnSuccessListener<AnnotatedData<AchievementBuffer>>() {
+            @Override
+            public void onSuccess(AnnotatedData<AchievementBuffer> achievementBufferAnnotatedData) {
+                AchievementBuffer achievementBuffer = achievementBufferAnnotatedData.get();
+                if (achievementBuffer != null) {
+                    int count = achievementBuffer.getCount();
+                    for (int index = 0; index < count; index++) {
+                        Achievement achievement = achievementBuffer.get(index);
+                        String achievementId = achievement.getAchievementId();
+                        // Update the progress related to ScoringAchievements
+                        for (int scoringAchievementIndex = 0; scoringAchievementIndex < ScoringAchievements.values().length;
+                             scoringAchievementIndex++) {
+                            ScoringAchievements currentScoringAchievement =
+                                    ScoringAchievements.values()[scoringAchievementIndex];
+                            if (achievementId.equals(getString(currentScoringAchievement.getAchievementStringResourceId()))) {
+                                if (achievement.getState() == Achievement.STATE_UNLOCKED) {
+                                    sharedPreferences.edit().putBoolean("scoringAchievement" + "_" +
+                                            getString(currentScoringAchievement.getAchievementStringResourceId()), true).apply();
+                                } else {
+                                    sharedPreferences.edit().putBoolean("scoringAchievement" + "_" +
+                                            getString(currentScoringAchievement.getAchievementStringResourceId()), false).apply();
+                                }
+                            }
+                        }
+
+                        // Update the progress related to TileUnlockAchievements
+                        for (int tileUnlockAchievementIndex = 0; tileUnlockAchievementIndex < TileUnlockAchievements.values().length;
+                             tileUnlockAchievementIndex++) {
+                            TileUnlockAchievements currentTileUnlockAchievement =
+                                    TileUnlockAchievements.values()[tileUnlockAchievementIndex];
+                            if (achievementId.equals(getString(currentTileUnlockAchievement.getAchievementStringResourceId()))) {
+                                if (achievement.getState() == Achievement.STATE_UNLOCKED) {
+                                    sharedPreferences.edit().putBoolean("tileUnlockAchievement" + "_" +
+                                            getString(currentTileUnlockAchievement.getAchievementStringResourceId()), true).apply();
+                                } else {
+                                    sharedPreferences.edit().putBoolean("tileUnlockAchievement" + "_" +
+                                            getString(currentTileUnlockAchievement.getAchievementStringResourceId()), false).apply();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (achievementBuffer != null) {
+                    achievementBuffer.release();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                updateAchievementsProgress(retryAttempt + 1);
+            }
+        });
+    }
+
+    private void updateLeaderboardsProgress(int retryAttempt) {
+        if (retryAttempt >= 3) {
+            return;
+        }
+
+        leaderboardsClient.loadLeaderboardMetadata(false)
+                .addOnSuccessListener(new OnSuccessListener<AnnotatedData<LeaderboardBuffer>>() {
+                    @Override
+                    public void onSuccess(AnnotatedData<LeaderboardBuffer> leaderboardBufferAnnotatedData) {
+                        LeaderboardBuffer leaderboardBuffer = leaderboardBufferAnnotatedData.get();
+                        if (leaderboardBuffer != null) {
+                            int count = leaderboardBuffer.getCount();
+                            for (int index = 0; index < count; index++) {
+                                Leaderboard leaderboard = leaderboardBuffer.get(index);
+                                String leaderboardId = leaderboard.getLeaderboardId();
+                                // Update progress related to the best scores in various game modes
+                                for (int currentGameModeIndex = 0; currentGameModeIndex < GameModes.values().length;
+                                     currentGameModeIndex++) {
+                                    GameModes currentGameMode = GameModes.values()[currentGameModeIndex];
+                                    if (leaderboardId.equals(getString(currentGameMode.getLeaderboardStringResourceId()))) {
+                                        List<LeaderboardVariant> leaderboardVariants = leaderboard.getVariants();
+                                        for (int variantIndex = 0; variantIndex < leaderboardVariants.size(); variantIndex++) {
+                                            LeaderboardVariant currentVariant = leaderboardVariants.get(variantIndex);
+                                            if (currentVariant.getTimeSpan() == LeaderboardVariant.TIME_SPAN_ALL_TIME &&
+                                                    currentVariant.getCollection() == LeaderboardVariant.COLLECTION_PUBLIC) {
+                                                long leaderboardBestScore = currentVariant.getRawPlayerScore();
+                                                long gameModeSavedBestScore = sharedPreferences.getLong("bestScore" + " " +
+                                                        currentGameMode.getMode() + " " + currentGameMode.getDimensions(), 0L);
+                                                if (leaderboardBestScore < gameModeSavedBestScore) {
+                                                    leaderboardsClient.submitScore(leaderboardId, gameModeSavedBestScore);
+                                                } else {
+                                                    sharedPreferences.edit().putLong("bestScore" + " " + currentGameMode.getMode()
+                                                            + " " + currentGameMode.getDimensions(), leaderboardBestScore).apply();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // Updating the progress related to the most number of coins saved
+                                if (leaderboardId.equals(getString(R.string.leaderboard_coins_leaderboard))) {
+                                    List<LeaderboardVariant> leaderboardVariants = leaderboard.getVariants();
+                                    for (int variantIndex = 0; variantIndex < leaderboardVariants.size(); variantIndex++) {
+                                        LeaderboardVariant currentVariant = leaderboardVariants.get(variantIndex);
+                                        if (currentVariant.getTimeSpan() == LeaderboardVariant.TIME_SPAN_ALL_TIME &&
+                                                currentVariant.getCollection() == LeaderboardVariant.COLLECTION_PUBLIC) {
+                                            int leaderboardMostCoins = (int) currentVariant.getRawPlayerScore();
+                                            // Basically saying that we always update the mostCoins
+                                            sharedPreferences.edit().putInt("mostCoins", leaderboardMostCoins).apply();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if (leaderboardBuffer != null) {
+                            leaderboardBuffer.release();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        updateLeaderboardsProgress(retryAttempt + 1);
+                    }
+                });
+    }
+
     private void updateCoins(int currentCoins) {
         sharedPreferences.edit().putInt("currentCoins", currentCoins).apply();
         List<Fragment> fragments = new ArrayList<>(getSupportFragmentManager().getFragments());
@@ -341,11 +649,24 @@ public class MainActivity extends AppCompatActivity implements
                 }
             }
         }
+
+        // Check if current coins count is greater than the highest most coins count
+        int mostCoins = sharedPreferences.getInt("mostCoins", 0);
+        if (currentCoins >= mostCoins + 1000) {
+            sharedPreferences.edit().putInt("mostCoins", currentCoins).apply();
+            leaderboardsClient.submitScore(getString(R.string.leaderboard_coins_leaderboard), currentCoins);
+        }
     }
 
     @Override
-    public void onNavigationFragmentGpgsSignInClicked() {
-        Toast.makeText(MainActivity.this, "GPGS Sign In Clicked", Toast.LENGTH_SHORT).show();
+    public void onNavigationFragmentGPGSSignInClicked() {
+        gamesSignInClient.signIn();
+        new CountDownTimer(1000, 10000) {
+            @Override
+            public void onTick(long l) {}
+            @Override
+            public void onFinish() { verifyPlayGamesSignIn(true); }
+        }.start();
     }
 
     @Override
@@ -370,14 +691,78 @@ public class MainActivity extends AppCompatActivity implements
                 fragment, "PREGAME_FRAGMENT").commit();
     }
 
+    private void showAchievementsDisplayPostVerification() {
+        achievementsClient.getAchievementsIntent().addOnSuccessListener(new OnSuccessListener<Intent>() {
+            @Override
+            public void onSuccess(Intent intent) {
+                startActivityForResult(intent, RC_ACHIEVEMENT_UI);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if (!isInternetConnected()) { // Internet is not connected which can be the cause of this failure
+                    Toast.makeText(MainActivity.this, "Network connection failed. Please check " +
+                            "Internet connectivity", Toast.LENGTH_LONG).show();
+                } else { // Some unknown error has occurred
+                    new ErrorOccurredDialog(MainActivity.this, "Oops! Something went wrong").show();
+                }
+            }
+        });
+    }
+
     @Override
     public void onNavigationFragmentAchievementsClicked() {
-        Toast.makeText(MainActivity.this, "Achievements Clicked", Toast.LENGTH_SHORT).show();
+        if (!isUserSignedIn) {
+            gamesSignInClient.signIn();
+            new CountDownTimer(1000, 10000) {
+                @Override
+                public void onTick(long l) {}
+                @Override
+                public void onFinish() {
+                    verifyPlayGamesSignInPreAchievementsDisplay();
+                }
+            }.start();
+        } else {
+            showAchievementsDisplayPostVerification();
+        }
+    }
+
+    private void showLeaderboardsDisplayPostVerification() {
+        // If LeaderboardsFragment was opened and is currently on top, then return
+        int countOfFragments = getSupportFragmentManager().getFragments().size();
+        if (countOfFragments > 0) {
+            Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments-1);
+            if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()
+                    && topMostFragment.getTag().equals("LEADERBOARDS_FRAGMENT")) {
+                return;
+            }
+        }
+
+        LeaderboardsFragment fragment = new LeaderboardsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.main_activity_full_screen_fragment_container,
+                fragment, "LEADERBOARDS_FRAGMENT").commit();
     }
 
     @Override
     public void onNavigationFragmentLeaderboardsClicked() {
-        Toast.makeText(MainActivity.this, "Leaderboards Clicked", Toast.LENGTH_SHORT).show();
+        if (!isUserSignedIn) {
+            gamesSignInClient.signIn();
+            new CountDownTimer(1000, 10000) {
+                @Override
+                public void onTick(long l) {}
+                @Override
+                public void onFinish() {
+                    verifyPlayGamesSignInPreLeaderboardsDisplay();
+                }
+            }.start();
+        } else {
+            showLeaderboardsDisplayPostVerification();
+        }
     }
 
     @Override
@@ -392,7 +777,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         }
 
-        SettingsFragment fragment = new SettingsFragment();
+        SettingsFragment fragment = SettingsFragment.newInstance(isUserSignedIn);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
@@ -445,8 +830,45 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onLeaderboardsFragmentInteractionBackClicked() {
+        onBackPressed();
+    }
+
+    @Override
+    public void onLeaderboardsFragmentInteractionShowLeaderboard(int leaderboardStringResourceId) {
+        leaderboardsClient.getLeaderboardIntent(getString(leaderboardStringResourceId))
+                .addOnSuccessListener(new OnSuccessListener<Intent>() {
+                    @Override
+                    public void onSuccess(Intent intent) {
+                        startActivityForResult(intent, RC_LEADERBOARD_UI);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (!isInternetConnected()) { // Internet is not connected which can be the cause of this failure
+                            Toast.makeText(MainActivity.this, "Network connection failed. Please check " +
+                                    "Internet connectivity", Toast.LENGTH_LONG).show();
+                        } else { // Some unknown error has occurred
+                            new ErrorOccurredDialog(MainActivity.this, "Oops! Something went wrong").show();
+                        }
+                    }
+                });
+    }
+
+    @Override
     public void onSettingsFragmentInteractionBackClicked() {
         onBackPressed();
+    }
+
+    @Override
+    public void onSettingsFragmentInteractionGPGSSignInClicked() {
+        gamesSignInClient.signIn();
+        new CountDownTimer(1000, 10000) {
+            @Override
+            public void onTick(long l) {}
+            @Override
+            public void onFinish() { verifyPlayGamesSignIn(true); }
+        }.start();
     }
 
     @Override
