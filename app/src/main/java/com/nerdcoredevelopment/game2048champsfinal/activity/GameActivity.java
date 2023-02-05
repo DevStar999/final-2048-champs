@@ -492,7 +492,6 @@ public class GameActivity extends AppCompatActivity implements
         gameManager.getAchievementsManager().checkScoringAchievements(currentScore);
     }
 
-    // TODO -> In the later stages of the game, make different ranges for smaller & larger dimension game boards
     @SuppressLint("UseCompatLoadingForDrawables")
     private void setMultiMergeComboBarProgress(int givenMultiMergeComboBarProgress) {
         multiMergeComboBarProgress = givenMultiMergeComboBarProgress;
