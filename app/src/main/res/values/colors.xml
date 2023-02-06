@@ -43,7 +43,7 @@
     <color name="game_tile_number_color_dark">#242424</color>
     <!-- Current opacity for following color = 70% i.e. in hex = B3 -->
     <color name="grid_lottie_black_translucent_film">#B3000000</color>
-    <color name="ic_launcher_background">#EEC22E</color>
+    <color name="ic_launcher_background">#000000</color>
     <color name="primary_background_color_dark">#070707</color>
     <color name="primary_background_color">#141414</color>
     <color name="primary_background_overlay_dark">#242424</color>
