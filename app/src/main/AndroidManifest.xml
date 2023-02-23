@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.2048Champs"
-        tools:targetApi="32">
+        tools:targetApi="33">
         <!-- Actual Admob App Id: ca-app-pub-4247468904518611~7012519655 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
