@@ -8,8 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleObserver;
 
-import com.google.android.gms.games.PlayGames;
-import com.google.android.gms.games.PlayGamesSdk;
 import com.qonversion.android.sdk.Qonversion;
 import com.qonversion.android.sdk.QonversionError;
 import com.qonversion.android.sdk.QonversionLaunchCallback;
@@ -41,8 +39,6 @@ public class MyApplication extends Application implements Application.ActivityLi
         this.registerActivityLifecycleCallbacks(this);
 
         initialiseQonversion(0);
-
-        PlayGamesSdk.initialize(this);
     }
 
     /**
