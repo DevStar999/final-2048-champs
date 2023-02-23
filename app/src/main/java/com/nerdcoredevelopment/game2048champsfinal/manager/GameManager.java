@@ -13,8 +13,6 @@ import android.widget.GridLayout;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
-import com.google.android.gms.games.LeaderboardsClient;
-import com.google.android.gms.games.PlayGames;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.dataclasses.CellTransitionInfoMatrix;
@@ -22,6 +20,8 @@ import com.nerdcoredevelopment.game2048champsfinal.enums.CellValues;
 import com.nerdcoredevelopment.game2048champsfinal.enums.Direction;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameStates;
+import com.google.android.gms.games.LeaderboardsClient;
+import com.google.android.gms.games.PlayGames;
 
 import java.util.ArrayList;
 import java.util.List;
