@@ -1,42 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">2048 Champs</string>
+
+    <!-- ## App Id for Play Games Project-->
     <string name="game_services_project_id">707068481295</string>
-    <!--achievement Novice-->
+
+    <!-- ## Achievements are listed as follows -->
+
+        <!-- # Scoring Level Achievements are as follows -->
+    <!-- Achievement Novice (Scoring Level 1) -->
     <string name="achievement_novice" translatable="false">CgkIj57DhMoUEAIQAw</string>
-    <!--achievement Skilled-->
+    <!-- Achievement Skilled (Scoring Level 2) -->
     <string name="achievement_skilled" translatable="false">CgkIj57DhMoUEAIQBA</string>
-    <!--achievement Masterful-->
-    <string name="achievement_masterful" translatable="false">CgkIj57DhMoUEAIQCA</string>
-    <!--achievement Genius-->
+    <!-- Achievement Genius (Scoring Level 3) -->
     <string name="achievement_genius" translatable="false">CgkIj57DhMoUEAIQBQ</string>
-    <!--achievement Champion-->
+    <!-- Achievement Champion (Scoring Level 4) -->
     <string name="achievement_champion" translatable="false">CgkIj57DhMoUEAIQBg</string>
-    <!--achievement Brainiac-->
-    <string name="achievement_brainiac" translatable="false">CgkIj57DhMoUEAIQCQ</string>
-    <!--achievement God Tier-->
+    <!-- Achievement God Tier (Scoring Leve 5) -->
     <string name="achievement_god_tier" translatable="false">CgkIj57DhMoUEAIQBw</string>
-    <!--leaderboard 4x4 - Square-->
+
+        <!-- # Tile Unlock Achievements are as follows -->
+    <!-- Achievement Masterful (Tile Unlock Level 1) -->
+    <string name="achievement_masterful" translatable="false">CgkIj57DhMoUEAIQCA</string>
+    <!-- Achievement Brainiac (Tile Unlock Level 2) -->
+    <string name="achievement_brainiac" translatable="false">CgkIj57DhMoUEAIQCQ</string>
+    <!-- Achievement Gifted (Tile Unlock Level 3) -->
+    <string name="achievement_gifted" translatable="false">CgkIj57DhMoUEAIQFQ</string>
+    <!-- Achievement Enigma (Tile Unlock Level 4) -->
+    <string name="achievement_enigma" translatable="false">CgkIj57DhMoUEAIQFg</string>
+
+        <!-- # 'Undo' Tool Achievements are as follows -->
+    <!-- Achievement Uno Reverse ('Undo' Tool Level 1) -->
+    <string name="achievement_uno_reverse" translatable="false">CgkIj57DhMoUEAIQGA</string>
+    <!-- Achievement Reverse Engineer ('Undo' Tool Level 2) -->
+    <string name="achievement_reverse_engineer" translatable="false">CgkIj57DhMoUEAIQGQ</string>
+    <!-- Achievement Time Traveller ('Undo' Tool Level 3) -->
+    <string name="achievement_time_traveller" translatable="false">CgkIj57DhMoUEAIQFw</string>
+
+        <!-- # 'Smash Tile' Tool Achievements are as follows -->
+    <!-- Achievement Smasher ('Smash Tile' Tool Level 1) -->
+    <string name="achievement_smasher" translatable="false">CgkIj57DhMoUEAIQHA</string>
+    <!-- Achievement Destroyer ('Smash Tile' Tool Level 2) -->
+    <string name="achievement_destroyer" translatable="false">CgkIj57DhMoUEAIQHQ</string>
+    <!-- Achievement Hammer of Thor ('Smash Tile' Tool Level 3) -->
+    <string name="achievement_hammer_of_thor" translatable="false">CgkIj57DhMoUEAIQHg</string>
+
+        <!-- # 'Swap Tiles' Tool Achievements are as follows -->
+    <!-- Achievement Sleight of Hand ('Swap Tiles' Tool Level 1) -->
+    <string name="achievement_sleight_of_hand" translatable="false">CgkIj57DhMoUEAIQIA</string>
+    <!-- Achievement Slick Shuffle ('Swap Tiles' Tool Level 2) -->
+    <string name="achievement_slick_shuffle" translatable="false">CgkIj57DhMoUEAIQIQ</string>
+    <!-- Achievement Switcheroo ('Swap Tiles' Tool Level 3) -->
+    <string name="achievement_switcheroo" translatable="false">CgkIj57DhMoUEAIQIg</string>
+
+        <!-- # 'Change Value' Tool Achievements are as follows -->
+    <!-- Achievement Charlatan ('Change Value' Tool Level 1) -->
+    <string name="achievement_charlatan" translatable="false">CgkIj57DhMoUEAIQJA</string>
+    <!-- Achievement Wizard ('Change Value' Tool Level 2) -->
+    <string name="achievement_wizard" translatable="false">CgkIj57DhMoUEAIQJQ</string>
+    <!-- Achievement Sorcerer Supreme ('Change Value' Tool Level 3) -->
+    <string name="achievement_sorcerer_supreme" translatable="false">CgkIj57DhMoUEAIQJg</string>
+
+        <!-- # 'Eliminate Value' Tool Achievements are as follows -->
+    <!-- Achievement Genin ('Eliminate Value' Tool Level 1) -->
+    <string name="achievement_genin" translatable="false">CgkIj57DhMoUEAIQKA</string>
+    <!-- Achievement Chunin ('Eliminate Value' Tool Level 2) -->
+    <string name="achievement_chunin" translatable="false">CgkIj57DhMoUEAIQKQ</string>
+    <!-- Achievement Jonin ('Eliminate Value' Tool Level 3) -->
+    <string name="achievement_jonin" translatable="false">CgkIj57DhMoUEAIQKg</string>
+
+        <!-- # 'Destroy Area' Tool Achievements are as follows -->
+    <!-- Achievement Grenadier ('Destroy Area' Tool Level 1) -->
+    <string name="achievement_grenadier" translatable="false">CgkIj57DhMoUEAIQLA</string>
+    <!-- Achievement Demolition Man ('Destroy Area' Tool Level 2) -->
+    <string name="achievement_demolition_man" translatable="false">CgkIj57DhMoUEAIQLQ</string>
+    <!-- Achievement Carnage ('Destroy Area' Tool Level 3) -->
+    <string name="achievement_carnage" translatable="false">CgkIj57DhMoUEAIQLg</string>
+
+        <!-- # 'Revive Game' Tool Achievements are as follows -->
+    <!-- Achievement Revival Expert ('Revive Game' Tool Level 1) -->
+    <string name="achievement_revival_expert" translatable="false">CgkIj57DhMoUEAIQMA</string>
+    <!-- Achievement Cure All ('Revive Game' Tool Level 2) -->
+    <string name="achievement_cure_all" translatable="false">CgkIj57DhMoUEAIQMQ</string>
+    <!-- Achievement Fountain of Life ('Revive Game' Tool Level 3) -->
+    <string name="achievement_fountain_of_life" translatable="false">CgkIj57DhMoUEAIQMg</string>
+
+    <!-- ## Leaderboards are listed as follows -->
+
+        <!-- # Game Mode Leaderboards are listed as follows -->
+    <!-- Leaderboard -> 4x4 - Square -->
     <string name="leaderboard_4x4__square" translatable="false">CgkIj57DhMoUEAIQCg</string>
-    <!--leaderboard 5x5 - Square-->
+    <!-- Leaderboard -> 5x5 - Square -->
     <string name="leaderboard_5x5__square" translatable="false">CgkIj57DhMoUEAIQCw</string>
-    <!--leaderboard 6x6 - Square-->
+    <!-- Leaderboard -> 6x6 - Square -->
     <string name="leaderboard_6x6__square" translatable="false">CgkIj57DhMoUEAIQDA</string>
-    <!--leaderboard 4x5 - Rectangle-->
+    <!-- Leaderboard -> 4x5 - Rectangle -->
     <string name="leaderboard_4x5__rectangle" translatable="false">CgkIj57DhMoUEAIQDQ</string>
-    <!--leaderboard 4x6 - Rectangle-->
+    <!-- Leaderboard -> 4x6 - Rectangle -->
     <string name="leaderboard_4x6__rectangle" translatable="false">CgkIj57DhMoUEAIQDg</string>
-    <!--leaderboard 5x6 - Rectangle-->
+    <!-- Leaderboard -> 5x6 - Rectangle -->
     <string name="leaderboard_5x6__rectangle" translatable="false">CgkIj57DhMoUEAIQDw</string>
-    <!--leaderboard 5x5 - Block Middle Sq.-->
+    <!-- Leaderboard -> 5x5 - Block Middle Sq. -->
     <string name="leaderboard_5x5__block_middle_sq." translatable="false">CgkIj57DhMoUEAIQEA</string>
-    <!--leaderboard 4x6 - Block Middle Rec.-->
+    <!-- Leaderboard -> 4x6 - Block Middle Rec. -->
     <string name="leaderboard_4x6__block_middle_rec." translatable="false">CgkIj57DhMoUEAIQEQ</string>
-    <!--leaderboard 5x5 - Block 2 Corners Sq.-->
+    <!-- Leaderboard -> 5x5 - Block 2 Corners Sq. -->
     <string name="leaderboard_5x5__block_2_corners_sq." translatable="false">CgkIj57DhMoUEAIQEg</string>
-    <!--leaderboard 4x6 - Block 2 Corners Rec.-->
+    <!-- Leaderboard -> 4x6 - Block 2 Corners Rec. -->
     <string name="leaderboard_4x6__block_2_corners_rec." translatable="false">CgkIj57DhMoUEAIQEw</string>
-    <!--leaderboard for Arriving Game Modes-->
-    <string name="leaderboard_arriving_game_modes" translatable="false">00000</string>
-    <!--leaderboard Coins Leaderboard-->
+
+        <!-- # Miscellaneous Leaderboards are as follows -->
+    <!-- Leaderboard -> Coins Leaderboard -->
     <string name="leaderboard_coins_leaderboard" translatable="false">CgkIj57DhMoUEAIQFA</string>
+    <!-- Leaderboard -> 'Undo' Tool Masters Leaderboard -->
+    <string name="leaderboard_undo_tool_masters" translatable="false">CgkIj57DhMoUEAIQGg</string>
+    <!-- Leaderboard -> 'Smash Tile' Tool Masters Leaderboard -->
+    <string name="leaderboard_smash_tile_tool_masters" translatable="false">CgkIj57DhMoUEAIQGw</string>
+    <!-- Leaderboard -> 'Swap Tiles' Tool Masters Leaderboard -->
+    <string name="leaderboard_swap_tiles_tool_masters" translatable="false">CgkIj57DhMoUEAIQHw</string>
+    <!-- Leaderboard -> 'Change Value' Tool Masters Leaderboard -->
+    <string name="leaderboard_change_value_tool_masters" translatable="false">CgkIj57DhMoUEAIQIw</string>
+    <!-- Leaderboard -> 'Eliminate Value' Tool Masters Leaderboard -->
+    <string name="leaderboard_eliminate_value_tool_masters" translatable="false">CgkIj57DhMoUEAIQJw</string>
+    <!-- Leaderboard -> 'Destroy Area' Tool Masters Leaderboard -->
+    <string name="leaderboard_destroy_area_tool_masters" translatable="false">CgkIj57DhMoUEAIQKw</string>
+    <!-- Leaderboard -> 'Revive Game' Tool Masters Leaderboard -->
+    <string name="leaderboard_revive_game_tool_masters" translatable="false">CgkIj57DhMoUEAIQLw</string>
+
+        <!-- # Temporary Leaderboards are as follows -->
+    <!-- Leaderboard for Arriving Game Modes-->
+    <string name="leaderboard_arriving_game_modes" translatable="false">00000</string>
 </resources>

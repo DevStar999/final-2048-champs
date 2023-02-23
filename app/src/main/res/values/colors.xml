@@ -34,8 +34,8 @@
     <color name="combo_merge_inner">@color/royal_red</color>
     <color name="combo_merge_outer">@color/blue_50_500</color>
     <color name="dialog_background_color">@color/primary_background_overlay_dark</color>
-    <!-- Current opacity for following color = 45% i.e. in hex = 73 -->
-    <color name="dialog_background_film">#73000000</color>
+    <!-- Current opacity for following color = 85% i.e. in hex = D9 -->
+    <color name="dialog_background_film">#D9000000</color>
     <color name="divider_line">#FFFFFF</color>
     <color name="empty_cell">@color/primary_background_overlay_light</color>
     <color name="fragment_title_color">#0064AF</color>
@@ -43,7 +43,10 @@
     <color name="game_tile_number_color_dark">#242424</color>
     <!-- Current opacity for following color = 70% i.e. in hex = B3 -->
     <color name="grid_lottie_black_translucent_film">#B3000000</color>
-    <color name="ic_launcher_background">#000000</color>
+    <color name="ic_launcher_background">#EEC22E</color>
+    <!-- Current opacity for following color = 55% i.e. in hex = 8C -->
+    <color name="main_activity_background_overlay">#73000000</color>
+    <color name="mystery_tools_icon_background_color">#DF55F2</color>
     <color name="primary_background_color_dark">#070707</color>
     <color name="primary_background_color">#141414</color>
     <color name="primary_background_overlay_dark">#242424</color>
@@ -99,10 +102,27 @@
     <color name="background_color_38_274877906944">#C21E39</color>
     <color name="background_color_39_549755813888">#55D5B2</color>
     <color name="background_color_40_1099511627776">#F8968D</color>
-    <color name="background_color_41_w">#8C6EBE</color>
-    <color name="background_color_42_b">#5AC26B</color>
-    <color name="background_color_43_w">#ED893D</color>
-    <color name="background_color_44_b">#FBC44F</color>
-    <color name="background_color_45_w">#818A51</color>
+    <color name="background_color_41_2199023255552">#8C6EBE</color>
+    <color name="background_color_42_4398046511104">#5AC26B</color>
+    <color name="background_color_43_8796093022208">#ED893D</color>
+    <color name="background_color_44_17592186044416">#FBC44F</color>
+    <color name="background_color_45_35184372088832">#818A51</color>
+    <color name="background_color_46_70368744177664">#98DA5E</color>
+    <color name="background_color_47_140737488355328">#FC4160</color>
+    <color name="background_color_48_281474976710656">#249CD1</color>
+    <color name="background_color_49_562949953421312">#C21E39</color>
+    <color name="background_color_50_1125899906842624">#117F80</color>
+    <color name="background_color_51_2251799813685248">#5AC26B</color>
+    <color name="background_color_52_4503599627370496">#058555</color>
+    <color name="background_color_53_9007199254740992">#A34E78</color>
+    <color name="background_color_54_18014398509481984">#F8968D</color>
+    <color name="background_color_55_36028797018963968">#E25A88</color>
+    <color name="background_color_56_72057594037927936">#8C6EBE</color>
+    <color name="background_color_57_144115188075855872">#55D5B2</color>
+    <color name="background_color_58_288230376151711744">#818A51</color>
+    <color name="background_color_59_576460752303423488">#ED893D</color>
+    <color name="background_color_60_1152921504606846976">#FBC44F</color>
+    <color name="background_color_61_2305843009213693952">#249CD1</color>
+    <color name="background_color_62_4611686018427387904">#FC4160</color>
     <color name="background_color_higher_order">#353935</color>
 </resources>
