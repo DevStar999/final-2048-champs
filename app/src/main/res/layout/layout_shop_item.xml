@@ -1,0 +1,131 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shop_coins_constraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/click_purchase_display_option">
+
+    <FrameLayout
+        android:id="@+id/shop_coins_offer_frame_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shop_coins_ribbon_label_image_view"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:shapeAppearanceOverlay="@style/RoundedCornerTiltedRibbon"
+            app:strokeColor="@null"
+            app:srcCompat="@drawable/tilted_ribbon_red" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/shop_coins_ribbon_label_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:rotation="-45"
+            android:scrollHorizontally="false"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/shop_coins_symbol_frame_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="76dp"
+            android:layout_height="64dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_progress="0"
+            app:lottie_rawRes="@raw/rotating_light"
+            app:lottie_speed="0.25" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/shop_coins_icon_image_view"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/shop_coins_reward_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/shop_coins_purchase_button"
+        app:layout_constraintStart_toEndOf="@id/shop_coins_symbol_frame_layout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/shop_coins_count_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="-"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/shop_coins_unit_frame_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/coin_symbol" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:alpha="0.85"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                app:srcCompat="@drawable/sparkle_icon" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/shop_coins_purchase_button"
+        android:layout_width="84dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center"
+        android:layout_marginVertical="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/click_purchase_button"
+        android:scrollHorizontally="false"
+        android:text="BUY"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
