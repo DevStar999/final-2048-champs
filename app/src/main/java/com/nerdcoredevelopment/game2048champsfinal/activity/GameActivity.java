@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
 import android.view.View;
@@ -30,16 +31,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.nerdcoredevelopment.game2048champsfinal.GameLayoutProvider;
+import com.nerdcoredevelopment.game2048champsfinal.NumericValueDisplay;
 import com.nerdcoredevelopment.game2048champsfinal.OnSwipeTouchListener;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.SwipeUtility;
 import com.nerdcoredevelopment.game2048champsfinal.animations.AnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.animations.ToolAnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.ArrivingToolDialog;
-import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameOverDialog;
+import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameOverDialogFragment;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GamePausedDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GameResetDialog;
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.GoalCompletionDialog;
@@ -47,8 +47,6 @@ import com.nerdcoredevelopment.game2048champsfinal.dialogs.ToolUseProhibitedDial
 import com.nerdcoredevelopment.game2048champsfinal.enums.CellValues;
 import com.nerdcoredevelopment.game2048champsfinal.enums.Direction;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
-import com.nerdcoredevelopment.game2048champsfinal.enums.GameOverDialogActivePage;
-import com.nerdcoredevelopment.game2048champsfinal.enums.GameOverDialogOptions;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameStates;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.ChangeValueFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.DestroyAreaFragment;
@@ -57,7 +55,10 @@ import com.nerdcoredevelopment.game2048champsfinal.fragments.ShopFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.SmashTileFragment;
 import com.nerdcoredevelopment.game2048champsfinal.fragments.SwapTilesFragment;
 import com.nerdcoredevelopment.game2048champsfinal.manager.GameManager;
+import com.nerdcoredevelopment.game2048champsfinal.manager.ReviveGameManager;
 import com.nerdcoredevelopment.game2048champsfinal.manager.UndoManager;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayDeque;
@@ -69,6 +70,7 @@ import java.util.Queue;
 
 public class GameActivity extends AppCompatActivity implements
         ShopFragment.OnShopFragmentInteractionListener,
+        GameOverDialogFragment.OnGameOverDialogFragmentInteractionListener,
         SmashTileFragment.OnSmashTileFragmentInteractionListener,
         SwapTilesFragment.OnSwapTilesFragmentInteractionListener,
         ChangeValueFragment.OnChangeValueFragmentInteractionListener,
@@ -105,6 +107,7 @@ public class GameActivity extends AppCompatActivity implements
     private ProgressBar multiMergeComboBar;
     private AppCompatTextView goalTileTextView;
     private LottieAnimationView toolsChangeLottie;
+    private AppCompatImageView toolsChangeClickAreaImageView;
     private AppCompatTextView tutorialTextView;
     private LottieAnimationView gridLottieView;
 
@@ -131,6 +134,7 @@ public class GameActivity extends AppCompatActivity implements
             put("specialToolsChangeValueCost", 400);
             put("specialToolsEliminateValueCost", 450);
             put("specialToolsDestroyAreaCost", 500);
+            put("mysteryToolsReviveGameCost", 1000);
         }};
         currentScore = sharedPreferences.getLong("currentScore" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), 0L);
@@ -139,8 +143,7 @@ public class GameActivity extends AppCompatActivity implements
         isCurrentScoreTheBest = false;
         multiMergeComboBarProgress = sharedPreferences.getInt("multiMergeComboBarProgress"  + " " +
                 currentGameMode.getMode() + " " + currentGameMode.getDimensions(), 1);
-        isToolsChestOpen = sharedPreferences.getBoolean("isToolsChestOpen" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), false);
+        isToolsChestOpen = false; // Always start with the Tools' Chest closed
     }
 
     private void initialiseLayouts() {
@@ -162,10 +165,10 @@ public class GameActivity extends AppCompatActivity implements
     private void initialiseViews() {
         backgroundFilmImageView = findViewById(R.id.background_film_game_activity_image_view);
         currentCoinsTextView = findViewById(R.id.current_coins_game_activity_text_view);
-        currentCoinsTextView.setText(String.valueOf(currentCoins));
+        currentCoinsTextView.setText(NumericValueDisplay.getGeneralValueDisplay(currentCoins));
 
         currentScoreTextView = findViewById(R.id.current_score_value_game_activity_text_view);
-        currentScoreTextView.setText(String.valueOf(currentScore));
+        currentScoreTextView.setText(NumericValueDisplay.getScoreValueDisplay(currentScore));
         gameManager.setCurrentScore(currentScore);
         gameManager.setHasGoalBeenCompleted(goalDone);
 
@@ -180,7 +183,7 @@ public class GameActivity extends AppCompatActivity implements
         gameManager.setUndoManager(gson.fromJson(jsonRetrieveUndoManager, typeUndoManager));
 
         bestScoreTextView = findViewById(R.id.best_score_value_game_activity_text_view);
-        bestScoreTextView.setText(String.valueOf(bestScore));
+        bestScoreTextView.setText(NumericValueDisplay.getScoreValueDisplay(bestScore));
         multiMergeComboBar = findViewById(R.id.multi_merge_combo_bar_game_activity_progress_bar);
         multiMergeComboBar.setMax(49);
         setMultiMergeComboBarProgress(multiMergeComboBarProgress);
@@ -193,7 +196,8 @@ public class GameActivity extends AppCompatActivity implements
 
         toolsChangeLottie = findViewById(R.id.tools_change_game_activity_lottie);
         toolsChangeLottie.setProgress((!isToolsChestOpen) ? 0f : 1f);
-        toolsChangeLottie.setOnClickListener(view -> handleToolsChangeTransition());
+        toolsChangeClickAreaImageView = findViewById(R.id.tools_change_click_area_game_activity_image_view);
+        toolsChangeClickAreaImageView.setOnClickListener(view -> handleToolsChangeTransition());
 
         tutorialTextView = findViewById(R.id.tutorial_game_activity_text_view);
         if (goalDone) {
@@ -207,23 +211,23 @@ public class GameActivity extends AppCompatActivity implements
         }
 
         AppCompatTextView standardToolsUndoCostTextView = findViewById(R.id.standard_tools_undo_cost_game_activity_text_view);
-        standardToolsUndoCostTextView.setText(String.valueOf(toolsCostMap.get("standardToolsUndoCost")));
+        standardToolsUndoCostTextView.setText(NumericValueDisplay.getGeneralValueDisplay(toolsCostMap.get("standardToolsUndoCost")));
         AppCompatTextView standardToolsSmashTileCostTextView = findViewById(R.id.standard_tools_smash_cost_game_activity_text_view);
-        standardToolsSmashTileCostTextView.setText(String.valueOf(toolsCostMap.get("standardToolsSmashTileCost")));
+        standardToolsSmashTileCostTextView.setText(NumericValueDisplay.getGeneralValueDisplay(toolsCostMap.get("standardToolsSmashTileCost")));
         AppCompatTextView standardToolsSwapTilesCostTextView = findViewById(R.id.standard_tools_swap_tiles_cost_game_activity_text_view);
-        standardToolsSwapTilesCostTextView.setText(String.valueOf(toolsCostMap.get("standardToolsSwapTilesCost")));
+        standardToolsSwapTilesCostTextView.setText(NumericValueDisplay.getGeneralValueDisplay(toolsCostMap.get("standardToolsSwapTilesCost")));
         AppCompatTextView specialToolsChangeValueCostTextView = findViewById(R.id.special_tools_change_value_cost_game_activity_text_view);
-        specialToolsChangeValueCostTextView.setText(String.valueOf(toolsCostMap.get("specialToolsChangeValueCost")));
+        specialToolsChangeValueCostTextView.setText(NumericValueDisplay.getGeneralValueDisplay(toolsCostMap.get("specialToolsChangeValueCost")));
         AppCompatTextView specialToolsEliminateValueCostTextView = findViewById(R.id.special_tools_eliminate_value_cost_game_activity_text_view);
-        specialToolsEliminateValueCostTextView.setText(String.valueOf(toolsCostMap.get("specialToolsEliminateValueCost")));
+        specialToolsEliminateValueCostTextView.setText(NumericValueDisplay.getGeneralValueDisplay(toolsCostMap.get("specialToolsEliminateValueCost")));
         AppCompatTextView specialToolsDestroyAreaCostTextView = findViewById(R.id.special_tools_destroy_area_cost_game_activity_text_view);
-        specialToolsDestroyAreaCostTextView.setText(String.valueOf(toolsCostMap.get("specialToolsDestroyAreaCost")));
+        specialToolsDestroyAreaCostTextView.setText(NumericValueDisplay.getGeneralValueDisplay(toolsCostMap.get("specialToolsDestroyAreaCost")));
     }
 
     private void initialiseGoalText() {
         CellValues goalCellValue = CellValues.getCellValueEnum(currentGameMode.getGoal());
         AppCompatTextView goalTextView = findViewById(R.id.goal_value_game_activity_text_view);
-        goalTextView.setText(String.valueOf(goalCellValue.getCellValue()));
+        goalTextView.setText(NumericValueDisplay.getGameTileValueDisplay(goalCellValue.getCellValue()));
         goalTextView.setTextColor(getColor(goalCellValue.getNumberColorResourceId()));
         GradientDrawable goalScoreGradientDrawable = new GradientDrawable();
         goalScoreGradientDrawable.setColor(getColor(goalCellValue.getBackgroundColorResourceId()));
@@ -254,51 +258,33 @@ public class GameActivity extends AppCompatActivity implements
         if (movesQueue.size() > 0) {
             movesQueue.clear();
         }
+
         tutorialTextView.setText(String.format("GAME OVER %s",
                 String.valueOf(toChars(Integer.parseInt("1F613", 16)))));
         saveGameState(true);
-        GameOverDialog gameOverDialog = new GameOverDialog(GameActivity.this, currentScore, bestScore);
-        gameOverDialog.show();
-        gameOverDialog.setGameOverDialogListener(new GameOverDialog.GameOverDialogListener() {
-            @Override
-            public void getResponseOfOverDialog(boolean didUserRespond, GameOverDialogActivePage activePage,
-                                                GameOverDialogOptions optionSelected) {
-                if (didUserRespond) {
-                    if (activePage == GameOverDialogActivePage.REVIVE_TOOLS_PAGE) {
-                        if (optionSelected == GameOverDialogOptions.SHOP_COINS) {
-                            openShopFragment();
-                        } else if (optionSelected == GameOverDialogOptions.STANDARD_TOOL_UNDO) {
-                            undoProcess();
-                        } else if (optionSelected == GameOverDialogOptions.STANDARD_TOOL_SMASH_TILE) {
-                            smashTileProcess();
-                        } else if (optionSelected == GameOverDialogOptions.STANDARD_TOOL_SWAP_TILES) {
-                            swapTilesProcess();
-                        } else if (optionSelected == GameOverDialogOptions.SPECIAL_TOOL_CHANGE_VALUE) {
-                            changeValueProcess();
-                        } else if (optionSelected == GameOverDialogOptions.SPECIAL_TOOL_ELIMINATE_VALUE) {
-                            eliminateValueProcess();
-                        } else if (optionSelected == GameOverDialogOptions.SPECIAL_TOOL_DESTROY_AREA) {
-                            new ArrivingToolDialog(GameActivity.this).show();
-                            /* TODO -> Implement the Destroy Area tool and uncomment the following line */
-                            //destroyAreaProcess();
-                        }
-                    } else if (activePage == GameOverDialogActivePage.GAME_SUMMARY_PAGE) {
-                        if (optionSelected == GameOverDialogOptions.MAIN_MENU) {
-                            resetGameAndStartIfFlagTrue(false);
 
-                            Intent intent = new Intent(GameActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else if (optionSelected == GameOverDialogOptions.PLAY_AGAIN) {
-                            resetGameAndStartIfFlagTrue(true);
-                        }
-                    }
-                } else {
-                    // If the user does not respond we will start a new game from our side
-                    resetGameAndStartIfFlagTrue(true);
+        // If GameOverDialogFragment has been opened even once, then return
+        int countOfFragments = getSupportFragmentManager().getFragments().size();
+        if (countOfFragments > 0) {
+            List<Fragment> allFragments = new ArrayList<>(getSupportFragmentManager().getFragments());
+            for (int index = 0; index < allFragments.size(); index++) {
+                Fragment currentFragment = allFragments.get(index);
+                if (currentFragment != null && currentFragment.getTag() != null && !currentFragment.getTag().isEmpty()
+                        && currentFragment.getTag().equals("GAME_OVER_DIALOG_FRAGMENT")) {
+                    return;
                 }
             }
-        });
+        }
+
+        // Initiate the tool entry transition
+        GameOverDialogFragment fragment = GameOverDialogFragment.newInstance(currentScore, bestScore, currentCoins);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.open_dialog, R.anim.close_dialog,
+                R.anim.open_dialog, R.anim.close_dialog);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.game_activity_full_screen_fragment_container,
+                fragment, "GAME_OVER_DIALOG_FRAGMENT").commit();
     }
 
     private void executeMove() {
@@ -445,7 +431,7 @@ public class GameActivity extends AppCompatActivity implements
         // For GameActivity
         this.currentCoins = currentCoins;
         sharedPreferences.edit().putInt("currentCoins", this.currentCoins).apply();
-        currentCoinsTextView.setText(String.valueOf(this.currentCoins));
+        currentCoinsTextView.setText(NumericValueDisplay.getGeneralValueDisplay(this.currentCoins));
 
         // For fragments which display coins
         sharedPreferences.edit().putInt("currentCoins", currentCoins).apply();
@@ -461,7 +447,7 @@ public class GameActivity extends AppCompatActivity implements
         }
 
         // Check if current coins count is greater than the highest most coins count
-        int mostCoins = sharedPreferences.getInt("mostCoins", 0);
+        int mostCoins = sharedPreferences.getInt("mostCoins", 3000);
         if (this.currentCoins >= mostCoins + 1000) {
             sharedPreferences.edit().putInt("mostCoins", this.currentCoins).apply();
             gameManager.getLeaderboardsClient().submitScore(getString(R.string.leaderboard_coins_leaderboard), this.currentCoins);
@@ -470,11 +456,11 @@ public class GameActivity extends AppCompatActivity implements
 
     private void updateScore(long updatedCurrentScore) {
         currentScore = updatedCurrentScore;
-        currentScoreTextView.setText(String.valueOf(currentScore));
+        currentScoreTextView.setText(NumericValueDisplay.getScoreValueDisplay(currentScore));
 
         if ((currentScore >= bestScore) && currentScore > 0L) {
             bestScore = currentScore;
-            bestScoreTextView.setText(String.valueOf(bestScore));
+            bestScoreTextView.setText(NumericValueDisplay.getScoreValueDisplay(bestScore));
             sharedPreferences.edit().putLong("bestScore" + " " + currentGameMode.getMode()
                     + " " + currentGameMode.getDimensions(), bestScore).apply();
             if (!isCurrentScoreTheBest) {
@@ -492,6 +478,7 @@ public class GameActivity extends AppCompatActivity implements
         gameManager.getAchievementsManager().checkScoringAchievements(currentScore);
     }
 
+    // TODO -> In the later stages of the game, make different ranges for smaller & larger dimension game boards
     @SuppressLint("UseCompatLoadingForDrawables")
     private void setMultiMergeComboBarProgress(int givenMultiMergeComboBarProgress) {
         multiMergeComboBarProgress = givenMultiMergeComboBarProgress;
@@ -558,8 +545,6 @@ public class GameActivity extends AppCompatActivity implements
                 + " " + currentGameMode.getDimensions(), gson.toJson(gameManager.getUndoManager())).apply();
         sharedPreferences.edit().putBoolean("goalDone" + " " + currentGameMode.getMode()
                 + " " + currentGameMode.getDimensions(), goalDone).apply();
-        sharedPreferences.edit().putBoolean("isToolsChestOpen" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), isToolsChestOpen).apply();
         if (gameManager.getCurrentGameState() == GameStates.GAME_START) {
             sharedPreferences.edit().putString("currentBoard" + " " + currentGameMode.getMode()
                     + " " + currentGameMode.getDimensions(), gson.toJson(getCopyOfGivenBoard(currentGameMode.getBlockCells()))).apply();
@@ -614,47 +599,48 @@ public class GameActivity extends AppCompatActivity implements
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) { // Back button was pressed from activity
             setupGamePausedDialog();
         } else { // Back button was pressed from fragment
-            boolean forToolFragmentsIsToolInProgress = false;
             int countOfFragments = getSupportFragmentManager().getFragments().size();
-            if (countOfFragments > 0) {
-                Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments - 1);
-                if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()) {
-                    String fragmentTag = topMostFragment.getTag();
-                    if (fragmentTag.equals("SMASH_TILE_FRAGMENT") || fragmentTag.equals("SWAP_TILES_FRAGMENT")
-                            || fragmentTag.equals("CHANGE_VALUE_FRAGMENT") || fragmentTag.equals("ELIMINATE_VALUE_FRAGMENT")
-                            || fragmentTag.equals("DESTROY_AREA_FRAGMENT")) {
-                        if (fragmentTag.equals("SMASH_TILE_FRAGMENT")) {
-                            forToolFragmentsIsToolInProgress = ((SmashTileFragment) topMostFragment).checkToolUseState();
-                            handleToolFragmentBackClicked(forToolFragmentsIsToolInProgress);
-                        } else if (fragmentTag.equals("SWAP_TILES_FRAGMENT")) {
-                            forToolFragmentsIsToolInProgress = ((SwapTilesFragment) topMostFragment).checkSecondClickStatus();
-                            handleToolFragmentBackClicked(forToolFragmentsIsToolInProgress);
-                        } else if (fragmentTag.equals("CHANGE_VALUE_FRAGMENT")) {
-                            forToolFragmentsIsToolInProgress = ((ChangeValueFragment) topMostFragment).checkSecondClickStatus();
-                            handleToolFragmentBackClicked(forToolFragmentsIsToolInProgress);
-                        } else if (fragmentTag.equals("ELIMINATE_VALUE_FRAGMENT")) {
-                            forToolFragmentsIsToolInProgress = ((EliminateValueFragment) topMostFragment).checkToolUseState();
-                            handleToolFragmentBackClicked(forToolFragmentsIsToolInProgress);
-                        } else { // For DestroyAreaFragment
-                            // TODO -> Add the handleToolFragmentBackClicked() method for this code block as well
-                        }
+            Fragment topMostFragment = getSupportFragmentManager().getFragments().get(countOfFragments - 1);
+            if (topMostFragment != null && topMostFragment.getTag() != null && !topMostFragment.getTag().isEmpty()) {
+                String fragmentTag = topMostFragment.getTag();
+                if (fragmentTag.equals("SMASH_TILE_FRAGMENT") || fragmentTag.equals("SWAP_TILES_FRAGMENT")
+                        || fragmentTag.equals("CHANGE_VALUE_FRAGMENT") || fragmentTag.equals("ELIMINATE_VALUE_FRAGMENT")
+                        || fragmentTag.equals("DESTROY_AREA_FRAGMENT")) {
+                    boolean forToolFragmentsIsToolInProgress = false;
+                    if (fragmentTag.equals("SMASH_TILE_FRAGMENT")) {
+                        forToolFragmentsIsToolInProgress = ((SmashTileFragment) topMostFragment).checkToolUseState();
+                        handleToolFragmentBackClicked(forToolFragmentsIsToolInProgress);
+                    } else if (fragmentTag.equals("SWAP_TILES_FRAGMENT")) {
+                        forToolFragmentsIsToolInProgress = ((SwapTilesFragment) topMostFragment).checkSecondClickStatus();
+                        handleToolFragmentBackClicked(forToolFragmentsIsToolInProgress);
+                    } else if (fragmentTag.equals("CHANGE_VALUE_FRAGMENT")) {
+                        forToolFragmentsIsToolInProgress = ((ChangeValueFragment) topMostFragment).checkSecondClickStatus();
+                        handleToolFragmentBackClicked(forToolFragmentsIsToolInProgress);
+                    } else if (fragmentTag.equals("ELIMINATE_VALUE_FRAGMENT")) {
+                        forToolFragmentsIsToolInProgress = ((EliminateValueFragment) topMostFragment).checkToolUseState();
+                        handleToolFragmentBackClicked(forToolFragmentsIsToolInProgress);
+                    } else { // For DestroyAreaFragment
+                        // TODO -> Add the handleToolFragmentBackClicked() method for this code block as well
                     }
+
+                    if (!forToolFragmentsIsToolInProgress) { // If tool is not in use, we can safely close the fragment
+                        getSupportFragmentManager().popBackStack();
+                    } else {
+                        // If tool use is in progress we want to ignore the back clicked
+                    }
+
+                    // We will perform a game state check after every tool use as follows
+                    gameManager.updateGameState();
+                    if (gameManager.getCurrentGameState() == GameStates.GAME_OVER) {
+                        handleGameOverProcess();
+                    } else {
+                        restoreTutorialTextViewMessage();
+                    }
+                    return;
                 }
             }
 
-            if (!forToolFragmentsIsToolInProgress) {
-                getSupportFragmentManager().popBackStack();
-            } else { // If tool use is in progress we want to ignore the back clicked and return
-                return;
-            }
-
-            // We will perform a game state check after every tool use as follows
-            gameManager.updateGameState();
-            if (gameManager.getCurrentGameState() == GameStates.GAME_OVER) {
-                handleGameOverProcess();
-            } else {
-                restoreTutorialTextViewMessage();
-            }
+            getSupportFragmentManager().popBackStack();
         }
     }
 
@@ -761,7 +747,7 @@ public class GameActivity extends AppCompatActivity implements
 
     private void updateScoreOnUndo(long updatedCurrentScore) {
         currentScore = updatedCurrentScore;
-        currentScoreTextView.setText(String.valueOf(currentScore));
+        currentScoreTextView.setText(NumericValueDisplay.getScoreValueDisplay(currentScore));
 
         // Making a check if the current score and the best scores need to be split or not
         if (currentScore < bestScore) {
@@ -793,6 +779,114 @@ public class GameActivity extends AppCompatActivity implements
         }
     }
 
+    private void addTempIndividualCellLottieLayerForReviveGame() {
+        float density = getResources().getDisplayMetrics().density;
+        int dp = currentGameMode.getGameLayoutProperties().getSpacing();
+        int padding = Math.round((float) dp * density);
+
+        // Adding a layer of lottie animation views for each individual game cell
+        GridLayout gameCellLottieLayout = new GridLayout(this);
+        gameCellLottieLayout.setId(R.id.game_cell_lottie_layout);
+        gameCellLottieLayout.setRowCount(currentGameMode.getRows());
+        gameCellLottieLayout.setColumnCount(currentGameMode.getColumns());
+        for (int i = 0; i < currentGameMode.getRows(); i++) {
+            for (int j = 0; j < currentGameMode.getColumns(); j++) {
+                LottieAnimationView lottieView = new LottieAnimationView(this);
+                lottieView.setTag("gameCellLottie" + i + j);
+                lottieView.setVisibility(View.VISIBLE);
+                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                params.height = 1;
+                params.width = 1;
+                params.topMargin = params.bottomMargin = params.leftMargin = params.rightMargin = padding;
+                params.rowSpec = GridLayout.spec(i, 1f);
+                params.columnSpec = GridLayout.spec(j, 1f);
+                params.setGravity(Gravity.FILL);
+                lottieView.setLayoutParams(params);
+                gameCellLottieLayout.addView(lottieView);
+            }
+        }
+        gameCellLottieLayout.setPadding(padding, padding, padding, padding);
+
+        // Adding layer to gameFrameLayout
+        gameFrameLayout.addView(gameCellLottieLayout);
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void updateBoardOnReviveGame() {
+        // Adding a layer of individual lottie cells
+        addTempIndividualCellLottieLayerForReviveGame();
+
+        // Hiding all the tiles just before the grid lottie animation ends
+        for (int row = 0; row < currentGameMode.getRows(); row++) {
+            for (int column = 0; column < currentGameMode.getColumns(); column++) {
+                AppCompatTextView textView = gameFrameLayout.findViewWithTag("gameCell" + row + column);
+                textView.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        // Setting up all the individual tile lottie animations
+        int finalGameTileRow = 0;
+        int finalGameTileColumn = 0;
+        for (int row = 0; row < currentGameMode.getRows(); row++) {
+            for (int column = 0; column < currentGameMode.getColumns(); column++) {
+                LottieAnimationView cellLottie = gameFrameLayout.findViewWithTag("gameCellLottie" + row + column);
+                long value = gameManager.getGameMatrix().get(row).get(column);
+                if (value == 0L || value == -1L) {
+                    cellLottie.setVisibility(View.INVISIBLE);
+                } else {
+                    finalGameTileRow = row;
+                    finalGameTileColumn = column;
+                    ToolAnimationsUtility.mysteryToolsReviveGameReviveTileSetup(cellLottie);
+                }
+            }
+        }
+        LottieAnimationView finalGameTileLottie = gameFrameLayout.findViewWithTag("gameCellLottie" +
+                finalGameTileRow + finalGameTileColumn);
+        finalGameTileLottie.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {}
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                gameFrameLayout.removeView(findViewById(R.id.game_cell_lottie_layout));
+                for (int row = 0; row < currentGameMode.getRows(); row++) {
+                    for (int column = 0; column < currentGameMode.getColumns(); column++) {
+                        GridLayout gameGridLayout = findViewById(R.id.game_grid_layout);
+                        AppCompatTextView textView = gameGridLayout.findViewWithTag("gameCell" + row + column);
+                        long value = gameManager.getGameMatrix().get(row).get(column);
+                        if (value == 0L || value == -1L) {
+                            textView.setVisibility(View.INVISIBLE);
+                        } else {
+                            CellValues cellValueEnum = CellValues.getCellValueEnum(value);
+                            AnimationsUtility.executePopUpAnimation(textView, cellValueEnum.getCellValue(),
+                                    getColor(cellValueEnum.getNumberColorResourceId()),
+                                    getDrawable(cellValueEnum.getBackgroundDrawableResourceId()), 300, 0,
+                                    currentGameMode.getGameLayoutProperties());
+                        }
+                    }
+                }
+
+                rootGameConstraintLayout.setEnabled(true);
+            }
+            @Override
+            public void onAnimationCancel(Animator animator) {}
+            @Override
+            public void onAnimationRepeat(Animator animator) {}
+        });
+
+        // Playing all the individual tile lottie animations
+        for (int row = 0; row < currentGameMode.getRows(); row++) {
+            for (int column = 0; column < currentGameMode.getColumns(); column++) {
+                LottieAnimationView cellLottie = gameFrameLayout.findViewWithTag("gameCellLottie" + row + column);
+                long value = gameManager.getGameMatrix().get(row).get(column);
+                if (value == 0L || value == -1L) {
+                    cellLottie.setVisibility(View.INVISIBLE);
+                } else {
+                    cellLottie.playAnimation();
+                }
+            }
+        }
+    }
+
     private void handleToolsChangeTransition() {
         if (!isToolsChestOpen) { // False i.e. the tools chest is NOT open. So, now we will open it.
             toolsChangeLottie.setSpeed(0.7f);
@@ -804,7 +898,7 @@ public class GameActivity extends AppCompatActivity implements
         toolsChangeLottie.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
-                toolsChangeLottie.setClickable(false);
+                toolsChangeClickAreaImageView.setClickable(false);
             }
 
             @Override
@@ -812,7 +906,7 @@ public class GameActivity extends AppCompatActivity implements
                 if (!isToolsChestOpen) {
                     standardToolsLinearLayout.setVisibility(View.VISIBLE);
                     specialToolsLinearLayout.setVisibility(View.GONE);
-                    toolsChangeLottie.setClickable(true);
+                    toolsChangeClickAreaImageView.setClickable(true);
                 } else {
                     specialToolsLinearLayout.setVisibility(View.VISIBLE);
                     standardToolsLinearLayout.setVisibility(View.GONE);
@@ -826,7 +920,7 @@ public class GameActivity extends AppCompatActivity implements
                         public void onAnimationStart(Animator animator) {}
                         @Override
                         public void onAnimationEnd(Animator animator) {
-                            toolsChangeLottie.setClickable(true);
+                            toolsChangeClickAreaImageView.setClickable(true);
                             toolsLottieLinearLayout.setVisibility(View.GONE);
                         }
                         @Override
@@ -845,8 +939,6 @@ public class GameActivity extends AppCompatActivity implements
             public void onAnimationRepeat(Animator animator) {}
         });
         toolsChangeLottie.playAnimation();
-        sharedPreferences.edit().putBoolean("isToolsChestOpen" + " " + currentGameMode.getMode()
-                + " " + currentGameMode.getDimensions(), isToolsChestOpen).apply();
     }
 
     public void standardToolsUndo(View view) {
@@ -899,8 +991,12 @@ public class GameActivity extends AppCompatActivity implements
                         restoreTutorialTextViewMessage();
                         // Update the reduced number of coins
                         currentCoins -= toolsCostMap.get("standardToolsUndoCost");
-                        sharedPreferences.edit().putInt("currentCoins", currentCoins).apply();
-                        currentCoinsTextView.setText(String.valueOf(currentCoins));
+                        updateCoins(currentCoins);
+                        // Update the count of tool use
+                        if (gameManager.getAchievementsManager().incrementUndoToolUseCount()) {
+                            gameManager.getLeaderboardsClient().submitScore(getString(R.string.leaderboard_undo_tool_masters),
+                                    gameManager.getAchievementsManager().getUndoToolCurrentUseCount());
+                        }
                     }
                 }.start();
             } else {
@@ -1173,6 +1269,9 @@ public class GameActivity extends AppCompatActivity implements
     }
 
     private void destroyAreaProcess() {
+        /* TODO -> After the implementation of the this tool is done at the very end of the process of this tool, remember to
+                   add code to increment the tool use count (Refer to other tools if required)
+        */
         movesQueue.clear();
         if (gameManager.findGameTilesCurrentlyOnBoard(gameManager.getGameMatrix()) < 1) {
             String destroyAreaMessage = "Atleast 1 game tile is required to use the \"DESTROY AREA\" tool";
@@ -1209,6 +1308,52 @@ public class GameActivity extends AppCompatActivity implements
         }
     }
 
+    private void reviveGameProcess() {
+        movesQueue.clear();
+        /*  There is no requirement to check any condition to use this tool, as this is already done because dialog is only
+            shown when the game is over
+        */
+
+        if (currentCoins >= toolsCostMap.get("mysteryToolsReviveGameCost")) {
+            ToolAnimationsUtility.mysteryToolsReviveGame(this, gridLottieView, rootGameConstraintLayout);
+            new CountDownTimer(2200, 10000) {
+                @Override
+                public void onTick(long l) {
+                }
+
+                @Override
+                public void onFinish() {
+                    gameManager.setCurrentGameState(GameStates.GAME_ONGOING);
+                    // Storing the result of revive game tool before hand with us
+                    ReviveGameManager reviveGameManager = new ReviveGameManager(gameManager.getGameMatrix());
+                    List<List<Long>> postReviveGameProcessGameMatrix = reviveGameManager.gameMatrixPostReviveGame();
+                    /*  Taking steps for undo, so as to have the game state which was just before the game got over,
+                        available for undo if the user chooses to do undo just after the revive game process
+                    */
+                    Pair<Long, List<List<Long>>> previousStateInfo = gameManager.getUndoManager().undoToPreviousState();
+                    gameManager.updateGameMatrixPostUndo(previousStateInfo.second);
+                    gameManager.setCurrentScore(previousStateInfo.first);
+                    currentScore = gameManager.getCurrentScore();
+                    // Taking steps for revive game process as follows
+                    gameManager.updateGameMatrix(postReviveGameProcessGameMatrix);
+                    updateBoardOnReviveGame();
+                    // Restore the tutorial text view message
+                    restoreTutorialTextViewMessage();
+                    // Update the reduced number of coins
+                    currentCoins -= toolsCostMap.get("mysteryToolsReviveGameCost");
+                    updateCoins(currentCoins);
+                    // Update the count of tool use
+                    if (gameManager.getAchievementsManager().incrementReviveGameToolUseCount()) {
+                        gameManager.getLeaderboardsClient().submitScore(getString(R.string.leaderboard_revive_game_tool_masters),
+                                gameManager.getAchievementsManager().getReviveGameToolCurrentUseCount());
+                    }
+                }
+            }.start();
+        } else {
+            openShopFragment();
+        }
+    }
+
     @Override
     public void onShopFragmentInteractionBackClicked() {
         onBackPressed();
@@ -1220,6 +1365,78 @@ public class GameActivity extends AppCompatActivity implements
     @Override
     public void onShopFragmentInteractionUpdateCoins(int currentCoins) {
         updateCoins(currentCoins);
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionUserDidNotRespond() {
+        // If the user does not respond we will start a new game from our side
+        resetGameAndStartIfFlagTrue(true);
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionStandardToolsUndoClicked() {
+        onBackPressed();
+        undoProcess();
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionStandardToolsSmashTileClicked() {
+        onBackPressed();
+        smashTileProcess();
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionStandardToolsSwapTilesClicked() {
+        onBackPressed();
+        swapTilesProcess();
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionSpecialToolsChangeValueClicked() {
+        onBackPressed();
+        changeValueProcess();
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionSpecialToolsEliminateValueClicked() {
+        onBackPressed();
+        eliminateValueProcess();
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionSpecialToolsDestroyAreaClicked() {
+        onBackPressed();
+        new ArrivingToolDialog(GameActivity.this).show();
+        /* TODO -> Implement the Destroy Area tool and uncomment the following line */
+        //destroyAreaProcess();
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionMysteryToolsReviveGameClicked() {
+        onBackPressed();
+        reviveGameProcess();
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionShopCoinsClicked() {
+        onBackPressed();
+        openShopFragment();
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionMainMenuClicked() {
+        resetGameAndStartIfFlagTrue(false);
+        onBackPressed();
+
+        Intent intent = new Intent(GameActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onGameOverDialogFragmentInteractionPlayAgainClicked() {
+        onBackPressed();
+        resetGameAndStartIfFlagTrue(true);
     }
 
     @Override
@@ -1264,10 +1481,14 @@ public class GameActivity extends AppCompatActivity implements
 
         // Update the reduced number of coins
         currentCoins -= toolsCostMap.get("standardToolsSmashTileCost");
-        sharedPreferences.edit().putInt("currentCoins", currentCoins).apply();
-        currentCoinsTextView.setText(String.valueOf(currentCoins));
+        updateCoins(currentCoins);
 
         // Final set of actions
+        // Update the count of tool use
+        if (gameManager.getAchievementsManager().incrementSmashTileToolUseCount()) {
+            gameManager.getLeaderboardsClient().submitScore(getString(R.string.leaderboard_smash_tile_tool_masters),
+                    gameManager.getAchievementsManager().getSmashTileToolCurrentUseCount());
+        }
         saveGameState(false);
         handleGoalCompletionStatus();
         onBackPressed();
@@ -1318,10 +1539,14 @@ public class GameActivity extends AppCompatActivity implements
 
         // Update the reduced number of coins
         currentCoins -= toolsCostMap.get("standardToolsSwapTilesCost");
-        sharedPreferences.edit().putInt("currentCoins", currentCoins).apply();
-        currentCoinsTextView.setText(String.valueOf(currentCoins));
+        updateCoins(currentCoins);
 
         // Final set of actions
+        // Update the count of tool use
+        if (gameManager.getAchievementsManager().incrementSwapTilesToolUseCount()) {
+            gameManager.getLeaderboardsClient().submitScore(getString(R.string.leaderboard_swap_tiles_tool_masters),
+                    gameManager.getAchievementsManager().getSwapTilesToolCurrentUseCount());
+        }
         saveGameState(false);
         onBackPressed();
     }
@@ -1359,10 +1584,14 @@ public class GameActivity extends AppCompatActivity implements
 
         // Update the reduced number of coins
         currentCoins -= toolsCostMap.get("specialToolsChangeValueCost");
-        sharedPreferences.edit().putInt("currentCoins", currentCoins).apply();
-        currentCoinsTextView.setText(String.valueOf(currentCoins));
+        updateCoins(currentCoins);
 
         // Final set of actions
+        // Update the count of tool use
+        if (gameManager.getAchievementsManager().incrementChangeValueToolUseCount()) {
+            gameManager.getLeaderboardsClient().submitScore(getString(R.string.leaderboard_change_value_tool_masters),
+                    gameManager.getAchievementsManager().getChangeValueToolCurrentUseCount());
+        }
         saveGameState(false);
         handleGoalCompletionStatus();
         onBackPressed();
@@ -1415,10 +1644,14 @@ public class GameActivity extends AppCompatActivity implements
 
         // Update the reduced number of coins
         currentCoins -= toolsCostMap.get("specialToolsEliminateValueCost");
-        sharedPreferences.edit().putInt("currentCoins", currentCoins).apply();
-        currentCoinsTextView.setText(String.valueOf(currentCoins));
+        updateCoins(currentCoins);
 
         // Final set of actions
+        // Update the count of tool use
+        if (gameManager.getAchievementsManager().incrementEliminateValueToolUseCount()) {
+            gameManager.getLeaderboardsClient().submitScore(getString(R.string.leaderboard_eliminate_value_tool_masters),
+                    gameManager.getAchievementsManager().getEliminateValueToolCurrentUseCount());
+        }
         saveGameState(false);
         handleGoalCompletionStatus();
         onBackPressed();
