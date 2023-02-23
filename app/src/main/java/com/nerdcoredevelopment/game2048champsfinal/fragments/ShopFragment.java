@@ -1,5 +1,6 @@
 package com.nerdcoredevelopment.game2048champsfinal.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +20,9 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.nerdcoredevelopment.game2048champsfinal.NumericValueDisplay;
 import com.nerdcoredevelopment.game2048champsfinal.R;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.qonversion.android.sdk.Qonversion;
 import com.qonversion.android.sdk.QonversionError;
 import com.qonversion.android.sdk.QonversionOfferingsCallback;
@@ -43,15 +48,16 @@ public class ShopFragment extends Fragment {
     private OnShopFragmentInteractionListener mListener;
     private SharedPreferences sharedPreferences;
 
-    /* Views related to this fragment */
-    private AppCompatTextView currentCoinsTextView;
-    private AppCompatImageView backButton;
-    private List<ConstraintLayout> shopCoinsConstraintLayouts;
-    private List<AppCompatButton> shopCoinsPurchaseButtons;
-
     /* Variables related to this fragment */
     private int currentCoins;
     private Map<String, Integer> coinsReward;
+
+    /* Views related to this fragment */
+    private AppCompatTextView currentCoinsTextView;
+    private AppCompatImageView backButton;
+    private LinearLayout scrollViewContainerLinearLayout;
+    private List<ConstraintLayout> shopCoinsConstraintLayouts;
+    private List<AppCompatButton> shopCoinsPurchaseButtons;
 
     public ShopFragment() {
         // Required empty public constructor
@@ -60,6 +66,67 @@ public class ShopFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    private int dpToPx(int dp, Context context) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return Math.round((float) dp * density);
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void loadShopItemsInLayout() {
+        for (int level = 1; level <= 7; level++) {
+            ConstraintLayout shopItemRootLayout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.layout_shop_item,
+                    scrollViewContainerLinearLayout, false);
+            int idForItemRootLayoutResId = context.getResources().getIdentifier("shop_coins_level" + level
+                    + "_shop_fragment_constraint_layout", "id", context.getPackageName());
+            shopItemRootLayout.setId(idForItemRootLayoutResId);
+            LinearLayout.LayoutParams layoutParamsShopItemRootLayout =
+                    (LinearLayout.LayoutParams) shopItemRootLayout.getLayoutParams();
+            layoutParamsShopItemRootLayout.setMargins(dpToPx(12, context), dpToPx(8, context),
+                    dpToPx(12, context), dpToPx(8, context));
+            shopItemRootLayout.setLayoutParams(layoutParamsShopItemRootLayout);
+
+            FrameLayout shopCoinsOfferFrameLayout = shopItemRootLayout.findViewById(R.id.shop_coins_offer_frame_layout);
+            if (level == 3 || level == 5 || level == 6) {
+                shopCoinsOfferFrameLayout.setVisibility(View.INVISIBLE);
+            }
+
+            ShapeableImageView shopCoinsRibbonLabelImageView = shopItemRootLayout.findViewById(R.id
+                    .shop_coins_ribbon_label_image_view);
+            if (level == 7) {
+                shopCoinsRibbonLabelImageView.setImageDrawable(context.getDrawable(R.drawable.tilted_ribbon_purple));
+            }
+
+            AppCompatTextView shopCoinsRibbonLabelTextView = shopItemRootLayout.findViewById(R.id
+                    .shop_coins_ribbon_label_text_view);
+            if (level == 1 || level == 2) { shopCoinsRibbonLabelTextView.setText("STEAL!"); }
+            else if (level == 4) { shopCoinsRibbonLabelTextView.setText("HOT!"); }
+            else if (level == 7) { shopCoinsRibbonLabelTextView.setText("VIP"); }
+
+            AppCompatImageView shopCoinsIconImageView = shopItemRootLayout.findViewById(R.id.shop_coins_icon_image_view);
+            int iconResId = context.getResources().getIdentifier("shop_coins_level" + level + "_icon",
+                    "drawable", context.getPackageName());
+            shopCoinsIconImageView.setImageResource(iconResId);
+
+            AppCompatTextView shopCoinsCountTextView = shopItemRootLayout.findViewById(R.id.shop_coins_count_text_view);
+            int coinsCount = coinsReward.get("coins_level" + level);
+            shopCoinsCountTextView.setText(NumericValueDisplay.getGeneralValueDisplay(coinsCount));
+
+            AppCompatButton shopCoinsPurchaseButton = shopItemRootLayout.findViewById(R.id.shop_coins_purchase_button);
+            int idForPurchaseButtonResId = context.getResources().getIdentifier("shop_coins_level" + level +
+                    "_shop_fragment_purchase_button", "id", context.getPackageName());
+            shopCoinsPurchaseButton.setId(idForPurchaseButtonResId);
+
+            LinearLayout shopCoinsRewardLinearLayout = shopItemRootLayout.findViewById(R.id.shop_coins_reward_linear_layout);
+            ConstraintLayout.LayoutParams layoutParamsShopCoinsRewardLinearLayout =
+                    (ConstraintLayout.LayoutParams) shopCoinsRewardLinearLayout.getLayoutParams();
+            layoutParamsShopCoinsRewardLinearLayout.endToStart = context.getResources().getIdentifier("shop_coins_level"
+                    + level + "_shop_fragment_purchase_button", "id", context.getPackageName());
+            shopCoinsRewardLinearLayout.setLayoutParams(layoutParamsShopCoinsRewardLinearLayout);
+
+            scrollViewContainerLinearLayout.addView(shopItemRootLayout);
+        }
     }
 
     private void settingOnClickListeners() {
@@ -143,8 +210,19 @@ public class ShopFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_shop, container, false);
 
+        currentCoins = sharedPreferences.getInt("currentCoins", 3000);
+        coinsReward = new HashMap<>() {{
+            put("coins_level1", 1000); put("coins_level2", 3000); put("coins_level3", 5000);
+            put("coins_level4", 10000); put("coins_level5", 25000);
+            put("coins_level6", 50000); put("coins_level7", 100000);
+        }};
+
         currentCoinsTextView = view.findViewById(R.id.current_coins_shop_fragment_text_view);
+        currentCoinsTextView.setText(NumericValueDisplay.getGeneralValueDisplay(currentCoins));
         backButton = view.findViewById(R.id.title_back_shop_fragment_button);
+        scrollViewContainerLinearLayout = view.findViewById(R.id.scroll_view_container_shop_fragment_linear_layout);
+
+        loadShopItemsInLayout();
 
         shopCoinsConstraintLayouts = new ArrayList<>();
         for (int level = 1; level <= 7; level++) {
@@ -160,14 +238,6 @@ public class ShopFragment extends Fragment {
             shopCoinsPurchaseButtons.add(view.findViewById(layoutResId));
         }
 
-        currentCoins = sharedPreferences.getInt("currentCoins", 3000);
-        currentCoinsTextView.setText(String.valueOf(currentCoins));
-        coinsReward = new HashMap<>() {{
-            put("coins_level1", 1000); put("coins_level2", 3000); put("coins_level3", 5000);
-            put("coins_level4", 10000); put("coins_level5", 25000);
-            put("coins_level6", 50000); put("coins_level7", 100000);
-        }};
-
         settingOnClickListeners();
 
         loadItemPrices(0);
@@ -178,7 +248,7 @@ public class ShopFragment extends Fragment {
     public void updateCoinsShopFragment(int currentCoins) {
         if (mListener != null) {
             this.currentCoins = currentCoins;
-            currentCoinsTextView.setText(String.valueOf(currentCoins));
+            currentCoinsTextView.setText(NumericValueDisplay.getGeneralValueDisplay(currentCoins));
         }
     }
 

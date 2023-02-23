@@ -168,4 +168,3 @@ public class NavigationFragment extends Fragment {
         mListener = null;
     }
 }
-

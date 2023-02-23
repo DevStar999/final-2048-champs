@@ -114,11 +114,7 @@ public class LeaderboardsFragment extends Fragment {
         leaderboardsManager.updateSizeBrowseIcons(currentGameMode.getDimensions(), allCurrentGameSizes);
 
         gamePreviewSpotLightLottie = layoutView.findViewById(R.id.game_preview_leaderboards_fragment_spotlight_lottie);
-        if (sharedPreferences.getBoolean("toggleRotatingLight", true)) {
-            gamePreviewSpotLightLottie.playAnimation();
-        } else {
-            gamePreviewSpotLightLottie.pauseAnimation();
-        }
+        gamePreviewSpotLightLottie.playAnimation();
         gamePreviewImageView = layoutView.findViewById(R.id.game_preview_leaderboards_fragment_image_view);
         modeLeft = layoutView.findViewById(R.id.game_mode_left_arrow_leaderboards_fragment_image_view);
         modeRight = layoutView.findViewById(R.id.game_mode_right_arrow_leaderboards_fragment_image_view);

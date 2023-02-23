@@ -11,13 +11,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.nerdcoredevelopment.game2048champsfinal.BuildConfig;
@@ -41,8 +39,6 @@ public class SettingsFragment extends Fragment {
     private LinearLayout gpgsSignInContainerLinearLayout;
     private LinearLayout gpgsSignInLinearLayout;
     private LinearLayout getPremiumLinearLayout;
-    private LinearLayout toggleRotatingLightLinearLayout;
-    private SwitchCompat toggleRotatingLightSwitch;
     private LinearLayout blockDesignLinearLayout;
     private LinearLayout howToPlayLinearLayout;
     private LinearLayout helpLinearLayout;
@@ -99,38 +95,6 @@ public class SettingsFragment extends Fragment {
                 view.setVisibility(View.GONE);
                 if (mListener != null) {
                     mListener.onSettingsFragmentInteractionGetPremiumClicked();
-                }
-            }
-        });
-        toggleRotatingLightLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (toggleRotatingLightSwitch.isChecked()) {
-                    toggleRotatingLightSwitch.setChecked(false);
-                    sharedPreferences.edit().putBoolean("toggleRotatingLight", false).apply();
-                } else {
-                    toggleRotatingLightSwitch.setChecked(true);
-                    sharedPreferences.edit().putBoolean("toggleRotatingLight", true).apply();
-                }
-
-                if (mListener != null) {
-                    mListener.onSettingsFragmentInteractionToggleRotatingLightClicked(
-                            sharedPreferences.getBoolean("toggleRotatingLight", true));
-                }
-            }
-        });
-        toggleRotatingLightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    sharedPreferences.edit().putBoolean("toggleRotatingLight", true).apply();
-                } else {
-                    sharedPreferences.edit().putBoolean("toggleRotatingLight", false).apply();
-                }
-
-                if (mListener != null) {
-                    mListener.onSettingsFragmentInteractionToggleRotatingLightClicked(
-                            sharedPreferences.getBoolean("toggleRotatingLight", true));
                 }
             }
         });
@@ -310,9 +274,6 @@ public class SettingsFragment extends Fragment {
         gpgsSignInContainerLinearLayout = view.findViewById(R.id.gpgs_sign_in_container_settings_fragment_linear_layout);
         gpgsSignInLinearLayout = view.findViewById(R.id.gpgs_sign_in_settings_fragment_linear_layout);
         getPremiumLinearLayout = view.findViewById(R.id.get_premium_settings_fragment_linear_layout);
-        toggleRotatingLightLinearLayout = view.findViewById(R.id.toggle_rotating_light_settings_fragment_linear_layout);
-        toggleRotatingLightSwitch = view.findViewById(R.id.toggle_rotating_light_settings_fragment_switch);
-        toggleRotatingLightSwitch.setChecked(sharedPreferences.getBoolean("toggleRotatingLight", true));
         blockDesignLinearLayout = view.findViewById(R.id.block_design_settings_fragment_linear_layout);
         howToPlayLinearLayout = view.findViewById(R.id.how_to_play_settings_fragment_linear_layout);
         helpLinearLayout = view.findViewById(R.id.help_settings_fragment_linear_layout);
