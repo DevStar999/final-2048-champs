@@ -17,10 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.2048Champs"
         tools:targetApi="33">
-        <!-- Actual Admob App Id: ca-app-pub-4247468904518611~7012519655 -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4247468904518611~7012519655" />
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
             android:value="@string/game_services_project_id" />
