@@ -28,7 +28,7 @@
             android:scrollHorizontally="false"
             android:text="SELECT GAME MODE"
             android:textAlignment="center"
-            android:textColor="@color/primary_background_color"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
         android:id="@+id/game_preview_pregame_fragment_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/game_options_pregame_fragment_linear_layout"
+        app:layout_constraintBottom_toTopOf="@id/high_score_pregame_fragment_linear_layout"
         app:layout_constraintDimensionRatio="1.5:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,53 +102,58 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/high_score_pregame_fragment_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_corners_best_score"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="5dp"
+        app:layout_constraintBottom_toTopOf="@id/game_options_pregame_fragment_linear_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_preview_pregame_fragment_frame_layout">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            app:srcCompat="@drawable/crown_icon" />
+
+        <!-- The text color is taken from the coin_symbol
+             drawable file -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/high_score_pregame_fragment_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1"
+            android:scrollHorizontally="false"
+            android:fontFamily="@font/dosis_extra_bold"
+            android:text="-"
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/game_options_pregame_fragment_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@drawable/gap_vertical"
         android:orientation="vertical"
         android:showDividers="middle"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/start_game_pregame_fragment_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_preview_pregame_fragment_frame_layout">
-
-        <LinearLayout
-            android:id="@+id/high_score_pregame_fragment_linear_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/rounded_corners_best_score"
-            android:orientation="horizontal"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="5dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
-                android:scaleX="1.4"
-                android:scaleY="1.4"
-                app:srcCompat="@drawable/crown_icon" />
-
-            <!-- The text color is taken from the coin_symbol
-                 drawable file -->
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/high_score_pregame_fragment_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
-                android:scrollHorizontally="false"
-                android:text="-"
-                android:textColor="@color/text_color"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/high_score_pregame_fragment_linear_layout">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -244,18 +249,22 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/start_game_pregame_fragment_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/click_button"
-            android:contentDescription="Game mode display button"
-            android:minEms="10"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/start_game_pregame_fragment_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/click_button"
+        android:contentDescription="Game mode display button"
+        android:minEms="10"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/game_options_pregame_fragment_linear_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

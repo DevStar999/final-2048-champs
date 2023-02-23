@@ -150,57 +150,10 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/toggle_rotating_light_settings_fragment_linear_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/click_settings_button_top"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/toggle_rotating_light_icon_settings_fragment_image_view"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="start|center_vertical"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginEnd="12dp"
-                        android:scaleX="1.25"
-                        android:scaleY="1.25"
-                        app:srcCompat="@drawable/settings_toggle_rotating_light_icon" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/toggle_rotating_light_settings_fragment_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="Toggle Rotating Light"
-                        android:textColor="@color/text_color"
-                        android:textSize="16sp"
-                        android:textStyle="normal" />
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/toggle_rotating_light_settings_fragment_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="14dp"
-                        android:checked="true"
-                        app:thumbTint="@color/settings_switch_thumb"
-                        app:trackTint="@color/settings_switch_track" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/settings_divider_line" />
-
-                <LinearLayout
                     android:id="@+id/block_design_settings_fragment_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/click_settings_button_middle"
+                    android:background="@drawable/click_settings_button_top"
                     android:orientation="horizontal"
                     android:padding="16dp">
 
