@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.nerdcoredevelopment.game2048champsfinal.enums.BlockDesigns;
@@ -47,7 +48,7 @@ public class GameLayoutProvider {
                 AppCompatImageView imageView = new AppCompatImageView(context);
                 if (gameMode.getBlockCells().get(i).get(j).equals(-1L)) {
                     BlockDesigns selectedBlockDesign = BlockDesigns.valueOf(sharedPreferences
-                            .getString("selectedBlockDrawableEnumName", BlockDesigns.BLOCK_CELL_X.name()));
+                            .getString("selectedBlockDrawableEnumName", BlockDesigns.BLOCK_PIRATE.name()));
                     imageView.setImageResource(selectedBlockDesign.getBlockDrawableResourceId());
                     imageView.setScaleX(selectedBlockDesign.getBlockDrawableScaleX());
                     imageView.setScaleY(selectedBlockDesign.getBlockDrawableScaleY());
@@ -82,7 +83,7 @@ public class GameLayoutProvider {
                 textView.setGravity(Gravity.CENTER);
                 textView.setTag("gameCell" + i + j);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+                textView.setTypeface(ResourcesCompat.getFont(context, R.font.dosis_extra_bold), Typeface.BOLD);
                 textView.setBackground(context.getDrawable(R.drawable.cell_empty));
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                 params.height = 1;

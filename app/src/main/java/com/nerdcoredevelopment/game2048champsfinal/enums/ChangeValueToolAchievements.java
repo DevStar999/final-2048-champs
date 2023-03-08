@@ -15,7 +15,7 @@ public enum ChangeValueToolAchievements {
             2, 250, STATE_HIDDEN),
     CHANGE_VALUE_TOOL_ACHIEVEMENT_LEVEL_3("Sorcerer Supreme", R.string.achievement_sorcerer_supreme,
             3, 500, STATE_HIDDEN);
-    
+
     private String nameOfAchievement; // Name as per the name given in the Google Play Games project
     private int achievementStringResourceId; // Achievement Id as per the Id generated in the Google Play Games project
     private int levelOfAchievement; // Custom information for us to keep track of the level of achievement completed

@@ -119,3 +119,4 @@ public class GameSummaryFragment extends Fragment {
         mListener = null;
     }
 }
+

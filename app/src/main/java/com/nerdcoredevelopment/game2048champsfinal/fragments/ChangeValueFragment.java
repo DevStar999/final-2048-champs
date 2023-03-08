@@ -21,9 +21,11 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.nerdcoredevelopment.game2048champsfinal.NumericValueDisplay;
 import com.nerdcoredevelopment.game2048champsfinal.R;
 import com.nerdcoredevelopment.game2048champsfinal.animations.ToolAnimationsUtility;
 import com.nerdcoredevelopment.game2048champsfinal.enums.CellValues;
@@ -83,12 +85,12 @@ public class ChangeValueFragment extends Fragment {
         valueOptionTextView.setGravity(Gravity.CENTER);
         valueOptionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         valueOptionTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        valueOptionTextView.setTypeface(valueOptionTextView.getTypeface(), Typeface.BOLD);
+        valueOptionTextView.setTypeface(ResourcesCompat.getFont(context, R.font.dosis_extra_bold), Typeface.BOLD);
         valueOptionTextView.setVisibility(View.VISIBLE);
 
         long currentOptionValue = optionValues.get(optionNumber);
         CellValues cellValueCurrentOption = CellValues.getCellValueEnum(currentOptionValue);
-        valueOptionTextView.setText(String.valueOf(currentOptionValue));
+        valueOptionTextView.setText(NumericValueDisplay.getGameTileValueDisplay(currentOptionValue));
         valueOptionTextView.setTextColor(ContextCompat.getColor(context, cellValueCurrentOption.getNumberColorResourceId()));
         valueOptionTextView.setBackgroundResource(cellValueCurrentOption.getBackgroundDrawableResourceId());
 
@@ -232,7 +234,7 @@ public class ChangeValueFragment extends Fragment {
         toolUseCompletedImageView.setImageResource(R.drawable.completed_icon);
         secondClickCheckBox.setChecked(true);
         CellValues cellValuesSelectedOption = CellValues.getCellValueEnum(optionValues.get(optionNumber));
-        selectedOptionValueTextView.setText(String.valueOf(cellValuesSelectedOption.getCellValue()));
+        selectedOptionValueTextView.setText(NumericValueDisplay.getGameTileValueDisplay(cellValuesSelectedOption.getCellValue()));
         selectedOptionValueTextView.setTextColor(ContextCompat.getColor(context,
                 cellValuesSelectedOption.getNumberColorResourceId()));
         selectedOptionValueTextView.setBackgroundResource(cellValuesSelectedOption.getBackgroundDrawableResourceId());
@@ -240,7 +242,7 @@ public class ChangeValueFragment extends Fragment {
         selectedOptionLinearLayout.setVisibility(View.VISIBLE);
 
         // Pre-processing for the 4th set of events is as follows
-        Animator.AnimatorListener individualTileLottieSmashAnimatorListener = new Animator.AnimatorListener() {
+        Animator.AnimatorListener individualTileLottieChangeAnimatorListener = new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {}
             @Override
@@ -272,7 +274,7 @@ public class ChangeValueFragment extends Fragment {
                 // 4th set of events is as follows
                 ToolAnimationsUtility.specialToolsChangeValueTargetTileSetup(ChangeValueFragment.this.changeValueTileLottie);
                 ChangeValueFragment.this.changeValueTileLottie.removeAllAnimatorListeners();
-                ChangeValueFragment.this.changeValueTileLottie.addAnimatorListener(individualTileLottieSmashAnimatorListener);
+                ChangeValueFragment.this.changeValueTileLottie.addAnimatorListener(individualTileLottieChangeAnimatorListener);
                 ChangeValueFragment.this.changeValueTileLottie.playAnimation();
             }
             @Override

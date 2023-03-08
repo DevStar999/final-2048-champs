@@ -1,5 +1,7 @@
 package com.nerdcoredevelopment.game2048champsfinal.enums;
 
+import com.nerdcoredevelopment.game2048champsfinal.NumericValueDisplay;
+
 import lombok.Getter;
 
 @Getter
@@ -64,12 +66,8 @@ public enum GameLayoutProperties {
     }
 
     public float getTextSizeForValue(long value) {
-        int numberOfDigits = 0;
-        while (value != 0L) {
-            value /= 10L;
-            numberOfDigits++;
-        }
-        switch (numberOfDigits) {
+        String gameTileFormattedValue = NumericValueDisplay.getGameTileValueDisplay(value);
+        switch (gameTileFormattedValue.length()) {
             case 1: {
                 return oneDigitNts;
             } case 2: {
