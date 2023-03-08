@@ -58,6 +58,7 @@ import com.nerdcoredevelopment.game2048champsfinal.dialogs.UpdateAppStaticAvaila
 import com.nerdcoredevelopment.game2048champsfinal.dialogs.UpdateAppStaticUnavailableDialog;
 import com.nerdcoredevelopment.game2048champsfinal.enums.ChangeValueToolAchievements;
 import com.nerdcoredevelopment.game2048champsfinal.enums.DestroyAreaToolAchievements;
+import com.nerdcoredevelopment.game2048champsfinal.enums.EarlyOutAchievements;
 import com.nerdcoredevelopment.game2048champsfinal.enums.EliminateValueToolAchievements;
 import com.nerdcoredevelopment.game2048champsfinal.enums.GameModes;
 import com.nerdcoredevelopment.game2048champsfinal.enums.ReviveGameToolAchievements;
@@ -565,6 +566,22 @@ public class MainActivity extends AppCompatActivity implements
                                 } else {
                                     sharedPreferences.edit().putBoolean("tileUnlockAchievement" + "_" +
                                             getString(currentTileUnlockAchievement.getAchievementStringResourceId()), false).apply();
+                                }
+                                break;
+                            }
+                        }
+
+                        // Update the progress related to EarlyOutAchievements
+                        for (int earlyOutAchievementIndex = 0; earlyOutAchievementIndex < EarlyOutAchievements.values().length;
+                             earlyOutAchievementIndex++) {
+                            EarlyOutAchievements currentEarlyOutAchievement = EarlyOutAchievements.values()[earlyOutAchievementIndex];
+                            if (achievementId.equals(getString(currentEarlyOutAchievement.getAchievementStringResourceId()))) {
+                                if (achievement.getState() == Achievement.STATE_UNLOCKED) {
+                                    sharedPreferences.edit().putBoolean("earlyOutAchievement" + "_" +
+                                            getString(currentEarlyOutAchievement.getAchievementStringResourceId()), true).apply();
+                                } else {
+                                    sharedPreferences.edit().putBoolean("earlyOutAchievement" + "_" +
+                                            getString(currentEarlyOutAchievement.getAchievementStringResourceId()), false).apply();
                                 }
                                 break;
                             }

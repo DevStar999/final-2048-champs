@@ -113,7 +113,7 @@ public class BlockDesignFragment extends Fragment {
 
                 blockDesignOptionsRow.addView(blockDesignOption);
 
-                if (sharedPreferences.getString("selectedBlockDrawableEnumName", BlockDesigns.BLOCK_CELL_X.name())
+                if (sharedPreferences.getString("selectedBlockDrawableEnumName", BlockDesigns.BLOCK_PIRATE.name())
                         .equals(blockDesignsList.get(i + j).name())) {
                     isSelectionDone = true;
                     blockDesignOptionImageView.setClickable(false);
