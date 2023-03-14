@@ -167,6 +167,10 @@ import java.util.List;
             bottom.
 */
 // TODO -> In the later stages of development, think over the colors for the different buttons in all the dialogs
+/* TODO -> Replaced the method submitScore() with submitScoreImmediate(), you'll have to check if this method is working
+           correctly or not when this code change is in prod, by checking if the the leaderboards are still being populated
+           with default scores like 0 (for game mode leaderboards), 3000 (for coins leaderboards) etc.
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
