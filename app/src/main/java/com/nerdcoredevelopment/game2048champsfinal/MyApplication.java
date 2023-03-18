@@ -1,5 +1,8 @@
 package com.nerdcoredevelopment.game2048champsfinal;
 
+import static com.google.android.gms.ads.RequestConfiguration.MAX_AD_CONTENT_RATING_G;
+import static com.google.android.gms.ads.RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE;
+
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
@@ -8,6 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleObserver;
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.qonversion.android.sdk.Qonversion;
 import com.qonversion.android.sdk.QonversionError;
 import com.qonversion.android.sdk.QonversionLaunchCallback;
@@ -39,6 +46,17 @@ public class MyApplication extends Application implements Application.ActivityLi
         this.registerActivityLifecycleCallbacks(this);
 
         initialiseQonversion(0);
+
+        // Initialising AdMob
+        RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration().toBuilder()
+                .setTagForChildDirectedTreatment(TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
+                .setMaxAdContentRating(MAX_AD_CONTENT_RATING_G)
+                .build();
+        MobileAds.setRequestConfiguration(requestConfiguration);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {}
+        });
     }
 
     /**
