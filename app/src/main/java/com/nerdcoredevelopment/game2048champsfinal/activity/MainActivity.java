@@ -166,6 +166,7 @@ import java.util.List;
            correctly or not when this code change is in prod, by checking if the the leaderboards are still being populated
            with default scores like 0 (for game mode leaderboards), 3000 (for coins leaderboards) etc.
 */
+// TODO -> Make the GPGS Achievements easier for the players
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
