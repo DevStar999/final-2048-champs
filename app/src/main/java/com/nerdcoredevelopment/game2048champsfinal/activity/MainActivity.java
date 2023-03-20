@@ -167,6 +167,10 @@ import java.util.List;
            with default scores like 0 (for game mode leaderboards), 3000 (for coins leaderboards) etc.
 */
 // TODO -> Make the GPGS Achievements easier for the players
+/* TODO -> About the page dot indicators in Game Over Dialog Fragment or Game Level Fragment, do the following -
+           (a) Give width and height in layout file
+           (b) Put navigation arrows next to the dot indicators as well
+*/
 public class MainActivity extends AppCompatActivity implements
         NavigationFragment.OnNavigationFragmentInteractionListener,
         PreGameFragment.OnPreGameFragmentInteractionListener,
