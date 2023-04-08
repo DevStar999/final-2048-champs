@@ -109,11 +109,6 @@ import java.util.List;
            [Note - As of now, every thing for implementing this feature with a static button in the SettingsFragment has
            been completed (as per the life-cycle of Review feature photo in Mobile photos in the OnePlus phone)]
 */
-/* TODO -> Shift all the tools transition & layout related code into a separate fragment for two of the places which are as
-           follows:
-           (1) GameActivity
-           (2) GameOverDialog
-*/
 /* TODO -> Replace the LottieAnimationView for rotating light everywhere with AppCompatImageView and rotate it at places it
            is required to be rotated. This should come in handy for when we implement the 'Change Theme' feature. The places
            this can be done are as follows:
