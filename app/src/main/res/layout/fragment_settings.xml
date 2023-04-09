@@ -189,16 +189,12 @@
 
                 </LinearLayout>
 
-                <!-- TODO -> Change 'android:visibility' after
-                             implementing the following -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/settings_divider_line"
                     android:visibility="gone" />
 
-                <!-- TODO -> Change 'android:visibility' after
-                             implementing the following -->
                 <LinearLayout
                     android:id="@+id/how_to_play_settings_fragment_linear_layout"
                     android:layout_width="match_parent"
@@ -240,17 +236,12 @@
 
                 </LinearLayout>
 
-                <!-- TODO -> Change 'android:visibility' after
-                             implementing the following -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/settings_divider_line"
                     android:visibility="gone" />
 
-
-                <!-- TODO -> Change 'android:visibility' after
-                             implementing the following -->
                 <LinearLayout
                     android:id="@+id/help_settings_fragment_linear_layout"
                     android:layout_width="match_parent"

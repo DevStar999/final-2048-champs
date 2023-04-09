@@ -20,10 +20,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_speed="2"
         app:lottie_rawRes="@raw/error_occurred"
         app:lottie_repeatCount="4"
-        app:lottie_repeatMode="restart" />
+        app:lottie_repeatMode="restart"
+        app:lottie_speed="2" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/error_occurred_text"
@@ -31,8 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="32dp"
-        android:paddingHorizontal="8dp"
         android:letterSpacing="0.04"
+        android:paddingHorizontal="8dp"
         android:textAlignment="center"
         android:textColor="@color/text_color"
         android:textSize="16sp"

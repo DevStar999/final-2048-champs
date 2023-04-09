@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
@@ -21,19 +20,19 @@
 
         <LinearLayout
             android:id="@+id/root_first_page_game_over_dialog_linear_layout"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:showDividers="middle"
             android:divider="@drawable/gap_game_over_dialog"
+            android:orientation="vertical"
+            android:showDividers="middle"
             android:visibility="visible">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/first_page_title_game_over_dialog_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="24dp"
                 android:letterSpacing="0.04"
                 android:scrollHorizontally="false"
                 android:text="Revive game using tools? 🤔"
@@ -48,10 +47,10 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginVertical="12dp"
+                android:paddingStart="7dp"
+                android:paddingBottom="14dp"
                 android:scaleX="5"
                 android:scaleY="5"
-                android:paddingBottom="14dp"
-                android:paddingStart="7dp"
                 app:lottie_autoPlay="false"
                 app:lottie_loop="false"
                 app:lottie_rawRes="@raw/tools_chest_transition" />
@@ -170,8 +169,8 @@
                             android:background="@drawable/click_standard_tools"
                             android:contentDescription="Smash Tile"
                             android:padding="2.5dp"
-                            android:scaleType="fitXY"
                             android:rotationY="180"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/standard_tools_smash" />
 
                     </LinearLayout>
@@ -223,8 +222,8 @@
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/click_standard_tools"
                             android:contentDescription="Swap Two Tiles"
-                            android:scaleType="fitXY"
                             android:padding="4dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/standard_tools_swap_tiles" />
 
                     </LinearLayout>
@@ -415,8 +414,8 @@
                         android:layout_weight="1"
                         android:scaleX="1.5"
                         android:scaleY="1.5"
-                        app:lottie_speed="1.75"
-                        app:lottie_rawRes="@raw/tool_intro" />
+                        app:lottie_rawRes="@raw/tool_intro"
+                        app:lottie_speed="1.75" />
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/tools_middle_game_over_dialog_lottie"
@@ -427,8 +426,8 @@
                         android:layout_weight="1"
                         android:scaleX="1.5"
                         android:scaleY="1.5"
-                        app:lottie_speed="1.75"
-                        app:lottie_rawRes="@raw/tool_intro" />
+                        app:lottie_rawRes="@raw/tool_intro"
+                        app:lottie_speed="1.75" />
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/tools_right_game_over_dialog_lottie"
@@ -439,8 +438,8 @@
                         android:layout_weight="1"
                         android:scaleX="1.5"
                         android:scaleY="1.5"
-                        app:lottie_speed="1.75"
-                        app:lottie_rawRes="@raw/tool_intro" />
+                        app:lottie_rawRes="@raw/tool_intro"
+                        app:lottie_speed="1.75" />
 
                 </LinearLayout>
 
@@ -450,8 +449,8 @@
                 android:id="@+id/first_page_warning_game_over_dialog_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="12dp"
                 android:letterSpacing="0.04"
                 android:scrollHorizontally="false"
                 android:text="[ ⚠️ Warning: All game progress will be lost if you continue ]"
@@ -514,15 +513,15 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:layout_marginEnd="2dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="2dp"
                     app:srcCompat="@drawable/dialog_page_selected" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="10dp"
                     android:layout_height="10dp"
-                    android:layout_marginStart="2dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginStart="2dp"
                     app:srcCompat="@drawable/dialog_page_not_selected" />
 
             </LinearLayout>
@@ -531,12 +530,12 @@
 
         <LinearLayout
             android:id="@+id/root_second_page_game_over_dialog_linear_layout"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="2dp"
-            android:showDividers="middle"
             android:divider="@drawable/gap_game_over_dialog"
+            android:orientation="vertical"
+            android:showDividers="middle"
             android:visibility="gone">
 
             <!-- GameOverDialog is the only dialog where we are keeping the
@@ -566,15 +565,15 @@
                 android:id="@+id/scores_summary_game_over_dialog_frame_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="24dp"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:paddingHorizontal="24dp">
 
                 <LinearLayout
                     android:id="@+id/new_high_score_summary_game_over_dialog_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
                     android:visibility="invisible">
 
                     <!-- Useful Emojis : 🏅🥇🎖🏆 -->
@@ -623,15 +622,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
+                        android:scrollHorizontally="false"
                         android:text="Score"
                         android:textAlignment="center"
                         android:textColor="@color/text_color"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:scrollHorizontally="false"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog"
                         app:layout_constraintEnd_toStartOf="@id/score_mid_colon_game_over_dialog_text_view"
-                        app:layout_constraintBottom_toTopOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/score_mid_colon_game_over_dialog_text_view"
@@ -642,25 +641,25 @@
                         android:textColor="@color/text_color"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/score_game_over_dialog_text_view"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:scrollHorizontally="false"
                         android:text=""
                         android:textAlignment="viewStart"
                         android:textColor="@color/text_color"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:scrollHorizontally="false"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog"
                         app:layout_constraintStart_toEndOf="@id/score_mid_colon_game_over_dialog_text_view"
-                        app:layout_constraintBottom_toTopOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/horizontal_guide_mid_scores_summary_game_over_dialog"
@@ -674,12 +673,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
+                        android:scrollHorizontally="false"
                         android:text="High Score"
                         android:textAlignment="center"
                         android:textColor="@color/text_color"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:scrollHorizontally="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/high_score_mid_colon_game_over_dialog_text_view"
                         app:layout_constraintTop_toBottomOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog" />
@@ -696,19 +695,19 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog"/>
+                        app:layout_constraintTop_toBottomOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/high_score_game_over_dialog_text_view"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:scrollHorizontally="false"
                         android:text=""
                         android:textAlignment="viewStart"
                         android:textColor="@color/text_color"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:scrollHorizontally="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/high_score_mid_colon_game_over_dialog_text_view"
                         app:layout_constraintTop_toBottomOf="@id/horizontal_guide_mid_scores_summary_game_over_dialog" />
@@ -791,15 +790,15 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="10dp"
                     android:layout_height="10dp"
-                    android:layout_marginEnd="2dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="2dp"
                     app:srcCompat="@drawable/dialog_page_not_selected" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:layout_marginStart="2dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginStart="2dp"
                     app:srcCompat="@drawable/dialog_page_selected" />
 
             </LinearLayout>

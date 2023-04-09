@@ -20,10 +20,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_speed="0.75"
         app:lottie_rawRes="@raw/arriving_feature"
         app:lottie_repeatCount="4"
-        app:lottie_repeatMode="restart" />
+        app:lottie_repeatMode="restart"
+        app:lottie_speed="0.75" />
 
     <!-- TODO -> Change the text to "This tool is arriving soon," +
                  " so stay tuned for updates !!" after implementing
@@ -34,8 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="18dp"
-        android:paddingHorizontal="8dp"
         android:letterSpacing="0.04"
+        android:paddingHorizontal="8dp"
         android:text="The 'DESTROY AREA' tool is arriving soon, so stay tuned for updates !!"
         android:textAlignment="center"
         android:textColor="@color/text_color"
