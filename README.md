@@ -2,7 +2,7 @@
 
 Android project for the game '2048 Champs'
 
-## The Screenshots of the Game are as follows - 
+## Screenshots of the game are as follows - 
 ![alt text](https://drive.google.com/uc?id=1ksqQxdzDdkFluct00dm17nimOWbduWM5)
 ![alt text](https://drive.google.com/uc?id=1aGk9qU4ENOVwKgdnf7eH5dYvCWLl14rz)
 ![alt text](https://drive.google.com/uc?id=10WbB_R2h0NfmBhBnK2AxXZRdVyrWnAtI)
@@ -18,3 +18,22 @@ Android project for the game '2048 Champs'
 ![alt text](https://drive.google.com/uc?id=1CO-GqlUI8iMKPTxhDj462de2pNCEe9uM)
 ![alt text](https://drive.google.com/uc?id=1sicsztYEOwDlTmaH3PPCNjKtZGiISUz7)
 ![alt text](https://drive.google.com/uc?id=1WnWS8Ua5NnokNsOZHH7lbDlDSl5aLqVh)
+![alt text](https://drive.google.com/uc?id=15VPMyiT1T_yVTRZMEgO2qxA92NZv4a8J)
+![alt text](https://drive.google.com/uc?id=1-OFtmR_uo1uCrWesvB56W6VgLvqK5fMJ)
+![alt text](https://drive.google.com/uc?id=14onPbZ9ZjE_IDCzywPNhI9t5lW6PIIvi)
+![alt text](https://drive.google.com/uc?id=1uNepO_IiwmJGAKA6iggoNFM9LfUP-4aD)
+![alt text](https://drive.google.com/uc?id=1eGp0ic4QPWTnOuPb-gfY-LvmnhW9IFGp)
+![alt text](https://drive.google.com/uc?id=16QeHcBKTqHsgvAQMJw23cSy5axvhDqLs)
+![alt text](https://drive.google.com/uc?id=1DITb2epo5crJWckgh4zaLmwaPg8D8rn8)
+![alt text](https://drive.google.com/uc?id=1fRXQvdyvpesWIqGs2jsfSX655w3CB2gv)
+![alt text](https://drive.google.com/uc?id=1mQRarxCR8nbpDEZ-8z0qS75SnaYdZclf)
+![alt text](https://drive.google.com/uc?id=1vxfXs7SypXHGynO3_SptkKkaOCxMIQSS)
+![alt text](https://drive.google.com/uc?id=1O2J-nYIgLywsAgyy4gpUYOCafLCIseba)
+![alt text](https://drive.google.com/uc?id=1q-Qer0StfBFkPV2qpGPLSJp48XN0ocE1)
+![alt text](https://drive.google.com/uc?id=19MaiUA0zdkRVDLCk8QDP27tac2T11xbB)
+![alt text](https://drive.google.com/uc?id=1vQbnVHiztyG3vSeMbHKkCEQOv_Ov5HqZ)
+![alt text](https://drive.google.com/uc?id=1h95uNsZxpBAeIGTmXWbA9AxYWnZJawyL)
+![alt text](https://drive.google.com/uc?id=1Uh8oaSxBnafSEQRzoZMMjVfBCgxU3Nor)
+![alt text](https://drive.google.com/uc?id=1SedcqzQg7ELsijzpyGhyFInhV99wX61c)
+![alt text](https://drive.google.com/uc?id=165i-4lWWHPGn-FdmGyPc9Vow3BakE9E5)
+![alt text](https://drive.google.com/uc?id=1GSSiC1PiSg0DfdWCKtJbJy1QcvlniXK6)
