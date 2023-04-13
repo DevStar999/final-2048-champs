@@ -1,6 +1,19 @@
 # 2048 Champs
 
-Android project for the game '2048 Champs'
+'2048 Champs' is a freshly brewed version of the classic '2048' block merge puzzle game which is 
+currently live on the Google Play Store with an audience of 3000+ downloads and 1000+ daily active users.
+
+The game is built as a native Android application filled with 14 fun-filled and unique game modes, 
+7 power tools, combo bars, animations etc. to make the players keep coming for more.
+
+Used Google Play Games Services integration to implement 0-click-login, global leaderboards for each game mode 
+and over 30 achievements based on various skills and milestones in the game to drive higher engagement among the players.
+
+Collaborated with a team of freelance promo ad creators, graphic designers and mobile marketing experts and 
+launched a Google Ads Campaign for the game.
+
+Incorporated in-app adverts using Google AdMob and implemented in-app purchases related to game items for the 
+purpose of monetising the app.
 
 ## Screenshots of the game are as follows - 
 ![alt text](https://drive.google.com/uc?id=1ksqQxdzDdkFluct00dm17nimOWbduWM5)
